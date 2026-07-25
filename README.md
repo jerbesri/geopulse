@@ -40,6 +40,19 @@ column where the installed `TimeSeriesModel.predict` output provides a numeric
 forecast. It is the hand-off format for a later FastAPI `/predict` endpoint or
 a hosted feature-layer join.
 
+## Forecast Pipeline
+
+```mermaid
+flowchart LR
+	A[NFIRS feature layer] --> B[Filter pilot area and time range]
+	B --> C[ArcGIS Pro: create Space Time Cube]
+	C --> D[AGOL .nc cube item]
+	D --> E[download_cube.py]
+	E --> F[train.py]
+	F --> G[Forecast CSV per hotspot/bin]
+	G --> H[FastAPI GET /predict]
+```
+
 ## ArcGIS API Compatibility Note
 
 The proposed `prepare_tabulardata(cube_path, variable_names=[...])` and
