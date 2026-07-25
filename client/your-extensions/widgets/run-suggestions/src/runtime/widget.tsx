@@ -1,40 +1,62 @@
 /* eslint-disable semi */
 import { React, type AllWidgetProps } from "jimu-core";
 import { Button } from "jimu-ui";
+import type { IMConfig } from "../config";
+import {
+  runStagingPipeline,
+  setPipelineConfig,
+  type StagingPipelineResult,
+} from "./staging-pipeline";
 
-const Widget = (props: AllWidgetProps<any>) => {
-  const [message, setMessage] = React.useState<string>("");
+const Widget = (props: AllWidgetProps<IMConfig>) => {
+  const [result, setResult] = React.useState<StagingPipelineResult | null>(
+    null,
+  );
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>("");
 
-  const handleFetchZen = async () => {
-    const controller = new AbortController();
+  const toErrorMessage = (err: unknown): string => {
+    if (err instanceof Error) {
+      return err.message;
+    }
 
+    if (typeof err === "string") {
+      return err;
+    }
+
+    try {
+      return JSON.stringify(err);
+    } catch {
+      return "Unknown error object";
+    }
+  };
+
+  const handleRunSuggestions = async () => {
     try {
       setLoading(true);
       setError("");
-      setMessage("");
+      setResult(null);
 
-      const response = await fetch("https://api.github.com/zen", {
-        signal: controller.signal,
+      setPipelineConfig({
+        featureLayerUrl: props.config?.featureLayerUrl ?? "",
+        azureEndpoint: props.config?.azureEndpoint ?? "",
+        azureDeploymentName: props.config?.azureDeploymentName ?? "",
+        azureApiKey: props.config?.azureApiKey ?? "",
+        aiBriefingProxyUrl: props.config?.aiBriefingProxyUrl ?? "",
+        forecastWindow: props.config?.forecastWindow ?? "next_24_hours",
       });
 
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
+      if (!props.config?.featureLayerUrl?.trim()) {
+        throw new Error("Set Feature Layer URL in widget settings first.");
       }
 
-      const text = await response.text();
-      setMessage(text);
+      const stagingResult = await runStagingPipeline(new Date().toISOString());
+      setResult(stagingResult);
     } catch (err) {
-      if (err instanceof DOMException && err.name === "AbortError") {
-        return;
-      }
-
-      const message = err instanceof Error ? err.message : "Unknown error";
-      setError(message);
+      const errorMessage = toErrorMessage(err);
+      setError(errorMessage);
     } finally {
       setLoading(false);
-      controller.abort();
     }
   };
 
@@ -44,16 +66,36 @@ const Widget = (props: AllWidgetProps<any>) => {
       <Button
         type="primary"
         onClick={() => {
-          handleFetchZen();
+          void handleRunSuggestions();
         }}
         size="default"
         disabled={loading}
       >
-        {loading ? "Fetching..." : "Fetch GitHub Zen"}
+        {loading ? "Running..." : "Run Staging Suggestions"}
       </Button>
-      {loading && <p>Loading API response...</p>}
+      {loading && <p>Running feature, weather, and AI pipeline...</p>}
       {!loading && error && <p>Error: {error}</p>}
-      {!loading && !error && <p>GitHub Zen: {message}</p>}
+      {!loading && !error && result && (
+        <div className="mt-3">
+          <p>
+            <strong>Recommended Location ID:</strong> {result.locationId}
+          </p>
+          <p>
+            <strong>Coordinates:</strong> {result.lat.toFixed(6)},{" "}
+            {result.lng.toFixed(6)}
+          </p>
+          <p>
+            <strong>Predicted Incident Score:</strong>{" "}
+            {result.predictedScore.toFixed(2)}
+          </p>
+          <p>
+            <strong>Weather:</strong> {result.weatherSummary}
+          </p>
+          <p>
+            <strong>Dispatch Briefing:</strong> {result.aiBriefing}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

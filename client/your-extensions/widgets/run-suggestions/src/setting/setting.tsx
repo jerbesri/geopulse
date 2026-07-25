@@ -1,12 +1,14 @@
 /* eslint-disable semi */
 import type { AllWidgetSettingProps } from "jimu-for-builder";
+import { TextInput } from "jimu-ui";
 import {
   MapWidgetSelector,
   SettingRow,
   SettingSection,
 } from "jimu-ui/advanced/setting-components";
+import type { Config, IMConfig } from "../config";
 
-const Setting = (props: AllWidgetSettingProps<any>) => {
+const Setting = (props: AllWidgetSettingProps<IMConfig>) => {
   const onMapWidgetSelected = (useMapWidgetIds: string[]) => {
     props.onSettingChange({
       id: props.id,
@@ -14,8 +16,85 @@ const Setting = (props: AllWidgetSettingProps<any>) => {
     });
   };
 
+  const onConfigChange = (key: keyof Config, value: string) => {
+    props.onSettingChange({
+      id: props.id,
+      config: props.config.set(key, value),
+    });
+  };
+
   return (
     <div className="p-2">
+      <SettingSection title="Pipeline">
+        <SettingRow>
+          <div className="w-100">
+            <p className="mb-1">Feature Layer URL</p>
+            <TextInput
+              value={props.config?.featureLayerUrl ?? ""}
+              onChange={(event) => {
+                onConfigChange("featureLayerUrl", event.target.value);
+              }}
+            />
+          </div>
+        </SettingRow>
+        <SettingRow>
+          <div className="w-100">
+            <p className="mb-1">Azure Endpoint</p>
+            <TextInput
+              value={props.config?.azureEndpoint ?? ""}
+              onChange={(event) => {
+                onConfigChange("azureEndpoint", event.target.value);
+              }}
+            />
+          </div>
+        </SettingRow>
+        <SettingRow>
+          <div className="w-100">
+            <p className="mb-1">Azure Deployment Name</p>
+            <TextInput
+              value={props.config?.azureDeploymentName ?? ""}
+              onChange={(event) => {
+                onConfigChange("azureDeploymentName", event.target.value);
+              }}
+            />
+          </div>
+        </SettingRow>
+        <SettingRow>
+          <div className="w-100">
+            <p className="mb-1">Azure API Key</p>
+            <TextInput
+              type="password"
+              value={props.config?.azureApiKey ?? ""}
+              onChange={(event) => {
+                onConfigChange("azureApiKey", event.target.value);
+              }}
+            />
+          </div>
+        </SettingRow>
+        <SettingRow>
+          <div className="w-100">
+            <p className="mb-1">AI Briefing Proxy URL (Recommended)</p>
+            <TextInput
+              value={props.config?.aiBriefingProxyUrl ?? ""}
+              onChange={(event) => {
+                onConfigChange("aiBriefingProxyUrl", event.target.value);
+              }}
+              placeholder="/rest/ai-briefing-proxy"
+            />
+          </div>
+        </SettingRow>
+        <SettingRow>
+          <div className="w-100">
+            <p className="mb-1">Forecast Window</p>
+            <TextInput
+              value={props.config?.forecastWindow ?? "next_24_hours"}
+              onChange={(event) => {
+                onConfigChange("forecastWindow", event.target.value);
+              }}
+            />
+          </div>
+        </SettingRow>
+      </SettingSection>
       <SettingSection title="Map">
         <SettingRow>
           <MapWidgetSelector
