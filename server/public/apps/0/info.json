@@ -1,0 +1,33 @@
+{
+  "created": 1784996021614,
+  "description": "",
+  "id": "0",
+  "modified": 1784996291142,
+  "owner": "jmackle_intern_hackathon",
+  "tags": [],
+  "thumbnail": null,
+  "title": "JoeExperience 1",
+  "type": "Web Experience",
+  "snippet": "",
+  "typeKeywords": [
+    "EXB Experience",
+    "JavaScript",
+    "lastEditor:jmackle_intern_hackathon",
+    "modified: 1784996289922",
+    "Ready To Use",
+    "status: Published",
+    "template:monitor",
+    "version:1.21.0",
+    "Web Application",
+    "Web Experience",
+    "Web Mapping Application",
+    "Web Page",
+    "Web Site",
+    "Viewer Copyable"
+  ],
+  "portalUrl": "https://intern-hackathon.maps.arcgis.com",
+  "username": "jmackle_intern_hackathon",
+  "name": "JoeExperience 1",
+  "isLocalApp": true,
+  "url": null
+}

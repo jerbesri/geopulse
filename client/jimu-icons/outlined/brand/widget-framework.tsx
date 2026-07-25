@@ -1,0 +1,12 @@
+import { React, classNames } from 'jimu-core'
+import type { SVGComponentProps } from 'jimu-ui'
+import src from '../../svg/outlined/brand/widget-framework.svg'
+
+export const WidgetFrameworkOutlined = (props: SVGComponentProps) => {
+  const SVG = window.SVG
+  const { className, autoFlip = true, ...others } = props
+
+  const classes = classNames('jimu-icon jimu-icon-component has-rtl-svg', className)
+  if (!SVG) return <svg className={classes} {...others as any} />
+  return <SVG className={classes} src={src} autoFlip={autoFlip} {...others} />
+}

@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "your-extensions",
+    "types",
+    "node_modules/@esri/**/dist/types/react.d.ts",
+    "node_modules/@arcgis/**/dist/types/react.d.ts"
+  ],
+  "files": [
+    "jimu-core/lib/types/window.d.ts"
+  ],
+  "exclude": [
+    "arcgis-js-api",
+    "**/*.js"
+  ]
+}
