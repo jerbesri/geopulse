@@ -29,7 +29,7 @@ const Widget = (props: AllWidgetProps<any>) => {
         useMapWidgetId={props.useMapWidgetIds?.[0]}
         onActiveViewChange={setJimuMapView}
       />
-      <button onClick={() => zoomToCoords(-96.797, 32.7767)}>
+      <button onClick={() => zoomToCoords(-117.1825, 34.0556)}>
         Zoom to coordinate
       </button>
     </div>

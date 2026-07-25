@@ -8,6 +8,7 @@
   "copyright": "",
   "license": "",
   "dependency": ["jimu-arcgis"],
+  "settingDependency": ["jimu-arcgis"],
   "properties": {},
   "translatedLocales": ["en"],
   "defaultSize": {
