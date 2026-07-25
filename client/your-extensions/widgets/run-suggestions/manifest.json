@@ -1,0 +1,16 @@
+{
+  "name": "run-suggestions",
+  "type": "widget",
+  "version": "1.17.0",
+  "exbVersion": "1.17.0",
+  "author": "Your Name",
+  "description": "A widget that hits the FastAPI endpoint to get EMS staging location suggestions",
+  "copyright": "",
+  "license": "",
+  "properties": {},
+  "translatedLocales": ["en"],
+  "defaultSize": {
+    "width": 800,
+    "height": 500
+  }
+}
