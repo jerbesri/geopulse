@@ -35,6 +35,13 @@ interface QueryFeatureData {
   geometry: any;
 }
 
+export interface StagingCandidate {
+  locationId: number;
+  lat: number;
+  lng: number;
+  predictedScore: number;
+}
+
 interface AzureDispatchPayload {
   location_id: number;
   latitude: number;
@@ -449,9 +456,87 @@ const resolveProxyUrl = (rawProxyUrl: string): string => {
   return trimmed;
 };
 
-const queryTopForecastFeature = async (
+const mapForecastFeatureToData = (
+  feature: any,
   targetTimeISO: string,
-): Promise<QueryFeatureData> => {
+): QueryFeatureData => {
+  const attributes = (feature.attributes ?? {}) as AttributeMap;
+  const locationIdRaw = getAttributeValue(attributes, [
+    "location_ID",
+    "location_id",
+    "locationid",
+  ]);
+  const predictedScoreRaw = getAttributeValue(attributes, [
+    "predicted_incident_count",
+    "prediction",
+    "predicted_count",
+  ]);
+  const latitudeRaw = getAttributeValue(attributes, ["latitude", "lat"]);
+  const longitudeRaw = getAttributeValue(attributes, [
+    "longitude",
+    "lng",
+    "lon",
+  ]);
+  const forecastStartRaw = getAttributeValue(attributes, ["forecast_start"]);
+  const historicalPatternRaw = getAttributeValue(attributes, [
+    "historical_pattern",
+    "historicalPattern",
+  ]);
+  const recentIncidentCountRaw = getAttributeValue(attributes, [
+    "recent_incident_count_30d",
+    "recentIncidentCount30d",
+  ]);
+  const incidentTypesRaw =
+    getAttributeValue(attributes, ["recent_incident_types"]) ??
+    getAttributeValue(attributes, ["incident_types"]) ??
+    getAttributeValue(attributes, ["joined_incident_types"]);
+
+  const locationId = Number(locationIdRaw ?? -1);
+  const predictedScore = Number(predictedScoreRaw ?? 0);
+
+  const geometry = feature.geometry as unknown;
+  const geometryLatitude =
+    geometry && typeof geometry === "object" && "latitude" in geometry
+      ? Number((geometry as { latitude: number }).latitude)
+      : 0;
+  const geometryLongitude =
+    geometry && typeof geometry === "object" && "longitude" in geometry
+      ? Number((geometry as { longitude: number }).longitude)
+      : 0;
+
+  const lat = Number(latitudeRaw ?? geometryLatitude ?? 0);
+  const lng = Number(longitudeRaw ?? geometryLongitude ?? 0);
+
+  const forecastPeakIntervalDate =
+    forecastStartRaw instanceof Date
+      ? forecastStartRaw
+      : new Date(
+          (forecastStartRaw as string | number | undefined) ?? targetTimeISO,
+        );
+
+  const historicalPattern =
+    typeof historicalPatternRaw === "string" ||
+    typeof historicalPatternRaw === "number"
+      ? String(historicalPatternRaw)
+      : "recurring demand";
+
+  return {
+    locationId,
+    lat,
+    lng,
+    predictedScore,
+    forecastPeakInterval: forecastPeakIntervalDate.toISOString(),
+    historicalPattern,
+    recentIncidentCount30d: Number(recentIncidentCountRaw ?? 0),
+    recentIncidentTypes: parseIncidentTypes(incidentTypesRaw),
+    geometry: feature.geometry,
+  };
+};
+
+const queryTopForecastFeatures = async (
+  targetTimeISO: string,
+  limit: number,
+): Promise<QueryFeatureData[]> => {
   if (!pipelineConfig.featureLayerUrl.trim()) {
     throw new Error("Feature layer URL is required in widget settings.");
   }
@@ -495,7 +580,7 @@ const queryTopForecastFeature = async (
     where: `forecast_start <= timestamp '${timestamp}' AND forecast_end > timestamp '${timestamp}'`,
     outFields: supportedOutFields.length > 0 ? supportedOutFields : ["*"],
     orderByFields: ["predicted_incident_count DESC"],
-    num: 1,
+    num: Math.max(1, limit),
     returnGeometry: true,
   });
 
@@ -508,83 +593,34 @@ const queryTopForecastFeature = async (
     );
   }
 
-  const topFeature = featureSet.features?.[0];
-
-  if (!topFeature) {
+  const features = featureSet.features ?? [];
+  if (features.length === 0) {
     throw new Error("No forecast features found for the requested interval.");
   }
 
-  const attributes = (topFeature.attributes ?? {}) as AttributeMap;
-  const locationIdRaw = getAttributeValue(attributes, [
-    "location_ID",
-    "location_id",
-    "locationid",
-  ]);
-  const predictedScoreRaw = getAttributeValue(attributes, [
-    "predicted_incident_count",
-    "prediction",
-    "predicted_count",
-  ]);
-  const latitudeRaw = getAttributeValue(attributes, ["latitude", "lat"]);
-  const longitudeRaw = getAttributeValue(attributes, [
-    "longitude",
-    "lng",
-    "lon",
-  ]);
-  const forecastStartRaw = getAttributeValue(attributes, ["forecast_start"]);
-  const historicalPatternRaw = getAttributeValue(attributes, [
-    "historical_pattern",
-    "historicalPattern",
-  ]);
-  const recentIncidentCountRaw = getAttributeValue(attributes, [
-    "recent_incident_count_30d",
-    "recentIncidentCount30d",
-  ]);
-  const incidentTypesRaw =
-    getAttributeValue(attributes, ["recent_incident_types"]) ??
-    getAttributeValue(attributes, ["incident_types"]) ??
-    getAttributeValue(attributes, ["joined_incident_types"]);
+  return features.map((feature) =>
+    mapForecastFeatureToData(feature, targetTimeISO),
+  );
+};
 
-  const locationId = Number(locationIdRaw ?? -1);
-  const predictedScore = Number(predictedScoreRaw ?? 0);
+const queryTopForecastFeature = async (
+  targetTimeISO: string,
+): Promise<QueryFeatureData> => {
+  const features = await queryTopForecastFeatures(targetTimeISO, 1);
+  return features[0];
+};
 
-  const geometry = topFeature.geometry as unknown;
-  const geometryLatitude =
-    geometry && typeof geometry === "object" && "latitude" in geometry
-      ? Number((geometry as { latitude: number }).latitude)
-      : 0;
-  const geometryLongitude =
-    geometry && typeof geometry === "object" && "longitude" in geometry
-      ? Number((geometry as { longitude: number }).longitude)
-      : 0;
-
-  const lat = Number(latitudeRaw ?? geometryLatitude ?? 0);
-  const lng = Number(longitudeRaw ?? geometryLongitude ?? 0);
-
-  const forecastPeakIntervalDate =
-    forecastStartRaw instanceof Date
-      ? forecastStartRaw
-      : new Date(
-          (forecastStartRaw as string | number | undefined) ?? targetTimeISO,
-        );
-
-  const historicalPattern =
-    typeof historicalPatternRaw === "string" ||
-    typeof historicalPatternRaw === "number"
-      ? String(historicalPatternRaw)
-      : "recurring demand";
-
-  return {
-    locationId,
-    lat,
-    lng,
-    predictedScore,
-    forecastPeakInterval: forecastPeakIntervalDate.toISOString(),
-    historicalPattern,
-    recentIncidentCount30d: Number(recentIncidentCountRaw ?? 0),
-    recentIncidentTypes: parseIncidentTypes(incidentTypesRaw),
-    geometry: topFeature.geometry,
-  };
+export const getTopStagingCandidates = async (
+  targetTimeISO: string,
+  limit = 3,
+): Promise<StagingCandidate[]> => {
+  const features = await queryTopForecastFeatures(targetTimeISO, limit);
+  return features.slice(0, Math.max(1, limit)).map((feature) => ({
+    locationId: feature.locationId,
+    lat: feature.lat,
+    lng: feature.lng,
+    predictedScore: feature.predictedScore,
+  }));
 };
 
 export const getWeatherForInterval = async (

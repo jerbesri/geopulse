@@ -9,8 +9,10 @@ import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import Query from "@arcgis/core/rest/support/Query";
 import type { IMConfig } from "../config";
 import {
+  getTopStagingCandidates,
   runStagingPipeline,
   setPipelineConfig,
+  type StagingCandidate,
   type StagingPipelineResult,
 } from "./staging-pipeline";
 
@@ -41,6 +43,11 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   );
   const [moveSuggestion, setMoveSuggestion] =
     React.useState<AmbulanceMoveSuggestion | null>(null);
+  const [topCandidates, setTopCandidates] = React.useState<StagingCandidate[]>(
+    [],
+  );
+  const [selectedCandidateIndex, setSelectedCandidateIndex] =
+    React.useState<number>(0);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>("");
 
@@ -128,7 +135,7 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   };
 
   const getAmbulanceId = (
-    attributes: Record<string, unknown>,
+    attributes: { [key: string]: unknown },
     index: number,
   ) => {
     const idCandidates = [
@@ -356,22 +363,75 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
     };
   };
 
+  const clearMoveAndRouteGraphics = () => {
+    if (!jimuMapView?.view) return;
+
+    if (moveAmbulanceGraphicRef.current) {
+      jimuMapView.view.graphics.remove(moveAmbulanceGraphicRef.current);
+      moveAmbulanceGraphicRef.current = null;
+    }
+
+    if (routeGraphicRef.current) {
+      jimuMapView.view.graphics.remove(routeGraphicRef.current);
+      routeGraphicRef.current = null;
+    }
+  };
+
+  const applyCandidateSelection = async (candidate: StagingCandidate) => {
+    await zoomAndHighlight(candidate.lat, candidate.lng);
+
+    const suggestedAmbulance = await suggestAmbulanceToMove(
+      candidate.lat,
+      candidate.lng,
+    );
+
+    setMoveSuggestion(suggestedAmbulance);
+
+    if (suggestedAmbulance) {
+      highlightAmbulanceToMove(
+        suggestedAmbulance.fromLat,
+        suggestedAmbulance.fromLng,
+      );
+      drawBasicRoute(
+        suggestedAmbulance.fromLat,
+        suggestedAmbulance.fromLng,
+        suggestedAmbulance.toLat,
+        suggestedAmbulance.toLng,
+      );
+      return;
+    }
+
+    clearMoveAndRouteGraphics();
+  };
+
+  const handleSelectCandidate = async (index: number) => {
+    const candidate = topCandidates[index];
+    if (!candidate) return;
+
+    setSelectedCandidateIndex(index);
+
+    try {
+      await applyCandidateSelection(candidate);
+    } catch (selectionError) {
+      setMoveSuggestion(null);
+      clearMoveAndRouteGraphics();
+      console.error(
+        "Unable to apply selected staging candidate:",
+        selectionError,
+      );
+    }
+  };
+
   const handleRunSuggestions = async () => {
     try {
       setLoading(true);
       setError("");
       setResult(null);
       setMoveSuggestion(null);
+      setTopCandidates([]);
+      setSelectedCandidateIndex(0);
 
-      if (jimuMapView?.view && moveAmbulanceGraphicRef.current) {
-        jimuMapView.view.graphics.remove(moveAmbulanceGraphicRef.current);
-        moveAmbulanceGraphicRef.current = null;
-      }
-
-      if (jimuMapView?.view && routeGraphicRef.current) {
-        jimuMapView.view.graphics.remove(routeGraphicRef.current);
-        routeGraphicRef.current = null;
-      }
+      clearMoveAndRouteGraphics();
 
       setPipelineConfig({
         featureLayerUrl: props.config?.featureLayerUrl ?? "",
@@ -390,46 +450,24 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
         throw new Error("Set Feature Layer URL in widget settings first.");
       }
 
-      const stagingResult = await runStagingPipeline(new Date().toISOString());
+      const targetTimeISO = new Date().toISOString();
+      const [stagingResult, candidates] = await Promise.all([
+        runStagingPipeline(targetTimeISO),
+        getTopStagingCandidates(targetTimeISO, 3),
+      ]);
+
       setResult(stagingResult);
+      setTopCandidates(candidates);
 
-      await zoomAndHighlight(stagingResult.lat, stagingResult.lng);
+      const firstCandidate: StagingCandidate = candidates[0] ?? {
+        locationId: stagingResult.locationId,
+        lat: stagingResult.lat,
+        lng: stagingResult.lng,
+        predictedScore: stagingResult.predictedScore,
+      };
+      setSelectedCandidateIndex(0);
 
-      try {
-        const suggestedAmbulance = await suggestAmbulanceToMove(
-          stagingResult.lat,
-          stagingResult.lng,
-        );
-        setMoveSuggestion(suggestedAmbulance);
-
-        if (suggestedAmbulance) {
-          highlightAmbulanceToMove(
-            suggestedAmbulance.fromLat,
-            suggestedAmbulance.fromLng,
-          );
-          drawBasicRoute(
-            suggestedAmbulance.fromLat,
-            suggestedAmbulance.fromLng,
-            suggestedAmbulance.toLat,
-            suggestedAmbulance.toLng,
-          );
-        } else if (jimuMapView?.view && routeGraphicRef.current) {
-          jimuMapView.view.graphics.remove(routeGraphicRef.current);
-          routeGraphicRef.current = null;
-        }
-      } catch (selectionError) {
-        setMoveSuggestion(null);
-
-        if (jimuMapView?.view && routeGraphicRef.current) {
-          jimuMapView.view.graphics.remove(routeGraphicRef.current);
-          routeGraphicRef.current = null;
-        }
-
-        console.error(
-          "Unable to evaluate live ambulance move suggestion:",
-          selectionError,
-        );
-      }
+      await applyCandidateSelection(firstCandidate);
     } catch (err) {
       const errorMessage = toErrorMessage(err);
       setError(errorMessage);
@@ -516,7 +554,6 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
         onActiveViewChange={setJimuMapView}
       />
 
-      <h4>Run Suggestions</h4>
       <Button
         type="primary"
         onClick={() => {
@@ -538,6 +575,62 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
       {!loading && error && <p>Error: {error}</p>}
       {!loading && !error && result && (
         <div className="mt-3">
+          {topCandidates.length > 0 && (
+            <div>
+              <p>
+                <strong>Top Staging Suggestions:</strong>
+              </p>
+              <div className="mb-2">
+                <Button
+                  size="sm"
+                  type="secondary"
+                  disabled={selectedCandidateIndex <= 0}
+                  onClick={() => {
+                    void handleSelectCandidate(selectedCandidateIndex - 1);
+                  }}
+                >
+                  Back
+                </Button>{" "}
+                <Button
+                  size="sm"
+                  type="secondary"
+                  disabled={selectedCandidateIndex >= topCandidates.length - 1}
+                  onClick={() => {
+                    void handleSelectCandidate(selectedCandidateIndex + 1);
+                  }}
+                >
+                  Next
+                </Button>
+              </div>
+              <div className="mb-2">
+                {topCandidates.map((candidate, index) => (
+                  <Button
+                    key={`${candidate.locationId}-${index}`}
+                    size="sm"
+                    type={
+                      index === selectedCandidateIndex ? "primary" : "secondary"
+                    }
+                    onClick={() => {
+                      void handleSelectCandidate(index);
+                    }}
+                    className="mr-2 mb-2"
+                  >
+                    #{index + 1} ID {candidate.locationId} (
+                    {candidate.predictedScore.toFixed(1)})
+                  </Button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {topCandidates[selectedCandidateIndex] && (
+            <p>
+              <strong>Selected Staging Candidate:</strong> #
+              {selectedCandidateIndex + 1} ID{" "}
+              {topCandidates[selectedCandidateIndex].locationId}
+            </p>
+          )}
+
           <p>
             <strong>Recommended Location ID:</strong> {result.locationId}
           </p>
