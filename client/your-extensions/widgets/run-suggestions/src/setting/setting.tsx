@@ -120,7 +120,7 @@ const Setting = (props: AllWidgetSettingProps<IMConfig>) => {
         </SettingRow>
         <SettingRow>
           <div className="w-100">
-            <p className="mb-1">Forecast Window</p>
+            <p className="mb-1">AI Briefing Forecast Window Label</p>
             <TextInput
               value={props.config?.forecastWindow ?? "next_24_hours"}
               onChange={(event) => {

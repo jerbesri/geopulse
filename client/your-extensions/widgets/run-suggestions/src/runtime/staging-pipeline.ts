@@ -632,8 +632,13 @@ export const getWeatherForInterval = async (
     const date = new Date(dateISO);
     const day = date.toISOString().slice(0, 10);
     const targetHour = date.toISOString().slice(0, 13);
+    const isPastTimestamp = date.getTime() < Date.now();
 
-    const weatherUrl = new URL("https://api.open-meteo.com/v1/forecast");
+    const weatherUrl = new URL(
+      isPastTimestamp
+        ? "https://archive-api.open-meteo.com/v1/archive"
+        : "https://api.open-meteo.com/v1/forecast",
+    );
     weatherUrl.searchParams.set("latitude", String(lat));
     weatherUrl.searchParams.set("longitude", String(lng));
     weatherUrl.searchParams.set("hourly", "temperature_2m,precipitation");

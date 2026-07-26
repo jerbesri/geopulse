@@ -34,6 +34,11 @@ interface AmbulanceMoveSuggestion {
   rationale: string;
 }
 
+const formatLocalDateTimeInputValue = (date: Date): string => {
+  const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+  return localDate.toISOString().slice(0, 16);
+};
+
 const styles: { [key: string]: React.CSSProperties } = {
   shell: {
     height: "100%",
@@ -60,11 +65,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     fontSize: "2rem",
     fontWeight: 600,
     letterSpacing: "-0.02em",
-  },
-  subtitle: {
-    margin: 0,
-    color: "rgba(255, 255, 255, 0.72)",
-    fontSize: "0.95rem",
   },
   stage: {
     position: "relative",
@@ -112,6 +112,69 @@ const styles: { [key: string]: React.CSSProperties } = {
     gap: "10px",
     flexWrap: "wrap",
   },
+  controlsRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    flexWrap: "nowrap",
+  },
+  primaryButton: {
+    width: "auto",
+    minWidth: "260px",
+    flex: "1 1 auto",
+    minHeight: "52px",
+    borderRadius: "999px",
+    background: "linear-gradient(180deg, #ffffff 0%, #ececec 100%)",
+    color: "#111111",
+    border: "1px solid rgba(135, 173, 255, 0.65)",
+    boxShadow: "0 12px 30px rgba(0, 0, 0, 0.2)",
+    fontWeight: 600,
+  },
+  settingsButton: {
+    minWidth: "52px",
+    width: "52px",
+    height: "52px",
+    borderRadius: "999px",
+    background: "rgba(255, 255, 255, 0.08)",
+    border: "1px solid rgba(255, 255, 255, 0.16)",
+    color: "#ffffff",
+    fontSize: "1.2rem",
+    padding: 0,
+    flexShrink: 0,
+  },
+  settingsPanel: {
+    width: "320px",
+    flexShrink: 0,
+    borderRadius: "18px",
+    background: "rgba(255, 255, 255, 0.05)",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+    padding: "12px 14px",
+    display: "flex",
+    alignItems: "flex-end",
+    gap: "10px",
+  },
+  settingsRow: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+    flex: 1,
+  },
+  input: {
+    width: "100%",
+    minHeight: "42px",
+    borderRadius: "12px",
+    border: "1px solid rgba(255, 255, 255, 0.18)",
+    background: "rgba(12, 12, 12, 0.45)",
+    color: "#ffffff",
+    padding: "10px 12px",
+  },
+  secondaryButton: {
+    alignSelf: "flex-start",
+    borderRadius: "999px",
+    background: "rgba(255, 255, 255, 0.08)",
+    border: "1px solid rgba(255, 255, 255, 0.18)",
+    color: "#ffffff",
+  },
   chip: {
     borderRadius: "999px",
     padding: "8px 14px",
@@ -125,18 +188,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     color: "#171717",
     border: "1px solid rgba(255, 255, 255, 0.85)",
     boxShadow: "0 8px 18px rgba(0, 0, 0, 0.18)",
-  },
-  primaryButton: {
-    width: "100%",
-    maxWidth: "760px",
-    alignSelf: "center",
-    minHeight: "52px",
-    borderRadius: "999px",
-    background: "linear-gradient(180deg, #ffffff 0%, #ececec 100%)",
-    color: "#111111",
-    border: "1px solid rgba(135, 173, 255, 0.65)",
-    boxShadow: "0 12px 30px rgba(0, 0, 0, 0.2)",
-    fontWeight: 600,
   },
   warning: {
     borderRadius: "16px",
@@ -211,6 +262,10 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   );
   const [selectedCandidateIndex, setSelectedCandidateIndex] =
     React.useState<number>(0);
+  const [isSettingsOpen, setIsSettingsOpen] = React.useState<boolean>(false);
+  const [selectedLocalDateTime, setSelectedLocalDateTime] = React.useState(() =>
+    formatLocalDateTimeInputValue(new Date()),
+  );
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>("");
 
@@ -240,6 +295,16 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
     } catch {
       return "Unknown error object";
     }
+  };
+
+  const getSelectedTimestampISO = (): string => {
+    const localDate = new Date(selectedLocalDateTime);
+
+    if (Number.isNaN(localDate.getTime())) {
+      throw new Error("Select a valid forecast date and time.");
+    }
+
+    return localDate.toISOString();
   };
 
   const zoomAndHighlight = async (lat: number, lng: number) => {
@@ -632,11 +697,11 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
         throw new Error("Set Feature Layer URL in widget settings first.");
       }
 
-      const targetTimeISO = new Date().toISOString();
-      targetTimeISORef.current = targetTimeISO;
+      const selectedTargetTimeISO = getSelectedTimestampISO();
+      targetTimeISORef.current = selectedTargetTimeISO;
       const [stagingResult, candidates] = await Promise.all([
-        runStagingPipeline(targetTimeISO),
-        getTopStagingCandidates(targetTimeISO, 3),
+        runStagingPipeline(selectedTargetTimeISO),
+        getTopStagingCandidates(selectedTargetTimeISO, 3),
       ]);
 
       setResult(stagingResult);
@@ -819,17 +884,57 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
           )}
         </div>
 
-        <Button
-          type="primary"
-          onClick={() => {
-            void handleRunSuggestions();
-          }}
-          size="default"
-          disabled={loading}
-          style={styles.primaryButton}
-        >
-          {loading ? "Running..." : "Run Staging Suggestions"}
-        </Button>
+        <div style={styles.controlsRow}>
+          <Button
+            type="primary"
+            onClick={() => {
+              void handleRunSuggestions();
+            }}
+            size="default"
+            disabled={loading}
+            style={styles.primaryButton}
+          >
+            {loading ? "Running..." : "Run Staging Suggestions"}
+          </Button>
+          <Button
+            type="secondary"
+            size="default"
+            style={styles.settingsButton}
+            onClick={() => {
+              setIsSettingsOpen((open) => !open);
+            }}
+            aria-label="Toggle forecast time settings"
+          >
+            ⚙
+          </Button>
+          {isSettingsOpen && (
+            <div style={styles.settingsPanel}>
+              <div style={styles.settingsRow}>
+                <div style={styles.label}>Forecast Date And Time</div>
+                <input
+                  type="datetime-local"
+                  value={selectedLocalDateTime}
+                  onChange={(event) => {
+                    setSelectedLocalDateTime(event.target.value);
+                  }}
+                  style={styles.input}
+                />
+              </div>
+              <Button
+                type="secondary"
+                size="sm"
+                style={styles.secondaryButton}
+                onClick={() => {
+                  setSelectedLocalDateTime(
+                    formatLocalDateTimeInputValue(new Date()),
+                  );
+                }}
+              >
+                Use current time
+              </Button>
+            </div>
+          )}
+        </div>
 
         {!props.useMapWidgetIds?.[0] && (
           <div style={styles.warning}>
