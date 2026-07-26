@@ -72,7 +72,6 @@ interface HistoricalIncidentSummary {
   totals: IncidentTypeBreakdown;
   matchCount: number;
   lookupMode: string;
-  matchedFeatureIds: Array<string | number>;
 }
 
 let pipelineConfig: PipelineConfig = {
@@ -183,25 +182,6 @@ const summarizeHistoricalTotals = (totals: IncidentTypeBreakdown): string => {
   return `Common nearby historical incidents: ${topThree.join(", ")}.`;
 };
 
-const logHistoricalDebug = (payload: {
-  targetTimeISO: string;
-  lookbackDays: number;
-  windowStartISO: string;
-  windowEndISO: string;
-  historicalLayerUrl: string;
-  alarmDateField: string;
-  lookupMode: string;
-  matchCount: number;
-  matchedFeatureIds: Array<string | number>;
-  totals: IncidentTypeBreakdown;
-}) => {
-  if (typeof process !== "undefined" && process.env.NODE_ENV === "production") {
-    return;
-  }
-
-  console.log("[Historical Debug]", payload);
-};
-
 const queryHistoricalIncidentSummary = async (
   lat: number,
   lng: number,
@@ -213,7 +193,6 @@ const queryHistoricalIncidentSummary = async (
       totals: {},
       matchCount: 0,
       lookupMode: "disabled",
-      matchedFeatureIds: [],
     };
   }
 
@@ -246,17 +225,9 @@ const queryHistoricalIncidentSummary = async (
   const alarmDateField = findFieldName(fields, [
     "Alarm Date and Time",
     "AlarmDateandTime",
-    "AlarmDateAndTime",
     "alarm_date_time",
     "alarm_datetime",
     "alarm_date_and_time",
-    "alarm_date_and_time_local",
-    "alarm_datetime_local",
-    "alarm_dt",
-    "event_datetime",
-    "event_date",
-    "incident_datetime",
-    "incident_date",
   ]);
   const emsField = findFieldName(fields, [
     "EMS Rescue Incident Count",
@@ -288,23 +259,14 @@ const queryHistoricalIncidentSummary = async (
   const dateStart = new Date(dateEnd);
   dateStart.setUTCDate(dateEnd.getUTCDate() - lookbackDays);
 
-  if (!alarmDateField) {
-    return {
-      summary:
-        "Historical layer date field was not found; time-bounded historical matching was skipped to avoid inaccurate results.",
-      totals: {},
-      matchCount: 0,
-      lookupMode: "missing_date_field",
-      matchedFeatureIds: [],
-    };
-  }
-
   const whereClauses = ["1=1"];
-  const startTimestamp = formatArcGISTimestamp(dateStart.toISOString());
-  const endTimestamp = formatArcGISTimestamp(dateEnd.toISOString());
-  whereClauses.push(
-    `${alarmDateField} >= timestamp '${startTimestamp}' AND ${alarmDateField} <= timestamp '${endTimestamp}'`,
-  );
+  if (alarmDateField) {
+    const startTimestamp = formatArcGISTimestamp(dateStart.toISOString());
+    const endTimestamp = formatArcGISTimestamp(dateEnd.toISOString());
+    whereClauses.push(
+      `${alarmDateField} >= timestamp '${startTimestamp}' AND ${alarmDateField} <= timestamp '${endTimestamp}'`,
+    );
+  }
 
   const outFields = [
     emsField,
@@ -370,18 +332,6 @@ const queryHistoricalIncidentSummary = async (
   };
 
   const features = featureSet.features ?? [];
-  const matchedFeatureIds = features
-    .map((feature) => {
-      const attrs = (feature.attributes ?? {}) as AttributeMap;
-      const featureId =
-        getAttributeValue(attrs, ["location_ID", "location_id", "grid_id"]) ??
-        getAttributeValue(attrs, ["OBJECTID", "ObjectId", "objectid"]);
-      return typeof featureId === "string" || typeof featureId === "number"
-        ? featureId
-        : null;
-    })
-    .filter((value): value is string | number => value !== null);
-
   features.forEach((feature) => {
     const attrs = (feature.attributes ?? {}) as AttributeMap;
     totals.EMS_RESCUE += Number(emsField ? attrs[emsField] : 0) || 0;
@@ -393,25 +343,11 @@ const queryHistoricalIncidentSummary = async (
     totals.TOTAL += Number(totalField ? attrs[totalField] : 0) || 0;
   });
 
-  logHistoricalDebug({
-    targetTimeISO,
-    lookbackDays,
-    windowStartISO: dateStart.toISOString(),
-    windowEndISO: dateEnd.toISOString(),
-    historicalLayerUrl: pipelineConfig.historicalLayerUrl,
-    alarmDateField,
-    lookupMode,
-    matchCount: features.length,
-    matchedFeatureIds,
-    totals,
-  });
-
   return {
     summary: summarizeHistoricalTotals(totals),
     totals,
     matchCount: features.length,
     lookupMode,
-    matchedFeatureIds,
   };
 };
 
@@ -864,7 +800,6 @@ export const runStagingPipeline = async (
       totals: {},
       matchCount: 0,
       lookupMode: "error",
-      matchedFeatureIds: [],
     };
   }
 

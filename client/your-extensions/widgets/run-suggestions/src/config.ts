@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 import type { ImmutableObject } from "seamless-immutable";
 
 export interface Config {
