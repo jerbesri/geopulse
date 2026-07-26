@@ -123,6 +123,7 @@ const Setting = (props: AllWidgetSettingProps<IMConfig>) => {
             <p className="mb-1">Forecast Window</p>
             <TextInput
               value={props.config?.forecastWindow ?? "next_24_hours"}
+              placeholder="next_hour, next_24_hours, or 2026-07-27T08:30:00.000Z"
               onChange={(event) => {
                 onConfigChange("forecastWindow", event.target.value);
               }}

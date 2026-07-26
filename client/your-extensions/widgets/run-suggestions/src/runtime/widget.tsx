@@ -15,6 +15,7 @@ import {
   type StagingCandidate,
   type StagingPipelineResult,
 } from "./staging-pipeline";
+import { resolveForecastTargetTime } from "./forecast-window";
 
 interface AmbulanceCandidate {
   id: string;
