@@ -34,6 +34,168 @@ interface AmbulanceMoveSuggestion {
   rationale: string;
 }
 
+const styles: { [key: string]: React.CSSProperties } = {
+  shell: {
+    height: "100%",
+    padding: "24px",
+    background:
+      "radial-gradient(circle at top, rgba(90, 90, 90, 0.28), rgba(16, 16, 16, 0.94) 60%)",
+    color: "#f7f7f7",
+    overflow: "auto",
+  },
+  card: {
+    minHeight: "100%",
+    borderRadius: "28px",
+    border: "1px solid rgba(255, 255, 255, 0.8)",
+    background: "linear-gradient(180deg, #3a3a3a 0%, #2f2f2f 100%)",
+    boxShadow:
+      "0 14px 40px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.08)",
+    padding: "28px 34px 32px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
+  },
+  heading: {
+    margin: 0,
+    fontSize: "2rem",
+    fontWeight: 600,
+    letterSpacing: "-0.02em",
+  },
+  subtitle: {
+    margin: 0,
+    color: "rgba(255, 255, 255, 0.72)",
+    fontSize: "0.95rem",
+  },
+  stage: {
+    position: "relative",
+    minHeight: "80px",
+    borderRadius: "22px",
+    background: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.09)",
+    padding: "22px 64px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    gap: "14px",
+  },
+  stageEmpty: {
+    color: "rgba(255, 255, 255, 0.56)",
+    fontSize: "0.96rem",
+    lineHeight: 1.5,
+  },
+  navButton: {
+    position: "absolute",
+    top: "50%",
+    transform: "translateY(-50%)",
+    minWidth: "46px",
+    width: "46px",
+    height: "46px",
+    borderRadius: "999px",
+    background: "transparent",
+    border: "1px solid rgba(255, 255, 255, 0.16)",
+    color: "#f5f5f5",
+    fontSize: "1.5rem",
+    lineHeight: 1,
+    padding: 0,
+  },
+  navButtonDisabled: {
+    opacity: 0.35,
+  },
+  leftNav: {
+    left: "12px",
+  },
+  rightNav: {
+    right: "12px",
+  },
+  pills: {
+    display: "flex",
+    gap: "10px",
+    flexWrap: "wrap",
+  },
+  chip: {
+    borderRadius: "999px",
+    padding: "8px 14px",
+    border: "1px solid rgba(255, 255, 255, 0.14)",
+    background: "rgba(255, 255, 255, 0.06)",
+    color: "#f2f2f2",
+    fontSize: "0.86rem",
+  },
+  chipActive: {
+    background: "#f4f4f4",
+    color: "#171717",
+    border: "1px solid rgba(255, 255, 255, 0.85)",
+    boxShadow: "0 8px 18px rgba(0, 0, 0, 0.18)",
+  },
+  primaryButton: {
+    width: "100%",
+    maxWidth: "760px",
+    alignSelf: "center",
+    minHeight: "52px",
+    borderRadius: "999px",
+    background: "linear-gradient(180deg, #ffffff 0%, #ececec 100%)",
+    color: "#111111",
+    border: "1px solid rgba(135, 173, 255, 0.65)",
+    boxShadow: "0 12px 30px rgba(0, 0, 0, 0.2)",
+    fontWeight: 600,
+  },
+  warning: {
+    borderRadius: "16px",
+    background: "rgba(255, 197, 61, 0.1)",
+    border: "1px solid rgba(255, 197, 61, 0.3)",
+    color: "#ffe7a1",
+    padding: "12px 14px",
+    fontSize: "0.92rem",
+  },
+  error: {
+    borderRadius: "16px",
+    background: "rgba(255, 84, 84, 0.1)",
+    border: "1px solid rgba(255, 84, 84, 0.35)",
+    color: "#ffd0d0",
+    padding: "12px 14px",
+    whiteSpace: "pre-wrap",
+  },
+  sectionGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))",
+    gap: "14px",
+  },
+  metricCard: {
+    borderRadius: "18px",
+    background: "rgba(255, 255, 255, 0.05)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
+    padding: "16px 18px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "6px",
+  },
+  label: {
+    color: "rgba(255, 255, 255, 0.58)",
+    fontSize: "0.78rem",
+    textTransform: "uppercase",
+    letterSpacing: "0.08em",
+  },
+  value: {
+    color: "#ffffff",
+    fontSize: "1rem",
+    lineHeight: 1.45,
+  },
+  largeValue: {
+    color: "#ffffff",
+    fontSize: "1.35rem",
+    fontWeight: 600,
+    lineHeight: 1.2,
+  },
+  briefingCard: {
+    borderRadius: "22px",
+    background: "rgba(255, 255, 255, 0.05)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
+    padding: "18px 20px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+  },
+};
+
 const Widget = (props: AllWidgetProps<IMConfig>) => {
   const LIVE_AMBULANCE_LAYER_URL =
     "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/AmbulancesAGOL/FeatureServer/0";
@@ -570,61 +732,56 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   }, [jimuMapView]);
 
   return (
-    <div className="widget-starter jimu-widget">
+    <div className="widget-starter jimu-widget" style={styles.shell}>
       <JimuMapViewComponent
         useMapWidgetId={props.useMapWidgetIds?.[0]}
         onActiveViewChange={setJimuMapView}
       />
 
-      <Button
-        type="primary"
-        onClick={() => {
-          void handleRunSuggestions();
-        }}
-        size="default"
-        disabled={loading}
-      >
-        {loading ? "Running..." : "Run Staging Suggestions"}
-      </Button>
+      <div style={styles.card}>
+        <div>
+          <h2 style={styles.heading}>Response Intelligence</h2>
+        </div>
 
-      {!props.useMapWidgetIds?.[0] && (
-        <p>Please select a map in widget settings to enable zoom/highlight.</p>
-      )}
-
-      {loading && (
-        <p>Running feature, weather, AI, and unit move selection...</p>
-      )}
-      {!loading && error && <p>Error: {error}</p>}
-      {!loading && !error && result && (
-        <div className="mt-3">
+        <div style={styles.stage}>
           {topCandidates.length > 0 && (
-            <div>
-              <p>
-                <strong>Top Staging Suggestions:</strong>
-              </p>
-              <div className="mb-2">
-                <Button
-                  size="sm"
-                  type="secondary"
-                  disabled={selectedCandidateIndex <= 0}
-                  onClick={() => {
-                    void handleSelectCandidate(selectedCandidateIndex - 1);
-                  }}
-                >
-                  Back
-                </Button>{" "}
-                <Button
-                  size="sm"
-                  type="secondary"
-                  disabled={selectedCandidateIndex >= topCandidates.length - 1}
-                  onClick={() => {
-                    void handleSelectCandidate(selectedCandidateIndex + 1);
-                  }}
-                >
-                  Next
-                </Button>
-              </div>
-              <div className="mb-2">
+            <>
+              <Button
+                size="sm"
+                type="secondary"
+                style={{
+                  ...styles.navButton,
+                  ...styles.leftNav,
+                  ...(selectedCandidateIndex <= 0
+                    ? styles.navButtonDisabled
+                    : {}),
+                }}
+                disabled={selectedCandidateIndex <= 0}
+                onClick={() => {
+                  void handleSelectCandidate(selectedCandidateIndex - 1);
+                }}
+              >
+                ‹
+              </Button>
+              <Button
+                size="sm"
+                type="secondary"
+                style={{
+                  ...styles.navButton,
+                  ...styles.rightNav,
+                  ...(selectedCandidateIndex >= topCandidates.length - 1
+                    ? styles.navButtonDisabled
+                    : {}),
+                }}
+                disabled={selectedCandidateIndex >= topCandidates.length - 1}
+                onClick={() => {
+                  void handleSelectCandidate(selectedCandidateIndex + 1);
+                }}
+              >
+                ›
+              </Button>
+
+              <div style={styles.pills}>
                 {topCandidates.map((candidate, index) => (
                   <Button
                     key={`${candidate.locationId}-${index}`}
@@ -632,86 +789,145 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
                     type={
                       index === selectedCandidateIndex ? "primary" : "secondary"
                     }
+                    style={{
+                      ...styles.chip,
+                      ...(index === selectedCandidateIndex
+                        ? styles.chipActive
+                        : {}),
+                    }}
                     onClick={() => {
                       void handleSelectCandidate(index);
                     }}
-                    className="mr-2 mb-2"
                   >
-                    #{index + 1} ID {candidate.locationId} (
-                    {candidate.predictedScore.toFixed(1)})
+                    #{index + 1} · ID {candidate.locationId}
                   </Button>
                 ))}
               </div>
+            </>
+          )}
+
+          {!topCandidates.length && !loading && !result && (
+            <div style={styles.stageEmpty}>
+              Run suggestions to load the top staging candidates.
             </div>
           )}
 
-          {topCandidates[selectedCandidateIndex] && (
-            <p>
-              <strong>Selected Staging Candidate:</strong> #
-              {selectedCandidateIndex + 1} ID{" "}
-              {topCandidates[selectedCandidateIndex].locationId}
-            </p>
-          )}
-
-          <p>
-            <strong>Recommended Location ID:</strong> {result.locationId}
-          </p>
-          <p>
-            <strong>Coordinates:</strong> {result.lat.toFixed(6)},{" "}
-            {result.lng.toFixed(6)}
-          </p>
-          <p>
-            <strong>Predicted Incident Score:</strong>{" "}
-            {result.predictedScore.toFixed(2)}
-          </p>
-          <p>
-            <strong>Weather:</strong> {result.weatherSummary}
-          </p>
-          <p>
-            <strong>Historical Incidents:</strong>{" "}
-            {result.historicalIncidentSummary}
-          </p>
-          <p>
-            <strong>Historical Matches:</strong> {result.historicalMatchCount} (
-            {result.historicalLookupMode})
-          </p>
-          <p>
-            <strong>Dispatch Briefing:</strong> {result.aiBriefing}
-          </p>
-          {moveSuggestion && (
-            <>
-              <p>
-                <strong>Suggested Ambulance To Move:</strong>{" "}
-                {moveSuggestion.ambulanceId}
-              </p>
-              <p>
-                <strong>Current Location:</strong>{" "}
-                {moveSuggestion.fromLat.toFixed(6)},{" "}
-                {moveSuggestion.fromLng.toFixed(6)}
-              </p>
-              <p>
-                <strong>Move Distance:</strong>{" "}
-                {moveSuggestion.moveDistanceKm.toFixed(2)} km
-              </p>
-              <p>
-                <strong>
-                  Coverage Loss Score Input (Nearest Neighbor Gap):
-                </strong>{" "}
-                {moveSuggestion.nearestNeighborDistanceKm.toFixed(2)} km
-              </p>
-              <p>
-                <strong>Selection Logic:</strong> {moveSuggestion.rationale}
-              </p>
-            </>
-          )}
-          {!moveSuggestion && (
-            <p>
-              <strong>Suggested Ambulance To Move:</strong> No live ambulance
-              location candidates were found.
-            </p>
+          {loading && (
+            <div style={styles.stageEmpty}>
+              Running feature, weather, AI, and unit move selection...
+            </div>
           )}
         </div>
-      )}
+
+        <Button
+          type="primary"
+          onClick={() => {
+            void handleRunSuggestions();
+          }}
+          size="default"
+          disabled={loading}
+          style={styles.primaryButton}
+        >
+          {loading ? "Running..." : "Run Staging Suggestions"}
+        </Button>
+
+        {!props.useMapWidgetIds?.[0] && (
+          <div style={styles.warning}>
+            Please select a map in widget settings to enable zoom and route
+            highlighting.
+          </div>
+        )}
+
+        {!loading && error && <div style={styles.error}>Error: {error}</div>}
+
+        {!loading && !error && result && (
+          <>
+            <div style={styles.briefingCard}>
+              <div style={styles.label}>Dispatch Briefing</div>
+              <div style={styles.value}>{result.aiBriefing}</div>
+            </div>
+            <div style={styles.sectionGrid}>
+              <div style={styles.metricCard}>
+                <div style={styles.label}>Selected Staging Candidate</div>
+                <div style={styles.largeValue}>
+                  #{selectedCandidateIndex + 1} · ID {result.locationId}
+                </div>
+              </div>
+              <div style={styles.metricCard}>
+                <div style={styles.label}>Coordinates</div>
+                <div style={styles.value}>
+                  {result.lat.toFixed(6)}, {result.lng.toFixed(6)}
+                </div>
+              </div>
+              <div style={styles.metricCard}>
+                <div style={styles.label}>Predicted Incident Score</div>
+                <div style={styles.largeValue}>
+                  {result.predictedScore.toFixed(2)}
+                </div>
+              </div>
+              <div style={styles.metricCard}>
+                <div style={styles.label}>Historical Matches</div>
+                <div style={styles.value}>
+                  {result.historicalMatchCount} ({result.historicalLookupMode})
+                </div>
+              </div>
+            </div>
+
+            <div style={styles.sectionGrid}>
+              <div style={styles.metricCard}>
+                <div style={styles.label}>Weather</div>
+                <div style={styles.value}>{result.weatherSummary}</div>
+              </div>
+              <div style={styles.metricCard}>
+                <div style={styles.label}>Historical Incidents</div>
+                <div style={styles.value}>
+                  {result.historicalIncidentSummary}
+                </div>
+              </div>
+            </div>
+
+            <div style={styles.sectionGrid}>
+              <div style={styles.metricCard}>
+                <div style={styles.label}>Suggested Ambulance To Move</div>
+                <div style={styles.largeValue}>
+                  {moveSuggestion?.ambulanceId ?? "No candidate found"}
+                </div>
+              </div>
+              <div style={styles.metricCard}>
+                <div style={styles.label}>Current Location</div>
+                <div style={styles.value}>
+                  {moveSuggestion
+                    ? `${moveSuggestion.fromLat.toFixed(6)}, ${moveSuggestion.fromLng.toFixed(6)}`
+                    : "Unavailable"}
+                </div>
+              </div>
+              <div style={styles.metricCard}>
+                <div style={styles.label}>Move Distance</div>
+                <div style={styles.value}>
+                  {moveSuggestion
+                    ? `${moveSuggestion.moveDistanceKm.toFixed(2)} km`
+                    : "Unavailable"}
+                </div>
+              </div>
+              <div style={styles.metricCard}>
+                <div style={styles.label}>Coverage Gap Heuristic</div>
+                <div style={styles.value}>
+                  {moveSuggestion
+                    ? `${moveSuggestion.nearestNeighborDistanceKm.toFixed(2)} km`
+                    : "Unavailable"}
+                </div>
+              </div>
+            </div>
+
+            {moveSuggestion && (
+              <div style={styles.briefingCard}>
+                <div style={styles.label}>Selection Logic</div>
+                <div style={styles.value}>{moveSuggestion.rationale}</div>
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
