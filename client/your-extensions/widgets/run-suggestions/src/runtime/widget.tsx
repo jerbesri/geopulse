@@ -210,7 +210,9 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
 
       if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
 
-      const attributes = (feature.attributes ?? {}) as Record<string, unknown>;
+      const attributes = (feature.attributes ?? {}) as {
+        [key: string]: unknown;
+      };
       candidates.push({
         id: getAmbulanceId(attributes, index),
         lat,
