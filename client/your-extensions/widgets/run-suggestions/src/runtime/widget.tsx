@@ -3,14 +3,33 @@ import { React, type AllWidgetProps } from "jimu-core";
 import { Button } from "jimu-ui";
 import { JimuMapViewComponent, type JimuMapView } from "jimu-arcgis";
 import Point from "@arcgis/core/geometry/Point";
+import Polyline from "@arcgis/core/geometry/Polyline";
 import Graphic from "@arcgis/core/Graphic";
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
+import Query from "@arcgis/core/rest/support/Query";
 import type { IMConfig } from "../config";
 import {
   runStagingPipeline,
   setPipelineConfig,
   type StagingPipelineResult,
 } from "./staging-pipeline";
+
+interface AmbulanceCandidate {
+  id: string;
+  lat: number;
+  lng: number;
+}
+
+interface AmbulanceMoveSuggestion {
+  ambulanceId: string;
+  fromLat: number;
+  fromLng: number;
+  toLat: number;
+  toLng: number;
+  moveDistanceKm: number;
+  nearestNeighborDistanceKm: number;
+  rationale: string;
+}
 
 const Widget = (props: AllWidgetProps<IMConfig>) => {
   const LIVE_AMBULANCE_LAYER_URL =
@@ -20,6 +39,8 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   const [result, setResult] = React.useState<StagingPipelineResult | null>(
     null,
   );
+  const [moveSuggestion, setMoveSuggestion] =
+    React.useState<AmbulanceMoveSuggestion | null>(null);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [error, setError] = React.useState<string>("");
 
@@ -27,6 +48,8 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
     null,
   );
   const highlightGraphicRef = React.useRef<Graphic | null>(null);
+  const moveAmbulanceGraphicRef = React.useRef<Graphic | null>(null);
+  const routeGraphicRef = React.useRef<Graphic | null>(null);
   const ambulanceLayerRef = React.useRef<FeatureLayer | null>(null);
 
   const toErrorMessage = (err: unknown): string => {
@@ -82,11 +105,273 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
     });
   };
 
+  const toRadians = (degrees: number): number => (degrees * Math.PI) / 180;
+
+  const distanceMeters = (
+    fromLat: number,
+    fromLng: number,
+    toLat: number,
+    toLng: number,
+  ): number => {
+    const earthRadiusMeters = 6371000;
+    const dLat = toRadians(toLat - fromLat);
+    const dLng = toRadians(toLng - fromLng);
+
+    const lat1 = toRadians(fromLat);
+    const lat2 = toRadians(toLat);
+
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.sin(dLng / 2) * Math.sin(dLng / 2) * Math.cos(lat1) * Math.cos(lat2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return earthRadiusMeters * c;
+  };
+
+  const getAmbulanceId = (
+    attributes: Record<string, unknown>,
+    index: number,
+  ) => {
+    const idCandidates = [
+      "ambulance_id",
+      "vehicle_id",
+      "unit_id",
+      "unit",
+      "name",
+      "callsign",
+      "OBJECTID",
+      "objectid",
+      "GlobalID",
+      "globalid",
+    ];
+
+    for (const candidate of idCandidates) {
+      const matchedKey = Object.keys(attributes).find(
+        (key) => key.toLowerCase() === candidate.toLowerCase(),
+      );
+
+      if (!matchedKey) continue;
+      const value = attributes[matchedKey];
+      if (
+        value !== null &&
+        value !== undefined &&
+        String(value).trim() !== ""
+      ) {
+        return String(value);
+      }
+    }
+
+    return `ambulance-${index + 1}`;
+  };
+
+  const queryLiveAmbulances = async (): Promise<AmbulanceCandidate[]> => {
+    const layerFromMap =
+      ambulanceLayerRef.current ??
+      (jimuMapView?.view?.map.findLayerById(LIVE_AMBULANCE_LAYER_ID) as
+        | FeatureLayer
+        | undefined) ??
+      null;
+
+    const queryLayer =
+      layerFromMap ??
+      new FeatureLayer({
+        url: LIVE_AMBULANCE_LAYER_URL,
+        outFields: ["*"],
+      });
+
+    const featureSet = await queryLayer.queryFeatures(
+      new Query({
+        where: "1=1",
+        outFields: ["*"],
+        returnGeometry: true,
+        num: 2000,
+      }),
+    );
+
+    const candidates: AmbulanceCandidate[] = [];
+    (featureSet.features ?? []).forEach((feature, index) => {
+      const geometry = feature.geometry as
+        | { latitude?: number; longitude?: number; x?: number; y?: number }
+        | undefined;
+
+      const lat = Number(geometry?.latitude ?? geometry?.y);
+      const lng = Number(geometry?.longitude ?? geometry?.x);
+
+      if (!Number.isFinite(lat) || !Number.isFinite(lng)) return;
+
+      const attributes = (feature.attributes ?? {}) as Record<string, unknown>;
+      candidates.push({
+        id: getAmbulanceId(attributes, index),
+        lat,
+        lng,
+      });
+    });
+
+    return candidates;
+  };
+
+  const highlightAmbulanceToMove = (lat: number, lng: number) => {
+    if (!jimuMapView?.view) return;
+
+    if (moveAmbulanceGraphicRef.current) {
+      jimuMapView.view.graphics.remove(moveAmbulanceGraphicRef.current);
+      moveAmbulanceGraphicRef.current = null;
+    }
+
+    const fromPoint = new Point({
+      longitude: lng,
+      latitude: lat,
+      spatialReference: { wkid: 4326 },
+    });
+
+    const moveGraphic = new Graphic({
+      geometry: fromPoint,
+      symbol: {
+        type: "simple-marker",
+        style: "diamond",
+        color: [33, 150, 243, 0.95],
+        size: 12,
+        outline: {
+          color: [255, 255, 255, 1],
+          width: 2,
+        },
+      },
+      attributes: {
+        label: "Suggested ambulance to move",
+      },
+    });
+
+    jimuMapView.view.graphics.add(moveGraphic);
+    moveAmbulanceGraphicRef.current = moveGraphic;
+  };
+
+  const drawBasicRoute = (
+    fromLat: number,
+    fromLng: number,
+    toLat: number,
+    toLng: number,
+  ) => {
+    if (!jimuMapView?.view) return;
+
+    if (routeGraphicRef.current) {
+      jimuMapView.view.graphics.remove(routeGraphicRef.current);
+      routeGraphicRef.current = null;
+    }
+
+    const line = new Polyline({
+      paths: [
+        [fromLng, fromLat],
+        [toLng, toLat],
+      ],
+      spatialReference: { wkid: 4326 },
+    });
+
+    const routeGraphic = new Graphic({
+      geometry: line,
+      symbol: {
+        type: "simple-line",
+        color: [0, 188, 212, 0.95],
+        width: 3,
+        style: "short-dot",
+      },
+      attributes: {
+        label: "Suggested repositioning route",
+      },
+    });
+
+    jimuMapView.view.graphics.add(routeGraphic);
+    routeGraphicRef.current = routeGraphic;
+  };
+
+  const suggestAmbulanceToMove = async (
+    targetLat: number,
+    targetLng: number,
+  ): Promise<AmbulanceMoveSuggestion | null> => {
+    const ambulances = await queryLiveAmbulances();
+    if (ambulances.length === 0) return null;
+
+    if (ambulances.length === 1) {
+      const single = ambulances[0];
+      return {
+        ambulanceId: single.id,
+        fromLat: single.lat,
+        fromLng: single.lng,
+        toLat: targetLat,
+        toLng: targetLng,
+        moveDistanceKm:
+          distanceMeters(single.lat, single.lng, targetLat, targetLng) / 1000,
+        nearestNeighborDistanceKm: 0,
+        rationale:
+          "Only one live ambulance is available, so it is selected by default.",
+      };
+    }
+
+    const scored = ambulances.map((candidate) => {
+      let nearestNeighborMeters = Number.POSITIVE_INFINITY;
+
+      ambulances.forEach((other) => {
+        if (other.id === candidate.id) return;
+        const spacing = distanceMeters(
+          candidate.lat,
+          candidate.lng,
+          other.lat,
+          other.lng,
+        );
+        if (spacing < nearestNeighborMeters) {
+          nearestNeighborMeters = spacing;
+        }
+      });
+
+      const moveMeters = distanceMeters(
+        candidate.lat,
+        candidate.lng,
+        targetLat,
+        targetLng,
+      );
+
+      return {
+        ...candidate,
+        nearestNeighborMeters,
+        moveMeters,
+      };
+    });
+
+    scored.sort((a, b) => {
+      if (a.nearestNeighborMeters !== b.nearestNeighborMeters) {
+        return a.nearestNeighborMeters - b.nearestNeighborMeters;
+      }
+      return a.moveMeters - b.moveMeters;
+    });
+
+    const selected = scored[0];
+    return {
+      ambulanceId: selected.id,
+      fromLat: selected.lat,
+      fromLng: selected.lng,
+      toLat: targetLat,
+      toLng: targetLng,
+      moveDistanceKm: selected.moveMeters / 1000,
+      nearestNeighborDistanceKm: selected.nearestNeighborMeters / 1000,
+      rationale:
+        "Selected ambulance has the smallest nearest-neighbor gap at its current position, which minimizes local coverage loss; tie-breaker favors shorter relocation distance.",
+    };
+  };
+
   const handleRunSuggestions = async () => {
     try {
       setLoading(true);
       setError("");
       setResult(null);
+      setMoveSuggestion(null);
+
+      if (jimuMapView?.view && moveAmbulanceGraphicRef.current) {
+        jimuMapView.view.graphics.remove(moveAmbulanceGraphicRef.current);
+        moveAmbulanceGraphicRef.current = null;
+      }
+
+      if (jimuMapView?.view && routeGraphicRef.current) {
+        jimuMapView.view.graphics.remove(routeGraphicRef.current);
+        routeGraphicRef.current = null;
+      }
 
       setPipelineConfig({
         featureLayerUrl: props.config?.featureLayerUrl ?? "",
@@ -109,6 +394,42 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
       setResult(stagingResult);
 
       await zoomAndHighlight(stagingResult.lat, stagingResult.lng);
+
+      try {
+        const suggestedAmbulance = await suggestAmbulanceToMove(
+          stagingResult.lat,
+          stagingResult.lng,
+        );
+        setMoveSuggestion(suggestedAmbulance);
+
+        if (suggestedAmbulance) {
+          highlightAmbulanceToMove(
+            suggestedAmbulance.fromLat,
+            suggestedAmbulance.fromLng,
+          );
+          drawBasicRoute(
+            suggestedAmbulance.fromLat,
+            suggestedAmbulance.fromLng,
+            suggestedAmbulance.toLat,
+            suggestedAmbulance.toLng,
+          );
+        } else if (jimuMapView?.view && routeGraphicRef.current) {
+          jimuMapView.view.graphics.remove(routeGraphicRef.current);
+          routeGraphicRef.current = null;
+        }
+      } catch (selectionError) {
+        setMoveSuggestion(null);
+
+        if (jimuMapView?.view && routeGraphicRef.current) {
+          jimuMapView.view.graphics.remove(routeGraphicRef.current);
+          routeGraphicRef.current = null;
+        }
+
+        console.error(
+          "Unable to evaluate live ambulance move suggestion:",
+          selectionError,
+        );
+      }
     } catch (err) {
       const errorMessage = toErrorMessage(err);
       setError(errorMessage);
@@ -169,9 +490,22 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
 
   React.useEffect(() => {
     return () => {
-      if (!jimuMapView?.view || !highlightGraphicRef.current) return;
-      jimuMapView.view.graphics.remove(highlightGraphicRef.current);
-      highlightGraphicRef.current = null;
+      if (!jimuMapView?.view) return;
+
+      if (highlightGraphicRef.current) {
+        jimuMapView.view.graphics.remove(highlightGraphicRef.current);
+        highlightGraphicRef.current = null;
+      }
+
+      if (moveAmbulanceGraphicRef.current) {
+        jimuMapView.view.graphics.remove(moveAmbulanceGraphicRef.current);
+        moveAmbulanceGraphicRef.current = null;
+      }
+
+      if (routeGraphicRef.current) {
+        jimuMapView.view.graphics.remove(routeGraphicRef.current);
+        routeGraphicRef.current = null;
+      }
     };
   }, [jimuMapView]);
 
@@ -198,7 +532,9 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
         <p>Please select a map in widget settings to enable zoom/highlight.</p>
       )}
 
-      {loading && <p>Running feature, weather, and AI pipeline...</p>}
+      {loading && (
+        <p>Running feature, weather, AI, and unit move selection...</p>
+      )}
       {!loading && error && <p>Error: {error}</p>}
       {!loading && !error && result && (
         <div className="mt-3">
@@ -227,6 +563,38 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
           <p>
             <strong>Dispatch Briefing:</strong> {result.aiBriefing}
           </p>
+          {moveSuggestion && (
+            <>
+              <p>
+                <strong>Suggested Ambulance To Move:</strong>{" "}
+                {moveSuggestion.ambulanceId}
+              </p>
+              <p>
+                <strong>Current Location:</strong>{" "}
+                {moveSuggestion.fromLat.toFixed(6)},{" "}
+                {moveSuggestion.fromLng.toFixed(6)}
+              </p>
+              <p>
+                <strong>Move Distance:</strong>{" "}
+                {moveSuggestion.moveDistanceKm.toFixed(2)} km
+              </p>
+              <p>
+                <strong>
+                  Coverage Loss Score Input (Nearest Neighbor Gap):
+                </strong>{" "}
+                {moveSuggestion.nearestNeighborDistanceKm.toFixed(2)} km
+              </p>
+              <p>
+                <strong>Selection Logic:</strong> {moveSuggestion.rationale}
+              </p>
+            </>
+          )}
+          {!moveSuggestion && (
+            <p>
+              <strong>Suggested Ambulance To Move:</strong> No live ambulance
+              location candidates were found.
+            </p>
+          )}
         </div>
       )}
     </div>
