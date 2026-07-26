@@ -44,7 +44,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     height: "100%",
     padding: "24px",
     background:
-      "radial-gradient(circle at top, rgba(90, 90, 90, 0.28), rgba(16, 16, 16, 0.94) 60%)",
+      "radial-gradient(circle at top, rgba(90, 90, 90, 0.28), #1C1B1B 60%)",
     color: "#f7f7f7",
     overflow: "auto",
   },
