@@ -10,6 +10,7 @@ import {
   setPipelineConfig,
   type StagingPipelineResult,
 } from "./staging-pipeline";
+import { resolveForecastTargetTime } from "./forecast-window";
 
 const Widget = (props: AllWidgetProps<IMConfig>) => {
   const [result, setResult] = React.useState<StagingPipelineResult | null>(
@@ -99,7 +100,10 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
         throw new Error("Set Feature Layer URL in widget settings first.");
       }
 
-      const stagingResult = await runStagingPipeline(new Date().toISOString());
+      const targetTime = resolveForecastTargetTime(
+        props.config?.forecastWindow,
+      );
+      const stagingResult = await runStagingPipeline(targetTime.toISOString());
       setResult(stagingResult);
 
       await zoomAndHighlight(stagingResult.lat, stagingResult.lng);
