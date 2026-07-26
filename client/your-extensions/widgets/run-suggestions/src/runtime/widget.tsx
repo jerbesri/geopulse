@@ -4,6 +4,7 @@ import { Button } from "jimu-ui";
 import { JimuMapViewComponent, type JimuMapView } from "jimu-arcgis";
 import Point from "@arcgis/core/geometry/Point";
 import Graphic from "@arcgis/core/Graphic";
+import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import type { IMConfig } from "../config";
 import {
   runStagingPipeline,
@@ -12,6 +13,10 @@ import {
 } from "./staging-pipeline";
 
 const Widget = (props: AllWidgetProps<IMConfig>) => {
+  const LIVE_AMBULANCE_LAYER_URL =
+    "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/AmbulancesAGOL/FeatureServer/0";
+  const LIVE_AMBULANCE_LAYER_ID = "run-suggestions-live-ambulance-overlay";
+
   const [result, setResult] = React.useState<StagingPipelineResult | null>(
     null,
   );
@@ -22,6 +27,7 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
     null,
   );
   const highlightGraphicRef = React.useRef<Graphic | null>(null);
+  const ambulanceLayerRef = React.useRef<FeatureLayer | null>(null);
 
   const toErrorMessage = (err: unknown): string => {
     if (err instanceof Error) {
@@ -110,6 +116,56 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
       setLoading(false);
     }
   };
+
+  const addAmbulanceOverlay = React.useCallback(() => {
+    if (!jimuMapView?.view) return;
+
+    const existingLayer = jimuMapView.view.map.findLayerById(
+      LIVE_AMBULANCE_LAYER_ID,
+    ) as FeatureLayer | undefined;
+
+    if (existingLayer) {
+      ambulanceLayerRef.current = existingLayer;
+      return;
+    }
+
+    const layer = new FeatureLayer({
+      url: LIVE_AMBULANCE_LAYER_URL,
+      id: LIVE_AMBULANCE_LAYER_ID,
+      title: "Live Ambulances",
+      visible: true,
+      outFields: ["*"],
+    });
+
+    jimuMapView.view.map.add(layer);
+    ambulanceLayerRef.current = layer;
+  }, [jimuMapView]);
+
+  const removeAmbulanceOverlay = React.useCallback(() => {
+    if (!jimuMapView?.view) {
+      ambulanceLayerRef.current = null;
+      return;
+    }
+
+    const liveLayer =
+      ambulanceLayerRef.current ??
+      (jimuMapView.view.map.findLayerById(
+        LIVE_AMBULANCE_LAYER_ID,
+      ) as FeatureLayer | null);
+
+    if (!liveLayer) return;
+
+    jimuMapView.view.map.remove(liveLayer);
+    ambulanceLayerRef.current = null;
+  }, [jimuMapView]);
+
+  React.useEffect(() => {
+    addAmbulanceOverlay();
+
+    return () => {
+      removeAmbulanceOverlay();
+    };
+  }, [addAmbulanceOverlay, removeAmbulanceOverlay]);
 
   React.useEffect(() => {
     return () => {
