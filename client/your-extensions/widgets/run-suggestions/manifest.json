@@ -4,7 +4,7 @@
   "version": "1.21.0",
   "exbVersion": "1.21.0",
   "author": "Your Name",
-  "description": "A widget that hits the FastAPI endpoint to get EMS staging location suggestions",
+  "description": "Selects a predicted EMS hotspot, summarizes nearby incidents and weather, and generates a tactical staging recommendation.",
   "copyright": "",
   "license": "",
   "dependency": ["jimu-arcgis"],

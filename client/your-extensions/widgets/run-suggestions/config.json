@@ -1,1 +1,7 @@
-{}
+{
+  "agolLayerUrl": "https://services.arcgis.com/REPLACE_WITH_ORG_ID/arcgis/rest/services/REPLACE_WITH_LAYER/FeatureServer/0",
+  "incidentLayerUrl": "https://services.arcgis.com/REPLACE_WITH_ORG_ID/arcgis/rest/services/REPLACE_WITH_INCIDENT_LAYER/FeatureServer/0",
+  "incidentTypeField": "incident_type",
+  "incidentSearchRadiusMiles": 1.5,
+  "briefingProxyUrl": "/rest/ems/staging-briefing"
+}
