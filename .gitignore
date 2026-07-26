@@ -34,3 +34,4 @@ CONTEXT.md
 
 client/dist*
 server/public
+server/temp

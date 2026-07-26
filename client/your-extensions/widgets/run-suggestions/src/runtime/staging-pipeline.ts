@@ -1,9 +1,13 @@
 /* eslint-disable semi */
 import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import Query from "@arcgis/core/rest/support/Query";
+import Point from "@arcgis/core/geometry/Point";
 
 interface PipelineConfig {
   featureLayerUrl: string;
+  historicalLayerUrl: string;
+  historicalLookbackDays: string;
+  historicalProximityMeters: string;
   azureEndpoint: string;
   azureDeploymentName: string;
   azureApiKey: string;
@@ -41,6 +45,10 @@ interface AzureDispatchPayload {
   recent_incident_count_30d: number;
   recent_incident_types: IncidentTypeBreakdown;
   historical_pattern: string;
+  historical_incident_summary: string;
+  historical_incident_totals: IncidentTypeBreakdown;
+  historical_match_count: number;
+  historical_lookup_mode: string;
   rank_citywide: number;
   weather_summary: string;
 }
@@ -51,12 +59,27 @@ export interface StagingPipelineResult {
   lng: number;
   predictedScore: number;
   weatherSummary: string;
+  historicalIncidentSummary: string;
+  historicalIncidentTotals: IncidentTypeBreakdown;
+  historicalMatchCount: number;
+  historicalLookupMode: string;
   aiBriefing: string;
   geometry: any;
 }
 
+interface HistoricalIncidentSummary {
+  summary: string;
+  totals: IncidentTypeBreakdown;
+  matchCount: number;
+  lookupMode: string;
+  matchedFeatureIds: Array<string | number>;
+}
+
 let pipelineConfig: PipelineConfig = {
   featureLayerUrl: "",
+  historicalLayerUrl: "",
+  historicalLookbackDays: "30",
+  historicalProximityMeters: "500",
   azureEndpoint: "",
   azureDeploymentName: "",
   azureApiKey: "",
@@ -116,6 +139,280 @@ const getAttributeValue = (
   }
 
   return undefined;
+};
+
+const parsePositiveNumber = (value: string, fallback: number): number => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+};
+
+const findFieldName = (
+  fields: Array<{ name: string; alias?: string }>,
+  candidates: string[],
+): string | undefined => {
+  const normalizedCandidates = candidates.map((candidate) =>
+    candidate.toLowerCase(),
+  );
+
+  const matched = fields.find((field) => {
+    const normalizedName = field.name.toLowerCase();
+    const normalizedAlias = (field.alias ?? "").toLowerCase();
+    return (
+      normalizedCandidates.includes(normalizedName) ||
+      normalizedCandidates.includes(normalizedAlias)
+    );
+  });
+
+  return matched?.name;
+};
+
+const summarizeHistoricalTotals = (totals: IncidentTypeBreakdown): string => {
+  const ranked = Object.entries(totals)
+    .filter(([, count]) => Number.isFinite(count) && count > 0)
+    .sort((a, b) => b[1] - a[1]);
+
+  if (ranked.length === 0) {
+    return "No historical incidents found in nearby area for the lookback window.";
+  }
+
+  const topThree = ranked.slice(0, 3).map(([name, count]) => {
+    const readable = name.replace(/_/g, " ").toLowerCase();
+    return `${readable}: ${Math.round(count)}`;
+  });
+
+  return `Common nearby historical incidents: ${topThree.join(", ")}.`;
+};
+
+const logHistoricalDebug = (payload: {
+  targetTimeISO: string;
+  lookbackDays: number;
+  windowStartISO: string;
+  windowEndISO: string;
+  historicalLayerUrl: string;
+  alarmDateField: string;
+  lookupMode: string;
+  matchCount: number;
+  matchedFeatureIds: Array<string | number>;
+  totals: IncidentTypeBreakdown;
+}) => {
+  if (typeof process !== "undefined" && process.env.NODE_ENV === "production") {
+    return;
+  }
+
+  console.log("[Historical Debug]", payload);
+};
+
+const queryHistoricalIncidentSummary = async (
+  lat: number,
+  lng: number,
+  targetTimeISO: string,
+): Promise<HistoricalIncidentSummary> => {
+  if (!pipelineConfig.historicalLayerUrl.trim()) {
+    return {
+      summary: "Historical layer not configured.",
+      totals: {},
+      matchCount: 0,
+      lookupMode: "disabled",
+      matchedFeatureIds: [],
+    };
+  }
+
+  const layer = new FeatureLayer({
+    url: pipelineConfig.historicalLayerUrl,
+  });
+
+  try {
+    await layer.load();
+  } catch (error) {
+    throw new Error(
+      `[Historical Query] Failed loading historical layer metadata (${pipelineConfig.historicalLayerUrl}): ${toErrorMessage(error)}`,
+    );
+  }
+
+  const lookbackDays = parsePositiveNumber(
+    pipelineConfig.historicalLookbackDays,
+    30,
+  );
+  const proximityMeters = parsePositiveNumber(
+    pipelineConfig.historicalProximityMeters,
+    500,
+  );
+
+  const fields = (layer.fields ?? []).map((field) => ({
+    name: field.name,
+    alias: field.alias,
+  }));
+
+  const alarmDateField = findFieldName(fields, [
+    "Alarm Date and Time",
+    "AlarmDateandTime",
+    "AlarmDateAndTime",
+    "alarm_date_time",
+    "alarm_datetime",
+    "alarm_date_and_time",
+    "alarm_date_and_time_local",
+    "alarm_datetime_local",
+    "alarm_dt",
+    "event_datetime",
+    "event_date",
+    "incident_datetime",
+    "incident_date",
+  ]);
+  const emsField = findFieldName(fields, [
+    "EMS Rescue Incident Count",
+    "ems_rescue_incident_count",
+    "ems_rescue_count",
+  ]);
+  const fireField = findFieldName(fields, [
+    "Fire Incident Count",
+    "fire_incident_count",
+    "fire_count",
+  ]);
+  const hazardsField = findFieldName(fields, [
+    "Hazards Accidents Incident Count",
+    "hazards_accidents_incident_count",
+    "hazards_accidents_count",
+  ]);
+  const serviceFalseAlarmField = findFieldName(fields, [
+    "Service FalseAlarm Incident Count",
+    "service_falsealarm_incident_count",
+    "service_false_alarm_count",
+  ]);
+  const totalField = findFieldName(fields, [
+    "Total_Count",
+    "total_count",
+    "Total Count",
+  ]);
+
+  const dateEnd = new Date(targetTimeISO);
+  const dateStart = new Date(dateEnd);
+  dateStart.setUTCDate(dateEnd.getUTCDate() - lookbackDays);
+
+  if (!alarmDateField) {
+    return {
+      summary:
+        "Historical layer date field was not found; time-bounded historical matching was skipped to avoid inaccurate results.",
+      totals: {},
+      matchCount: 0,
+      lookupMode: "missing_date_field",
+      matchedFeatureIds: [],
+    };
+  }
+
+  const whereClauses = ["1=1"];
+  const startTimestamp = formatArcGISTimestamp(dateStart.toISOString());
+  const endTimestamp = formatArcGISTimestamp(dateEnd.toISOString());
+  whereClauses.push(
+    `${alarmDateField} >= timestamp '${startTimestamp}' AND ${alarmDateField} <= timestamp '${endTimestamp}'`,
+  );
+
+  const outFields = [
+    emsField,
+    fireField,
+    hazardsField,
+    serviceFalseAlarmField,
+    totalField,
+  ].filter(Boolean) as string[];
+
+  const centerPoint = new Point({
+    longitude: lng,
+    latitude: lat,
+    spatialReference: { wkid: 4326 },
+  });
+
+  const intersectsQuery = new Query({
+    where: whereClauses.join(" AND "),
+    geometry: centerPoint,
+    spatialRelationship: "intersects",
+    outFields: outFields.length > 0 ? outFields : ["*"],
+    returnGeometry: false,
+    num: 200,
+  });
+
+  let featureSet;
+  let lookupMode = "intersects";
+  try {
+    featureSet = await layer.queryFeatures(intersectsQuery);
+  } catch (error) {
+    throw new Error(
+      `[Historical Query] Intersects query failed: ${toErrorMessage(error)}`,
+    );
+  }
+
+  if (!featureSet.features?.length) {
+    const proximityQuery = new Query({
+      where: whereClauses.join(" AND "),
+      geometry: centerPoint,
+      spatialRelationship: "intersects",
+      distance: proximityMeters,
+      units: "meters",
+      outFields: outFields.length > 0 ? outFields : ["*"],
+      returnGeometry: false,
+      num: 200,
+    });
+
+    try {
+      featureSet = await layer.queryFeatures(proximityQuery);
+      lookupMode = `proximity_${Math.round(proximityMeters)}m`;
+    } catch (error) {
+      throw new Error(
+        `[Historical Query] Proximity query failed: ${toErrorMessage(error)}`,
+      );
+    }
+  }
+
+  const totals: IncidentTypeBreakdown = {
+    EMS_RESCUE: 0,
+    FIRE: 0,
+    HAZARDS_ACCIDENTS: 0,
+    SERVICE_FALSE_ALARM: 0,
+    TOTAL: 0,
+  };
+
+  const features = featureSet.features ?? [];
+  const matchedFeatureIds = features
+    .map((feature) => {
+      const attrs = (feature.attributes ?? {}) as AttributeMap;
+      const featureId =
+        getAttributeValue(attrs, ["location_ID", "location_id", "grid_id"]) ??
+        getAttributeValue(attrs, ["OBJECTID", "ObjectId", "objectid"]);
+      return typeof featureId === "string" || typeof featureId === "number"
+        ? featureId
+        : null;
+    })
+    .filter((value): value is string | number => value !== null);
+
+  features.forEach((feature) => {
+    const attrs = (feature.attributes ?? {}) as AttributeMap;
+    totals.EMS_RESCUE += Number(emsField ? attrs[emsField] : 0) || 0;
+    totals.FIRE += Number(fireField ? attrs[fireField] : 0) || 0;
+    totals.HAZARDS_ACCIDENTS +=
+      Number(hazardsField ? attrs[hazardsField] : 0) || 0;
+    totals.SERVICE_FALSE_ALARM +=
+      Number(serviceFalseAlarmField ? attrs[serviceFalseAlarmField] : 0) || 0;
+    totals.TOTAL += Number(totalField ? attrs[totalField] : 0) || 0;
+  });
+
+  logHistoricalDebug({
+    targetTimeISO,
+    lookbackDays,
+    windowStartISO: dateStart.toISOString(),
+    windowEndISO: dateEnd.toISOString(),
+    historicalLayerUrl: pipelineConfig.historicalLayerUrl,
+    alarmDateField,
+    lookupMode,
+    matchCount: features.length,
+    matchedFeatureIds,
+    totals,
+  });
+
+  return {
+    summary: summarizeHistoricalTotals(totals),
+    totals,
+    matchCount: features.length,
+    lookupMode,
+    matchedFeatureIds,
+  };
 };
 
 const parseIncidentTypes = (
@@ -183,6 +480,37 @@ const clampToTwoSentences = (text: string): string => {
   }
 
   return `${sentences[0]} Position a secondary unit on a nearby high-access corridor to preserve area coverage and reduce spillover risk.`;
+};
+
+const resolveProxyUrl = (rawProxyUrl: string): string => {
+  const trimmed = rawProxyUrl.trim();
+  const routePath = "/rest/ai-briefing-proxy";
+
+  if (!trimmed) {
+    if (
+      typeof window !== "undefined" &&
+      window.location.protocol === "https:"
+    ) {
+      return `https://localhost:3001${routePath}`;
+    }
+    return `http://localhost:3000${routePath}`;
+  }
+
+  if (/^https?:\/\//i.test(trimmed)) {
+    return trimmed;
+  }
+
+  if (trimmed.startsWith("/")) {
+    if (
+      typeof window !== "undefined" &&
+      window.location.protocol === "https:"
+    ) {
+      return `https://localhost:3001${trimmed}`;
+    }
+    return `http://localhost:3000${trimmed}`;
+  }
+
+  return trimmed;
 };
 
 const queryTopForecastFeature = async (
@@ -398,7 +726,7 @@ export const getWeatherForInterval = async (
 export const generateAIDispatchBriefing = async (
   payload: AzureDispatchPayload,
 ): Promise<string> => {
-  const proxyUrl = pipelineConfig.aiBriefingProxyUrl.trim();
+  const proxyUrl = resolveProxyUrl(pipelineConfig.aiBriefingProxyUrl);
 
   if (proxyUrl) {
     let proxyResponse: Response;
@@ -523,6 +851,23 @@ export const runStagingPipeline = async (
     throw new Error(`[Pipeline] Weather step failed: ${toErrorMessage(error)}`);
   }
 
+  let historicalIncidentSummary: HistoricalIncidentSummary;
+  try {
+    historicalIncidentSummary = await queryHistoricalIncidentSummary(
+      topFeature.lat,
+      topFeature.lng,
+      targetTimeISO,
+    );
+  } catch (error) {
+    historicalIncidentSummary = {
+      summary: `Historical query failed: ${toErrorMessage(error)}`,
+      totals: {},
+      matchCount: 0,
+      lookupMode: "error",
+      matchedFeatureIds: [],
+    };
+  }
+
   const azurePayload: AzureDispatchPayload = {
     location_id: topFeature.locationId,
     latitude: topFeature.lat,
@@ -533,6 +878,10 @@ export const runStagingPipeline = async (
     recent_incident_count_30d: topFeature.recentIncidentCount30d,
     recent_incident_types: topFeature.recentIncidentTypes,
     historical_pattern: topFeature.historicalPattern,
+    historical_incident_summary: historicalIncidentSummary.summary,
+    historical_incident_totals: historicalIncidentSummary.totals,
+    historical_match_count: historicalIncidentSummary.matchCount,
+    historical_lookup_mode: historicalIncidentSummary.lookupMode,
     rank_citywide: 1,
     weather_summary: weatherSummary,
   };
@@ -554,6 +903,10 @@ export const runStagingPipeline = async (
     lng: topFeature.lng,
     predictedScore: topFeature.predictedScore,
     weatherSummary,
+    historicalIncidentSummary: historicalIncidentSummary.summary,
+    historicalIncidentTotals: historicalIncidentSummary.totals,
+    historicalMatchCount: historicalIncidentSummary.matchCount,
+    historicalLookupMode: historicalIncidentSummary.lookupMode,
     aiBriefing,
     geometry: topFeature.geometry,
   };

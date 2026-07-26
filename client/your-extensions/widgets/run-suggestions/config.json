@@ -1,5 +1,8 @@
 {
   "featureLayerUrl": "",
+  "historicalLayerUrl": "",
+  "historicalLookbackDays": "30",
+  "historicalProximityMeters": "500",
   "azureEndpoint": "",
   "azureDeploymentName": "",
   "azureApiKey": "",

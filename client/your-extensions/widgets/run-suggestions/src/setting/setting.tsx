@@ -39,6 +39,41 @@ const Setting = (props: AllWidgetSettingProps<IMConfig>) => {
         </SettingRow>
         <SettingRow>
           <div className="w-100">
+            <p className="mb-1">Historical Layer URL (Redlands_Hexagons_28)</p>
+            <TextInput
+              value={props.config?.historicalLayerUrl ?? ""}
+              onChange={(event) => {
+                onConfigChange("historicalLayerUrl", event.target.value);
+              }}
+            />
+          </div>
+        </SettingRow>
+        <SettingRow>
+          <div className="w-100">
+            <p className="mb-1">Historical Lookback Days</p>
+            <TextInput
+              value={props.config?.historicalLookbackDays ?? "30"}
+              onChange={(event) => {
+                onConfigChange("historicalLookbackDays", event.target.value);
+              }}
+              placeholder="30"
+            />
+          </div>
+        </SettingRow>
+        <SettingRow>
+          <div className="w-100">
+            <p className="mb-1">Historical Proximity Radius (meters)</p>
+            <TextInput
+              value={props.config?.historicalProximityMeters ?? "500"}
+              onChange={(event) => {
+                onConfigChange("historicalProximityMeters", event.target.value);
+              }}
+              placeholder="500"
+            />
+          </div>
+        </SettingRow>
+        <SettingRow>
+          <div className="w-100">
             <p className="mb-1">Azure Endpoint</p>
             <TextInput
               value={props.config?.azureEndpoint ?? ""}
