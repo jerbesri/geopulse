@@ -1,0 +1,3498 @@
+{
+  "pages": {
+    "page_2": {
+      "id": "page_2",
+      "mode": "FIT_WINDOW",
+      "type": "NORMAL",
+      "layout": {
+        "LARGE": "layout_100",
+        "MEDIUM": "layout_110",
+        "SMALL": "layout_133"
+      },
+      "isDefault": true,
+      "isVisible": true,
+      "header": true,
+      "footer": false,
+      "label": "Page"
+    }
+  },
+  "layouts": {
+    "layout_24": {
+      "type": "FIXED",
+      "order": [
+        "2",
+        "3"
+      ],
+      "content": {
+        "2": {
+          "type": "WIDGET",
+          "bbox": {
+            "left": "90.6327%",
+            "right": "10.00px",
+            "top": "50%",
+            "bottom": "16.6667%",
+            "width": "117px",
+            "height": "40px"
+          },
+          "widgetId": "widget_125",
+          "setting": {
+            "autoProps": {
+              "width": false,
+              "height": false,
+              "top": false,
+              "bottom": true,
+              "right": false,
+              "left": true
+            },
+            "vCenter": true,
+            "hCenter": false
+          },
+          "isPending": false,
+          "parent": "layout_24"
+        },
+        "3": {
+          "type": "WIDGET",
+          "widgetId": "widget_234",
+          "bbox": {
+            "left": "0px",
+            "right": "1569px",
+            "top": "0.0%",
+            "bottom": "0.0%",
+            "width": "18.3%",
+            "height": "100.0%"
+          },
+          "setting": {
+            "autoProps": {
+              "right": true,
+              "left": false,
+              "top": false,
+              "bottom": false,
+              "width": "STRETCH",
+              "height": "STRETCH"
+            },
+            "vCenter": false,
+            "hCenter": false
+          }
+        }
+      }
+    },
+    "layout_100": {
+      "type": "GRID",
+      "content": {
+        "24": {
+          "gridType": 0,
+          "bbox": {
+            "width": 100
+          },
+          "children": [
+            "30",
+            "60",
+            "46"
+          ]
+        },
+        "30": {
+          "gridType": 3,
+          "type": "WIDGET",
+          "expandable": true,
+          "hasItemHeader": false,
+          "bbox": {
+            "width": 20.64
+          },
+          "widgetId": "widget_256",
+          "parent": "24"
+        },
+        "45": {
+          "gridType": 3,
+          "type": "WIDGET",
+          "expandable": true,
+          "hasItemHeader": false,
+          "bbox": {
+            "width": 21.289531249999996
+          },
+          "widgetId": "widget_206",
+          "parent": "46"
+        },
+        "46": {
+          "gridType": 1,
+          "parent": "24",
+          "bbox": {
+            "width": 17.61
+          },
+          "children": [
+            "58",
+            "45",
+            "57",
+            "51"
+          ]
+        },
+        "50": {
+          "gridType": 3,
+          "type": "WIDGET",
+          "expandable": true,
+          "hasItemHeader": false,
+          "parent": "60",
+          "bbox": {
+            "width": 50
+          },
+          "widgetId": "widget_205"
+        },
+        "51": {
+          "type": "WIDGET",
+          "widgetId": "widget_261",
+          "gridType": 3,
+          "parent": "46",
+          "bbox": {
+            "width": 35.065
+          },
+          "expandable": true,
+          "hasItemHeader": true,
+          "headerBackground": "var(--sys-color-secondary-light)",
+          "headerForeground": "var(--ref-palette-neutral-1300)"
+        },
+        "57": {
+          "type": "WIDGET",
+          "widgetId": "widget_270",
+          "gridType": 3,
+          "bbox": {
+            "width": 22.959531249999998
+          },
+          "expandable": true,
+          "hasItemHeader": false,
+          "parent": "46"
+        },
+        "58": {
+          "type": "WIDGET",
+          "widgetId": "widget_272",
+          "gridType": 3,
+          "bbox": {
+            "width": 20.685937499999998
+          },
+          "expandable": true,
+          "hasItemHeader": false,
+          "parent": "46"
+        },
+        "59": {
+          "type": "WIDGET",
+          "widgetId": "widget_274",
+          "gridType": 3,
+          "parent": "60",
+          "bbox": {
+            "width": 50
+          },
+          "expandable": true,
+          "hasItemHeader": false
+        },
+        "60": {
+          "gridType": 1,
+          "parent": "24",
+          "bbox": {
+            "width": 61.75000000000001
+          },
+          "children": [
+            "50",
+            "59"
+          ]
+        }
+      },
+      "order": [],
+      "setting": {
+        "rootItem": "24",
+        "mainItemId": "widget_205",
+        "style": {
+          "padding": {
+            "number": [
+              8,
+              30,
+              0,
+              30
+            ],
+            "unit": "px"
+          }
+        },
+        "splitSize": 35,
+        "hasItemHeader": false,
+        "expandable": true,
+        "resizable": false
+      }
+    },
+    "layout_101": {
+      "type": "FIXED",
+      "label": "Map FixedLayout",
+      "content": {},
+      "order": []
+    },
+    "layout_109": {
+      "content": {
+        "3": {
+          "type": "WIDGET",
+          "widgetId": "widget_249",
+          "bbox": {
+            "width": "343px",
+            "height": "50px"
+          },
+          "setting": {
+            "heightMode": "fixed",
+            "aspectRatio": 0.27,
+            "autoProps": {
+              "width": "AUTO"
+            }
+          }
+        }
+      },
+      "type": "FLEX_ROW",
+      "order": [
+        "3"
+      ],
+      "label": "Default",
+      "setting": {
+        "padding": {
+          "number": [
+            10,
+            10,
+            10,
+            10
+          ],
+          "unit": "px"
+        },
+        "justifyContent": "flex-start"
+      }
+    },
+    "layout_110": {
+      "type": "GRID",
+      "content": {
+        "3": {
+          "type": "WIDGET",
+          "widgetId": "widget_205",
+          "bbox": {
+            "width": 52.370000000000005
+          },
+          "parent": "8",
+          "gridType": 3
+        },
+        "6": {
+          "gridType": 1,
+          "bbox": {
+            "width": 100
+          },
+          "children": [
+            "8",
+            "21"
+          ]
+        },
+        "8": {
+          "gridType": 0,
+          "parent": "6",
+          "bbox": {
+            "width": 50.48
+          },
+          "children": [
+            "3",
+            "10"
+          ]
+        },
+        "10": {
+          "gridType": 1,
+          "parent": "8",
+          "bbox": {
+            "width": 47.629999999999995
+          },
+          "children": [
+            "16",
+            "14"
+          ]
+        },
+        "14": {
+          "type": "WIDGET",
+          "widgetId": "widget_235",
+          "bbox": {
+            "width": 40.33999999999998
+          },
+          "gridType": 3,
+          "parent": "10",
+          "expandable": true
+        },
+        "16": {
+          "type": "WIDGET",
+          "widgetId": "widget_236",
+          "gridType": 3,
+          "parent": "10",
+          "bbox": {
+            "width": 59.66
+          },
+          "expandable": true
+        },
+        "21": {
+          "type": "SECTION",
+          "sectionId": "section_4",
+          "gridType": 3,
+          "parent": "6",
+          "bbox": {
+            "width": 49.51999999999999
+          },
+          "expandable": true
+        }
+      },
+      "order": [],
+      "setting": {
+        "rootItem": "6",
+        "mainItemId": "widget_205",
+        "style": {
+          "padding": {
+            "number": [
+              8,
+              30,
+              0,
+              30
+            ],
+            "unit": "px"
+          }
+        },
+        "splitSize": 35,
+        "resizable": false
+      }
+    },
+    "layout_111": {
+      "type": "FIXED",
+      "label": "Map FixedLayout"
+    },
+    "layout_117": {
+      "type": "COLUMN",
+      "order": [
+        "0",
+        "1",
+        "2"
+      ],
+      "content": {
+        "0": {
+          "type": "WIDGET",
+          "bbox": {
+            "width": "90.00%",
+            "height": "28.00px"
+          },
+          "widgetId": "widget_229",
+          "parent": "layout_41",
+          "setting": {
+            "autoProps": {
+              "height": "CUSTOM",
+              "width": "CUSTOM"
+            },
+            "style": {
+              "alignSelf": "center"
+            }
+          }
+        },
+        "1": {
+          "type": "WIDGET",
+          "bbox": {
+            "width": "89.9986%",
+            "height": "54.00px"
+          },
+          "widgetId": "widget_230",
+          "parent": "layout_41",
+          "setting": {
+            "autoProps": {
+              "height": "CUSTOM",
+              "width": "CUSTOM"
+            },
+            "style": {
+              "alignSelf": "center"
+            }
+          }
+        },
+        "2": {
+          "type": "WIDGET",
+          "bbox": {
+            "width": "90.00%",
+            "height": "36.00px"
+          },
+          "widgetId": "widget_231",
+          "parent": "layout_41",
+          "setting": {
+            "autoProps": {
+              "width": "CUSTOM",
+              "height": "CUSTOM"
+            },
+            "style": {
+              "alignSelf": "center"
+            }
+          }
+        }
+      },
+      "setting": {
+        "padding": {
+          "number": [
+            20,
+            0,
+            20,
+            0
+          ],
+          "unit": "px"
+        },
+        "justifyContent": "space-around"
+      },
+      "label": "Default"
+    },
+    "layout_118": {
+      "content": {
+        "0": {
+          "type": "WIDGET",
+          "widgetId": "widget_220",
+          "bbox": {
+            "left": "0%",
+            "right": "0.0%",
+            "top": "50%",
+            "bottom": "24.4%",
+            "width": "100.0%",
+            "height": "25.6%"
+          },
+          "setting": {
+            "autoProps": {
+              "right": true,
+              "left": false,
+              "top": false,
+              "bottom": true,
+              "height": "AUTO",
+              "width": "AUTO"
+            },
+            "hCenter": false,
+            "vCenter": true
+          }
+        }
+      },
+      "type": "FIXED",
+      "order": [
+        "0"
+      ],
+      "label": "Default"
+    },
+    "layout_119": {
+      "type": "FIXED",
+      "content": {},
+      "order": []
+    },
+    "layout_120": {
+      "type": "FIXED",
+      "content": {},
+      "order": []
+    },
+    "layout_121": {
+      "type": "FIXED",
+      "content": {},
+      "order": []
+    },
+    "layout_122": {
+      "type": "FIXED",
+      "content": {
+        "0": {
+          "type": "WIDGET",
+          "widgetId": "widget_206",
+          "bbox": {
+            "left": "0%",
+            "right": "0%",
+            "top": "0%",
+            "bottom": "0%",
+            "width": "100%",
+            "height": "100%"
+          },
+          "setting": {
+            "autoProps": {
+              "right": false,
+              "left": false,
+              "top": false,
+              "bottom": false,
+              "height": "STRETCH",
+              "width": "STRETCH"
+            },
+            "vCenter": false,
+            "hCenter": false
+          }
+        }
+      },
+      "order": [
+        "0"
+      ]
+    },
+    "layout_123": {
+      "type": "FIXED",
+      "content": {},
+      "order": []
+    },
+    "layout_133": {
+      "type": "GRID",
+      "content": {
+        "3": {
+          "type": "WIDGET",
+          "widgetId": "widget_205",
+          "bbox": {
+            "width": 50
+          },
+          "parent": "6",
+          "gridType": 3
+        },
+        "5": {
+          "type": "WIDGET",
+          "widgetId": "widget_206",
+          "bbox": {
+            "width": 100
+          },
+          "gridType": 3,
+          "parent": "17",
+          "expandable": true
+        },
+        "6": {
+          "gridType": 1,
+          "bbox": {
+            "width": 100
+          },
+          "children": [
+            "3",
+            "17"
+          ]
+        },
+        "8": {
+          "gridType": 0,
+          "parent": "6",
+          "bbox": {
+            "width": 68.35
+          },
+          "children": [
+            "15",
+            "3",
+            "10"
+          ]
+        },
+        "10": {
+          "gridType": 1,
+          "parent": "8",
+          "bbox": {
+            "width": 26.66
+          },
+          "children": [
+            "7",
+            "16",
+            "14"
+          ]
+        },
+        "13": {
+          "gridType": 0,
+          "parent": "6",
+          "bbox": {
+            "width": 31.649999999999995
+          },
+          "children": [
+            "11",
+            "5",
+            "12"
+          ]
+        },
+        "14": {
+          "type": "WIDGET",
+          "widgetId": "widget_239",
+          "bbox": {
+            "width": 40.079999999999984
+          },
+          "gridType": 3,
+          "parent": "17",
+          "expandable": true
+        },
+        "15": {
+          "gridType": 1,
+          "parent": "8",
+          "bbox": {
+            "width": 25
+          },
+          "children": [
+            "0",
+            "1"
+          ]
+        },
+        "16": {
+          "type": "WIDGET",
+          "widgetId": "widget_240",
+          "gridType": 3,
+          "parent": "17",
+          "bbox": {
+            "width": 159.92
+          },
+          "expandable": true
+        },
+        "17": {
+          "bbox": {
+            "width": 50
+          },
+          "gridType": 2,
+          "children": [
+            "16",
+            "14",
+            "5"
+          ],
+          "parent": "6"
+        }
+      },
+      "order": [],
+      "setting": {
+        "rootItem": "6",
+        "mainItemId": "widget_205",
+        "style": {
+          "padding": {
+            "number": [
+              8,
+              30,
+              0,
+              30
+            ],
+            "unit": "px"
+          }
+        },
+        "splitSize": 35,
+        "resizable": false
+      }
+    },
+    "layout_134": {
+      "type": "FIXED",
+      "label": "Map FixedLayout"
+    },
+    "layout_140": {
+      "type": "COLUMN",
+      "order": [
+        "0",
+        "1",
+        "2"
+      ],
+      "content": {
+        "0": {
+          "type": "WIDGET",
+          "bbox": {
+            "width": "90.00%",
+            "height": "28.00px"
+          },
+          "widgetId": "widget_229",
+          "parent": "layout_41",
+          "setting": {
+            "autoProps": {
+              "height": "CUSTOM",
+              "width": "CUSTOM"
+            },
+            "style": {
+              "alignSelf": "center"
+            }
+          }
+        },
+        "1": {
+          "type": "WIDGET",
+          "bbox": {
+            "width": "89.9986%",
+            "height": "54.00px"
+          },
+          "widgetId": "widget_230",
+          "parent": "layout_41",
+          "setting": {
+            "autoProps": {
+              "height": "CUSTOM",
+              "width": "CUSTOM"
+            },
+            "style": {
+              "alignSelf": "center"
+            }
+          }
+        },
+        "2": {
+          "type": "WIDGET",
+          "bbox": {
+            "width": "90.00%",
+            "height": "36.00px"
+          },
+          "widgetId": "widget_231",
+          "parent": "layout_41",
+          "setting": {
+            "autoProps": {
+              "width": "CUSTOM",
+              "height": "CUSTOM"
+            },
+            "style": {
+              "alignSelf": "center"
+            }
+          }
+        }
+      },
+      "setting": {
+        "padding": {
+          "number": [
+            20,
+            0,
+            20,
+            0
+          ],
+          "unit": "px"
+        },
+        "justifyContent": "space-around"
+      },
+      "label": "Default"
+    },
+    "layout_141": {
+      "content": {
+        "0": {
+          "type": "WIDGET",
+          "widgetId": "widget_220",
+          "bbox": {
+            "left": "0%",
+            "right": "72.1%",
+            "top": "78.0%",
+            "bottom": "0%",
+            "width": "27.9%",
+            "height": "10.7%"
+          },
+          "setting": {
+            "autoProps": {
+              "right": true,
+              "left": false,
+              "top": true,
+              "bottom": false,
+              "height": "AUTO",
+              "width": "AUTO"
+            },
+            "hCenter": false,
+            "vCenter": false
+          }
+        }
+      },
+      "type": "FIXED",
+      "order": [
+        "0"
+      ],
+      "label": "Default"
+    },
+    "layout_146": {
+      "content": {},
+      "type": "FIXED",
+      "setting": {
+        "lockDescendants": true
+      }
+    },
+    "layout_149": {
+      "content": {
+        "0": {
+          "type": "WIDGET",
+          "widgetId": "widget_242",
+          "bbox": {
+            "height": "564px"
+          }
+        },
+        "3": {
+          "type": "WIDGET",
+          "widgetId": "widget_259",
+          "bbox": {
+            "height": "543px"
+          }
+        },
+        "4": {
+          "type": "WIDGET",
+          "widgetId": "widget_252",
+          "bbox": {
+            "height": "531px"
+          }
+        }
+      },
+      "type": "ACCORDION",
+      "label": "Default",
+      "order": [
+        "4",
+        "3",
+        "0"
+      ]
+    },
+    "layout_163": {
+      "content": {},
+      "type": "FIXED",
+      "label": "Map FixedLayout"
+    },
+    "layout_165": {
+      "content": {},
+      "type": "FIXED",
+      "label": "Map FixedLayout"
+    }
+  },
+  "exbVersion": "1.21.0",
+  "mainSizeMode": "LARGE",
+  "theme": "themes/astro/",
+  "forBuilderAttributes": {
+    "lockLayout": false,
+    "viewPortSize": {
+      "MEDIUM": {
+        "width": 834,
+        "height": 1112
+      },
+      "SMALL": {
+        "width": 414,
+        "height": 736
+      },
+      "LARGE": {
+        "width": 1920,
+        "height": 1080
+      }
+    }
+  },
+  "template": "monitor",
+  "widgets": {
+    "widget_125": {
+      "uri": "widgets/common/share/",
+      "version": "1.21.0",
+      "config": {
+        "uiMode": "INLINE",
+        "popup": {
+          "icon": "",
+          "items": [
+            {
+              "id": "embed",
+              "enable": false
+            },
+            {
+              "id": "qrcode",
+              "enable": false
+            },
+            {
+              "id": "email",
+              "enable": true
+            },
+            {
+              "id": "facebook",
+              "enable": true
+            },
+            {
+              "id": "twitter",
+              "enable": true
+            },
+            {
+              "id": "pinterest",
+              "enable": false
+            },
+            {
+              "id": "linkedin",
+              "enable": true
+            }
+          ],
+          "tooltip": ""
+        },
+        "inline": {
+          "items": [
+            {
+              "id": "facebook",
+              "enable": true
+            },
+            {
+              "id": "twitter",
+              "enable": true
+            },
+            {
+              "id": "pinterest",
+              "enable": false
+            },
+            {
+              "id": "linkedin",
+              "enable": false
+            },
+            {
+              "id": "embed",
+              "enable": false
+            },
+            {
+              "id": "qrcode",
+              "enable": false
+            },
+            {
+              "id": "email",
+              "enable": true
+            },
+            {
+              "id": "sharelink",
+              "enable": false
+            }
+          ],
+          "design": {
+            "direction": "HORIZONTAL",
+            "hideLabel": true,
+            "btnRad": 0,
+            "btnColor": "",
+            "iconColor": "",
+            "size": "default"
+          }
+        }
+      },
+      "id": "widget_125",
+      "label": "Share"
+    },
+    "widget_205": {
+      "uri": "widgets/arcgis/arcgis-map/",
+      "version": "1.21.0",
+      "config": {
+        "toolConfig": {
+          "canZoom": true,
+          "canHome": true,
+          "canSearch": true,
+          "canNavigation": true,
+          "canLayers": true,
+          "canBaseMap": true,
+          "canMeasure": true,
+          "canScaleBar": true,
+          "canSelect": true,
+          "canSelectState": true,
+          "canLocate": true
+        },
+        "isUseCustomMapState": true,
+        "layoutIndex": 1,
+        "preLayoutIndex": 0,
+        "initialMapDataSourceID": "dataSource_1",
+        "initialMapState": {
+          "viewPoint": {
+            "rotation": 0,
+            "scale": 36111.909643,
+            "targetGeometry": {
+              "spatialReference": {
+                "latestWkid": 3857,
+                "wkid": 102100
+              },
+              "x": -13044667.392714327,
+              "y": 4036304.0222117743
+            }
+          },
+          "extent": {
+            "spatialReference": {
+              "latestWkid": 3857,
+              "wkid": 102100
+            },
+            "xmin": -13050194.745322192,
+            "ymin": 4033518.847993637,
+            "xmax": -13039140.040106462,
+            "ymax": 4039089.1964299115
+          },
+          "rotation": 0,
+          "viewType": "2d"
+        },
+        "scaleRange": null,
+        "customLODs": null,
+        "showPopupUponSelection": false,
+        "popupDockPosition": "",
+        "disablePopUp": true,
+        "selectionHighlightColor": "rgba(67,171,235,0.53)",
+        "selectionHighlightHaloColor": "#43abeb"
+      },
+      "id": "widget_205",
+      "layouts": {
+        "MapFixedLayout": {
+          "LARGE": "layout_101",
+          "MEDIUM": "layout_111",
+          "SMALL": "layout_134"
+        }
+      },
+      "style": {
+        "border": {
+          "type": "solid",
+          "color": "rgba(255,255,255,0.41)",
+          "width": "1px"
+        },
+        "borderRadius": {
+          "number": [
+            30,
+            30,
+            30,
+            30
+          ],
+          "unit": "px"
+        },
+        "boxShadow": {
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "5px",
+          "spread": "2px",
+          "color": "rgba(255,255,255,0.18)"
+        }
+      },
+      "label": "Map",
+      "useDataSources": [
+        {
+          "dataSourceId": "dataSource_1",
+          "mainDataSourceId": "dataSource_1"
+        }
+      ],
+      "dataActions": {
+        "showOnMap": {
+          "config": {
+            "isUseCustomSymbol": true,
+            "isOperationalLayer": true,
+            "symbolOption": {
+              "pointSymbol": {
+                "type": "esriSMS",
+                "color": [
+                  255,
+                  255,
+                  0,
+                  150
+                ],
+                "angle": 0,
+                "xoffset": 0,
+                "yoffset": 0,
+                "size": 12,
+                "style": "esriSMSCircle",
+                "outline": {
+                  "type": "esriSLS",
+                  "color": [
+                    255,
+                    255,
+                    0,
+                    150
+                  ],
+                  "width": 1,
+                  "style": "esriSLSSolid"
+                }
+              },
+              "polylineSymbol": {
+                "type": "esriSLS",
+                "color": [
+                  255,
+                  255,
+                  0,
+                  150
+                ],
+                "width": 0.75,
+                "style": "esriSLSSolid"
+              },
+              "polygonSymbol": {
+                "type": "esriSFS",
+                "color": [
+                  255,
+                  255,
+                  0,
+                  150
+                ],
+                "outline": {
+                  "type": "esriSLS",
+                  "color": [
+                    255,
+                    255,
+                    0,
+                    150
+                  ],
+                  "width": 1,
+                  "style": "esriSLSSolid"
+                },
+                "style": "esriSFSSolid"
+              }
+            }
+          }
+        }
+      }
+    },
+    "widget_206": {
+      "uri": "widgets/common/chart/",
+      "version": "1.21.0",
+      "config": {
+        "template": "histogram",
+        "webChart": {
+          "version": "25.0.0",
+          "id": "histogram",
+          "type": "chart",
+          "dataSource": {
+            "query": {
+              "outFields": [
+                "FCAST_1"
+              ]
+            }
+          },
+          "colorMatch": true,
+          "series": [
+            {
+              "type": "histogramSeries",
+              "id": "FCAST_1",
+              "name": "Forecast for COUNT in 2026-08-01 16:00:00",
+              "x": "FCAST_1",
+              "binCount": 15,
+              "overlays": {
+                "type": "chartOverlays",
+                "mean": {
+                  "type": "chartOverlay",
+                  "visible": true,
+                  "created": false,
+                  "symbol": {
+                    "type": "esriSLS",
+                    "style": "esriSLSDash",
+                    "color": "#A6CEE3",
+                    "width": 1
+                  }
+                },
+                "median": {
+                  "type": "chartOverlay",
+                  "visible": true,
+                  "created": false,
+                  "symbol": {
+                    "type": "esriSLS",
+                    "style": "esriSLSDash",
+                    "color": "#33A02C",
+                    "width": 1
+                  }
+                },
+                "standardDeviation": {
+                  "type": "chartOverlay",
+                  "visible": true,
+                  "created": false,
+                  "symbol": {
+                    "type": "esriSLS",
+                    "style": "esriSLSDash",
+                    "color": "#B2DF8A",
+                    "width": 1
+                  }
+                },
+                "comparisonDistribution": {
+                  "type": "chartOverlay",
+                  "visible": true,
+                  "created": false,
+                  "symbol": {
+                    "type": "esriSLS",
+                    "style": "esriSLSDash",
+                    "color": "#E31A1C",
+                    "width": 1
+                  }
+                }
+              },
+              "dataTransformationType": "none",
+              "fillSymbol": {
+                "type": "esriSFS",
+                "style": "esriSFSSolid",
+                "color": "#5E8FD0",
+                "outline": {
+                  "type": "esriSLS",
+                  "style": "esriSLSSolid",
+                  "color": "var(--sys-color-divider-secondary)",
+                  "width": 0
+                }
+              },
+              "dataLabels": {
+                "type": "chartText",
+                "visible": false,
+                "content": {
+                  "type": "esriTS",
+                  "color": "var(--sys-color-surface-paper-hint)",
+                  "font": {
+                    "family": "inherit",
+                    "size": 10,
+                    "style": "normal",
+                    "weight": "normal",
+                    "decoration": "none"
+                  },
+                  "horizontalAlignment": "center",
+                  "verticalAlignment": "middle"
+                }
+              },
+              "dataTooltipVisible": true
+            }
+          ],
+          "axes": [
+            {
+              "type": "chartAxis",
+              "visible": true,
+              "isLogarithmic": false,
+              "title": {
+                "type": "chartText",
+                "visible": false,
+                "content": {
+                  "type": "esriTS",
+                  "color": "var(--sys-color-surface-paper-text)",
+                  "font": {
+                    "family": "inherit",
+                    "size": 14,
+                    "style": "normal",
+                    "weight": "normal",
+                    "decoration": "none"
+                  },
+                  "horizontalAlignment": "center",
+                  "verticalAlignment": "middle"
+                }
+              },
+              "labels": {
+                "type": "chartText",
+                "visible": true,
+                "content": {
+                  "type": "esriTS",
+                  "color": "var(--sys-color-surface-paper-hint)",
+                  "font": {
+                    "family": "inherit",
+                    "size": 12,
+                    "style": "normal",
+                    "weight": "normal",
+                    "decoration": "none"
+                  },
+                  "horizontalAlignment": "center",
+                  "verticalAlignment": "middle"
+                }
+              },
+              "valueFormat": {
+                "type": "number",
+                "intlOptions": {
+                  "style": "decimal",
+                  "notation": "standard",
+                  "minimumFractionDigits": 0,
+                  "maximumFractionDigits": 2
+                }
+              },
+              "lineSymbol": {
+                "type": "esriSLS",
+                "style": "esriSLSSolid",
+                "color": "var(--sys-color-divider-primary)",
+                "width": 1
+              },
+              "grid": {
+                "type": "esriSLS",
+                "style": "esriSLSDash",
+                "color": "var(--sys-color-divider-tertiary)",
+                "width": 0
+              }
+            },
+            {
+              "type": "chartAxis",
+              "visible": true,
+              "isLogarithmic": false,
+              "title": {
+                "type": "chartText",
+                "visible": false,
+                "content": {
+                  "type": "esriTS",
+                  "color": "var(--sys-color-surface-paper-text)",
+                  "font": {
+                    "family": "inherit",
+                    "size": 14,
+                    "style": "normal",
+                    "weight": "normal",
+                    "decoration": "none"
+                  },
+                  "horizontalAlignment": "center",
+                  "verticalAlignment": "middle"
+                }
+              },
+              "labels": {
+                "type": "chartText",
+                "visible": true,
+                "content": {
+                  "type": "esriTS",
+                  "color": "var(--sys-color-surface-paper-hint)",
+                  "font": {
+                    "family": "inherit",
+                    "size": 12,
+                    "style": "normal",
+                    "weight": "normal",
+                    "decoration": "none"
+                  },
+                  "horizontalAlignment": "center",
+                  "verticalAlignment": "middle"
+                }
+              },
+              "valueFormat": {
+                "type": "number",
+                "intlOptions": {
+                  "style": "decimal",
+                  "notation": "standard",
+                  "minimumFractionDigits": 0,
+                  "maximumFractionDigits": 0
+                }
+              },
+              "lineSymbol": {
+                "type": "esriSLS",
+                "style": "esriSLSSolid",
+                "color": "var(--sys-color-divider-primary)",
+                "width": 1
+              },
+              "grid": {
+                "type": "esriSLS",
+                "style": "esriSLSDash",
+                "color": "var(--sys-color-divider-tertiary)",
+                "width": 0
+              }
+            }
+          ],
+          "background": "var(--sys-color-surface-paper)",
+          "title": {
+            "type": "chartText",
+            "visible": true,
+            "content": {
+              "type": "esriTS",
+              "color": "var(--sys-color-surface-paper-text)",
+              "font": {
+                "family": "inherit",
+                "size": 16,
+                "style": "normal",
+                "weight": "normal",
+                "decoration": "none"
+              },
+              "horizontalAlignment": "center",
+              "text": "Distribution of Forecast for COUNT in 2026-08-01 16:00:00"
+            }
+          },
+          "footer": {
+            "type": "chartText",
+            "visible": true,
+            "content": {
+              "type": "esriTS",
+              "color": "var(--sys-color-surface-paper-hint)",
+              "font": {
+                "family": "inherit",
+                "size": 12,
+                "style": "normal",
+                "weight": "normal",
+                "decoration": "none"
+              },
+              "horizontalAlignment": "center",
+              "text": ""
+            }
+          },
+          "legend": {
+            "type": "chartLegend",
+            "visible": true,
+            "title": {
+              "type": "chartText",
+              "visible": true,
+              "content": {
+                "type": "esriTS",
+                "color": "var(--sys-color-surface-paper-text)",
+                "font": {
+                  "family": "inherit",
+                  "size": 14,
+                  "style": "normal",
+                  "weight": "normal",
+                  "decoration": "none"
+                },
+                "horizontalAlignment": "center",
+                "text": ""
+              }
+            },
+            "body": {
+              "type": "esriTS",
+              "color": "var(--sys-color-surface-paper-text)",
+              "font": {
+                "family": "inherit",
+                "size": 12,
+                "style": "normal",
+                "weight": "normal",
+                "decoration": "none"
+              },
+              "horizontalAlignment": "center",
+              "text": ""
+            },
+            "position": "bottom"
+          }
+        },
+        "tools": {
+          "cursorEnable": true
+        }
+      },
+      "id": "widget_206",
+      "style": {
+        "border": {
+          "type": "solid",
+          "color": "",
+          "width": "1px"
+        },
+        "background": {
+          "color": "",
+          "fillType": "fill",
+          "image": {
+            "url": ""
+          }
+        },
+        "borderRadius": {
+          "number": [
+            30,
+            30,
+            30,
+            30
+          ],
+          "unit": "px"
+        }
+      },
+      "label": "Chart 2",
+      "useDataSources": [
+        {
+          "dataSourceId": "dataSource_1-d5b4ce6aeeab4932af8c6a44145ca568",
+          "mainDataSourceId": "dataSource_1-d5b4ce6aeeab4932af8c6a44145ca568",
+          "rootDataSourceId": "dataSource_1",
+          "fields": [
+            "FCAST_1"
+          ]
+        }
+      ],
+      "outputDataSources": [
+        "widget_206_output"
+      ]
+    },
+    "widget_220": {
+      "uri": "widgets/common/navigator/",
+      "version": "1.21.0",
+      "config": {
+        "data": {
+          "type": "AUTO",
+          "section": "section_3",
+          "views": [
+            "view_2",
+            "view_4",
+            "view_5"
+          ]
+        },
+        "display": {
+          "type": "navButtonGroup",
+          "navStyle": "default",
+          "standard": {
+            "showPageNumber": true,
+            "previousText": "",
+            "previousIcon": {
+              "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"none\" fill-rule=\"evenodd\"><path d=\"M2.479 5.47L8.019.162a.592.592 0 01.813 0 .534.534 0 010 .779L3.552 6l5.28 5.06a.534.534 0 010 .779.592.592 0 01-.813 0l-5.54-5.31a.726.726 0 010-1.058z\" fill=\"#000\"></path><path d=\"M0 0h12v12H0z\"></path></g></svg>",
+              "properties": {
+                "filename": "left-arrow-12",
+                "size": 12
+              }
+            },
+            "nextText": "",
+            "nextIcon": {
+              "svg": "<svg viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"none\" fill-rule=\"evenodd\"><path d=\"M9.521 5.47L3.981.162a.592.592 0 00-.813 0 .534.534 0 000 .779L8.448 6l-5.28 5.06a.534.534 0 000 .779.592.592 0 00.813 0l5.54-5.31a.726.726 0 000-1.058z\" fill=\"#000\"></path><path d=\"M0 0h12v12H0z\"></path></g></svg>",
+              "properties": {
+                "filename": "right-arrow-12",
+                "size": 12
+              }
+            }
+          },
+          "vertical": false,
+          "advanced": false,
+          "variant": null
+        }
+      },
+      "id": "widget_220",
+      "label": "Views Navigation"
+    },
+    "widget_229": {
+      "uri": "widgets/common/text/",
+      "version": "1.21.0",
+      "config": {
+        "text": "<p style=\"text-align: center;\"><br></p>",
+        "placeholder": "<p style=\"text-align: center;\"><span style=\"color: var(--dark);\">Eos id amet inani </span></p>",
+        "style": {
+          "verticalAlign": "start",
+          "wrap": true,
+          "color": ""
+        }
+      },
+      "id": "widget_229",
+      "useDataSourcesEnabled": false,
+      "label": "Text 12"
+    },
+    "widget_230": {
+      "uri": "widgets/common/text/",
+      "version": "1.21.0",
+      "config": {
+        "text": "<p style=\"text-align: center;\"><strong style=\"font-size: 42px; color: var(--primary);\">﻿</strong></p>",
+        "placeholder": "<h2 style=\"text-align: center;\"><strong style=\"color: var(--primary);\">Statistics</strong></h2>",
+        "style": {
+          "verticalAlign": "start",
+          "wrap": true
+        }
+      },
+      "id": "widget_230",
+      "label": "Text 13"
+    },
+    "widget_231": {
+      "uri": "widgets/common/text/",
+      "version": "1.21.0",
+      "config": {
+        "text": "<p style=\"text-align: center;\"><br></p>",
+        "placeholder": "<h6 style=\"text-align: center;\">Lorem ipsum dolor sit amet </h6>",
+        "style": {
+          "verticalAlign": "start",
+          "wrap": true
+        }
+      },
+      "id": "widget_231",
+      "label": "Text 14"
+    },
+    "widget_234": {
+      "uri": "widgets/layout/flowrow/",
+      "version": "1.21.0",
+      "config": {
+        "space": 10,
+        "style": {
+          "padding": {
+            "number": [
+              10,
+              10,
+              10,
+              10
+            ],
+            "unit": "px"
+          },
+          "justifyContent": "flex-start",
+          "alignItems": "stretch"
+        }
+      },
+      "id": "widget_234",
+      "layouts": {
+        "DEFAULT": {
+          "LARGE": "layout_109"
+        }
+      },
+      "label": "Flow Row"
+    },
+    "widget_235": {
+      "uri": "widgets/layout/column/",
+      "version": "1.21.0",
+      "config": {
+        "space": 10,
+        "style": {
+          "padding": {
+            "number": [
+              20,
+              0,
+              20,
+              0
+            ],
+            "unit": "px"
+          },
+          "justifyContent": "space-around",
+          "alignItems": "stretch"
+        }
+      },
+      "id": "widget_235",
+      "style": {
+        "background": {
+          "color": "",
+          "fillType": "fill",
+          "image": {
+            "url": ""
+          }
+        },
+        "border": {
+          "type": "solid",
+          "color": "var(--ref-palette-neutral-500)",
+          "width": "1px"
+        }
+      },
+      "layouts": {
+        "DEFAULT": {
+          "MEDIUM": "layout_117"
+        }
+      },
+      "label": "Column 2"
+    },
+    "widget_236": {
+      "uri": "widgets/layout/fixed/",
+      "version": "1.21.0",
+      "config": null,
+      "id": "widget_236",
+      "layouts": {
+        "DEFAULT": {
+          "MEDIUM": "layout_118"
+        }
+      },
+      "label": "Fixed Panel 2"
+    },
+    "widget_239": {
+      "uri": "widgets/layout/column/",
+      "version": "1.21.0",
+      "config": {
+        "space": 10,
+        "style": {
+          "padding": {
+            "number": [
+              20,
+              0,
+              20,
+              0
+            ],
+            "unit": "px"
+          },
+          "justifyContent": "space-around",
+          "alignItems": "stretch"
+        }
+      },
+      "id": "widget_239",
+      "style": {
+        "background": {
+          "color": "",
+          "fillType": "fill",
+          "image": {
+            "url": ""
+          }
+        },
+        "border": {
+          "type": "solid",
+          "color": "var(--ref-palette-neutral-500)",
+          "width": "1px"
+        }
+      },
+      "layouts": {
+        "DEFAULT": {
+          "SMALL": "layout_140"
+        }
+      },
+      "label": "Column 3"
+    },
+    "widget_240": {
+      "uri": "widgets/layout/fixed/",
+      "version": "1.21.0",
+      "config": null,
+      "id": "widget_240",
+      "layouts": {
+        "DEFAULT": {
+          "SMALL": "layout_141"
+        }
+      },
+      "label": "Fixed Panel 3"
+    },
+    "widget_242": {
+      "uri": "widgets/arcgis/analysis/",
+      "version": "1.21.0",
+      "label": "Analysis",
+      "config": {
+        "toolList": [
+          {
+            "id": "a4912f50-889c-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "AggregatePoints",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": true,
+                "allowExportResults": true
+              },
+              "option": {}
+            }
+          },
+          {
+            "id": "b1144f50-889c-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "SummarizeCenterAndDispersion",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": true,
+                "allowExportResults": true
+              },
+              "option": {}
+            }
+          },
+          {
+            "id": "b64f6bd0-889c-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "ChooseBestFacilities",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": false,
+                "allowExportResults": false
+              },
+              "option": {}
+            }
+          },
+          {
+            "id": "c3da0230-88c7-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "SummarizeWithin",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": false,
+                "allowExportResults": false
+              },
+              "option": {}
+            }
+          },
+          {
+            "id": "042b0140-88c8-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "CalculateDensity",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": true,
+                "allowExportResults": true
+              },
+              "option": {}
+            }
+          },
+          {
+            "id": "0c814070-88c8-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "FindHotSpots",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": true,
+                "allowExportResults": true
+              },
+              "option": {}
+            }
+          },
+          {
+            "id": "23578110-88c8-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "FindPointClusters",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": true,
+                "allowExportResults": true
+              },
+              "option": {}
+            }
+          },
+          {
+            "id": "36392ef0-88c8-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "InterpolatePoints",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": true,
+                "allowExportResults": true
+              },
+              "option": {}
+            }
+          },
+          {
+            "id": "406df220-88c8-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "ConnectOriginsToDestinations",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": true,
+                "allowExportResults": true
+              },
+              "option": {}
+            }
+          },
+          {
+            "id": "4b9b1f10-88c8-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "CreateBuffers",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": true,
+                "allowExportResults": true
+              },
+              "option": {}
+            }
+          },
+          {
+            "id": "4f8a3390-88c8-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "FindNearest",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": true,
+                "allowExportResults": true
+              },
+              "option": {}
+            }
+          },
+          {
+            "id": "539cae90-88c8-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "CreateDriveTimeAreas",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": true,
+                "allowExportResults": true
+              },
+              "option": {}
+            }
+          },
+          {
+            "id": "5a2ab0e0-88c8-11f1-ba8c-e511f5165cfa",
+            "type": "standard",
+            "toolName": "PlanRoutes",
+            "analysisEngine": "standard",
+            "config": {
+              "input": {
+                "selectFromMapLayer": false,
+                "allowBrowserLayers": false,
+                "allowDrawingOnTheMap": false,
+                "allowLocalFileUpload": false,
+                "allowServiceUrl": false,
+                "selectFromOtherWidget": false
+              },
+              "output": {
+                "addResultLayersToMapAuto": true,
+                "allowExportResults": true
+              },
+              "option": {}
+            }
+          }
+        ],
+        "displayToolHistoryFromMap": true
+      },
+      "id": "widget_242",
+      "useMapWidgetIds": [
+        "widget_205"
+      ],
+      "style": {
+        "borderRadius": {
+          "number": [
+            30,
+            30,
+            30,
+            30
+          ],
+          "unit": "px"
+        }
+      },
+      "useUtilities": []
+    },
+    "widget_249": {
+      "uri": "widgets/common/image/",
+      "version": "1.21.0",
+      "label": "Image 6",
+      "config": {
+        "functionConfig": {
+          "altText": "",
+          "toolTip": "",
+          "linkParam": {},
+          "scale": "Fit",
+          "imageParam": {
+            "url": "${appResourceUrl}/images/widget_249/1785050872653.png",
+            "originalUrl": "${appResourceUrl}/images/widget_249/1785050872653.png",
+            "fileName": "1785050872653.png",
+            "originalName": "Asset 4.png",
+            "imgSourceType": "BY_UPLOAD",
+            "fileFormat": "image/png",
+            "originalId": "1785050872653",
+            "originalWidth": 3448,
+            "originalHeight": 508,
+            "cropParam": {
+              "svgViewBox": "0 0 16 16",
+              "svgPath": "M0 0h16v16H0z",
+              "cropShape": "square"
+            }
+          },
+          "imageDisplayQualityMode": "ORIGINAL",
+          "imgSourceType": "",
+          "srcExpression": null,
+          "imageFillMode": "FIT"
+        },
+        "styleConfig": {}
+      },
+      "id": "widget_249",
+      "style": {
+        "boxShadow": {},
+        "background": {
+          "fillType": "fit",
+          "image": {
+            "url": ""
+          }
+        }
+      }
+    },
+    "widget_252": {
+      "uri": "widgets/arcgis/map-layers/",
+      "version": "1.21.0",
+      "label": "Toggle map layers",
+      "config": {
+        "useMapWidget": true,
+        "popup": false,
+        "opacity": true,
+        "information": false,
+        "useTickBoxes": true,
+        "enableLegend": false,
+        "searchLayers": true,
+        "goto": false,
+        "label": false
+      },
+      "id": "widget_252",
+      "useMapWidgetIds": [
+        "widget_205"
+      ],
+      "style": {
+        "boxShadow": {
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "8px",
+          "spread": "0px"
+        },
+        "borderRadius": {
+          "number": [
+            30,
+            30,
+            30,
+            30
+          ],
+          "unit": "px"
+        }
+      }
+    },
+    "widget_256": {
+      "uri": "widgets/layout/accordion/",
+      "version": "1.21.0",
+      "label": "Accordion 2",
+      "config": {
+        "gap": 4,
+        "padding": {
+          "number": [
+            0
+          ],
+          "unit": "px"
+        },
+        "header": {
+          "expandIcon": {
+            "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 16 16\"><path fill-rule=\"evenodd\" d=\"M2.146 4.653a.485.485 0 0 1 .708 0L8 10.24l5.146-5.587a.485.485 0 0 1 .708 0 .54.54 0 0 1 0 .738l-5.5 5.956a.485.485 0 0 1-.708 0l-5.5-5.956a.54.54 0 0 1 0-.738\" clip-rule=\"evenodd\"></path></svg>",
+            "properties": {
+              "size": 16,
+              "color": "var(--sys-color-action-selected-text)",
+              "inlineSvg": true,
+              "isUploaded": false,
+              "originalName": "outlined/directional/down.svg",
+              "path": [
+                "arrows",
+                "arrowDown"
+              ]
+            }
+          },
+          "collapseIcon": {
+            "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 16 16\"><path fill-rule=\"evenodd\" d=\"M13.854 11.347a.486.486 0 0 1-.708 0L8 5.76l-5.146 5.587a.485.485 0 0 1-.708 0 .54.54 0 0 1 0-.738l5.5-5.956a.485.485 0 0 1 .708 0l5.5 5.956a.54.54 0 0 1 0 .738\" clip-rule=\"evenodd\"></path></svg>",
+            "properties": {
+              "size": 16,
+              "color": "var(--sys-color-action-selected-text)",
+              "inlineSvg": true,
+              "isUploaded": false,
+              "originalName": "outlined/directional/up.svg",
+              "path": [
+                "arrows",
+                "arrowUp"
+              ]
+            }
+          },
+          "showWidgetIcon": false,
+          "widgetIconSize": 16,
+          "widgetIconColor": "var(--sys-color-action-selected-text)",
+          "textStyle": {
+            "bold": true,
+            "color": "var(--sys-color-action-selected-text)",
+            "size": "14px"
+          },
+          "padding": {
+            "number": [
+              8
+            ],
+            "unit": "px"
+          },
+          "borderRadius": {
+            "number": [
+              45
+            ],
+            "unit": "px"
+          },
+          "collapsedColor": "var(--sys-color-action-selected)",
+          "expandedColor": "var(--sys-color-action-selected-hover)"
+        },
+        "panel": {
+          "borderRadius": {
+            "number": [
+              8
+            ],
+            "unit": "px"
+          },
+          "padding": {
+            "number": [
+              12
+            ],
+            "unit": "px"
+          }
+        },
+        "singleMode": false,
+        "showToggleAll": false,
+        "useQuickStyle": 2,
+        "expandedItems": [
+          "widget_242",
+          "widget_259"
+        ]
+      },
+      "id": "widget_256",
+      "layouts": {
+        "DEFAULT": {
+          "LARGE": "layout_149"
+        }
+      },
+      "style": {
+        "borderRadius": {
+          "number": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "unit": "px"
+        }
+      }
+    },
+    "widget_259": {
+      "uri": "widgets/arcgis/legend/",
+      "version": "1.21.0",
+      "label": "Legend",
+      "config": {
+        "style": {
+          "useCustom": true
+        }
+      },
+      "id": "widget_259",
+      "useMapWidgetIds": [
+        "widget_205"
+      ],
+      "style": {
+        "borderRadius": {
+          "number": [
+            30,
+            30,
+            30,
+            30
+          ],
+          "unit": "px"
+        }
+      }
+    },
+    "widget_261": {
+      "uri": "widgets/arcgis/feature-info/",
+      "version": "1.21.0",
+      "label": "Feature Info",
+      "config": {
+        "styleType": "custom",
+        "showCount": false,
+        "clearSelection": true,
+        "dsNavigator": false,
+        "useMapWidget": true,
+        "featureNavigator": false
+      },
+      "id": "widget_261",
+      "useMapWidgetIds": [
+        "widget_205"
+      ],
+      "style": {
+        "borderRadius": {
+          "number": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "unit": "px"
+        }
+      }
+    },
+    "widget_270": {
+      "uri": "widgets/arcgis/arcgis-map/",
+      "version": "1.21.0",
+      "label": "Map 6",
+      "config": {
+        "toolConfig": {
+          "canZoom": true,
+          "canHome": true,
+          "canSearch": false,
+          "canNavigation": true,
+          "canBaseMap": true,
+          "canLayers": true
+        },
+        "isUseCustomMapState": false,
+        "initialMapDataSourceID": "dataSource_3",
+        "initialMapState": null,
+        "scaleRange": null,
+        "customLODs": null
+      },
+      "id": "widget_270",
+      "layouts": {
+        "MapFixedLayout": {
+          "LARGE": "layout_163"
+        }
+      },
+      "style": {
+        "borderRadius": {
+          "number": [
+            30,
+            30,
+            30,
+            30
+          ],
+          "unit": "px"
+        }
+      },
+      "useDataSources": [
+        {
+          "dataSourceId": "dataSource_3",
+          "mainDataSourceId": "dataSource_3"
+        }
+      ],
+      "dataActions": {
+        "showOnMap": {
+          "config": {
+            "isUseCustomSymbol": true,
+            "isOperationalLayer": true,
+            "symbolOption": {
+              "pointSymbol": {
+                "type": "esriSMS",
+                "color": [
+                  255,
+                  255,
+                  0,
+                  150
+                ],
+                "angle": 0,
+                "xoffset": 0,
+                "yoffset": 0,
+                "size": 12,
+                "style": "esriSMSCircle",
+                "outline": {
+                  "type": "esriSLS",
+                  "color": [
+                    255,
+                    255,
+                    0,
+                    150
+                  ],
+                  "width": 1,
+                  "style": "esriSLSSolid"
+                }
+              },
+              "polylineSymbol": {
+                "type": "esriSLS",
+                "color": [
+                  255,
+                  255,
+                  0,
+                  150
+                ],
+                "width": 0.75,
+                "style": "esriSLSSolid"
+              },
+              "polygonSymbol": {
+                "type": "esriSFS",
+                "color": [
+                  255,
+                  255,
+                  0,
+                  150
+                ],
+                "outline": {
+                  "type": "esriSLS",
+                  "color": [
+                    255,
+                    255,
+                    0,
+                    150
+                  ],
+                  "width": 1,
+                  "style": "esriSLSSolid"
+                },
+                "style": "esriSFSSolid"
+              }
+            }
+          }
+        }
+      }
+    },
+    "widget_272": {
+      "uri": "widgets/arcgis/arcgis-map/",
+      "version": "1.21.0",
+      "label": "Map 7",
+      "config": {
+        "toolConfig": {
+          "canZoom": true,
+          "canHome": true,
+          "canSearch": false,
+          "canNavigation": true,
+          "canLayers": true
+        },
+        "isUseCustomMapState": true,
+        "initialMapDataSourceID": "dataSource_2",
+        "initialMapState": null,
+        "scaleRange": null,
+        "customLODs": null
+      },
+      "id": "widget_272",
+      "layouts": {
+        "MapFixedLayout": {
+          "LARGE": "layout_165"
+        }
+      },
+      "style": {
+        "borderRadius": {
+          "number": [
+            30,
+            30,
+            30,
+            30
+          ],
+          "unit": "px"
+        }
+      },
+      "useDataSources": [
+        {
+          "dataSourceId": "dataSource_2",
+          "mainDataSourceId": "dataSource_2"
+        }
+      ],
+      "dataActions": {
+        "showOnMap": {
+          "config": {
+            "isUseCustomSymbol": true,
+            "isOperationalLayer": true,
+            "symbolOption": {
+              "pointSymbol": {
+                "type": "esriSMS",
+                "color": [
+                  255,
+                  255,
+                  0,
+                  150
+                ],
+                "angle": 0,
+                "xoffset": 0,
+                "yoffset": 0,
+                "size": 12,
+                "style": "esriSMSCircle",
+                "outline": {
+                  "type": "esriSLS",
+                  "color": [
+                    255,
+                    255,
+                    0,
+                    150
+                  ],
+                  "width": 1,
+                  "style": "esriSLSSolid"
+                }
+              },
+              "polylineSymbol": {
+                "type": "esriSLS",
+                "color": [
+                  255,
+                  255,
+                  0,
+                  150
+                ],
+                "width": 0.75,
+                "style": "esriSLSSolid"
+              },
+              "polygonSymbol": {
+                "type": "esriSFS",
+                "color": [
+                  255,
+                  255,
+                  0,
+                  150
+                ],
+                "outline": {
+                  "type": "esriSLS",
+                  "color": [
+                    255,
+                    255,
+                    0,
+                    150
+                  ],
+                  "width": 1,
+                  "style": "esriSLSSolid"
+                },
+                "style": "esriSFSSolid"
+              }
+            }
+          }
+        }
+      }
+    },
+    "widget_274": {
+      "uri": "widgets/run-suggestions/",
+      "version": "1.21.0",
+      "config": {
+        "featureLayerUrl": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/2026forecast/FeatureServer",
+        "historicalLayerUrl": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/redlands_hexagons/FeatureServer",
+        "historicalLookbackDays": "30",
+        "historicalProximityMeters": "500",
+        "azureEndpoint": "https://ist-apim-aoai.azure-api.net/load-balancing/gpt-5.2",
+        "azureDeploymentName": "gpt-5.2",
+        "azureApiKey": "674a310717f74c8d87180daedcd3a0bc",
+        "aiBriefingProxyUrl": "/rest/ai-briefing-proxy",
+        "forecastWindow": "next_12_hours"
+      },
+      "id": "widget_274",
+      "useMapWidgetIds": [
+        "widget_205"
+      ]
+    }
+  },
+  "widgetsManifest": {},
+  "views": {
+    "view_9": {
+      "id": "view_9",
+      "layout": {
+        "MEDIUM": "layout_119"
+      },
+      "label": "View 4"
+    },
+    "view_10": {
+      "id": "view_10",
+      "layout": {
+        "MEDIUM": "layout_120"
+      },
+      "label": "View 5"
+    },
+    "view_11": {
+      "id": "view_11",
+      "layout": {
+        "MEDIUM": "layout_121"
+      },
+      "label": "View 6"
+    },
+    "view_12": {
+      "id": "view_12",
+      "layout": {
+        "MEDIUM": "layout_122"
+      },
+      "label": "View 7"
+    },
+    "view_13": {
+      "id": "view_13",
+      "layout": {
+        "MEDIUM": "layout_123"
+      },
+      "label": "View 8"
+    }
+  },
+  "sections": {
+    "section_4": {
+      "id": "section_4",
+      "views": [
+        "view_9",
+        "view_10",
+        "view_11",
+        "view_12",
+        "view_13"
+      ],
+      "arrowsNav": {
+        "visible": true
+      },
+      "dotsNav": {
+        "visible": true,
+        "offset": 10
+      },
+      "label": "Section 2"
+    }
+  },
+  "dialogs": {},
+  "messageConfigs": {
+    "messageConfig_2": {
+      "id": "messageConfig_2",
+      "messageType": "DATA_RECORDS_SELECTION_CHANGE",
+      "actions": [
+        {
+          "actionId": "select-data-record-action-1785060818877",
+          "dataSourceId": null,
+          "sectionId": null,
+          "messageWidgetId": "widget_261",
+          "actionName": "select data record action",
+          "description": null,
+          "config": {
+            "messageUseDataSource": {
+              "dataSourceId": "dataSource_1-19f9da3c37b-layer-318-19f9da3c4e9-layer-322",
+              "mainDataSourceId": "dataSource_1-19f9da3c37b-layer-318-19f9da3c4e9-layer-322",
+              "rootDataSourceId": "dataSource_1"
+            },
+            "actionUseDataSource": {
+              "dataSourceId": "dataSource_1-19f9da3c37b-layer-318-19f9da3c4e9-layer-322",
+              "mainDataSourceId": "dataSource_1-19f9da3c37b-layer-318-19f9da3c4e9-layer-322",
+              "rootDataSourceId": "dataSource_1"
+            },
+            "sqlExprObj": null,
+            "enabledDataRelationShip": true,
+            "connectionType": null
+          },
+          "version": "1.21.0",
+          "useDataSources": [
+            {
+              "dataSourceId": "dataSource_1-19f9da3c37b-layer-318-19f9da3c4e9-layer-322",
+              "mainDataSourceId": "dataSource_1-19f9da3c37b-layer-318-19f9da3c4e9-layer-322",
+              "rootDataSourceId": "dataSource_1",
+              "fields": []
+            }
+          ]
+        }
+      ],
+      "widgetId": "widget_261"
+    }
+  },
+  "pageStructure": [
+    {
+      "page_2": []
+    }
+  ],
+  "header": {
+    "layout": {
+      "LARGE": "layout_24"
+    },
+    "height": {
+      "LARGE": 52
+    },
+    "backgroundColor": "var(--ref-palette-neutral-1200)",
+    "textColor": "var(--ref-palette-neutral-100)"
+  },
+  "customTheme": {},
+  "customThemeOptions": {
+    "sys": {
+      "color": {
+        "mode": "dark",
+        "dark": {
+          "surface": {
+            "background": "var(--ref-palette-neutral-1200)",
+            "backgroundText": "var(--ref-palette-neutral-100)",
+            "backgroundHint": "var(--ref-palette-neutral-100)",
+            "paper": "var(--ref-palette-neutral-1100)",
+            "paperText": "var(--ref-palette-neutral-100)",
+            "paperHint": "var(--ref-palette-neutral-100)"
+          },
+          "action": {
+            "link": {
+              "default": "#4d9fff",
+              "hover": "#89baff"
+            }
+          },
+          "secondary": {
+            "main": "#ff6f61"
+          },
+          "primary": {
+            "main": "#7296da"
+          }
+        }
+      },
+      "typography": {
+        "h1": {
+          "fontFamily": "Roboto Mono"
+        },
+        "h2": {
+          "fontFamily": "Roboto Mono"
+        },
+        "h3": {
+          "fontFamily": "Roboto Mono"
+        },
+        "h4": {
+          "fontFamily": "Roboto Mono"
+        },
+        "h5": {
+          "fontFamily": "Roboto Mono"
+        },
+        "h6": {
+          "fontFamily": "Roboto Mono"
+        },
+        "title1": {
+          "fontFamily": "Montserrat"
+        },
+        "title2": {
+          "fontFamily": "Montserrat"
+        },
+        "title3": {
+          "fontFamily": "Montserrat"
+        },
+        "inputField": {
+          "fontFamily": "Montserrat"
+        },
+        "body": {
+          "fontFamily": "Montserrat"
+        },
+        "label1": {
+          "fontFamily": "Montserrat"
+        },
+        "label2": {
+          "fontFamily": "Montserrat"
+        },
+        "label3": {
+          "fontFamily": "Montserrat"
+        }
+      },
+      "shape": {
+        "shape1": "3px",
+        "shape2": "6px",
+        "inputField": "3px"
+      }
+    },
+    "ref": {
+      "typeface": {
+        "customFonts": [
+          {
+            "name": "Roboto Mono",
+            "url": "https://fonts.googleapis.com/css2?family=Roboto+Mono"
+          },
+          {
+            "name": "Montserrat",
+            "url": "https://fonts.googleapis.com/css2?family=Montserrat"
+          },
+          {
+            "name": "Arimo",
+            "url": "https://fonts.googleapis.com/css2?family=Arimo"
+          }
+        ],
+        "htmlFontSize": "100%"
+      }
+    },
+    "comp": {
+      "Button": {
+        "root": {
+          "vars": {}
+        }
+      }
+    },
+    "src": {
+      "primary": {
+        "color": "#7296da",
+        "harmonize": true
+      },
+      "secondary": {
+        "color": "#ff6f61",
+        "harmonize": true
+      }
+    }
+  },
+  "permission": {
+    "restrictions": []
+  },
+  "publishTimestamp": 1785091705376,
+  "attributes": {
+    "portalUrl": "https://intern-hackathon.maps.arcgis.com",
+    "isWebTier": false,
+    "clientId": "FPMuKNOCgAxITGJV",
+    "express": false,
+    "title": "GeoPulse",
+    "description": "",
+    "type": "Web Experience",
+    "thumbnail": null
+  },
+  "timestamp": 1785091699569,
+  "sharedThemeVariables": {
+    "header": {},
+    "body": {},
+    "button": {}
+  },
+  "mainLocale": "en-us",
+  "dataSources": {
+    "dataSource_1": {
+      "id": "dataSource_1",
+      "type": "WEB_MAP",
+      "sourceLabel": "NFIRS Redlands Incident Forecast",
+      "itemId": "9ada044149ad4074b61302d788adb8ee",
+      "portalUrl": "https://intern-hackathon.maps.arcgis.com",
+      "childDataSourceJsons": {
+        "e15b03963ce24e78a39e97c4420161cf": {
+          "id": "dataSource_1-e15b03963ce24e78a39e97c4420161cf",
+          "type": "GROUP_LAYER",
+          "sourceLabel": "Medical Emergency Response Structures",
+          "label": "Medical Emergency Response Structures",
+          "childDataSourceJsons": {
+            "d72da610fba4409e93e36209929d0fe4": {
+              "id": "dataSource_1-e15b03963ce24e78a39e97c4420161cf-d72da610fba4409e93e36209929d0fe4",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Hospitals_Medical_Centers",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "2c36dbb008844081b017da6fd3d0d28b",
+              "layerId": "0",
+              "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Structures_Medical_Emergency_Response_v1/FeatureServer/0",
+              "isHidden": true
+            },
+            "04559538ac4d4054bc63ac790830bdb0": {
+              "id": "dataSource_1-e15b03963ce24e78a39e97c4420161cf-04559538ac4d4054bc63ac790830bdb0",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Ambulance_Services",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "2c36dbb008844081b017da6fd3d0d28b",
+              "layerId": "1",
+              "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Structures_Medical_Emergency_Response_v1/FeatureServer/1",
+              "isHidden": true
+            },
+            "a8763e1eea5d4d9096b9a9ea41539b9b": {
+              "id": "dataSource_1-e15b03963ce24e78a39e97c4420161cf-a8763e1eea5d4d9096b9a9ea41539b9b",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Fire_Stations_EMS_Stations",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "2c36dbb008844081b017da6fd3d0d28b",
+              "layerId": "2",
+              "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Structures_Medical_Emergency_Response_v1/FeatureServer/2",
+              "isHidden": true
+            }
+          },
+          "isHidden": true
+        },
+        "19f9f5a6730-layer-126": {
+          "id": "dataSource_1-19f9f5a6730-layer-126",
+          "type": "GROUP_LAYER",
+          "sourceLabel": "Incidents By Type",
+          "childDataSourceJsons": {
+            "19f9cd2ff56-layer-303": {
+              "id": "dataSource_1-19f9f5a6730-layer-126-19f9cd2ff56-layer-303",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Hazards Accidents Incidents",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "85338959445e4ac985b99bd621e390d1",
+              "layerId": "15",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/15",
+              "isHidden": false
+            },
+            "19f9cd2ff55-layer-301": {
+              "id": "dataSource_1-19f9f5a6730-layer-126-19f9cd2ff55-layer-301",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "EMS Rescue Incidents",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "85338959445e4ac985b99bd621e390d1",
+              "layerId": "13",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/13",
+              "isHidden": false
+            },
+            "19f9cd2ff55-layer-302": {
+              "id": "dataSource_1-19f9f5a6730-layer-126-19f9cd2ff55-layer-302",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Fire Incidents",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "85338959445e4ac985b99bd621e390d1",
+              "layerId": "14",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/14",
+              "isHidden": false
+            },
+            "19f9da3c4e9-layer-322": {
+              "id": "dataSource_1-19f9f5a6730-layer-126-19f9da3c4e9-layer-322",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Service False Alarm Incidents",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "b1604c9bab104d6687e1a6d87c1cc759",
+              "layerId": "16",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Incident_Types_Categories/FeatureServer/16",
+              "isHidden": false
+            },
+            "19f9de24881-layer-323": {
+              "id": "dataSource_1-19f9f5a6730-layer-126-19f9de24881-layer-323",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Service False Alarm Heat Map",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "b1604c9bab104d6687e1a6d87c1cc759",
+              "layerId": "16",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Incident_Types_Categories/FeatureServer/16",
+              "isHidden": false
+            }
+          },
+          "label": "Incidents By Type",
+          "isHidden": false
+        },
+        "8f6b34c2f390418abf05e6d34977183d": {
+          "id": "dataSource_1-8f6b34c2f390418abf05e6d34977183d",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "City of Redlands Boundary",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "9dafc2995719437f80e64151cfd6cc2b",
+          "layerId": "2",
+          "url": "https://services.arcgis.com/FLM8UAw9y5MmuVTV/arcgis/rest/services/RedlandsBoundary/FeatureServer/2",
+          "label": "City of Redlands Boundary",
+          "isHidden": false
+        },
+        "19f9acf166c-layer-20": {
+          "id": "dataSource_1-19f9acf166c-layer-20",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands NFIRS NoNullResponseTimes",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "7bced739e0134c11b62c4cb58b4fbce0",
+          "layerId": "6",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Response_Time_Optimized_Outlier_Analysis/FeatureServer/6",
+          "label": "Redlands NFIRS NoNullResponseTimes",
+          "isHidden": true
+        },
+        "d5b4ce6aeeab4932af8c6a44145ca568": {
+          "id": "dataSource_1-d5b4ce6aeeab4932af8c6a44145ca568",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands_Incident_8hrCube_ESF",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "5b1459d8024e48d29a3160ab87666e90",
+          "layerId": "1",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/NFIRS_Redlands_Incident_Forecast_WFL1/FeatureServer/1"
+        },
+        "7e4034945c3a4cd78a8f6c8dbe77e910": {
+          "id": "dataSource_1-7e4034945c3a4cd78a8f6c8dbe77e910",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "EmergingHS",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "5b1459d8024e48d29a3160ab87666e90",
+          "layerId": "2",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/NFIRS_Redlands_Incident_Forecast_WFL1/FeatureServer/2",
+          "label": "EmergingHS",
+          "isHidden": true
+        },
+        "19f9cd2ff58-layer-317": {
+          "id": "dataSource_1-19f9cd2ff58-layer-317",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands Network Analysis_Travel Times from Fire Stations - Hexagon Category Groups",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "85338959445e4ac985b99bd621e390d1",
+          "layerId": "30",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/30",
+          "label": "Redlands Network Analysis_Travel Times from Fire Stations - Hexagon Category Groups",
+          "isHidden": true
+        },
+        "19f9cd2ff58-layer-316": {
+          "id": "dataSource_1-19f9cd2ff58-layer-316",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands Network Analysis_Travel Times from Fire Stations - Redlands Hexagons for Jonathan.csv",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "85338959445e4ac985b99bd621e390d1",
+          "layerId": "45",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/45",
+          "label": "Redlands Network Analysis_Travel Times from Fire Stations - Redlands Hexagons for Jonathan.csv",
+          "isHidden": true
+        },
+        "19f9fa2ba75-layer-55": {
+          "id": "dataSource_1-19f9fa2ba75-layer-55",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Response Times Heat Map",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "0dd5e7bd279e426f9f5401fd4cc42f0c",
+          "layerId": "0",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_EMS_Response_Times_Interpolated_Map/FeatureServer/0",
+          "label": "Response Times Heat Map",
+          "isHidden": true
+        },
+        "19f9acf3d34-layer-28": {
+          "id": "dataSource_1-19f9acf3d34-layer-28",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Locations by Demand",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "a0d75cf6b2be446a998efc9eca196ce3",
+          "layerId": "11",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_EMS_Demand_Optimized_Outlier_Analysis_Point/FeatureServer/11",
+          "label": "Locations by Demand",
+          "isHidden": true
+        },
+        "19f9cd2ff57-layer-312": {
+          "id": "dataSource_1-19f9cd2ff57-layer-312",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands Fire Service Areas",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "85338959445e4ac985b99bd621e390d1",
+          "layerId": "46",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/46",
+          "label": "Redlands Fire Service Areas",
+          "isHidden": true
+        }
+      },
+      "isHidden": false
+    },
+    "widget_206_output": {
+      "id": "widget_206_output",
+      "type": "FEATURE_LAYER",
+      "label": "Chart 2 statistics",
+      "originDataSources": [
+        {
+          "dataSourceId": "dataSource_1-d5b4ce6aeeab4932af8c6a44145ca568",
+          "mainDataSourceId": "dataSource_1-d5b4ce6aeeab4932af8c6a44145ca568",
+          "rootDataSourceId": "dataSource_1",
+          "fields": [
+            "FCAST_1"
+          ]
+        }
+      ],
+      "isOutputFromWidget": true,
+      "isDataInDataSourceInstance": true,
+      "schema": {
+        "idField": "__outputid__",
+        "label": "Chart 2 statistics",
+        "fields": {
+          "__outputid__": {
+            "jimuName": "__outputid__",
+            "alias": "OBJECTID",
+            "type": "NUMBER",
+            "esriType": "esriFieldTypeOID",
+            "name": "__outputid__"
+          },
+          "minValue": {
+            "jimuName": "minValue",
+            "type": "NUMBER",
+            "esriType": "esriFieldTypeDouble",
+            "name": "minValue",
+            "alias": "Min value",
+            "originFields": [
+              "FCAST_1"
+            ],
+            "fieldFormat": {
+              "type": "number",
+              "maximumFractionDigits": 3,
+              "minimumFractionDigits": 3,
+              "style": "decimal",
+              "useGrouping": "never"
+            }
+          },
+          "maxValue": {
+            "jimuName": "maxValue",
+            "type": "NUMBER",
+            "esriType": "esriFieldTypeDouble",
+            "name": "maxValue",
+            "alias": "Max value",
+            "originFields": [
+              "FCAST_1"
+            ],
+            "fieldFormat": {
+              "type": "number",
+              "maximumFractionDigits": 3,
+              "minimumFractionDigits": 3,
+              "style": "decimal",
+              "useGrouping": "never"
+            }
+          },
+          "count": {
+            "jimuName": "count",
+            "type": "NUMBER",
+            "esriType": "esriFieldTypeInteger",
+            "name": "count",
+            "alias": "Count",
+            "originFields": [
+              "FCAST_1"
+            ],
+            "fieldFormat": {
+              "type": "number",
+              "maximumFractionDigits": 0,
+              "minimumFractionDigits": 0,
+              "style": "decimal",
+              "useGrouping": "never"
+            }
+          }
+        }
+      }
+    },
+    "dataSource_2": {
+      "id": "dataSource_2",
+      "type": "WEB_MAP",
+      "sourceLabel": "NFIRS Redlands Incident Forecast",
+      "itemId": "9ada044149ad4074b61302d788adb8ee",
+      "portalUrl": "https://intern-hackathon.maps.arcgis.com",
+      "childDataSourceJsons": {
+        "8f6b34c2f390418abf05e6d34977183d": {
+          "id": "dataSource_2-8f6b34c2f390418abf05e6d34977183d",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "City of Redlands Boundary",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "9dafc2995719437f80e64151cfd6cc2b",
+          "layerId": "2",
+          "url": "https://services.arcgis.com/FLM8UAw9y5MmuVTV/arcgis/rest/services/RedlandsBoundary/FeatureServer/2",
+          "label": "City of Redlands Boundary"
+        },
+        "e15b03963ce24e78a39e97c4420161cf": {
+          "id": "dataSource_2-e15b03963ce24e78a39e97c4420161cf",
+          "type": "GROUP_LAYER",
+          "sourceLabel": "Medical Emergency Response Structures",
+          "childDataSourceJsons": {
+            "d72da610fba4409e93e36209929d0fe4": {
+              "id": "dataSource_2-e15b03963ce24e78a39e97c4420161cf-d72da610fba4409e93e36209929d0fe4",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Hospitals_Medical_Centers",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "2c36dbb008844081b017da6fd3d0d28b",
+              "layerId": "0",
+              "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Structures_Medical_Emergency_Response_v1/FeatureServer/0"
+            },
+            "04559538ac4d4054bc63ac790830bdb0": {
+              "id": "dataSource_2-e15b03963ce24e78a39e97c4420161cf-04559538ac4d4054bc63ac790830bdb0",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Ambulance_Services",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "2c36dbb008844081b017da6fd3d0d28b",
+              "layerId": "1",
+              "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Structures_Medical_Emergency_Response_v1/FeatureServer/1"
+            },
+            "a8763e1eea5d4d9096b9a9ea41539b9b": {
+              "id": "dataSource_2-e15b03963ce24e78a39e97c4420161cf-a8763e1eea5d4d9096b9a9ea41539b9b",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Fire_Stations_EMS_Stations",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "2c36dbb008844081b017da6fd3d0d28b",
+              "layerId": "2",
+              "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Structures_Medical_Emergency_Response_v1/FeatureServer/2"
+            }
+          },
+          "label": "Medical Emergency Response Structures"
+        },
+        "19f9f5a6730-layer-126": {
+          "id": "dataSource_2-19f9f5a6730-layer-126",
+          "type": "GROUP_LAYER",
+          "sourceLabel": "Incidents By Type",
+          "childDataSourceJsons": {
+            "19f9cd2ff56-layer-303": {
+              "id": "dataSource_2-19f9f5a6730-layer-126-19f9cd2ff56-layer-303",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Hazards Accidents Incidents",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "85338959445e4ac985b99bd621e390d1",
+              "layerId": "15",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/15",
+              "isHidden": true
+            },
+            "19f9cd2ff55-layer-302": {
+              "id": "dataSource_2-19f9f5a6730-layer-126-19f9cd2ff55-layer-302",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Fire Incidents",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "85338959445e4ac985b99bd621e390d1",
+              "layerId": "14",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/14",
+              "isHidden": true
+            },
+            "19f9cd2ff55-layer-301": {
+              "id": "dataSource_2-19f9f5a6730-layer-126-19f9cd2ff55-layer-301",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "EMS Rescue Incidents",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "85338959445e4ac985b99bd621e390d1",
+              "layerId": "13",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/13",
+              "isHidden": true
+            },
+            "19f9da3c4e9-layer-322": {
+              "id": "dataSource_2-19f9f5a6730-layer-126-19f9da3c4e9-layer-322",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Service False Alarm Incidents",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "b1604c9bab104d6687e1a6d87c1cc759",
+              "layerId": "16",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Incident_Types_Categories/FeatureServer/16",
+              "isHidden": true
+            },
+            "19f9de24881-layer-323": {
+              "id": "dataSource_2-19f9f5a6730-layer-126-19f9de24881-layer-323",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Service False Alarm Heat Map",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "b1604c9bab104d6687e1a6d87c1cc759",
+              "layerId": "16",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Incident_Types_Categories/FeatureServer/16",
+              "isHidden": true
+            }
+          },
+          "label": "Incidents By Type",
+          "isHidden": true
+        },
+        "19f9acf166c-layer-20": {
+          "id": "dataSource_2-19f9acf166c-layer-20",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands NFIRS NoNullResponseTimes",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "7bced739e0134c11b62c4cb58b4fbce0",
+          "layerId": "6",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Response_Time_Optimized_Outlier_Analysis/FeatureServer/6",
+          "label": "Redlands NFIRS NoNullResponseTimes",
+          "isHidden": true
+        },
+        "19f9fa2ba75-layer-55": {
+          "id": "dataSource_2-19f9fa2ba75-layer-55",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Response Times Heat Map",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "0dd5e7bd279e426f9f5401fd4cc42f0c",
+          "layerId": "0",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_EMS_Response_Times_Interpolated_Map/FeatureServer/0",
+          "label": "Response Times Heat Map",
+          "isHidden": true
+        },
+        "19f9acf3d34-layer-28": {
+          "id": "dataSource_2-19f9acf3d34-layer-28",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Locations by Demand",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "a0d75cf6b2be446a998efc9eca196ce3",
+          "layerId": "11",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_EMS_Demand_Optimized_Outlier_Analysis_Point/FeatureServer/11",
+          "label": "Locations by Demand",
+          "isHidden": true
+        },
+        "19f9cd2ff57-layer-312": {
+          "id": "dataSource_2-19f9cd2ff57-layer-312",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands Fire Service Areas",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "85338959445e4ac985b99bd621e390d1",
+          "layerId": "46",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/46",
+          "label": "Redlands Fire Service Areas",
+          "isHidden": true
+        },
+        "d5b4ce6aeeab4932af8c6a44145ca568": {
+          "id": "dataSource_2-d5b4ce6aeeab4932af8c6a44145ca568",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands_Incident_8hrCube_ESF",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "5b1459d8024e48d29a3160ab87666e90",
+          "layerId": "1",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/NFIRS_Redlands_Incident_Forecast_WFL1/FeatureServer/1",
+          "label": "Redlands_Incident_8hrCube_ESF",
+          "isHidden": false
+        },
+        "7e4034945c3a4cd78a8f6c8dbe77e910": {
+          "id": "dataSource_2-7e4034945c3a4cd78a8f6c8dbe77e910",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "EmergingHS",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "5b1459d8024e48d29a3160ab87666e90",
+          "layerId": "2",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/NFIRS_Redlands_Incident_Forecast_WFL1/FeatureServer/2",
+          "label": "EmergingHS",
+          "isHidden": true
+        },
+        "19f9cd2ff58-layer-317": {
+          "id": "dataSource_2-19f9cd2ff58-layer-317",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands Network Analysis_Travel Times from Fire Stations - Hexagon Category Groups",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "85338959445e4ac985b99bd621e390d1",
+          "layerId": "30",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/30",
+          "label": "Redlands Network Analysis_Travel Times from Fire Stations - Hexagon Category Groups",
+          "isHidden": true
+        },
+        "19f9cd2ff58-layer-316": {
+          "id": "dataSource_2-19f9cd2ff58-layer-316",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands Network Analysis_Travel Times from Fire Stations - Redlands Hexagons for Jonathan.csv",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "85338959445e4ac985b99bd621e390d1",
+          "layerId": "45",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/45",
+          "label": "Redlands Network Analysis_Travel Times from Fire Stations - Redlands Hexagons for Jonathan.csv",
+          "isHidden": true
+        }
+      },
+      "isHidden": false
+    },
+    "dataSource_3": {
+      "id": "dataSource_3",
+      "type": "WEB_MAP",
+      "sourceLabel": "NFIRS Redlands Incident Forecast",
+      "itemId": "9ada044149ad4074b61302d788adb8ee",
+      "portalUrl": "https://intern-hackathon.maps.arcgis.com",
+      "childDataSourceJsons": {
+        "19f9f5a6730-layer-126": {
+          "id": "dataSource_3-19f9f5a6730-layer-126",
+          "type": "GROUP_LAYER",
+          "sourceLabel": "Incidents By Type",
+          "label": "Incidents By Type",
+          "isHidden": true,
+          "childDataSourceJsons": {
+            "19f9cd2ff56-layer-303": {
+              "id": "dataSource_3-19f9f5a6730-layer-126-19f9cd2ff56-layer-303",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Hazards Accidents Incidents",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "85338959445e4ac985b99bd621e390d1",
+              "layerId": "15",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/15",
+              "isHidden": true
+            },
+            "19f9cd2ff55-layer-302": {
+              "id": "dataSource_3-19f9f5a6730-layer-126-19f9cd2ff55-layer-302",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Fire Incidents",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "85338959445e4ac985b99bd621e390d1",
+              "layerId": "14",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/14",
+              "isHidden": true
+            },
+            "19f9cd2ff55-layer-301": {
+              "id": "dataSource_3-19f9f5a6730-layer-126-19f9cd2ff55-layer-301",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "EMS Rescue Incidents",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "85338959445e4ac985b99bd621e390d1",
+              "layerId": "13",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/13",
+              "isHidden": true
+            },
+            "19f9da3c4e9-layer-322": {
+              "id": "dataSource_3-19f9f5a6730-layer-126-19f9da3c4e9-layer-322",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Service False Alarm Incidents",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "b1604c9bab104d6687e1a6d87c1cc759",
+              "layerId": "16",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Incident_Types_Categories/FeatureServer/16",
+              "isHidden": true
+            },
+            "19f9de24881-layer-323": {
+              "id": "dataSource_3-19f9f5a6730-layer-126-19f9de24881-layer-323",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Service False Alarm Heat Map",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "b1604c9bab104d6687e1a6d87c1cc759",
+              "layerId": "16",
+              "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Incident_Types_Categories/FeatureServer/16",
+              "isHidden": true
+            }
+          }
+        },
+        "8f6b34c2f390418abf05e6d34977183d": {
+          "id": "dataSource_3-8f6b34c2f390418abf05e6d34977183d",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "City of Redlands Boundary",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "9dafc2995719437f80e64151cfd6cc2b",
+          "layerId": "2",
+          "url": "https://services.arcgis.com/FLM8UAw9y5MmuVTV/arcgis/rest/services/RedlandsBoundary/FeatureServer/2",
+          "label": "City of Redlands Boundary"
+        },
+        "e15b03963ce24e78a39e97c4420161cf": {
+          "id": "dataSource_3-e15b03963ce24e78a39e97c4420161cf",
+          "type": "GROUP_LAYER",
+          "sourceLabel": "Medical Emergency Response Structures",
+          "childDataSourceJsons": {
+            "d72da610fba4409e93e36209929d0fe4": {
+              "id": "dataSource_3-e15b03963ce24e78a39e97c4420161cf-d72da610fba4409e93e36209929d0fe4",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Hospitals_Medical_Centers",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "2c36dbb008844081b017da6fd3d0d28b",
+              "layerId": "0",
+              "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Structures_Medical_Emergency_Response_v1/FeatureServer/0",
+              "isHidden": true
+            },
+            "04559538ac4d4054bc63ac790830bdb0": {
+              "id": "dataSource_3-e15b03963ce24e78a39e97c4420161cf-04559538ac4d4054bc63ac790830bdb0",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Ambulance_Services",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "2c36dbb008844081b017da6fd3d0d28b",
+              "layerId": "1",
+              "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Structures_Medical_Emergency_Response_v1/FeatureServer/1",
+              "isHidden": true
+            },
+            "a8763e1eea5d4d9096b9a9ea41539b9b": {
+              "id": "dataSource_3-e15b03963ce24e78a39e97c4420161cf-a8763e1eea5d4d9096b9a9ea41539b9b",
+              "type": "FEATURE_LAYER",
+              "sourceLabel": "Fire_Stations_EMS_Stations",
+              "portalUrl": "https://www.arcgis.com",
+              "itemId": "2c36dbb008844081b017da6fd3d0d28b",
+              "layerId": "2",
+              "url": "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Structures_Medical_Emergency_Response_v1/FeatureServer/2",
+              "isHidden": true
+            }
+          },
+          "label": "Medical Emergency Response Structures",
+          "isHidden": true
+        },
+        "19f9acf166c-layer-20": {
+          "id": "dataSource_3-19f9acf166c-layer-20",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands NFIRS NoNullResponseTimes",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "7bced739e0134c11b62c4cb58b4fbce0",
+          "layerId": "6",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Response_Time_Optimized_Outlier_Analysis/FeatureServer/6",
+          "label": "Redlands NFIRS NoNullResponseTimes",
+          "isHidden": true
+        },
+        "19f9fa2ba75-layer-55": {
+          "id": "dataSource_3-19f9fa2ba75-layer-55",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Response Times Heat Map",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "0dd5e7bd279e426f9f5401fd4cc42f0c",
+          "layerId": "0",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_EMS_Response_Times_Interpolated_Map/FeatureServer/0",
+          "label": "Response Times Heat Map",
+          "isHidden": true
+        },
+        "19f9acf3d34-layer-28": {
+          "id": "dataSource_3-19f9acf3d34-layer-28",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Locations by Demand",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "a0d75cf6b2be446a998efc9eca196ce3",
+          "layerId": "11",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_EMS_Demand_Optimized_Outlier_Analysis_Point/FeatureServer/11",
+          "label": "Locations by Demand",
+          "isHidden": true
+        },
+        "19f9cd2ff57-layer-312": {
+          "id": "dataSource_3-19f9cd2ff57-layer-312",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands Fire Service Areas",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "85338959445e4ac985b99bd621e390d1",
+          "layerId": "46",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/46",
+          "label": "Redlands Fire Service Areas",
+          "isHidden": false
+        },
+        "d5b4ce6aeeab4932af8c6a44145ca568": {
+          "id": "dataSource_3-d5b4ce6aeeab4932af8c6a44145ca568",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands_Incident_8hrCube_ESF",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "5b1459d8024e48d29a3160ab87666e90",
+          "layerId": "1",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/NFIRS_Redlands_Incident_Forecast_WFL1/FeatureServer/1",
+          "label": "Redlands_Incident_8hrCube_ESF",
+          "isHidden": true
+        },
+        "7e4034945c3a4cd78a8f6c8dbe77e910": {
+          "id": "dataSource_3-7e4034945c3a4cd78a8f6c8dbe77e910",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "EmergingHS",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "5b1459d8024e48d29a3160ab87666e90",
+          "layerId": "2",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/NFIRS_Redlands_Incident_Forecast_WFL1/FeatureServer/2",
+          "label": "EmergingHS",
+          "isHidden": true
+        },
+        "19f9cd2ff58-layer-317": {
+          "id": "dataSource_3-19f9cd2ff58-layer-317",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands Network Analysis_Travel Times from Fire Stations - Hexagon Category Groups",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "85338959445e4ac985b99bd621e390d1",
+          "layerId": "30",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/30",
+          "label": "Redlands Network Analysis_Travel Times from Fire Stations - Hexagon Category Groups",
+          "isHidden": true
+        },
+        "19f9cd2ff58-layer-316": {
+          "id": "dataSource_3-19f9cd2ff58-layer-316",
+          "type": "FEATURE_LAYER",
+          "sourceLabel": "Redlands Network Analysis_Travel Times from Fire Stations - Redlands Hexagons for Jonathan.csv",
+          "portalUrl": "https://www.arcgis.com",
+          "itemId": "85338959445e4ac985b99bd621e390d1",
+          "layerId": "45",
+          "url": "https://services8.arcgis.com/LLNIdHmmdjO2qQ5q/arcgis/rest/services/Redlands_Network_Analysis_Travel_Times_from_Fire_Stations/FeatureServer/45",
+          "label": "Redlands Network Analysis_Travel Times from Fire Stations - Redlands Hexagons for Jonathan.csv",
+          "isHidden": true
+        }
+      },
+      "label": "3 NFIRS Redlands Incident Forecast",
+      "isHidden": false
+    }
+  },
+  "savedThemes": [
+    {
+      "id": "cd0524f3_02a8_1f40_b4da_3e906be4f14a",
+      "name": "Astro-copy",
+      "uri": "themes/astro/",
+      "customThemeOptions": {
+        "sys": {
+          "color": {
+            "mode": "dark",
+            "dark": {
+              "surface": {
+                "background": "var(--ref-palette-neutral-1200)",
+                "backgroundText": "var(--ref-palette-neutral-100)",
+                "backgroundHint": "var(--ref-palette-neutral-100)",
+                "paper": "var(--ref-palette-neutral-1100)",
+                "paperText": "var(--ref-palette-neutral-100)",
+                "paperHint": "var(--ref-palette-neutral-100)"
+              },
+              "action": {
+                "link": {
+                  "default": "#4d9fff",
+                  "hover": "#89baff"
+                }
+              },
+              "secondary": {
+                "main": "#ff6f61"
+              },
+              "primary": {
+                "main": "#7296da"
+              }
+            }
+          },
+          "typography": {
+            "h1": {
+              "fontFamily": "Roboto Mono"
+            },
+            "h2": {
+              "fontFamily": "Roboto Mono"
+            },
+            "h3": {
+              "fontFamily": "Roboto Mono"
+            },
+            "h4": {
+              "fontFamily": "Roboto Mono"
+            },
+            "h5": {
+              "fontFamily": "Roboto Mono"
+            },
+            "h6": {
+              "fontFamily": "Roboto Mono"
+            },
+            "title1": {
+              "fontFamily": "Montserrat"
+            },
+            "title2": {
+              "fontFamily": "Montserrat"
+            },
+            "title3": {
+              "fontFamily": "Montserrat"
+            },
+            "inputField": {
+              "fontFamily": "Montserrat"
+            },
+            "body": {
+              "fontFamily": "Montserrat"
+            },
+            "label1": {
+              "fontFamily": "Montserrat"
+            },
+            "label2": {
+              "fontFamily": "Montserrat"
+            },
+            "label3": {
+              "fontFamily": "Montserrat"
+            }
+          },
+          "shape": {
+            "shape1": "3px",
+            "shape2": "6px",
+            "inputField": "3px"
+          }
+        },
+        "ref": {
+          "typeface": {
+            "customFonts": [
+              {
+                "name": "Roboto Mono",
+                "url": "https://fonts.googleapis.com/css2?family=Roboto+Mono"
+              },
+              {
+                "name": "Montserrat",
+                "url": "https://fonts.googleapis.com/css2?family=Montserrat"
+              },
+              {
+                "name": "Arimo",
+                "url": "https://fonts.googleapis.com/css2?family=Arimo"
+              }
+            ],
+            "htmlFontSize": "100%"
+          }
+        },
+        "comp": {
+          "Button": {
+            "root": {
+              "vars": {}
+            }
+          }
+        },
+        "src": {
+          "primary": {
+            "color": "#7296da",
+            "harmonize": true
+          },
+          "secondary": {
+            "color": "#ff6f61",
+            "harmonize": true
+          }
+        }
+      }
+    }
+  ],
+  "savedThemeSelectedId": "cd0524f3_02a8_1f40_b4da_3e906be4f14a",
+  "footer": {
+    "layout": {
+      "LARGE": "layout_146"
+    },
+    "height": {
+      "LARGE": 75
+    }
+  }
+}
