@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Instrumentul Detectare țintă folosind spectre calculează un scor de corelare pentru fiecare pixel dintr-un raster de intrare pe baza nivelului de corelare a spectrului pixelului cu spectrele țintă definite de un fișier de semnătură spectrală de intrare.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Rasterul multibandă care conține pixelii țintă de detectat.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Tipul de fișier al fișierului de semnătură spectrală de intrare.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>Fișierul de semnătură spectrală care conține spectrele țintă.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Metoda utilizată pentru a calcula scorurile de corelare dintre rasterul de intrare și fișierul de semnătură spectrală.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Specifică dacă spectrele sunt normalizate, lucru care poate fi realizat utiliz&acirc;nd o imagine sau date de referință. Dacă este nebifat, spectrele nu sunt normalizate. Dacă este bifat, spectrele sunt normalizate.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Numele stratului tematic care conține rasterul cu scorul de corelare care este creat și afișat.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Tipul de ieșire care va fi creată. Ieșirea poate fi un strat tematic de imagini satelitare cu structură tile sau un strat tematic de imagini satelitare dinamic.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Numele folderului din  <b>Resursele mele</b> &icirc;n care va fi salvat rezultatul.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

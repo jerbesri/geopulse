@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Інструмент &laquo;Рельєфи земної поверхні в геоморфоні&raquo; обчислює геоморфне розпізнавання кожного осередку вхідного растрового зображення поверхні та класифікує їх за загальними типами рельєфу.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>Растр висот, який використовуватиметься для розрахунків. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>Одиниця виміру відстані, яка буде використовуватися для параметрів  <b>&laquo;Відстань пошуку&raquo;</b> та <b>&laquo;Відстань пропуску&raquo;</b>. За замовчуванням встановлено значення &laquo;Осередки&raquo;.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Відстань від цільового осередку, що визначає радіус області, яка використовується для ідентифікації геоморфного розпізнавання. За замовчуванням встановлено 10 осередків.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Відстань від цільового осередку, де починається область аналізу. Має бути менша за значення параметра  <b>&laquo;Відстань пошуку&raquo;</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Порогове значення (у градусах), нижче якого цільовий осередок класифікується як плоский. За замовчуванням встановлено 1 градус.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Лінійні одиниці вимірювання вертикальних z-значень.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>Назва растрового шару рельєфу, який буде створено та додано до карти.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>Назва растрового шару геоморфонів, який буде створено та додано до карти.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Тип вихідних даних, які буде створено. Вихідними даними може бути шар зображень з тайлами або динамічний шар зображень.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>Назва папки в  <b>Моєму вмісті</b>, де буде збережено результат.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

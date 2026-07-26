@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>V&aelig;rkt&oslash;jet Geomorphon Landforms beregner geomorphon-m&oslash;nsteret for hver celle i en indsat overfladeraster og klassificerer dem som almindelige terr&aelig;ntyper.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>H&oslash;jderasteren, der bruges til beregninger. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>Afstandsenheden, der bruges til parametrene  <b>S&oslash;geafstand</b> og <b>Spring afstand over</b>. Standardindstillingen er celler.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Afstanden v&aelig;k fra m&aring;lcellen, der definerer radiussen af det omr&aring;de, der bruges til at identificere geomorphon-m&oslash;nsteret. Standardindstillingen er 10 celler.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Afstanden v&aelig;k fra m&aring;lcellen, hvor analyseomr&aring;det starter. Den skal v&aelig;re mindre end parameterv&aelig;rdien for  <b>s&oslash;geafstand</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>T&aelig;rsklen (i grader), under hvilken m&aring;lcellen klassificeres som flad. Standardindstillingen er 1 grad.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Den line&aelig;re enhed p&aring; lodrette z-v&aelig;rdier.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>Navnet p&aring; rasterlaget for terr&aelig;nformer, der oprettes og f&oslash;jes til kortet.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>Navnet p&aring; det rasterlag for geomorphons, der oprettes og f&oslash;jes til kortet.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Den type output, der oprettes. Outputtet kan v&aelig;re et tile-billedlag eller et dynamisk billedlag.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>Navnet p&aring; mappen  <b>Mit indhold</b>, hvor resultatet gemmes.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

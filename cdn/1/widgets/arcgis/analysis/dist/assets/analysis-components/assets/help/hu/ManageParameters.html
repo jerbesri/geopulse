@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Webes eszk&ouml;z k&ouml;zz&eacute;t&eacute;telekor haszn&aacute;lt modellparam&eacute;terek be&aacute;ll&iacute;t&aacute;sai.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Ez a sz&ouml;veg param&eacute;tern&eacute;vk&eacute;nt fog megjelenni a webes eszk&ouml;z fel&uuml;let&eacute;n. A felirat legyen r&ouml;vid, &iacute;rja le a param&eacute;ter c&eacute;lj&aacute;t, &eacute;s haszn&aacute;ljon k&ouml;z&eacute;rthető nyelvezetet.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Ez a sz&ouml;veg a param&eacute;ter előugr&oacute; ablakban megjelenő s&uacute;g&oacute;jak&eacute;nt jelenik meg, &eacute;s t&aacute;j&eacute;koztatja a webes eszk&ouml;z felhaszn&aacute;l&oacute;j&aacute;t az eszk&ouml;zparam&eacute;ter kit&ouml;lt&eacute;s&eacute;nek m&oacute;dj&aacute;r&oacute;l. Adja meg a param&eacute;ter műk&ouml;d&eacute;s&eacute;nek le&iacute;r&aacute;s&aacute;t, azt, hogy a k&uuml;l&ouml;nb&ouml;ző &eacute;rt&eacute;kek hogyan befoly&aacute;solj&aacute;k az eszk&ouml;z eredm&eacute;nyeit, valamint sz&uuml;ks&eacute;g szerint adja meg a t&aacute;mogatott bemeneteket &eacute;s az alap&eacute;rtelmez&eacute;s szerinti &eacute;rt&eacute;keket.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>A param&eacute;ter &aacute;ltal t&aacute;mogatott adatt&iacute;pus. Ezt az &eacute;rt&eacute;ket a v&aacute;ltoz&oacute; adatt&iacute;pusa hat&aacute;rozza meg, &eacute;s nem lehet m&oacute;dos&iacute;tani.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Megadja, hogy a param&eacute;ter bemeneti vagy kimeneti-e. Ezt az &eacute;rt&eacute;ket az eszk&ouml;zparam&eacute;ter hat&aacute;rozza meg, &eacute;s nem lehet m&oacute;dos&iacute;tani.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Megadja, hogy a param&eacute;ter rendelkezik-e alap&eacute;rtelmezett &eacute;rt&eacute;kkel. Ha enged&eacute;lyezi, a param&eacute;ter a v&aacute;ltoz&oacute; &eacute;rt&eacute;ke alapj&aacute;n egy alap&eacute;rtelmezett &eacute;rt&eacute;ket fog haszn&aacute;lni. Ha letiltja, a param&eacute;ter alap&eacute;rtelmez&eacute;s szerint &uuml;res lesz. Az alap&eacute;rtelmezett &eacute;rt&eacute;k seg&iacute;thet a felhaszn&aacute;l&oacute; adatbeviteleinek ir&aacute;ny&iacute;t&aacute;s&aacute;ban, vagy megk&ouml;nny&iacute;theti a webes eszk&ouml;z futtat&aacute;s&aacute;t, mivel a felhaszn&aacute;l&oacute;nak nem kell manu&aacute;lisan friss&iacute;tenie a param&eacute;tert.
+            </p>
+            <p>Ne haszn&aacute;ljon alap&eacute;rtelmezett &eacute;rt&eacute;keket azokhoz a param&eacute;terekhez, amelyeket esetleg &uuml;resen szeretne hagyni (p&eacute;ld&aacute;ul egy opcion&aacute;lis bemeneti adathalmazhoz).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>A param&eacute;ter alap&eacute;rtelmezett &eacute;rt&eacute;ke. Az alap&eacute;rtelmezett &eacute;rt&eacute;k m&oacute;dos&iacute;t&aacute;s&aacute;hoz friss&iacute;tse a v&aacute;ltoz&oacute; &eacute;rt&eacute;k&eacute;t a modelldiagramon. Az alap&eacute;rtelmezett &eacute;rt&eacute;knek olyan &eacute;rt&eacute;knek kell lennie, amely a legt&ouml;bb esetben pontos vagy prefer&aacute;lt eredm&eacute;nyt ad.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Megadhatja, hogy a webes eszk&ouml;z futtat&aacute;s&aacute;hoz k&ouml;telező-e a param&eacute;ter megad&aacute;sa. Ha a modellparam&eacute;ter egy vagy t&ouml;bb k&ouml;telező eszk&ouml;zparam&eacute;terhez csatlakozik, ez az &eacute;rt&eacute;k enged&eacute;lyezve lesz, &eacute;s nem lesz szerkeszthető. Ha az &ouml;sszes csatlakoztatott eszk&ouml;zparam&eacute;ter opcion&aacute;lis, akkor a modellparam&eacute;ter enged&eacute;lyez&eacute;s&eacute;vel a param&eacute;ter k&ouml;telező lesz, letilt&aacute;s&aacute;val pedig a param&eacute;ter opcion&aacute;lis lesz. Ha egy param&eacute;tert k&ouml;telezőv&eacute; tesz, a felhaszn&aacute;l&oacute;nak mindenk&eacute;ppen meg kell adnia egy bemenetet, mielőtt futtathatn&aacute; a webes eszk&ouml;zt.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Megadhatja, hogy az eszk&ouml;zparam&eacute;ter bemeneteire vonatkozzanak-e korl&aacute;toz&aacute;sok. A szűrőopci&oacute;k a param&eacute;ter t&iacute;pus&aacute;t&oacute;l az al&aacute;bbiak szerint f&uuml;ggenek:
+            </p>
+            <ul>
+                <li>Karakterl&aacute;nc &ndash; V&aacute;lassza ki, hogy mely egyedi &eacute;rt&eacute;kek &eacute;rhetők el.
+                </li>
+                <li>Vektoros r&eacute;teg &ndash; V&aacute;lassza ki, hogy mely vektoroselem-t&iacute;pusok &eacute;rhetők el.
+                </li>
+                <li>Integer &ndash; Adjon meg egy minim&aacute;lis &eacute;s maxim&aacute;lis &eacute;rt&eacute;ket.
+                </li>
+                <li>Double &ndash; Adjon meg egy minim&aacute;lis &eacute;s maxim&aacute;lis &eacute;rt&eacute;ket.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

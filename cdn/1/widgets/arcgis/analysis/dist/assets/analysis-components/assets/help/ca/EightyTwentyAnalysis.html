@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>L'eina d'an&agrave;lisi 80-20 identifica les ubicacions on es produeix una proporci&oacute; excessivament elevada d'incidents mitjan&ccedil;ant l'an&agrave;lisi de Pareto (80/20).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Capa de punts que es far&agrave; servir per calcular les ubicacions on els incidents es produeixen de manera desproporcionada.
+            </p>
+            <p class="toolPaneOnly">El recompte de les entitats dep&egrave;n d'altres factors com ara els criteris de filtratge i l'extensi&oacute; d'an&agrave;lisi.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Especifica si els punts d'entrada s'agruparan mitjan&ccedil;ant el m&egrave;tode de clustering per dist&agrave;ncia definida (DBSCAN) (<b>Cl&uacute;ster de punts</b>) o mitjan&ccedil;ant una entitat de l&iacute;nia o de comparaci&oacute; d'entrada (<b>Entitat m&eacute;s propera</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Dist&agrave;ncia m&agrave;xima a la qual els punts es consideraran part del mateix cl&uacute;ster. Si no s'especifica la toler&agrave;ncia de cl&uacute;ster, l'eina crear&agrave; un cl&uacute;ster on les entitats de punt se superposen.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Capa de l&iacute;nia o de pol&iacute;gon que es fa servir per agregar punts segons l'entitat m&eacute;s propera.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Camp dels punts d'entrada i de les entitats de comparaci&oacute; que es faran servir per fer coincidir les entitats m&eacute;s properes. Nom&eacute;s s'inclouran a la sortida els registres de les entitats d'entrada que coincideixin amb els valors dels camps de les entitats de comparaci&oacute;.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Camps de les entitats d'entrada que es transferiran a la sortida.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Nom de la capa que es crear&agrave; i s'afegir&agrave; al mapa.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Nom de la carpeta d' <b>El meu contingut</b> on es desar&agrave; el resultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>지형패턴 도구는 입력 표면 래스터에 있는 각 셀의 지형패턴을 계산하고 이를 일반적인 지형 유형으로 분류합니다.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>계산에 사용될 고도 래스터입니다. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p> <b>검색 거리</b> 및 <b>스킵 거리</b> 매개변수에 사용할 거리 단위입니다. 기본값은 셀입니다.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>대상 셀로부터의 거리로, 지형패턴을 식별하는 데 사용할 영역의 반경을 정의합니다. 기본값은 셀 10개입니다.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>분석 영역이 시작되는 대상 셀로부터의 거리입니다.  <b>검색 거리</b> 매개변수 값보다 작아야 합니다.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>대상 셀이 평면으로 분류될 임계값(도)입니다. 기본값은 1도입니다.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>수직 z 값의 선형 단위입니다.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>생성되어 맵에 추가될 지형 래스터 레이어의 이름입니다.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>생성되어 맵에 추가될 지형패턴 래스터 레이어의 이름입니다.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>생성될 결과 유형입니다. 결과는 타일 영상 레이어 또는 동적 영상 레이어일 수 있습니다.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>결과를 저장할  <b>내 콘텐츠</b>의 폴더 이름입니다.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

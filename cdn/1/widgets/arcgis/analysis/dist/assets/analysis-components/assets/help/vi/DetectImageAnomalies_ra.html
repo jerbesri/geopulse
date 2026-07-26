@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>C&ocirc;ng cụ Ph&aacute;t hiện Bất thường H&igrave;nh ảnh tạo raster điểm số bất thường từ h&igrave;nh ảnh đa dải hoặc si&ecirc;u quang phổ đầu v&agrave;o. Raster điểm số bất thường l&agrave; raster đơn dải c&oacute; gi&aacute; trị nằm trong khoảng từ kh&ocirc;ng đến một.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>H&igrave;nh ảnh đa dải hoặc si&ecirc;u quang phổ chứa c&aacute;c bất thường cần được ph&aacute;t hiện.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Phương ph&aacute;p d&ugrave;ng để ph&aacute;t hiện bất thường.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>Lớp đối tượng đa gi&aacute;c x&aacute;c định khu vực d&ugrave;ng để t&iacute;nh to&aacute;n thống k&ecirc; nền. Th&ocirc;ng số n&agrave;y chỉ xuất hiện nếu  <b>Phương ph&aacute;p t&iacute;nh to&aacute;n bất thường</b> được đặt l&agrave; <b>RXD</b> hoặc <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>X&aacute;c định xem c&oacute; t&iacute;nh to&aacute;n lại thống k&ecirc; cho raster đầu v&agrave;o khi  <b>Phương ph&aacute;p t&iacute;nh to&aacute;n bất thường</b> được đặt l&agrave; <b>RXD</b> hoặc <b>UTD</b>, cần thống k&ecirc; ch&iacute;nh x&aacute;c để thực hiện hay kh&ocirc;ng. Nếu chọn, thống k&ecirc; sẽ được t&iacute;nh to&aacute;n lại cho raster đầu v&agrave;o. Nếu kh&ocirc;ng chọn, thống k&ecirc; sẽ kh&ocirc;ng được t&iacute;nh to&aacute;n lại.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>Số cụm được sử dụng nếu  <b>Phương ph&aacute;p t&iacute;nh to&aacute;n bất thường</b> được đặt l&agrave; <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>T&ecirc;n của lớp sẽ được tạo v&agrave; th&ecirc;m v&agrave;o bản đồ.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Loại đầu ra sẽ được tạo. Đầu ra c&oacute; thể l&agrave; lớp h&igrave;nh ảnh dạng tile hoặc lớp h&igrave;nh ảnh động.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>T&ecirc;n của thư mục trong  <b>Nội dung của t&ocirc;i</b> sẽ lưu trữ kết quả.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

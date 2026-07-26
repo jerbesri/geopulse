@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Налаштування параметрів моделі під час публікації вебінструменту.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Цей текст відображатиметься як назва параметра в інтерфейсі вебінструменту. Напис повинен бути коротким, описувати призначення параметра і бути написаний простою мовою.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Цей текст відображатиметься як спливаюча підказка параметра і надасть користувачеві вебінструменту інформацію про те, як заповнити параметр інструменту. Додайте опис того, що робить параметр, як різні значення впливають на результати інструменту, підтримувані вхідні дані та значення за замовчуванням, якщо це необхідно.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Підтримуваний тип даних для параметра. Це значення визначається типом змінних даних і не може бути змінене.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Вказує, чи є параметр вхідним або вихідним. Це значення визначається параметром інструменту і не може бути змінене.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Вказує, чи має параметр значення за замовчуванням. При увімкненні параметр використовуватиме значення за замовчуванням, яке базується на значенні змінної. При вимкненні параметр буде порожнім за замовчуванням. Значення за замовчуванням може використовуватися для орієнтування користувача при введенні даних або для спрощення роботи вебінструменту, оскільки користувачеві не потрібно вручну оновлювати параметр.
+            </p>
+            <p>Значення за замовчуванням не мають використовуватися для параметрів, які можуть залишатися порожніми (наприклад, для необов&rsquo;язкового вхідного набору даних).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Значення параметра за замовчуванням. Щоб змінити значення за замовчуванням, оновіть значення змінної в діаграмі моделі. Значенням за замовчуванням має бути значення, яке в більшості випадків дасть точний або бажаний результат.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Визначає, чи є параметр необхідним для запуску вебінструменту. Якщо параметр моделі пов'язаний з одним або декількома необхідними параметрами інструменту, це значення буде увімкнено і не підлягатиме редагуванню. Якщо всі параметри підключеного інструменту є необов'язковими, параметр моделі можна увімкнути, щоб зробити параметр обов'язковим, або вимкнути, щоб зробити параметр необов'язковим. Встановлення обов'язкового параметра змусить користувача ввести дані, перш ніж вебінструмент зможе запуститися.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Визначає, чи будуть введені параметри інструменту мати обмеження. Параметри фільтра залежать від типу параметра:
+            </p>
+            <ul>
+                <li>Рядок &mdash; виберіть, які унікальні значення доступні.
+                </li>
+                <li>Векторний шар &mdash; виберіть, які типи об'єктів будуть доступні.
+                </li>
+                <li>Ціле число &mdash; вкажіть мінімальне та максимальне значення.
+                </li>
+                <li>Подвійне число &mdash; вкажіть мінімальне та максимальне значення.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

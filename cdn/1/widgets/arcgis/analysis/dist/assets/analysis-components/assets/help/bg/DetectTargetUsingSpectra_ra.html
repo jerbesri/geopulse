@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Инструментът &bdquo;Откриване на цел с използване на Spectra&ldquo; изчислява оценка за съвпадение за всеки пиксел във входен растер въз основа на това доколко спектърът на пиксела съвпада с целевите спектри, определени чрез входен файл със спектрални подписи.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Многолентовият растер, съдържащ целевите пиксели, които трябва да бъдат открити.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Типът на файла на входния файл със спектрални подписи.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>Файлът със спектрални подписи, който съдържа целевите спектри.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Методът, използван за изчисляване на степента на съвпадение между входния растер и файла със спектрални подписи.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Указва дали спектрите са нормализирани, което може да се направи с помощта на изображение или данните за справка. Ако не е отметнато, спектрите не са нормализирани. Ако е отметнато, спектрите са нормализирани.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Името на слоя, съдържащ растера с оценки за съвпадение, който се създава и показва.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Типът резултат, който ще бъде създаден. Резултатът може да бъде слой с плочкови изображения или слой с динамични изображения.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Името на папка в  <b>Моето съдържание</b>, където резултатите ще бъдат запазени.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

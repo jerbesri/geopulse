@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>라이브러리 스펙트럼 리샘플링 도구는 입력 라이브러리 스펙트럼을 대상 센서, 사용자 설정 스펙트럼 라이브러리 파일, 사용자 설정 이미지의 대상 스펙트럼 밴드 수 및 파장 범위와 일치하도록 리샘플링합니다.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>리샘플링할 스펙트럼이 포함된 파일입니다. 입력 라이브러리 스펙트럼은  Esri 스펙트럼 라이브러리 파일(<code>.esl</code>)이어야 합니다.
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>대상 스펙트럼이 포함된 대상 센서, 사용자 설정 스펙트럼 라이브러리 파일 또는 사용자 설정 이미지입니다.
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>대상 스펙트럼이 포함된 스펙트럼 라이브러리 파일(<code>.esl</code>) 또는 이미지입니다. 대상 스펙트럼에 이미지를 사용하는 경우, 해당 이미지에는 파장 정보가 포함되어야 합니다.
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>입력 스펙트럼 라이브러리 파일을 리샘플링하는 데 사용되는 리샘플링 방법입니다.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>생성된  Esri 스펙트럼 라이브러리 파일의 이름(<code>.esl</code>)입니다.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>생성될 결과 유형입니다. 결과는 타일 영상 레이어 또는 동적 영상 레이어일 수 있습니다.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>결과를 저장할  <b>내 콘텐츠</b>의 폴더 이름입니다.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Bir web aracı yayınlanırken model parametreleri i&ccedil;in ayarlar.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Bu metin, web aracı aray&uuml;z&uuml;nde parametre adı olarak g&ouml;r&uuml;necektir. Etiket, parametrenin amacını tanımlayan, kısa ve a&ccedil;ıklayıcı olmalı ve sade bir dille yazılmalıdır.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Bu metin, parametrenin a&ccedil;ılır yardımında g&ouml;r&uuml;necek ve web aracı kullanıcısına ara&ccedil; parametresinin nasıl doldurulacağı hakkında bilgi sağlayacaktır. Gerekli durumlarda, parametrenin ne işe yaradığının, farklı değerlerin ara&ccedil; sonu&ccedil;larını nasıl etkilediğinin, desteklenen girdilerin ve varsayılan değerlerin a&ccedil;ıklamasını ekleyin.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Parametre i&ccedil;in desteklenen veri t&uuml;r&uuml;. Bu değer, değişkenin veri t&uuml;r&uuml; tarafından belirlenir ve değiştirilemez.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Parametrenin bir girdimi yoksa &ccedil;ıktı mı olduğunu belirtir. Bu değer, ara&ccedil; parametresi tarafından belirlenir ve değiştirilemez.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Parametrenin bir varsayılan değeri olup olmadığını belirtir. A&ccedil;ıkken, parametre değişken değerine bağlı olarak varsayılan bir değeri kullanır. Kapalıyken, parametre varsayılan olarak boş olacaktır. Varsayılan bir değer, kullanıcının girdilerini y&ouml;nlendirmek veya kullanıcının parametreyi manuel olarak g&uuml;ncellemesine gerek kalmadığı i&ccedil;in web aracının daha kolay &ccedil;alıştırılmasını sağlamak amacıyla kullanılabilir.
+            </p>
+            <p>Boş bırakmak isteyebileceğiniz parametreler i&ccedil;in varsayılan değerler kullanılmamalıdır (&ouml;rneğin, isteğe bağlı bir girdi veri k&uuml;mesi).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Parametrenin varsayılan değeri. Varsayılan değeri değiştirmek i&ccedil;in model diyagramındaki değişken değerini g&uuml;ncelleyin. Varsayılan değer, &ccedil;oğu durumda doğru veya tercih edilen bir sonu&ccedil; verecek bir değer olmalıdır.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Parametrenin web aracını &ccedil;alıştırmak i&ccedil;in gerekli olup olmadığını belirtir. Model parametresi bir veya daha fazla zorunlu ara&ccedil; parametresine bağlıysa, bu değer etkinleştirilir ve d&uuml;zenlenemez. Bağlı t&uuml;m ara&ccedil; parametreleri isteğe bağlıysa, model parametresi parametreyi zorunlu yapmak i&ccedil;in etkinleştirilebilir veya parametreyi isteğe bağlı yapmak i&ccedil;in devre dışı bırakılabilir. Bir parametreyi zorunlu yapmak, web aracı &ccedil;alıştırılmadan &ouml;nce kullanıcının bir girdi sağlamasını zorunlu kılar.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Ara&ccedil; parametresi girdilerinin kısıtlamalara sahip olup olmayacağını belirtir. Filtre se&ccedil;enekleri, parametre t&uuml;r&uuml;ne bağlı olarak aşağıdaki gibidir:
+            </p>
+            <ul>
+                <li>Dize &mdash; Hangi benzersiz değerlerin kullanılabilir olduğunu se&ccedil;in.
+                </li>
+                <li>Detay katmanı &mdash; Hangi detay t&uuml;rlerinin kullanılabilir olduğunu se&ccedil;in.
+                </li>
+                <li>Tamsayı &mdash; Bir minimum ve maksimum değer belirtin.
+                </li>
+                <li>Ondalık &mdash; Bir minimum ve maksimum değer belirtin.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

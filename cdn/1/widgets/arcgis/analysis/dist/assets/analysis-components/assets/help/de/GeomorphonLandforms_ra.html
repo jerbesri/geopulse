@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Das Werkzeug &quot;Geomorphon-Landformen&quot; berechnet das Geomorphon-Muster aller Zellen eines Eingabe-Oberfl&auml;chen-Rasters und klassifiziert die Ergebnisse der Berechnung in allgemeine Landformtypen.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>Das H&ouml;henraster, das f&uuml;r Berechnungen verwendet wird. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>Die Entfernungseinheit, die f&uuml;r die Parameter  <b>Suchentfernung</b> und <b>Entfernung zum &Uuml;berspringen</b> verwendet wird. Die Standardeinstellung lautet Zellen.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Die Entfernung ab der Zielzelle, mit der der Radius des Bereichs definiert wird, der zur Identifizierung des Geomorphon-Musters verwendet wird. Die Standardeinstellung lautet 10&nbsp;Zellen.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Die Entfernung ab der Zielzelle, in der der Analysebereich beginnt. Der Wert muss kleiner sein als der Parameterwert  <b>Suchentfernung</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Der Grenzwert (in Grad), unter dem die Zielzelle als Ebene klassifiziert wird. Die Standardeinstellung lautet 1&nbsp;Grad.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Die lineare Einheit vertikaler Z-Werte.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>Der Name des Landformen-Raster-Layers, der erstellt und der Karte hinzugef&uuml;gt wird.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>Der Name des Geomorphon-Raster-Layers, der erstellt und der Karte hinzugef&uuml;gt wird.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Die Art der Ausgabe, die erstellt wird. Die Ausgabe kann ein gekachelter Bilddaten-Layer oder ein dynamischer Bilddaten-Layer sein.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>Der Name des Ordners in  <b>Eigene Inhalte</b>, in dem das Ergebnis gespeichert werden soll.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

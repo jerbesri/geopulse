@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>เครื่องมือการวิเคราะห์ 80-20 จะระบุตำแหน่งที่มีสัดส่วนของเหตุการณ์เกิดขึ้นมากอย่างไม่สมดุล โดยใช้การวิเคราะห์แบบพาเรโต (80/20)
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>ชั้นข้อมูลจุดที่จะใช้ในการคำนวณตำแหน่งซึ่งมีสัดส่วนของเหตุการณ์ที่เกิดขึ้นอย่างไม่สมดุล
+            </p>
+            <p class="toolPaneOnly">จำนวนของฟีเจอร์จะขึ้นอยู่กับปัจจัยเพิ่มเติม อาทิ เกณฑ์การกรองและขอบเขตการวิเคราะห์
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>ระบุว่าจะรวมจุดอินพุตโดยใช้วิธีการสร้างคลัสเตอร์แบบกำหนดระยะทาง (DBSCAN) (<b>คลัสเตอร์จุด</b>) หรือใช้ฟีเจอน์เส้นหรือรูปหลายเหลี่ยมเปรียบเทียบอินพุต (<b>ฟีเจอร์ที่ใกล้ที่สุด</b>)
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>ระยะทางสูงสุดที่จุดจะถูกพิจารณาว่าเป็นส่วนหนึ่งของคลัสเตอร์เดียวกัน หากไม่ได้ระบุความคลาดเคลื่อนกลุ่มไว้ เครื่องมือจะสร้างคลัสเตอร์ที่ฟีเจอร์จุดทับซ้อนกัน
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>ชั้นข้อมูลเส้นหรือรูปหลายเหลี่ยมที่ใช้ในการรวมจุดตามฟีเจอร์ที่ใกล้ที่สุด
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>ฟิลด์จากจุดอินพุตและฟีเจอร์เปรียบเทียบที่จะใช้ในการจับคู่ฟีเจอร์ที่ใกล้ที่สุด เฉพาะบันทึกจากฟีเจอร์อินพุตที่มีค่าในฟิลด์ตรงกับฟีเจอร์เปรียบเทียบเท่านั้น ที่จะถูกรวมไว้ในเอาต์พุต
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>ฟิลด์จากฟีเจอร์อินพุตที่จะโอนไปยังเอาต์พุต
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>ชื่อของชั้นข้อมูลที่จะสร้างและเพิ่มลงในแผนที่
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>ชื่อของโฟลเดอร์ใน  <b>เนื้อหาของฉัน</b> ที่จะทำการบันทึกผลลัพธ์
+            </p>
+        </div>
+    </div>
+</div>
+</html>

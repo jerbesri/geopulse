@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Alat za geomorfonske forme reljefa izračunava geomorfonski uzorak svake ćelije ulaznog povr&scaron;inskog rastera i klasificira ih u uobičajene tipove formi reljefa.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>Raster visine terena koji će se koristiti za izračune. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>Jedinica udaljenosti koja će se koristiti za parametre  <b>Pretraži udaljenost</b> i <b>Preskoči udaljenost</b>. Zadana vrijednost je &quot;Ćelije&quot;.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Udaljenost od ciljne ćelije koja definira polumjer područja kori&scaron;tenog za identifikaciju geomorfonskog uzorka. Zadana vrijednost je 10 ćelija.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Udaljenost od ciljne ćelije gdje počinje područje analize. Mora biti manja od vrijednosti parametra  <b>Pretraži udaljenost</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Prag (u stupnjevima) ispod kojeg će se ciljna ćelija klasificirati kao ravna. Zadana vrijednost je 1 stupanj.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Linearna jedinica okomitih z-vrijednosti.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>Naziv rasterskog sloja forme reljefa koji će se kreirati i dodati na kartu.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>Naziv rasterskog sloja geomorfona koji će se kreirati i dodati na kartu.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Vrsta izlaza koji će se stvoriti. Izlaz može biti sloj s pločastom slikom ili sloj s dinamičnom slikom.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>Naziv mape u opciji  <b>My sadržaj</b> gdje će se spremiti rezultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

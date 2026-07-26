@@ -1,0 +1,1 @@
+{"KMEANS":"KMEANS","RXD":"RXD","UTD":"UTD","backgroundRegion":"バックグラウンド領域","itemProperties":{"description":"画像異常値の検出解析ツールを実行して生成された出力。","snippet":"画像異常値の検出から生成された出力"},"method":"異常の計算方法","methodGroupLabel":"異常の設定","numClusters":"クラスターの数","recomputeStats":"統計の再計算"}

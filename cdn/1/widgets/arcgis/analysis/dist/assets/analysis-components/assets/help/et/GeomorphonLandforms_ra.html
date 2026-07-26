@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Geomorfoloogiliste pinnavormide t&ouml;&ouml;riist arvutab sisendpinna rastri iga lahtri geomorfooni mustri ja liigitab need tavalistesse pinnavormit&uuml;&uuml;pidesse.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>Arvutamiseks kasutatav k&otilde;rgusraster. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>Vahemaa &uuml;hik, mida kasutatakse parameetrite  <b>Otsitav vahemaa</b> ja <b>Vahemaa vahelej&auml;tmine</b> puhul. Vaikimisi on pikslid.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Kaugus eemal sihtpikslitest, mis m&auml;&auml;rab geomorfooni mustri tuvastamiseks kasutatava ala raadiuse. Vaikimisi 10 pikslit.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Kaugus eemal sihtpikslist, kust algab anal&uuml;&uuml;sipiirkond. See peab olema v&auml;iksem kui parameetri  <b>Otsitav vahemaa</b> v&auml;&auml;rtus.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>L&auml;vi (kraadides), millest allapoole j&auml;&auml;v sihtpiksel liigitatakse lamedaks. Vaikes&auml;te on 1 kraad.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Vertikaalse z-v&auml;&auml;rtuse lineaarne m&otilde;&otilde;t&uuml;hik.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>Selle pinnavormide rasterkihi nimi, mis luuakse jaotises ja lisatakse kaardile.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>Loodava ja kaardile lisatava geomorfoonide rasterkihi nimi.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Loodava v&auml;ljundi t&uuml;&uuml;p. V&auml;ljund v&otilde;ib olla paanitud pildikiht v&otilde;i d&uuml;naamiline pildikiht.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>Selle kausta nimi jaotises  <b>Minu sisu</b>, kuhu tulemus salvestatakse.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

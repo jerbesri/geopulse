@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Rīks Ģeomorfonu reljefa formas (Geomorphon Landforms) aprēķina katras ievades virsmas rastra &scaron;ūnas ģeomorfonu rakstu un klasificē tās pēc parastajiem reljefa formu veidiem.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>Augstuma rastrs, kas tiks izmantots aprēķinos. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>Attāluma mērvienība, kas tiks izmantota parametriem  <b>Meklē&scaron;anas attālums</b> un <b>Izlaist attālumu</b>. Noklusējums ir &scaron;ūnas.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Attālums no mērķa &scaron;ūnas, kas nosaka zonas rādiusu, ko izmanto ģeomorfonu raksta noteik&scaron;anai. Noklusējums ir 10 &scaron;ūnas.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Attālums no mērķa &scaron;ūnas, no kura sākas analīzes zona. Tai ir jābūt mazākai par  <b>Meklē&scaron;anas attāluma</b> parametra vērtību.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Slieksnis (grādos), zem kura mērķa &scaron;ūna tiks klasificēta kā līdzenums. Noklusējums ir 1 grāds.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Vertikālo z vērtību lineārā mērvienība.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>Nosaukums reljefa formu rastra slānim, kas tiks izveidots un pievienots kartei.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>Ģeomorfonu rastra slāņa nosaukums, kas tiks izveidots un pievienots kartei.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Izveidotās izvades veids. Izvade var būt mozaīkas attēlu slānis vai dinamisks attēlu slānis.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>Mapes nosaukums sadaļā  <b>Mans saturs</b>, kurā tiks saglabāts rezultāts.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

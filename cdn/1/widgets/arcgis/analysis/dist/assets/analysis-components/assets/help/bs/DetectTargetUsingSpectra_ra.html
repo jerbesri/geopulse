@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Alat Otkrivanje cilja pomoću spektra izračunava ocjenu podudarnosti za svaki piksel ulaznog rastera na temelju toga koliko se spektar tog piksela poklapa s ciljnim spektrom definiranim u datoteci spektralnog potpisa.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Vi&scaron;eslojni raster koji sadrži ciljne piksele koje treba detektirati.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Vrsta datoteke spektralnog potpisa ulazne datoteke.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>Datoteka spektralnog potpisa koja sadrži ciljne spektre.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Metoda koja se koristi za izračun ocjena podudarnosti između ulaznog rastera i datoteke spektralnog potpisa.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Određuje jesu li spektri normalizirani, &scaron;to se može napraviti pomoću slike ili referentnih podataka. Ako opcija nije označena, spektri se ne normaliziraju. Ako je opcija označena, spektri se normaliziraju.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Naziv sloja koji sadrži raster s ocjenama podudarnosti koji se stvara i prikazuje.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Vrsta izlaza koji će se stvoriti. Izlaz može biti sloj s pločastom slikom ili sloj s dinamičnom slikom.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Naziv mape u opciji  <b>My sadržaj</b> gdje će se spremiti rezultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

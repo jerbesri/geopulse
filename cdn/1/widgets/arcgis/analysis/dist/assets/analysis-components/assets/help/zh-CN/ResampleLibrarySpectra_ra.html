@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>&ldquo;重采样库光谱&rdquo;工具用于对输入库光谱进行重采样，以匹配来自目标传感器、自定义光谱库文件或自定义图像的目标光谱的波段数和波长范围。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>包含待重采样光谱的文件。 输入库光谱必须为  Esri 光谱库文件 (<code>.esl</code>)。
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>包含目标光谱的目标传感器、自定义光谱库文件或自定义图像。
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>包含目标光谱的光谱库文件 (<code>.esl</code>) 或图像。 如果使用图像作为目标光谱，则其必须包含波长信息。
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>用于对输入光谱库文件进行重采样的重采样方法。
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>所创建的  Esri 光谱库文件 (<code>.esl</code>) 的名称。
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>要创建的输出的类型。 输出可以为切片影像图层或动态影像图层。
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p> <b>我的内容</b>中要保存结果的文件夹名称。
+            </p>
+        </div>
+    </div>
+</div>
+</html>

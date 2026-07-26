@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Einstellungen f&uuml;r Modellparameter beim Ver&ouml;ffentlichen eines Web-Werkzeugs
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Dieser Text wird in der Bedienoberfl&auml;che des Web-Werkzeugs als Parametername angezeigt. Die Beschriftung sollte kurz sein, den Zweck des Parameters beschreiben und in einfacher Sprache verfasst sein.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Der Text wird als Pop-up-Hilfe des Parameters angezeigt und bietet dem Benutzer des Web-Werkzeugs Informationen zum F&uuml;llen des Werkzeugparameters. F&uuml;gen Sie je nach Bedarf eine Beschreibung der Funktion des Parameters, der Auswirkungen verschiedener Werte auf die Ergebnisse des Werkzeugs, der unterst&uuml;tzten Eingaben und der Standardwerte hinzu.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Der unterst&uuml;tzte Datentyp f&uuml;r den Parameter. Dieser Wert wird anhand des Datentyps der Variablen bestimmt und kann nicht ge&auml;ndert werden.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Gibt an, ob der Parameter eine Eingabe oder eine Ausgabe ist. Dieser Wert wird anhand des Werkzeugparameters bestimmt und kann nicht ge&auml;ndert werden.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Gibt an, ob der Parameter &uuml;ber einen Standardwert verf&uuml;gt. Wenn diese Option aktiviert ist, verwendet der Parameter einen auf dem Variablenwert basierenden Standardwert. Wenn diese Option deaktiviert ist, ist der Parameter standardm&auml;&szlig;ig leer. Ein Standardwert kann verwendet werden, um die Eingaben des Benutzers anzuleiten oder die Ausf&uuml;hrung des Web-Werkzeugs zu vereinfachen, da der Benutzer den Parameter nicht manuell aktualisieren muss.
+            </p>
+            <p>Standardwerte sollten nicht f&uuml;r Parameter verwendet werden, die ggf. leer gelassen werden sollen (z.&nbsp;B. ein optionales Eingabe-Dataset).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Der Standardwert f&uuml;r den Parameter. Um den Standardwert zu &auml;ndern, aktualisieren Sie den Wert der Variable im Modellschema. Beim Standardwert sollte es sich um einen Wert handeln, mit dem in den meisten F&auml;llen ein genaues oder bevorzugtes Ergebnis erzielt wird.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Gibt an, ob der Parameter f&uuml;r die Ausf&uuml;hrung des Web-Werkzeugs erforderlich ist. Wenn der Modellparameter mit einem oder mehreren erforderlichen Werkzeugparametern verbunden ist, ist dieser Wert aktiviert und nicht editierbar. Wenn alle verbundenen Werkzeugparameter optional sind, kann der Modellparameter aktiviert werden, um den Parameter als erforderlich festzulegen, oder deaktiviert werden, um den Parameter als optional festzulegen. Durch das Festlegen eines Parameters als erforderlich, wird der Benutzer gezwungen, vor der Ausf&uuml;hrung des Web-Werkzeugs eine Eingabe bereitzustellen.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Gibt an, ob die Eingaben f&uuml;r die Werkzeugparameter Einschr&auml;nkungen unterliegen. Die nachfolgenden Filteroptionen h&auml;ngen vom Parametertyp ab:
+            </p>
+            <ul>
+                <li>Zeichenfolge: W&auml;hlen Sie aus, welche Einzelwerte verf&uuml;gbar sind.
+                </li>
+                <li>Feature-Layer: W&auml;hlen Sie aus, welche Feature-Typen verf&uuml;gbar sind.
+                </li>
+                <li>Integer: Legen Sie einen Minimal- und einen Maximalwert fest.
+                </li>
+                <li>Double: Legen Sie einen Minimal- und einen Maximalwert fest.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

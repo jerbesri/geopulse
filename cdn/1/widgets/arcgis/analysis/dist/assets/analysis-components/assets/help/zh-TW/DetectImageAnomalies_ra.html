@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>偵測圖像異常工具可根據輸入多頻段或高光譜圖像建立異常分數點陣。 異常分數點陣是一個單頻段點陣，其值介於 0 和 1 之間。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>包含待偵測異常的多頻段或高光譜圖像。
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>用於偵測異常的方法。
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>用於定義區域以計算背景統計資料的多邊形圖徵圖層。 只有當 <b>異常計算方法</b>設定為 <b>RXD</b> 或 <b>UTD</b> 時，才會顯示此參數。
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>指定當 <b>異常計算方法</b>設定為 <b>RXD</b> 或 <b>UTD</b> 時，是否重新計算輸入點陣的統計資料，因為這兩種方法都需要精確的統計資料才能執行。 如果核取，則會重新計算輸入點陣的統計資料。 如果取消核取，則不會重新計算統計資料。
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>當 <b>異常值計算方法</b>設定為 <b>KMEANS</b>，要使用的叢集數量。
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>將建立並新增到地圖之圖層的名稱。
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>將建立之輸出的類型。 輸出可以是圖磚影像圖層或動態影像圖層。
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p> <b>我的內容</b>中將儲存結果的資料夾名稱。
+            </p>
+        </div>
+    </div>
+</div>
+</html>

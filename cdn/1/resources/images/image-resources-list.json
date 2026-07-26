@@ -1,0 +1,54 @@
+{
+  "1785008324318": {
+    "originalName": "Designer.png",
+    "fileName": "1785008324318.png",
+    "size": 436021,
+    "url": "${appResourceUrl}/images/widget_70/1785008324318.png",
+    "created": 1785008324318,
+    "resourcesPrefix": "images/widget_70",
+    "referredIds": [],
+    "originId": "1785008324318",
+    "fileFormat": "image/png",
+    "originalWidth": 1254,
+    "originalHeight": 1254
+  },
+  "1785031354318": {
+    "originalName": "GeoPULSE_logo_text.png",
+    "fileName": "1785031354318.png",
+    "size": 20141,
+    "url": "${appResourceUrl}/images/widget_249/1785031354318.png",
+    "created": 1785031354318,
+    "resourcesPrefix": "images/widget_249",
+    "referredIds": [],
+    "originId": "1785031354318",
+    "fileFormat": "image/png",
+    "originalWidth": 1657,
+    "originalHeight": 450
+  },
+  "1785050872653": {
+    "originalName": "Asset 4.png",
+    "fileName": "1785050872653.png",
+    "size": 38346,
+    "url": "${appResourceUrl}/images/widget_249/1785050872653.png",
+    "created": 1785050872653,
+    "resourcesPrefix": "images/widget_249",
+    "referredIds": [],
+    "originId": "1785050872653",
+    "fileFormat": "image/png",
+    "originalWidth": 3448,
+    "originalHeight": 508
+  },
+  "1785055864133": {
+    "originalName": "Asset 8.png",
+    "fileName": "1785055864133.png",
+    "size": 41485,
+    "url": "${appResourceUrl}/images/widget_249/1785055864133.png",
+    "created": 1785055864133,
+    "resourcesPrefix": "images/widget_249",
+    "referredIds": [],
+    "originId": "1785055864133",
+    "fileFormat": "image/png",
+    "originalWidth": 3562,
+    "originalHeight": 481
+  }
+}

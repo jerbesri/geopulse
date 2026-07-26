@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Alat Buat Tessellation menciptakan grid poligon berdasarkan jangkauan, bentuk, dan ukuran yang ditentukan.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="binType">
+        <div>
+            <p>Bentuk Tessellation yang akan dibuat.
+            </p>
+        </div>
+    </div>
+    <div id="sizeType">
+        <div>
+            <p>Menentukan apakah ukuran Tessellation akan ditentukan oleh luasnya (<b>Luas</b>) atau nilai jarak (<b>Jarak</b>).
+            </p>
+            <p>Nilai defaultnya adalah  <b>Luas</b>.
+            </p>
+        </div>
+    </div>
+    <div id="binSize">
+        <div>
+            <p>Ukuran (luas atau jarak) dari tessellation yang dibuat. Untuk bentuk persegi, heksagon, segitiga, dan berlian, jarak menentukan tinggi tessellation. Untuk heksagon melintang, jarak menentukan lebar tessellation.
+            </p>
+        </div>
+    </div>
+    <div id="binResolution">
+        <div>
+            <p>Resolusi H3 dari tessellation tersebut. Rentang resolusi dari 0 hingga 15. Seiring bertambahnya tingkat resolusi, luas poligon akan mengecil menjadi sepertujuh dari ukuran pada resolusi yang lebih rendah.
+            </p>
+        </div>
+    </div>
+    <div id="binSizeUnit">
+        <div>
+            <p>Satuan akan digunakan untuk ukuran tessellation.
+            </p>
+        </div>
+    </div>
+    <div id="extentLayer">
+        <div>
+            <p>Jangkauan yang akan dicakup tessellation.
+            </p>
+            <p class="toolPaneOnly">Jumlah fitur bergantung pada faktor tambahan seperti kriteria pemfilteran dan jangkauan analisis.
+            </p>
+        </div>
+    </div>
+    <div id="intersectStudyArea">
+        <div>
+            <p>Untuk feature layer, menentukan apakah tessellation akan mencakup seluruh jangkauan (tidak dicentang) atau hanya area di mana tessellation yang berpotongan dengan fitur (dicentang).
+            </p>
+            <p>Parameter ini tidak dicentang secara default.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Nama layer yang akan dibuat dan ditambahkan ke peta.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>Nama folder di  <b>Konten saya</b> tempat penyimpanan hasil.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

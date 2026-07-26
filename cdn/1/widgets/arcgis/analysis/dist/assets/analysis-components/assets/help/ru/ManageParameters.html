@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Настройка параметров модели при публикации веб-инструмента.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Этот текст будет отображаться в качестве имени параметра в интерфейсе веб-инструмента. Подпись должна быть короткой, описывать назначение параметра и должна быть написана простым языком.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Этот текст будет отображаться как всплывающее окно справки по данному параметру и будет содержать информацию для пользователя веб-инструмента о том, как задать параметр этого инструмента. При необходимости добавьте описание того, что делает этот параметр, как различные значения влияют на результаты работы инструмента, а также, какие входные данные поддерживаются, и значения по умолчанию.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Поддерживаемый тип данных для данного параметра. Это значение определяется типом данных переменной и не может быть изменено.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Указывает, является ли данный параметр входным или выходным. Это значение определяется параметром инструмента и не может быть изменено.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Указывает, имеет ли параметр значение по умолчанию. Когда этот параметр включен, он будет использовать значение по умолчанию, основанное на значении переменной. Когда этот параметр выключен, то по умолчанию он будет пустым. Значение по умолчанию может использоваться для управления вводимыми пользователем данными или упрощения запуска веб-инструмента, чтобы пользователю не нужно было обновлять этот параметр вручную.
+            </p>
+            <p>Для тех параметров, которые вы хотите оставить пустыми, не следует использовать значения по умолчанию (например, дополнительный входной набор данных).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Значение по умолчанию для параметра. Чтобы изменить значение по умолчанию, обновите значение переменной в схеме модели. Значением по умолчанию должно быть значение, которое в большинстве случаев будет давать точный или наиболее предпочтительный результат.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Указывает, является ли параметр обязательным для запуска веб-инструмента. Если параметр модели привязан к одному или нескольким обязательным параметрам инструмента, это значение будет включено и недоступно для редактирования. Если все привязанные параметры инструмента являются необязательными, параметр модели можно включить, чтобы сделать его обязательным, или отключить, чтобы сделать его необязательным. Если задать обязательный параметр, пользователь должен будет ввести его перед запуском веб-инструмента.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Указывает, будут ли ограничения у входных параметров инструмента. Параметры фильтрации зависят от типа параметра следующим образом:
+            </p>
+            <ul>
+                <li>Строка - Выберите, какие уникальные значения доступны.
+                </li>
+                <li>Векторный слой - Выберите доступные типы объектов.
+                </li>
+                <li>Целое число - Укажите минимальное и максимальное значения.
+                </li>
+                <li>Двойное - Укажите минимальное и максимальное значения.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

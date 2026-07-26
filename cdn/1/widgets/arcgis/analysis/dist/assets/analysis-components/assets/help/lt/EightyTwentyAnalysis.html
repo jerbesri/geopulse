@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Naudojant 80&ndash;20 analizės įrankį ir taikant Pareto (80/20) principu grindžiamą analizę nustatomos vietos, kur įvyksta neproporcingai didelė incidentų dalis.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Ta&scaron;kų sluoksnis, kuris bus naudojamas apskaičiuojant vietas, kur neproporcingai dažnai įvyksta incidentai.
+            </p>
+            <p class="toolPaneOnly">Elementų skaičius priklauso nuo papildomų veiksnių, pavyzdžiui, filtravimo kriterijų ir analizės apimties.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Nurodoma, ar įvesties ta&scaron;kai bus agreguoti taikant apibrėžto atstumo (DBSCAN) grupavimo metodą (<b>ta&scaron;kų grupė</b>), ar įvesties palyginimo liniją, ar plotinį elementą (<b>artimiausias elementas</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Didžiausias atstumas, kuriuo nutolę ta&scaron;kai bus laikomi tos pačios grupės dalimi. Jei nenuyrodyta grupių tolerancija, įrankis sukurs grupę, kurioje ta&scaron;kiniai elementai persidengia.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Linijų arba poligonų sluoksnis, naudojamas ta&scaron;kams agreguoti pagal artimiausią elementą.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Įvesties ta&scaron;kų ir palyginimo elementų laukas, kuris bus naudojamas artimiausiems elementams suderinti. Į i&scaron;vestį bus įtraukti tik įra&scaron;ai i&scaron; įvesties elementų, kuriuos naudojant lauko reik&scaron;mės suderinamos su palyginimo elementais.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Laukai i&scaron; įvesties elementų bus perkelti į i&scaron;vestį.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Sluoksnio, kuris bus sukurtas ir pridėtas į žemėlapį, pavadinimas.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Puslapyje  <b>Mano turinys</b> esančio aplanko, kur bus įra&scaron;ytas rezultatas, pavadinimas.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Alat Deteksi Target Menggunakan Spektrum menghitung skor kecocokan untuk setiap piksel dalam raster input berdasarkan sejauh mana spektrum piksel tersebut sesuai dengan spektrum target yang ditentukan oleh berkas signatur spektral input.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Raster multiband yang berisi piksel target yang akan dideteksi.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Jenis file dari file signatur spektral input.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>File signatur spektral yang berisi spektrum target.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Metode yang digunakan untuk menghitung skor kecocokan antara raster input dan file signatur spektral.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Menentukan apakah spektrum dinormalisasi, yang dapat dilakukan menggunakan gambar atau data referensi. Jika opsi ini tidak dicentang, spektrum tidak akan dinormalisasi. Jika opsi ini dicentang, spektrum akan dinormalisasi.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Nama lapisan yang berisi raster skor kecocokan yang dibuat dan ditampilkan.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Jenis output yang akan dibuat. Output dapat berupa layer citra berpetak atau layer citra dinamis.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Nama folder di  <b>Konten saya</b> tempat penyimpanan hasil.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

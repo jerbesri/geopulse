@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Configura&ccedil;&otilde;es dos par&acirc;metros do modelo ao publicar uma ferramenta web.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Este texto aparecer&aacute; como o nome do par&acirc;metro na interface da ferramenta da web. O r&oacute;tulo deve ser curto, descritivo da finalidade do par&acirc;metro e escrito em linguagem simples.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Este texto aparecer&aacute; como ajuda pop-up do par&acirc;metro e fornecer&aacute; informa&ccedil;&otilde;es ao usu&aacute;rio da ferramenta da web sobre como preencher o par&acirc;metro da ferramenta. Inclua uma descri&ccedil;&atilde;o da fun&ccedil;&atilde;o do par&acirc;metro, como diferentes valores afetam os resultados da ferramenta, as entradas suportadas e os valores padr&atilde;o, conforme necess&aacute;rio.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>O tipo de dados suportado para o par&acirc;metro. Esse valor &eacute; determinado pelo tipo de dados da vari&aacute;vel e n&atilde;o pode ser alterado.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Especifica se o par&acirc;metro &eacute; uma entrada ou uma sa&iacute;da. Esse valor &eacute; determinado pelo par&acirc;metro da ferramenta e n&atilde;o pode ser alterado.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Especifica se o par&acirc;metro possui um valor padr&atilde;o. Quando ativado, o par&acirc;metro usar&aacute; um valor padr&atilde;o com base no valor da vari&aacute;vel. Quando desativado, o par&acirc;metro estar&aacute; vazio por padr&atilde;o. Um valor padr&atilde;o pode ser usado para orientar as entradas do usu&aacute;rio ou para facilitar a execu&ccedil;&atilde;o da ferramenta online, pois o usu&aacute;rio n&atilde;o precisa atualizar o par&acirc;metro manualmente.
+            </p>
+            <p>N&atilde;o utilize valores padr&atilde;o para par&acirc;metros que voc&ecirc; pode querer deixar vazios (por exemplo, um conjunto de dados de entrada opcional).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>O valor padr&atilde;o para o par&acirc;metro. Para alterar o valor padr&atilde;o, atualize o valor da vari&aacute;vel no diagrama do modelo. O valor padr&atilde;o deve ser um valor que forne&ccedil;a um resultado preciso ou preferencial na maioria dos casos.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Especifica se o par&acirc;metro &eacute; necess&aacute;rio para executar a ferramenta da web. Se o par&acirc;metro do modelo estiver conectado a um ou mais par&acirc;metros de ferramenta obrigat&oacute;rios, esse valor ser&aacute; ativado e n&atilde;o poder&aacute; ser editado. Se todos os par&acirc;metros da ferramenta conectada forem opcionais, o par&acirc;metro do modelo pode ser ativado para tornar o par&acirc;metro obrigat&oacute;rio ou desativado para torn&aacute;-lo opcional. Tornar um par&acirc;metro obrigat&oacute;rio for&ccedil;ar&aacute; o usu&aacute;rio a fornecer uma entrada antes que a ferramenta online possa ser executada.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Especifica se as entradas dos par&acirc;metros da ferramenta ter&atilde;o restri&ccedil;&otilde;es. As op&ccedil;&otilde;es de filtro dependem do tipo de par&acirc;metro, conforme descrito a seguir:
+            </p>
+            <ul>
+                <li>String&mdash;selecione os valores &uacute;nicos dispon&iacute;veis.
+                </li>
+                <li>Camada de fei&ccedil;&atilde;o&mdash;selecione quais tipos de fei&ccedil;&otilde;es est&atilde;o dispon&iacute;veis.
+                </li>
+                <li>Inteiro&mdash;especifique um valor m&iacute;nimo e um valor m&aacute;ximo.
+                </li>
+                <li>Duplo&mdash;especifique um valor m&iacute;nimo e um valor m&aacute;ximo.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

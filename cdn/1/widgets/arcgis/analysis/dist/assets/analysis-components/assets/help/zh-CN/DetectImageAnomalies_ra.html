@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>&ldquo;检测图像异常&rdquo;工具可根据输入多波段或高光谱图像创建异常得分栅格。 异常得分栅格是一个单波段栅格，其值介于 0 和 1 之间。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>包含待检测异常的多波段或高光谱图像。
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>用于检测异常的方法。
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>定义区域的面要素图层，该区域用于计算背景统计数据。 仅当 <b>异常计算方法</b>参数设置为 <b>RXD</b> 或 <b>UTD</b> 时，此参数才会显示。
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>指定当 <b>异常计算方法</b>设置为需要精确统计数据才能执行的 <b>RXD</b> 或 <b>UTD</b> 时，是否重新计算输入栅格的统计数据。 如果选中此选项，则将重新计算输入栅格的统计数据。 如果未选中，则不重新计算统计数据。
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>当 <b>异常计算方法</b>设置为 <b>K 均值</b>时要使用的聚类数。
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>要创建并添加至地图的图层的名称。
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>要创建的输出的类型。 输出可以为切片影像图层或动态影像图层。
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p> <b>我的内容</b>中要保存结果的文件夹名称。
+            </p>
+        </div>
+    </div>
+</div>
+</html>

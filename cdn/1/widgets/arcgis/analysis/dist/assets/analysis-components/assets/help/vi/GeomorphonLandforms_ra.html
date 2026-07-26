@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>C&ocirc;ng cụ Địa h&igrave;nh Địa mạo t&iacute;nh to&aacute;n m&ocirc; h&igrave;nh địa mạo của từng cell trong raster bề mặt đầu v&agrave;o v&agrave; ph&acirc;n loại c&aacute;c cell n&agrave;y th&agrave;nh c&aacute;c loại địa h&igrave;nh phổ biến.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>Raster độ cao sẽ được sử dụng để t&iacute;nh to&aacute;n. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>Đơn vị khoảng c&aacute;ch sẽ được sử dụng cho c&aacute;c th&ocirc;ng số  <b>Khoảng c&aacute;ch T&igrave;m kiếm</b> v&agrave; <b>Khoảng c&aacute;ch Bỏ qua</b>. Gi&aacute; trị mặc định l&agrave; Cell.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Khoảng c&aacute;ch t&iacute;nh từ cell đ&iacute;ch x&aacute;c định b&aacute;n k&iacute;nh khu vực được sử dụng để nhận định m&ocirc; h&igrave;nh địa mạo. Gi&aacute; trị mặc định l&agrave; 10 cell.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Khoảng c&aacute;ch t&iacute;nh từ cell đ&iacute;ch nơi khu vực ph&acirc;n t&iacute;ch bắt đầu. Gi&aacute; trị n&agrave;y phải nhỏ hơn gi&aacute; trị th&ocirc;ng số  <b>Khoảng c&aacute;ch T&igrave;m kiếm</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Ngưỡng (t&iacute;nh bằng độ) nằm dưới gi&aacute; trị m&agrave; cell đ&iacute;ch sẽ được ph&acirc;n loại l&agrave; phẳng. Gi&aacute; trị mặc định l&agrave; 1 độ.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Đơn vị đường của c&aacute;c gi&aacute; trị z dọc.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>T&ecirc;n của lớp raster địa h&igrave;nh sẽ được tạo v&agrave; th&ecirc;m v&agrave;o bản đồ.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>T&ecirc;n của lớp raster địa mạo sẽ được tạo v&agrave; th&ecirc;m v&agrave;o bản đồ.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Loại đầu ra sẽ được tạo. Đầu ra c&oacute; thể l&agrave; lớp h&igrave;nh ảnh dạng tile hoặc lớp h&igrave;nh ảnh động.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>T&ecirc;n của thư mục trong  <b>Nội dung của t&ocirc;i</b> sẽ lưu trữ kết quả.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

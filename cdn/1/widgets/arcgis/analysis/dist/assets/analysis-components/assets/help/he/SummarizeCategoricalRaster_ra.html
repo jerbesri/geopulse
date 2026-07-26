@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>הכלי 'סיכום רסטר קטגורי' הוא כלי ניתוח רסטר שמפיק טבלה אשר מכילה את ספירת הפיקסלים עבור כל קטגורייה, בכל פלח של רסטר קטגורי רב-ממדי.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>מציין את הרסטר הקטגורי שיש לסכם. הרסטר הקטגורי של הקלט צריך להיות מסוג מספר שלם.
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>מציין את הממד אשר משמש לסיכום רסטר הקלט. אם יש יותר מממד אחד ולא צוין ערך, כל הפלחים יסוכמו תוך שימוש בכל השילובים של ערכי ממד.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>מציין את שכבת ישויות הפוליגון שמכילה את אזור או אזורי העניין אשר ישמשו בעת חישוב ספירת הפיקלים לכל קטגוריה. אם לא צוין אזור עניין, הניתוח משתמש בכל סט נתוני הרסטר.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>מציין את השדה בשכבת ישויות הפוליגון שמגידר כל אזור ענין.
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>שם השכבה שתיווצר ותתווסף למפה.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>שם התיקייה  <b>בתוכן שלי</b> שבה התוצאה תישמר.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

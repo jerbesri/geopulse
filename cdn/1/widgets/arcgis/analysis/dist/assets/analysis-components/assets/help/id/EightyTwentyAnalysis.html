@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Alat Analisis 80-20 mengidentifikasi lokasi-lokasi di mana sebagian besar insiden terjadi secara tidak proporsional menggunakan analisis Pareto (80/20).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Lapisan titik yang akan digunakan untuk menghitung lokasi-lokasi di mana insiden terjadi secara tidak proporsional.
+            </p>
+            <p class="toolPaneOnly">Jumlah fitur bergantung pada faktor tambahan seperti kriteria pemfilteran dan jangkauan analisis.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Menentukan apakah titik masukan akan diagregasikan menggunakan metode pengklusteran Jarak tertentu (DBSCAN) (<b>Kluster titik</b>) atau fitur garis atau poligon perbandingan masukan (<b>Fitur terdekat</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Jarak maksimum di mana titik-titik akan dianggap sebagai bagian dari kluster yang sama. Jika tidak ada toleransi kluster yang ditentukan, alat ini akan membuat kluster di mana fitur titik saling tumpang tindih.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Lapisan garis atau poligon yang digunakan untuk mengagregasikan titik berdasarkan fitur terdekat.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Kolom dari titik masukan dan fitur perbandingan yang akan digunakan untuk mencocokkan fitur terdekat. Hanya rekaman dari fitur input yang nilai kolomnya cocok dengan fitur perbandingan yang akan dimasukkan ke dalam hasil keluaran.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Kolom dari fitur input yang akan dipindahkan ke hasil output.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Nama layer yang akan dibuat dan ditambahkan ke peta.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Nama folder di  <b>Konten saya</b> tempat penyimpanan hasil.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>De tool Anomalie&euml;n in afbeeldingen detecteren maakt een anomaliescoreraster uit een ingevoerde multiband- of hyperspectrale afbeelding. Het anomaliescoreraster is een eenbandsraster met waarden tussen nul en een.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>De multibandafbeelding of hyperspectrale afbeelding die de te detecteren anomalie&euml;n bevat.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>De methode die wordt gebruikt om anomalie&euml;n te detecteren.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>De polygoonobjectlaag die de regio definieert die wordt gebruikt om achtergrondstatistieken te berekenen. Deze parameter verschijnt alleen als de  <b>Anomalieberekeningsmethode</b> is ingesteld op <b>RXD</b> of <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>Specificeert of statistieken opnieuw worden berekend voor het invoerraster als de  <b>Anomalieberekeningsmethode</b> is ingesteld op <b>RXD</b> of <b>UTD</b>, waarbij de uitvoering nauwkeurige statistieken vereist. Als dit is aangevinkt, worden de statistieken opnieuw berekend voor het invoerraster. Als dit niet is aangevinkt, worden de statistieken niet opnieuw berekend.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>Het aantal clusters dat moet worden gebruikt als de  <b>Anomalieberekeningsmethode</b> is ingesteld op <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>De naam van de laag die wordt aangemaakt en toegevoegd aan de kaart.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Het type uitvoer dat wordt gemaakt. De uitvoer kan een getegelde beeldlaag of een dynamische beeldlaag zijn.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>De naam van de map in  <b>Mijn content</b> waarin het resultaat wordt opgeslagen.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

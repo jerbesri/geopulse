@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>&ldquo;K&uuml;t&uuml;phane Spektrumlarını Yeniden &Ouml;rnekle&rdquo; aracı, girdi k&uuml;t&uuml;phane spektrumlarını yeniden &ouml;rnekleyerek bunları bir hedef sens&ouml;rden, &ouml;zel spektral k&uuml;t&uuml;phane dosyasından veya &ouml;zel bir g&ouml;r&uuml;nt&uuml;den alınan hedef spektrumların bant sayısı ve dalga boyu aralığına uyumlu hale getirir.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>Yeniden &ouml;rneklenecek spektrumları i&ccedil;eren dosya. Girdi k&uuml;t&uuml;phane spektrumu bir  Esri spektral k&uuml;t&uuml;phane dosyası (<code>.esl</code>) olmalıdır.
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>Hedef sens&ouml;r, &ouml;zel spektral k&uuml;t&uuml;phane dosyası veya hedef spektrumları i&ccedil;eren &ouml;zel g&ouml;r&uuml;nt&uuml;.
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>Spektral k&uuml;t&uuml;phane dosyası (<code>.esl</code>) veya hedef spektrumu i&ccedil;eren g&ouml;r&uuml;nt&uuml;. Hedef spektrumlar i&ccedil;in bir g&ouml;r&uuml;nt&uuml; kullanıyorsanız, bu g&ouml;r&uuml;nt&uuml; dalga boyu bilgilerini i&ccedil;ermelidir.
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>Girdi spektral k&uuml;t&uuml;phane dosyasını yeniden &ouml;rneklemek i&ccedil;in kullanılan yeniden &ouml;rnekleme y&ouml;ntemi.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p> Esri spektral k&uuml;t&uuml;phane dosyasının (<code>.esl</code>) adı oluşturuldu.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Oluşturulacak &ccedil;ıktının t&uuml;r&uuml;. &Ccedil;ıktı, d&ouml;şemeli g&ouml;r&uuml;nt&uuml; katmanı veya dinamik g&ouml;r&uuml;nt&uuml; katmanı olabilir.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p> <b>İ&ccedil;eriğim</b> i&ccedil;inde sonucun kaydedileceği klas&ouml;r&uuml;n adı.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

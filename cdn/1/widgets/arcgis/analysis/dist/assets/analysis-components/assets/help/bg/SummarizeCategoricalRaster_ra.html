@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Инструментът &bdquo;Обобщение на растера по категории&ldquo; е инструмент за растерен анализ, който генерира таблица, съдържаща броя на пикселите за всяка категория във всеки сегмент от входен многоизмерен категоричен растер.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>Указва растера по категории, който ще бъде обобщен. Входният растер по категории трябва да е от целочислен тип.
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>Указва измерението, използвано за обобщаване на входния растер. Ако има повече от едно измерение и не е зададена стойност, всички сегменти ще бъдат обобщени, като се използват всички комбинации от стойности на измеренията.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>Указва слоя на полигона, съдържащ областта или областите от интерес, които да се използват при изчисляване на броя на пикселите за всяка категория. Ако не е зададена област от интерес, целият набор от растерни данни се използва в анализа.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>Указва полето в слоя на полигонов обект, което определя всяка област от интерес.
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>Името на слоя, който ще бъде създаден и добавен към картата.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Името на папка в  <b>Моето съдържание</b>, където резултатите ще бъдат запазени.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>カテゴリー ラスターの集約ツールは、入力多次元カテゴリー ラスターの各スライス内のカテゴリーごとのピクセル数を含むテーブルを生成するラスター解析ツールです。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>集約対象のカテゴリー ラスターを指定します。 入力カテゴリー ラスターは、整数タイプである必要があります。
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>入力ラスターを集約するために使用するディメンションを指定します。 2 つ以上のディメンションがあり、値が指定されていない場合は、ディメンション値のすべての組み合わせを使用してすべてのスライスが集約されます。
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>カテゴリーごとのピクセル数を計算する際に使用する対象地域 (複数可) を含むポリゴン フィーチャ レイヤーを指定します。 対象地域を指定しない場合、ラスター データセット全体が解析で使用されます。
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>各対象地域を定義するポリゴン フィーチャ レイヤーのフィールドを指定します。
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>作成されマップに追加されるレイヤーの名前。
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>結果を保存する  <b>[マイ コンテンツ]</b> 内のフォルダーの名前。
+            </p>
+        </div>
+    </div>
+</div>
+</html>

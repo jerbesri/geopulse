@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Инструмент Геоморфологические формы рельефа вычисляет геоморфологическую структуру каждой ячейки входного растра поверхности и классифицирует их по общим типам рельефа.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>Растр высот, который будет использоваться для расчета. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>Единицы расстояния, которые будут использоваться для параметров  <b>Расстояние поиска</b> и <b>Расстояние пропуска</b>. Значение по умолчанию - Ячейки.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Расстояние от целевой ячейки, задающее радиус области, которая будет использоваться для идентификации геоморфологической структуры. Значение по умолчанию - 10 ячеек.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Расстояние от целевой ячейки, от которой начинается область анализа. Оно должно быть меньше значения параметра  <b>Расстояние поиска</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Пороговое значение (в градусах), ниже которого целевая ячейка будут классифицирована как равнина. Значение по умолчанию равно 1 градусу.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Линейные единицы измерения вертикальных z-значений.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>Имя растрового слоя рельефа земной поверхности, который будет создан и добавлен на карту.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>Имя растрового слоя геоморфонов, который будет создан и добавлен на карту.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Тип создаваемых выходных данных. Результатом может быть слой листов изображений или динамический слой изображений.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>Имя папки в разделе  <b>Мои ресурсы</b>, в которую будет сохранен результат.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

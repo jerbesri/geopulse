@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Innstillinger for modellparametere n&aring;r du publiserer et webverkt&oslash;y.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Teksten vises som et parameternavnet i webverkt&oslash;yets grensesnitt. Etiketten b&oslash;r v&aelig;re kort, beskrive form&aring;let med parameteren og skrevet i et enkelt spr&aring;k.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Teksten vises som parameterens popup-hjelpevindu, og gir informasjon til brukeren av webverkt&oslash;yet om hvordan verkt&oslash;yparameteren fylles ut. Ta med en beskrivelse av hva parameteren gj&oslash;r, hvordan ulike verdier p&aring;virker resultatene i verkt&oslash;yet, de st&oslash;ttede inndataene og standardverdiene etter behov.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Den st&oslash;ttede datatypen for parameteren. Denne verdien bestemmes av variabelens datatype, og kan ikke endres.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Angir om parameteren er en inndata- eller utdataparameter. Verdien bestemmes av verkt&oslash;yparameteren og kan ikke endres.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Angir om parameteren har en standardverdi. N&aring;r den er p&aring;sl&aring;tt, bruker parameteren en standardverdi som er basert p&aring; variabelens verdi. N&aring;r den er avsl&aring;tt, er parameteren tom som standard. En standardverdi kan brukes til &aring; veilede brukerens inndata eller gj&oslash;re webverkt&oslash;yet enklere &aring; kj&oslash;re fordi brukeren ikke trenger &aring; oppdatere parameteren manuelt.
+            </p>
+            <p>Standardverdier b&oslash;r ikke brukes som parametere du kanskje &oslash;nsker &aring; la st&aring; tomme (f.eks. et valgfritt inndatasett).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Parameterens standardverdi. For &aring; endre standardverdien m&aring; variabelverdien oppdateres i modelldiagrammet. Standardverdien m&aring; v&aelig;re en verdi som gir en n&oslash;yaktig eller et foretrukket resultat i de fleste tilfeller.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Angir om parameteren kreves for &aring; kj&oslash;re webverkt&oslash;yet. Hvis modellparameteren er koblet til &eacute;n eller flere p&aring;krevde verkt&oslash;yparametere, er denne verdien sl&aring;tt p&aring; og kan ikke redigeres. Hvis alle tilkoblede verkt&oslash;yparametere er valgfrie, kan modellparameteren sl&aring;s p&aring; for &aring; gj&oslash;re parameteren obligatorisk eller avsl&aring;tt for &aring; gj&oslash;re parameteren valgfri. Hvis en parameter gj&oslash;res obligatorisk, tvinges brukeren til &aring; oppgi inndata f&oslash;r webverkt&oslash;yet kan kj&oslash;res.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Spesifiserer om verkt&oslash;yparameterens inndata skal ha restriksjoner. Filteralternativene avhenger av parametertype som f&oslash;lger:
+            </p>
+            <ul>
+                <li>Streng &ndash; Velg hvilke unike verdier som er tilgjengelige.
+                </li>
+                <li>Geoobjektlag &ndash; Velg hvilke geoobjekttyper som er tilgjengelige.
+                </li>
+                <li>Heltall &ndash; Angi en minimums- og maksimumsverdi.
+                </li>
+                <li>Dobbel &ndash; Angi en minimums- og maksimumsverdi.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

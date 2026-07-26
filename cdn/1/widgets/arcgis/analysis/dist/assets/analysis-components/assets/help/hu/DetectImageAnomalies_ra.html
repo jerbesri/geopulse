@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>A K&eacute;panom&aacute;li&aacute;k &eacute;szlel&eacute;se eszk&ouml;z anom&aacute;liapontsz&aacute;m-rasztert hoz l&eacute;tre egy bemeneti t&ouml;bbs&aacute;vos vagy hiperspektr&aacute;lis k&eacute;pből. Az anom&aacute;liapontsz&aacute;m-raszter egyetlen hull&aacute;mhossztartom&aacute;nyt tartalmaz&oacute; raszter, amelynek &eacute;rt&eacute;kei nulla &eacute;s egy k&ouml;z&eacute; esnek.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Az &eacute;szlelendő anom&aacute;li&aacute;kat tartalmaz&oacute; t&ouml;bbs&aacute;vos vagy hiperspektr&aacute;lis k&eacute;p.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Az anom&aacute;li&aacute;k &eacute;szlel&eacute;s&eacute;hez haszn&aacute;lt met&oacute;dus.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>A h&aacute;tt&eacute;rstatisztika kisz&aacute;m&iacute;t&aacute;s&aacute;hoz haszn&aacute;lt r&eacute;gi&oacute;t meghat&aacute;roz&oacute; polygon t&iacute;pus&uacute; vektoroselem-r&eacute;teg. Ez a param&eacute;ter csak akkor jelenik meg, ha az  <b>Anom&aacute;liasz&aacute;m&iacute;t&aacute;si met&oacute;dus</b> lehetős&eacute;g be&aacute;ll&iacute;t&aacute;sa <b>RXD</b> vagy <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>Megadhatja, hogy a rendszer &uacute;jrasz&aacute;m&iacute;tsa-e a bemeneti raszter statisztik&aacute;it, amikor az  <b>Anom&aacute;liasz&aacute;m&iacute;t&aacute;si met&oacute;dus</b> lehetős&eacute;g be&aacute;ll&iacute;t&aacute;sa <b>RXD</b> vagy <b>UTD</b>, mivel ezek pontos statisztik&aacute;t ig&eacute;nyelnek a műk&ouml;d&eacute;shez. Ha be van jel&ouml;lve, a rendszer &uacute;jrasz&aacute;m&iacute;tja a bemeneti raszter statisztik&aacute;it. Ha nincs bejel&ouml;lve, a rendszer nem sz&aacute;molja &uacute;jra a statisztik&aacute;kat.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>A felhaszn&aacute;land&oacute; klaszterek sz&aacute;ma, ha az  <b>Anom&aacute;liasz&aacute;m&iacute;t&aacute;si met&oacute;dus</b> be&aacute;ll&iacute;t&aacute;sa <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>A l&eacute;trehozni &eacute;s a t&eacute;rk&eacute;phez hozz&aacute;adni k&iacute;v&aacute;nt r&eacute;teg neve.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>A l&eacute;trej&ouml;vő kimenet t&iacute;pusa. A kimenet csemp&eacute;zett t&aacute;v&eacute;rz&eacute;kel&eacute;si r&eacute;teg vagy pedig dinamikus t&aacute;v&eacute;rz&eacute;kel&eacute;si r&eacute;teg lehet.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>A  <b>Saj&aacute;t tartalom</b> azon mapp&aacute;j&aacute;nak neve, ahov&aacute; az eredm&eacute;ny ment&eacute;se t&ouml;rt&eacute;nik.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Інструмент &laquo;Виявити ціль за допомогою спектрів&raquo; обчислює оцінку збігу для кожного пікселя вхідного растра на основі того, наскільки добре спектр цього пікселя збігається з цільовими спектрами, визначеними у вхідному файлі спектральних сигнатур.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Багатоканальний растр, що містить цільові пікселі для виявлення.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Тип файлу вхідного файлу спектральних сигнатур.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>Файл спектральних сигнатур з цільовими спектрами.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Метод, який використовується для обчислення оцінок збігу між вхідним растром і файлом спектральних сигнатур.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Визначає, чи є спектри нормованими, що можна зробити за допомогою зображення або базових даних. Якщо прапорець знято, спектри не нормуються. Якщо прапорець установлено, спектри нормуються.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Назва шару, що містить створений і відображений растр оцінки збігу.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Тип вихідних даних, які буде створено. Вихідними даними може бути шар зображень з тайлами або динамічний шар зображень.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Назва папки в  <b>Моєму вмісті</b>, де буде збережено результат.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

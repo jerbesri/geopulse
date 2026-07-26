@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>C&ocirc;ng cụ Ph&acirc;n t&iacute;ch 80-20 x&aacute;c định c&aacute;c vị tr&iacute; trong đ&oacute; một tỷ lệ lớn kh&ocirc;ng tương xứng c&aacute;c sự cố xảy ra bằng ph&acirc;n t&iacute;ch Pareto (80/20).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Lớp điểm sẽ được sử dụng để t&iacute;nh to&aacute;n c&aacute;c vị tr&iacute; trong đ&oacute; c&aacute;c sự cố xảy ra theo c&aacute;ch kh&ocirc;ng tương xứng.
+            </p>
+            <p class="toolPaneOnly">Số lượng đối tượng phụ thuộc v&agrave;o c&aacute;c yếu tố bổ sung như ti&ecirc;u ch&iacute; lọc v&agrave; phạm vi ph&acirc;n t&iacute;ch.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>X&aacute;c định xem c&aacute;c điểm đầu v&agrave;o sẽ được tổng hợp bằng phương ph&aacute;p gom cụm theo Khoảng c&aacute;ch x&aacute;c định (DBSCAN) (<b>Cụm điểm</b>) hay bằng đối tượng đường hoặc đa gi&aacute;c so s&aacute;nh đầu v&agrave;o (<b>Đối tượng gần nhất</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Khoảng c&aacute;ch tối đa để c&aacute;c điểm được xem l&agrave; thuộc c&ugrave;ng một cụm. Nếu kh&ocirc;ng x&aacute;c định dung sai cụm điểm, c&ocirc;ng cụ sẽ tạo cụm c&oacute; c&aacute;c điểm chồng l&ecirc;n nhau.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Lớp đường hoặc đa gi&aacute;c được sử dụng để tổng hợp c&aacute;c điểm theo đối tượng gần nhất.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Trường từ c&aacute;c điểm đầu v&agrave;o v&agrave; c&aacute;c đối tượng so s&aacute;nh sẽ được sử dụng để khớp c&aacute;c đối tượng gần nhất. Chỉ bản ghi từ c&aacute;c đối tượng đầu v&agrave;o c&oacute; gi&aacute; trị trường khớp với đối tượng so s&aacute;nh mới được bao gồm trong đầu ra.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>C&aacute;c trường từ đối tượng đầu v&agrave;o sẽ được chuyển sang đầu ra.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>T&ecirc;n của lớp sẽ được tạo v&agrave; th&ecirc;m v&agrave;o bản đồ.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>T&ecirc;n của thư mục trong  <b>Nội dung của t&ocirc;i</b> sẽ lưu trữ kết quả.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

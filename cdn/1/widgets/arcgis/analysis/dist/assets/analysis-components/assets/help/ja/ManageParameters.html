@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Web ツールを公開する際の、モデル パラメーターの設定。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>このテキストは、Web ツール インターフェイスにパラメーター名として表示されます。 ラベルは簡潔で、パラメーターの目的を説明し、平易な言葉で記述される必要があります。
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>このテキストはパラメーターのポップアップ ヘルプとして表示され、Web ツールのユーザーにツール パラメーターの入力方法に関する情報を提供します。 パラメーターの機能の説明、異なる値がツールの結果に与える影響、サポートされている入力、およびデフォルト値を必要に応じて含めます。
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>パラメーターでサポートされているデータ タイプ。 この値は変数のデータ タイプによって決定されるもので、変更することはできません。
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>パラメーターが入力であるか出力であるかを指定します。 この値はツール パラメーターによって決定されるもので、変更することはできません。
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>パラメーターにデフォルト値があるかどうかを指定します。 オンの場合、パラメーターでは変数値に基づくデフォルト値を使用します。 オフの場合、パラメーターはデフォルトで空になります。 デフォルト値を使用すると、ユーザーの入力をガイドでき、パラメーターを手動で更新する必要がないため、Web ツールをより簡単に実行できます。
+            </p>
+            <p>空にしておきたいパラメーター (オプションの入力データセットなど) には、デフォルト値を使用しないでください。
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>パラメーターのデフォルト値。 デフォルト値を変更するには、モデル ダイアグラムの変数値を更新します。 デフォルト値は、ほとんどのケースで正確または望ましい結果をもたらす値である必要があります。
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Web ツールを実行する際に、パラメーターが必須であるかどうかを指定します。 モデル パラメーターが 1 つ以上の必須ツール パラメーターに接続されている場合、この値はオンになり、編集することはできません。 接続されているツール パラメーターがすべて任意である場合、モデル パラメーターをオンにしてパラメーターを必須にするか、オフにしてパラメーターを任意にできます。 パラメーターを必須にすると、Web ツールを実行する前に、ユーザーによる入力が求められます。
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>ツール パラメーターの入力に制限を設けるかどうかを指定します。 フィルター オプションは、次に示すように、パラメーター タイプによって異なります:
+            </p>
+            <ul>
+                <li>文字列 - 使用できる個別値を選択します。
+                </li>
+                <li>フィーチャ レイヤー - 使用できるフィーチャ タイプを選択します。
+                </li>
+                <li>整数 - 最小値と最大値を指定します。
+                </li>
+                <li>倍精度値 - 最小値と最大値を指定します。
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Narzędzie Wykryj cel za pomocą widma oblicza wynik dopasowania dla każdego piksela w wejściowym rastrze na podstawie tego, jak dobrze widmo piksela pasuje do widm docelowych zdefiniowanych przez wejściowy plik sygnatury spektralnej.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Wielopasmowy raster zawierający docelowe piksele do wykrycia.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Typ wejściowego pliku sygnatury spektralnej.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>Plik sygnatury widmowej zawierający widma docelowe.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Metoda używana do obliczania wyniku dopasowania między wejściowym rastrem a plikiem sygnatury spektralnej.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Określa, czy widma są normalizowane, co można wykonać przy użyciu obrazu lub danych referencyjnych. Jeśli opcja jest odznaczona, widma nie są normalizowane. Jeśli parametr jest zaznaczony, widma są normalizowane.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Nazwa warstwy zawierającej tworzony i wyświetlany raster wynik&oacute;w dopasowania.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Typ wynikowy, kt&oacute;ry zostanie utworzony. Dane wynikowe mogą być warstwą zobrazowań kafelkowych lub dynamiczną warstwą zobrazowań.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Nazwa folderu na stronie  <b>Moje zasoby</b>, w kt&oacute;rym zostanie zapisany wynik.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

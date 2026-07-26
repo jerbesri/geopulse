@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Verkt&oslash;yet P&aring;vis bildeavvik oppretter et raster med avvikspoengsum fra et flerb&aring;nds- eller hyperspektralbilde som brukes som inndata. Avvikspoengsumrasteret er et enkeltb&aring;ndsraster med verdier mellom null og &eacute;n.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Flerb&aring;nds- eller hyperspektralbildet som inneholder avvikene som skal p&aring;vises.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Metoden som brukes til &aring; p&aring;vise avvik.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>Polygongeoobjektlaget som definerer regionen som brukes til &aring; beregne bakgrunnsstatistikk. Denne parameteren vises bare hvis  <b>Avviksberegningsmetode</b> er satt til <b>RXD</b> eller <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>Oppgir om statistikk skal beregnes p&aring; nytt for inndatarasteret n&aring;r  <b>Avviksberegningsmetode</b> er satt til <b>RXD</b> eller <b>UTD</b>, som krever n&oslash;yaktig statistikk for &aring; kunne utf&oslash;res. Hvis dette er krysset av, beregnes statistikken p&aring; nytt for inndatarasteret. Hvis dette ikke er krysset av, blir ikke statistikken beregnet p&aring; nytt.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>Antallet klynger som skal brukes hvis  <b>Avviksberegningsmetode</b> er satt til <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Navnet p&aring; laget som opprettes og legges til kartet.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Typen utdata som blir opprettet. Utdata kan v&aelig;re et flisinndelt bildelag eller et dynamisk bildelag.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Navnet p&aring; mappen i  <b>Mitt innhold</b> der resultatet blir lagret.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

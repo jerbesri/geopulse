@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>הכלי 'זהה אנומליות של תמונה' יוצר רסטר של ציוני אנומליות מתוך תמונת קלט רב־ערוצית או היפרספקטרלית. רסטר ציוני האנומליות הוא רסטר בעל ערוץ יחיד, שערכיו נעים בין אפס לאחד.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>התמונה הרב־ערוצית או ההיפרספקטרלית המכילה את האנומליות שיש לזהות.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>השיטה שבה נעשה שימוש לזיהוי אנומליות.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>שכבת הישות הפוליגונלית המגדירה את האזור המשמש לחישוב סטטיסטיקות רקע פרמטר זה מופיע רק כאשר  <b>שיטת חישוב אנומליות</b> מוגדרת ל- <b>RXD</b> או <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>מציין אם יש לחשב מחדש את הסטטיסטיקות עבור רסטר הקלט כאשר  <b>שיטת חישוב אנומליות</b> מוגדרת ל- <b>RXD</b> או <b>UTD</b>, הדורשות סטטיסטיקות מדויקות לביצוע החישוב. אם תיבת הסימון מסומנת, יתבצע חישוב מחדש של סטטיסטיקות עבור רסטר הקלט. אם תיבת הסימון לא מסומנת, לא יתבצע חישוב מחדש של הסטטיסטיקות.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>מספר האשכולות שבהם ייעשה שימוש אם  <b>שיטת חישוב אנומליות</b> מוגדרת ל- <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>שם השכבה שתיווצר ותתווסף למפה.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>סוג הקלט שייווצר. הפלט יכול להיות שכבת תצלומים באריחים או שכבת תצלומים דינמית.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>שם התיקייה  <b>בתוכן שלי</b> שבה התוצאה תישמר.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

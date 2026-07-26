@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>A Kategorikus raszter &ouml;sszes&iacute;t&eacute;se eszk&ouml;z egy raszterelemz&eacute;si eszk&ouml;z, amely olyan t&aacute;bl&aacute;t hoz l&eacute;tre, amely a bemeneti t&ouml;bbdimenzi&oacute;s kategorikus raszter minden szelet&eacute;re kateg&oacute;ri&aacute;nk&eacute;nt tartalmazza a pixelsz&aacute;mot.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>Megadja az &ouml;sszes&iacute;tendő kateg&oacute;rikus rasztert. A bemeneti kategorikus raszternek integert&iacute;pus&uacute;nak kell lennie.
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>Megadja a bemeneti raszter &ouml;sszegz&eacute;s&eacute;hez haszn&aacute;lt dimenzi&oacute;t. Ha egyn&eacute;l t&ouml;bb dimenzi&oacute; van, &eacute;s nincs megadva &eacute;rt&eacute;k, akkor a rendszer az &ouml;sszes szeletet a dimenzi&oacute;&eacute;rt&eacute;kek &ouml;sszes kombin&aacute;ci&oacute;j&aacute;t felhaszn&aacute;lva fogja &ouml;sszes&iacute;teni.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>Megadja azt a polygon t&iacute;pus&uacute; vektoros elem r&eacute;teget, amely a kateg&oacute;ri&aacute;nk&eacute;nti pixelsz&aacute;m kisz&aacute;m&iacute;t&aacute;sakor haszn&aacute;lni k&iacute;v&aacute;nt vizsg&aacute;lati ter&uuml;letet vagy ter&uuml;leteket tartalmazza. Ha nincs megadva vizsg&aacute;lati ter&uuml;let, a rendszer az elemz&eacute;sben a teljes raszteres adathalmazt haszn&aacute;lja.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>Megadja a polygon t&iacute;pus&uacute; vektoros elem r&eacute;teg azon mezőj&eacute;t, amely meghat&aacute;rozza az egyes vizsg&aacute;lati ter&uuml;leteket.
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>A l&eacute;trehozni &eacute;s a t&eacute;rk&eacute;phez hozz&aacute;adni k&iacute;v&aacute;nt r&eacute;teg neve.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>A  <b>Saj&aacute;t tartalom</b> azon mapp&aacute;j&aacute;nak neve, ahov&aacute; az eredm&eacute;ny ment&eacute;se t&ouml;rt&eacute;nik.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

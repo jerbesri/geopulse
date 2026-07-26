@@ -1,0 +1,27 @@
+{
+  "status": {
+    "noPermission": {
+      "notice": "You don't have permission to update sharing of this item.",
+      "panel": "You don't have permission to update sharing of this item. This item may not be visible to others because it's shared differently."
+    },
+    "pdc": {
+      "notice": "Enable Public Data Collection before sharing this layer publicly.",
+      "panel": "Enable Public Data Collection before sharing this layer publicly. For optimal performance and data integrity, please consider disabling editing or using a non-editable view layer.",
+      "learnMore": "Learn more about enabling editing on public layers."
+    },
+    "premium": {
+      "notice": "Premium and subscriber content may require signing in to view.",
+      "panel": "Premium and subscriber content may require signing in to view.",
+      "learnMore": "Learn more about sharing premium or subscriber content."
+    },
+    "sharingPDCEnabled": {
+      "notice": "Sharing this editable layer publicly will allow anyone to edit it.",
+      "panel": "Sharing this editable layer publicly will allow anyone to edit it. For optimal performance and data integrity, please consider disabling editing or using a non-editable view layer."
+    },
+    "needsAuthentication": {
+      "notice": "Authentication required.",
+      "panel": "This item may not be accessible to others because it contains location services that require authentication in applications that display the item."
+    }
+  },
+  "goToItem": "View full details"
+}

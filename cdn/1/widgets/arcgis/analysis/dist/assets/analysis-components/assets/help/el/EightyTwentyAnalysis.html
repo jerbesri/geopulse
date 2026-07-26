@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="regularsize">
+    <p>&Tau;&omicron; &epsilon;&rho;&gamma;&alpha;&lambda;&epsilon;ί&omicron; &alpha;&nu;ά&lambda;&upsilon;&sigma;&eta;&sigmaf; 80-20 &pi;&rho;&omicron;&sigma;&delta;&iota;&omicron;&rho;ί&zeta;&epsilon;&iota; &tau;&iota;&sigmaf; &tau;&omicron;&pi;&omicron;&theta;&epsilon;&sigma;ί&epsilon;&sigmaf; ό&pi;&omicron;&upsilon; &pi;&alpha;&rho;&omicron;&upsilon;&sigma;&iota;ά&zeta;&epsilon;&tau;&alpha;&iota; &delta;&upsilon;&sigma;&alpha;&nu;ά&lambda;&omicron;&gamma;&alpha; &mu;&epsilon;&gamma;ά&lambda;&omicron; &pi;&omicron;&sigma;&omicron;&sigma;&tau;ό &pi;&epsilon;&rho;&iota;&sigma;&tau;&alpha;&tau;&iota;&kappa;ώ&nu; &mu;έ&sigma;&omega; &alpha;&nu;ά&lambda;&upsilon;&sigma;&eta;&sigmaf; Pareto (80/20).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>&Tau;&omicron; &theta;&epsilon;&mu;&alpha;&tau;&iota;&kappa;ό &epsilon;&pi;ί&pi;&epsilon;&delta;&omicron; &sigma;&eta;&mu;&epsilon;ί&omega;&nu; &pi;&omicron;&upsilon; &theta;&alpha; &chi;&rho;&eta;&sigma;&iota;&mu;&omicron;&pi;&omicron;&iota;&eta;&theta;&epsilon;ί &gamma;&iota;&alpha; &tau;&omicron;&nu; &upsilon;&pi;&omicron;&lambda;&omicron;&gamma;&iota;&sigma;&mu;ό &tau;&omega;&nu; &tau;&omicron;&pi;&omicron;&theta;&epsilon;&sigma;&iota;ώ&nu; &mu;&epsilon; &delta;&upsilon;&sigma;&alpha;&nu;ά&lambda;&omicron;&gamma;&omicron; &pi;&omicron;&sigma;&omicron;&sigma;&tau;ό &pi;&epsilon;&rho;&iota;&sigma;&tau;&alpha;&tau;&iota;&kappa;ώ&nu;.
+            </p>
+            <p class="toolPaneOnly">&Omicron; &alpha;&rho;&iota;&theta;&mu;ό&sigmaf; &tau;&omega;&nu; &sigma;&tau;&omicron;&iota;&chi;&epsilon;ί&omega;&nu; &epsilon;&xi;&alpha;&rho;&tau;ά&tau;&alpha;&iota; &alpha;&pi;ό &epsilon;&pi;&iota;&pi;&lambda;έ&omicron;&nu; &pi;&alpha;&rho;ά&gamma;&omicron;&nu;&tau;&epsilon;&sigmaf;, ό&pi;&omega;&sigmaf; &tau;&alpha; &kappa;&rho;&iota;&tau;ή&rho;&iota;&alpha; &phi;&iota;&lambda;&tau;&rho;&alpha;&rho;ί&sigma;&mu;&alpha;&tau;&omicron;&sigmaf; &kappa;&alpha;&iota; &eta; έ&kappa;&tau;&alpha;&sigma;&eta; &tau;&eta;&sigmaf; &alpha;&nu;ά&lambda;&upsilon;&sigma;&eta;&sigmaf;.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>&Pi;&rho;&omicron;&sigma;&delta;&iota;&omicron;&rho;ί&zeta;&epsilon;&iota; &alpha;&nu; &eta; &sigma;&upsilon;&nu;ά&theta;&rho;&omicron;&iota;&sigma;&eta; &tau;&omega;&nu; &sigma;&eta;&mu;&epsilon;ί&omega;&nu; &epsilon;&iota;&sigma;ό&delta;&omicron;&upsilon; &theta;&alpha; &gamma;ί&nu;&epsilon;&iota; &mu;&epsilon; &tau;&eta; &mu;έ&theta;&omicron;&delta;&omicron; &delta;&eta;&mu;&iota;&omicron;&upsilon;&rho;&gamma;ί&alpha;&sigmaf; &sigma;&upsilon;&sigma;&tau;ά&delta;&omega;&nu; &kappa;&alpha;&theta;&omicron;&rho;&iota;&sigma;&mu;έ&nu;&eta;&sigmaf; &alpha;&pi;ό&sigma;&tau;&alpha;&sigma;&eta;&sigmaf; (DBSCAN) (<b>&Sigma;&upsilon;&sigma;&tau;ά&delta;&alpha; &sigma;&eta;&mu;&epsilon;ί&omega;&nu;</b>) ή &mu;&epsilon; &tau;&eta; &chi;&rho;ή&sigma;&eta; &epsilon;&nu;ό&sigmaf; &gamma;&rho;&alpha;&mu;&mu;&iota;&kappa;&omicron;ύ ή &pi;&omicron;&lambda;&upsilon;&gamma;&omega;&nu;&iota;&kappa;&omicron;ύ &sigma;&tau;&omicron;&iota;&chi;&epsilon;ί&omicron;&upsilon; &sigma;ύ&gamma;&kappa;&rho;&iota;&sigma;&eta;&sigmaf; (<b>&Pi;&lambda;&eta;&sigma;&iota;έ&sigma;&tau;&epsilon;&rho;&omicron; &sigma;&tau;&omicron;&iota;&chi;&epsilon;ί&omicron;</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>&Eta; &mu;έ&gamma;&iota;&sigma;&tau;&eta; &alpha;&pi;ό&sigma;&tau;&alpha;&sigma;&eta; &sigma;&tau;&eta;&nu; &omicron;&pi;&omicron;ί&alpha; &tau;&alpha; &sigma;&eta;&mu;&epsilon;ί&alpha; &theta;&alpha; &theta;&epsilon;&omega;&rho;&omicron;ύ&nu;&tau;&alpha;&iota; &tau;&mu;ή&mu;&alpha; &tau;&eta;&sigmaf; ί&delta;&iota;&alpha;&sigmaf; &sigma;&upsilon;&sigma;&tau;ά&delta;&alpha;&sigmaf;. &Alpha;&nu; &delta;&epsilon;&nu; έ&chi;&epsilon;&iota; &omicron;&rho;&iota;&sigma;&tau;&epsilon;ί &alpha;&nu;&omicron;&chi;ή &sigma;&upsilon;&sigma;&tau;ά&delta;&alpha;&sigmaf;, &tau;&omicron; &epsilon;&rho;&gamma;&alpha;&lambda;&epsilon;ί&omicron; &theta;&alpha; &delta;&eta;&mu;&iota;&omicron;&upsilon;&rho;&gamma;&epsilon;ί &sigma;&upsilon;&sigma;&tau;ά&delta;&alpha; &epsilon;&kappa;&epsilon;ί ό&pi;&omicron;&upsilon; &alpha;&lambda;&lambda;&eta;&lambda;&epsilon;&pi;&iota;&kappa;&alpha;&lambda;ύ&pi;&tau;&omicron;&nu;&tau;&alpha;&iota; &tau;&alpha; &sigma;&eta;&mu;&epsilon;&iota;&alpha;&kappa;ά &sigma;&tau;&omicron;&iota;&chi;&epsilon;ί&alpha;.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>&Tau;&omicron; &theta;&epsilon;&mu;&alpha;&tau;&iota;&kappa;ό &epsilon;&pi;ί&pi;&epsilon;&delta;&omicron; &gamma;&rho;&alpha;&mu;&mu;ώ&nu; ή &pi;&omicron;&lambda;&upsilon;&gamma;ώ&nu;&omega;&nu; &pi;&omicron;&upsilon; &theta;&alpha; &chi;&rho;&eta;&sigma;&iota;&mu;&omicron;&pi;&omicron;&iota;&eta;&theta;&epsilon;ί &gamma;&iota;&alpha; &tau;&eta; &sigma;&upsilon;&nu;ά&theta;&rho;&omicron;&iota;&sigma;&eta; &tau;&omega;&nu; &sigma;&eta;&mu;&epsilon;ί&omega;&nu; &mu;&epsilon; &beta;ά&sigma;&eta; &tau;&omicron; &pi;&lambda;&eta;&sigma;&iota;έ&sigma;&tau;&epsilon;&rho;&omicron; &sigma;&tau;&omicron;&iota;&chi;&epsilon;ί&omicron;.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>&Tau;&omicron; &pi;&epsilon;&delta;ί&omicron; &tau;&omega;&nu; &sigma;&eta;&mu;&epsilon;ί&omega;&nu; &epsilon;&iota;&sigma;ό&delta;&omicron;&upsilon; &kappa;&alpha;&iota; &tau;&omega;&nu; &sigma;&tau;&omicron;&iota;&chi;&epsilon;ί&omega;&nu; &sigma;ύ&gamma;&kappa;&rho;&iota;&sigma;&eta;&sigmaf; &pi;&omicron;&upsilon; &theta;&alpha; &chi;&rho;&eta;&sigma;&iota;&mu;&omicron;&pi;&omicron;&iota;&eta;&theta;&epsilon;ί &gamma;&iota;&alpha; &tau;&eta;&nu; &alpha;&nu;&tau;&iota;&sigma;&tau;&omicron;ί&chi;&iota;&sigma;&eta; &tau;&omega;&nu; &pi;&lambda;&eta;&sigma;&iota;έ&sigma;&tau;&epsilon;&rho;&omega;&nu; &sigma;&tau;&omicron;&iota;&chi;&epsilon;ί&omega;&nu;. &Mu;ό&nu;&omicron; &omicron;&iota; &epsilon;&gamma;&gamma;&rho;&alpha;&phi;έ&sigmaf; &alpha;&pi;ό &tau;&alpha; &sigma;&tau;&omicron;&iota;&chi;&epsilon;ί&alpha; &epsilon;&iota;&sigma;ό&delta;&omicron;&upsilon; &pi;&omicron;&upsilon; έ&chi;&omicron;&upsilon;&nu; ί&delta;&iota;&epsilon;&sigmaf; &tau;&iota;&mu;έ&sigmaf; &pi;&epsilon;&delta;ί&omega;&nu; &mu;&epsilon; &tau;&alpha; &sigma;&tau;&omicron;&iota;&chi;&epsilon;ί&alpha; &sigma;ύ&gamma;&kappa;&rho;&iota;&sigma;&eta;&sigmaf; &theta;&alpha; &sigma;&upsilon;&mu;&pi;&epsilon;&rho;&iota;&lambda;&eta;&phi;&theta;&omicron;ύ&nu; &sigma;&tau;&eta;&nu; έ&xi;&omicron;&delta;&omicron;.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>&Tau;&alpha; &pi;&epsilon;&delta;ί&alpha; &alpha;&pi;ό &tau;&alpha; &sigma;&tau;&omicron;&iota;&chi;&epsilon;ί&alpha; &epsilon;&iota;&sigma;ό&delta;&omicron;&upsilon; &pi;&omicron;&upsilon; &theta;&alpha; &mu;&epsilon;&tau;&alpha;&phi;&epsilon;&rho;&theta;&omicron;ύ&nu; &sigma;&tau;&eta;&nu; έ&xi;&omicron;&delta;&omicron;.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>&Tau;&omicron; ό&nu;&omicron;&mu;&alpha; &tau;&omicron;&upsilon; &theta;&epsilon;&mu;&alpha;&tau;&iota;&kappa;&omicron;ύ &epsilon;&pi;&iota;&pi;έ&delta;&omicron;&upsilon; &pi;&omicron;&upsilon; &theta;&alpha; &delta;&eta;&mu;&iota;&omicron;&upsilon;&rho;&gamma;&eta;&theta;&epsilon;ί &kappa;&alpha;&iota; &theta;&alpha; &pi;&rho;&omicron;&sigma;&tau;&epsilon;&theta;&epsilon;ί &sigma;&tau;&omicron;&nu; &chi;ά&rho;&tau;&eta;.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>&Tau;&omicron; ό&nu;&omicron;&mu;&alpha; &tau;&omicron;&upsilon; &phi;&alpha;&kappa;έ&lambda;&omicron;&upsilon; &sigma;&tau;&eta;&nu; &epsilon;&nu;ό&tau;&eta;&tau;&alpha;  <b>&Tau;&omicron; &pi;&epsilon;&rho;&iota;&epsilon;&chi;ό&mu;&epsilon;&nu;ό &mu;&omicron;&upsilon;</b> ό&pi;&omicron;&upsilon; &theta;&alpha; &alpha;&pi;&omicron;&theta;&eta;&kappa;&epsilon;&upsilon;&tau;&epsilon;ί &tau;&omicron; &alpha;&pi;&omicron;&tau;έ&lambda;&epsilon;&sigma;&mu;&alpha;.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Instrumentul Detectare anomalii &icirc;n imagini creează un raster al scorului de anomalie dintr-o imagine multibandă sau hiperspectrală de intrare. Rasterul scorului de anomalie este un raster cu o singură bandă cu valori cuprinse &icirc;ntre zero și unu.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Imaginea multibandă sau hiperspectrală care conține anomaliile de detectat.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Metoda utilizată pentru detectarea anomaliilor.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>Stratul tematic de obiect spațial poligon care definește regiunea utilizată pentru calcularea statisticilor de fundal. Acest parametru apare doar dacă  <b>Metoda de calculare a anomaliilor</b> este setată la <b>RXD</b> sau <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>Specifică dacă sunt recalculate statisticile pentru rasterul de intrare atunci c&acirc;nd  <b>Metoda de calculare a anomaliilor</b> este setată la <b>RXD</b> sau <b>UTD</b>, ceea ce necesită realizarea unor statistici corecte. Dacă este bifată, statisticile sunt recalculate pentru rasterul de intrare. Dacă este nebifată, statisticile nu sunt recalculate.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>Numărul de grupări care vor fi utilizate dacă  <b>Metoda de calculare a anomaliilor</b> este setată la <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Numele stratului tematic care va fi creat și adăugat pe hartă.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Tipul de ieșire care va fi creată. Ieșirea poate fi un strat tematic de imagini satelitare cu structură tile sau un strat tematic de imagini satelitare dinamic.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Numele folderului din  <b>Resursele mele</b> &icirc;n care va fi salvat rezultatul.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

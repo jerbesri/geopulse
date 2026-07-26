@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>เครื่องมือสรุปราสเตอร์ตามหมวดหมู่ เป็นเครื่องมือวิเคราะห์ราสเตอร์ที่จะสร้างตารางซึ่งมีจำนวนพิกเซลของแต่ละหมวดหมู่ในแต่ละสไลซ์ของราสเตอร์ตามหมวดหมู่แบบหลายมิติอินพุต
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>ระบุราสเตอร์ตามหมวดหมู่ที่จะสรุป ราสเตอร์ตามหมวดหมู่อินพุต จะต้องเป็นประเภทจำนวนเต็ม
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>ระบุขนาดที่จะใช้ในการสรุปราสเตอร์อินพุต หากมีมากกว่าหนึ่งมิติและไม่ได้ระบุค่าไว้ สไลซ์ทั้งหมดจะถูกสรุปโดยใช้ค่าขนาดทั้งหมดรวมกัน
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>ระบุชั้นข้อมูลฟีเจอร์รูปหลายเหลี่ยมซึ่งมีพื้นที่ที่สนใจที่จะใช้ในการคำนวณจำนวนพิกเซลต่อหมวดหมู่ หากไม่ได้ระบุพื้นที่ที่สนใจไว้ จะใช้ชุดข้อมูลราสเตอร์ทั้งหมดในการวิเคราะห์
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>ระบุฟิลด์ในชั้นข้อมูลฟีเจอร์รูปหลายเหลี่ยมที่กำหนดแต่ละพื้นที่ที่สนใจ
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>ชื่อของชั้นข้อมูลที่จะสร้างและเพิ่มลงในแผนที่
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>ชื่อของโฟลเดอร์ใน  <b>เนื้อหาของฉัน</b> ที่จะทำการบันทึกผลลัพธ์
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>V&aelig;rkt&oslash;jet Tag ny sample af biblioteksspektre tager nye samples af input-biblioteksspektre for at matche antallet af b&aring;nd og m&aring;lspektrets b&oslash;lgeomr&aring;de fra en m&aring;lsensor, en brugerdefineret spektralbiblioteksfil eller et brugerdefineret billede.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>Den fil, der indeholder de spektre, samples p&aring; ny. Input-biblioteksspektrene skal v&aelig;re en  Esri-spektralbiblioteksfil (<code>.esl</code>).
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>M&aring;lsensoren, den brugerdefinerede spektralbiblioteksfil eller det brugerdefinerede billede, der indeholder m&aring;lspektrene.
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>Spektralbiblioteksfilen (<code>.esl</code>) eller billedet, der indeholder m&aring;lspektrene. Hvis du bruger et billede til m&aring;lspektrene, skal det indeholde oplysninger om b&oslash;lgel&aelig;ngde.
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>Metoden til ny sampling, der bruges til ny sampling af input-spektralbiblioteksfilen.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Navnet p&aring; den  Esri-spektralbiblioteksfil (<code>.esl</code>), der er oprettet.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Den type output, der oprettes. Outputtet kan v&aelig;re et tile-billedlag eller et dynamisk billedlag.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Navnet p&aring; mappen  <b>Mit indhold</b>, hvor resultatet gemmes.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

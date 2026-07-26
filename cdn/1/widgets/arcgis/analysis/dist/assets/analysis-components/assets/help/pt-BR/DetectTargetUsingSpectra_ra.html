@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>A ferramenta Detectar alvo usando espectros calcula uma pontua&ccedil;&atilde;o de correspond&ecirc;ncia para cada pixel em um raster de entrada, com base em qu&atilde;o bem o espectro do pixel corresponde aos espectros de destino definidos por um arquivo de assinatura espectral de entrada.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>O raster de m&uacute;ltiplas bandas que cont&eacute;m os pixels de destino a serem detectados.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>O tipo de arquivo da assinatura espectral de entrada.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>O arquivo de assinatura espectral que cont&eacute;m os espectros de destino.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>O m&eacute;todo utilizado para calcular as pontua&ccedil;&otilde;es de correspond&ecirc;ncia entre o raster de entrada e o arquivo de assinatura espectral.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Especifica se os espectros s&atilde;o normalizados, o que pode ser feito usando uma imagem ou dados de refer&ecirc;ncia. Se desmarcado, os espectros n&atilde;o ser&atilde;o normalizados. Se selecionada, a op&ccedil;&atilde;o normaliza os espectros.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>O nome da camada que cont&eacute;m o raster de pontua&ccedil;&atilde;o de correspond&ecirc;ncia, que &eacute; criado e exibido.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>O tipo de sa&iacute;da que ser&aacute; criado. A sa&iacute;da pode ser uma camada de imagem mosaicada ou uma camada de imagem din&acirc;mica.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>O nome da pasta em  <b>Meu conte&uacute;do</b> onde o resultado ser&aacute; salvo.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

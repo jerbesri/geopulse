@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>The Geomorphon Landforms tool calculates the geomorphon pattern of each cell of an input surface raster and classifies them into common landform types.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>The elevation raster that will be used for calculations. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>The distance unit that will be used for the  <b>Search distance</b> and <b>Skip distance</b> parameters. The default is Cells.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>The distance away from the target cell defining the radius of the area used to identify the geomorphon pattern. The default is 10 cells.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>The distance away from the target cell where the analysis area starts. It must be smaller than the  <b>Search distance</b> parameter value.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>The threshold (in degrees) below which the target cell will be classified as flat. The default is 1 degree.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>The linear unit of vertical z-values.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>The name of the landforms raster layer that will be created and added to the map.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>The name of the geomorphons raster layer that will be created and added to the map.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>The type of output that will be created. The output can be a tiled imagery layer or a dynamic imagery layer.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>The name of the folder in  <b>My content</b> where the result will be saved.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

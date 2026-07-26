@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Setări pentru parametrii model la publicarea unui instrument web.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Acest text va apărea ca numele parametrului &icirc;n interfața instrumentului web. Eticheta trebuie să fie scurtă, să descrie scopul parametrului și să folosească un limbaj clar.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Acest text va apărea ca mesaj pop-up de asistență al parametrului și va furniza utilizatorului instrumentului web informații despre cum să populeze parametrul instrumentului. Includeți o descriere despre ce face parametrul, modul &icirc;n care diferitele valori influențează rezultatele instrumentului, intrările acceptate și valorile implicite, după cum este necesar.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Tipul de date acceptat pentru parametru. Această valoare este determinată de tipul de date variabile și nu poate fi modificată.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Specifică dacă parametrul este o intrare sau o ieșire. Această valoare este determinată de parametrul instrumentului și nu poate fi modificată.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Specifică dacă parametrul are o valoare implicită. C&acirc;nd este activat, parametrul va utiliza o valoare implicită pe baza valorii variabile. C&acirc;nd este dezactivat, parametrul va fi gol &icirc;n mod implicit. O valoare implicită poate fi utilizată pentru a ghida intrările utilizatorului sau a face instrumentul web mai ușor de executat deoarece utilizatorul nu trebuie să actualizeze manual parametrul.
+            </p>
+            <p>Nu ar trebui utilizate valori implicite pentru parametri pe care este posibil să doriți să &icirc;i lăsați necompletați (de exemplu, un set de date de intrare opțional).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Valoarea implicită pentru parametru. Pentru a modifica valoarea implicită, actualizați valoarea variabilei din diagrama modelului. Valoarea implicită trebuie să fie o valoare care să ofere un rezultat corect sau preferat &icirc;n majoritatea cazurilor.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Specifică dacă parametrul trebuie să execute instrumentul web. Dacă parametrul model este conectat la unul sau mai mulți parametri necesari ai instrumentului, această valoare va fi activată și nu va fi editabilă. Dacă toți parametrii instrumentului sunt opționali, parametrul model poate fi activat pentru a face parametrul necesar sau poate fi dezactivat pentru a face parametrul opțional. Dacă un parametru devine necesar, acest lucru va forța utilizatorului să furnizeze o intrare &icirc;nainte ca instrumentul web să poată fi executat.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Specifică dacă intrările pentru parametrul instrumentului vor avea restricții. Opțiunile de filtrare depind de tipul de parametru după cum urmează:
+            </p>
+            <ul>
+                <li>Șir&mdash;Selectați care valori unice sunt disponibile.
+                </li>
+                <li>Strat tematic de obiecte spațiale&mdash;Selectați care tipuri de obiecte spațiale sunt disponibile.
+                </li>
+                <li>Număr &icirc;ntreg&mdash;Specificați o valoare minimă și maximă.
+                </li>
+                <li>Dublu&mdash;Specificați o valoare minimă și maximă.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

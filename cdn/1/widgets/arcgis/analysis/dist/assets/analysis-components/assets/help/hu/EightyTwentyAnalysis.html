@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>A 80-20-as elemzőeszk&ouml;z Pareto-f&eacute;le (80/20) elemz&eacute;ssel azonos&iacute;tja azokat a helyeket, ahol az incidensek ar&aacute;nytalanul nagy r&eacute;sze fordul elő.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Az incidensek ar&aacute;nytalan előfordul&aacute;si helyeinek kisz&aacute;m&iacute;t&aacute;s&aacute;hoz haszn&aacute;land&oacute; pontr&eacute;teg.
+            </p>
+            <p class="toolPaneOnly">A vektoros elemek sz&aacute;ma olyan tov&aacute;bbi t&eacute;nyezőktől f&uuml;gg, mint p&eacute;ld&aacute;ul szűr&eacute;si krit&eacute;rium &eacute;s elemz&eacute;s kiterjeszt&eacute;se.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Megadhatja, hogy a bemeneti pontokat a Meghat&aacute;rozott t&aacute;vols&aacute;g (DBSCAN) klaszterez&eacute;si met&oacute;dussal (<b>Pontklaszter</b>), vagy egy bemeneti &ouml;sszehasonl&iacute;t&aacute;si vonal vagy polygon t&iacute;pus&uacute; vektoros elem haszn&aacute;lat&aacute;val (<b>Legk&ouml;zelebbi vektoros elem</b>) vonja-e &ouml;ssze.
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Az a maxim&aacute;lis t&aacute;vols&aacute;g, amelyen bel&uuml;l a pontok ugyanazon klaszter r&eacute;sz&eacute;nek minős&uuml;lnek. Ha nincs megadva klasztertolerancia, az eszk&ouml;z klasztert hoz l&eacute;tre ott, ahol a pontszerű vektoros elemek &aacute;tfedik egym&aacute;st.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>A pontok legk&ouml;zelebbi vektoros elem szerinti &ouml;sszevon&aacute;s&aacute;hoz haszn&aacute;lt vonal- vagy polygonr&eacute;teg
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>A bemeneti pontok &eacute;s az &ouml;sszehasonl&iacute;t&aacute;si vektoros elemek mezője, amely a legk&ouml;zelebbi vektoros elemek egyeztet&eacute;s&eacute;hez haszn&aacute;land&oacute;. Csak azok a bemeneti vektoros elemekből sz&aacute;rmaz&oacute; rekordok ker&uuml;lnek be a kimenetbe, amelyek mező&eacute;rt&eacute;kei egyeznek az &ouml;sszehasonl&iacute;t&aacute;si vektoros elemek mező&eacute;rt&eacute;keivel.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>A bemeneti vektoros elemekből a kimenetbe &aacute;tvinni k&iacute;v&aacute;nt mezők.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>A l&eacute;trehozni &eacute;s a t&eacute;rk&eacute;phez hozz&aacute;adni k&iacute;v&aacute;nt r&eacute;teg neve.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>A  <b>Saj&aacute;t tartalom</b> azon mapp&aacute;j&aacute;nak neve, ahov&aacute; az eredm&eacute;ny ment&eacute;se t&ouml;rt&eacute;nik.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

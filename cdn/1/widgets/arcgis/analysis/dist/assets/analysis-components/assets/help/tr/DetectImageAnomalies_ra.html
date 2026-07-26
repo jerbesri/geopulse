@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>G&ouml;r&uuml;nt&uuml; Anormalliklerini Algılama aracı, girdi olarak alınan &ccedil;ok bantlı veya hiperspektral bir g&ouml;r&uuml;nt&uuml;den bir anormallik puanı rasterı oluşturur. Anormallik puanı rasterı, değerleri sıfır ile bir arasında değişen tek bantlı bir rasterdır.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Algılanacak anormallikleri i&ccedil;eren &ccedil;ok bantlı veya hiperspektral g&ouml;r&uuml;nt&uuml;.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Anormallikleri algılamak i&ccedil;in kullanılan y&ouml;ntem.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>Arka plan istatistiklerinin hesaplanmasında kullanılan b&ouml;lgeyi tanımlayan &ccedil;okgen detay katmanı. Bu parametre yalnızca  <b>Anormallik hesaplama y&ouml;netimi</b> <b>RXD</b> veya <b>UTD</b> olarak ayarlandığında g&ouml;r&uuml;n&uuml;r.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p> <b>Anormallik hesaplama y&ouml;ntemi</b> <b>RXD</b> veya <b>UTD</b> olarak ayarlandığında, girdi raster i&ccedil;in istatistiklerin yeniden hesaplanıp hesaplanmayacağını belirler; bu hesaplamaların ger&ccedil;ekleştirilebilmesi i&ccedil;in doğru istatistikler gereklidir. İşaretlenirse, girdi raster i&ccedil;in istatistikler yeniden hesaplanır. İşaretlenmezse, istatistikler yeniden hesaplanmaz.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p> <b>Anomali hesaplama y&ouml;ntemi</b> <b>KMEANS</b> olarak ayarlandığında kullanılacak k&uuml;me sayısı.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Oluşturulacak ve haritaya eklenecek katmanın adı.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Oluşturulacak &ccedil;ıktının t&uuml;r&uuml;. &Ccedil;ıktı, d&ouml;şemeli g&ouml;r&uuml;nt&uuml; katmanı veya dinamik g&ouml;r&uuml;nt&uuml; katmanı olabilir.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p> <b>İ&ccedil;eriğim</b> i&ccedil;inde sonucun kaydedileceği klas&ouml;r&uuml;n adı.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

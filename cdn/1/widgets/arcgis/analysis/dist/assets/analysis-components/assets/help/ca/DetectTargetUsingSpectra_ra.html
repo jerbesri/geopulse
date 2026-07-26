@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>L'eina Detecta la destinaci&oacute; mitjan&ccedil;ant espectres calcula una puntuaci&oacute; de coincid&egrave;ncia per a cadascun dels p&iacute;xels d'un r&agrave;ster d'entrada, basada en el nivell de coincid&egrave;ncia de l'espectre del p&iacute;xel amb els espectres de destinaci&oacute; definits per un fitxer de signatura espectral d'entrada.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>R&agrave;ster multibanda que cont&eacute; els p&iacute;xels de destinaci&oacute; que cal detectar.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Tipus de fitxer de signatura espectral d'entrada.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>Fitxer de signatura espectral que cont&eacute; l'espectre de destinaci&oacute;.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>M&egrave;tode que es fa servir per calcular les puntuacions de coincid&egrave;ncia entre el r&agrave;ster d'entrada i el fitxer de signatura espectral.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Especifica si els espectres es normalitzen, cosa que es pot fer mitjan&ccedil;ant una imatge o dades de refer&egrave;ncia. Si no se selecciona, els espectres no es normalitzen. Si se selecciona, els espectres es normalitzen.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Nom de la capa que cont&eacute; el r&agrave;ster de puntuaci&oacute; de coincid&egrave;ncia que es crea i es mostra.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Tipus de sortida que es crear&agrave;. La sortida pot ser una capa d'imatges en mosaic o una capa d'imatges din&agrave;miques.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Nom de la carpeta d' <b>El meu contingut</b> on es desar&agrave; el resultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

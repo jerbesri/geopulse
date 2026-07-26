@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Įrankis Sumuoti kategorinį rastrą &ndash; tai rastrų analizės įrankis, kurį naudojant sugeneruojama lentelė, kurioje nurodomas ta&scaron;kų skaičius kiekvienoje kategorijoje, kiekvienoje įvesties daugiamačio kategorinio rastro skiltyje.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>Nurodomas kategorinis rastras, kuris bus sumuojamas. Įvesties kategorinis rastras turi būti sveikojo skaičiaus tipo.
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>Nurodomas matmuo, naudojamas įvesties rastrui sumuoti. Jei yra daugiai nei vienas matmuo ir nenurodyta jokia reik&scaron;mė, visos skiltys bus susumuotos naudojant visus matmenų reik&scaron;mių derinius.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>Nurodomas poligono elementų sluoksnis, kuriame yra dominanti teritorija ar dominančios teritorijos, naudojamos skaičiuojant kiekvienos kategorijos pikselių skaičių. Jei nenurodyta jokia dominanti sritis, analizėje naudojamas visas rastrinis duomenų rinkinys.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>Nurodomas laukas poligono elementų sluoksnyje, apibrėžiantis kiekvieną dominančią sritį.
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>Sluoksnio, kuris bus sukurtas ir pridėtas į žemėlapį, pavadinimas.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Puslapyje  <b>Mano turinys</b> esančio aplanko, kur bus įra&scaron;ytas rezultatas, pavadinimas.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Orodje za zaznavanje anomalij slike ustvari raster z oceno anomalij iz vhodne večpasovne ali hiperspektralne slike. Raster anomalij je enopasovni raster z vrednostmi med nič in ena.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Večpasovna ali hiperspektralna slika, ki vsebuje anomalije, ki jih je treba zaznati.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Metoda, ki se uporablja za odkrivanje anomalij.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>Geoobjektni sloj poligona, ki definira območje, uporabljeno za izračun statističnih podatkov ozadja. Ta parameter se prikaže le, če je  <b>metoda izračuna anomalij</b> nastavljena na <b>RXD</b> ali <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>Določa, ali se statistični podatki ponovno izračunajo za vhodni raster, ko je  <b>metoda izračuna anomalij</b> nastavljena na <b>RXD</b> ali <b>UTD</b>, kar zahteva natančno statistiko. Če je označeno, se statistika ponovno izračuna za vhodni raster. Če ni označeno, se statistika ne preračuna.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>&Scaron;tevilo gruč za uporabo, če je  <b>metoda izračuna anomalij</b> nastavljena na <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Ime sloja, ki bo ustvarjen in dodan na karto.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Vrsta rezultata, ki bo ustvarjen. Rezultat je lahko plo&scaron;čični slikovni sloj ali dinamični slikovni sloj.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Ime mape v  <b>Moja vsebina</b>, kjer bo shranjen rezultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Tunnista kuvan poikkeamat -ty&ouml;kalu luo poikkeamien tulosrasterin l&auml;ht&ouml;aineiston monikaistaisesta tai hyperspektrisest&auml; kuvasta. Poikkeamien tulosrasteri on yksikaistainen rasteri, jossa on arvoja 0&ndash;1.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Tunnistettavat poikkeamat sis&auml;lt&auml;v&auml; monikaistainen tai hyperspektrinen kuva.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Poikkeamien tunnistamiseen k&auml;ytetty menetelm&auml;.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>Taustatilastojen laskemiseen k&auml;ytett&auml;v&auml;n alueen m&auml;&auml;ritt&auml;v&auml; aluekohdekarttataso. T&auml;m&auml; parametri n&auml;kyy vain, jos  <b>Poikkeaman laskentamenetelm&auml;</b> -arvoksi on m&auml;&auml;ritetty <b>RDX</b> tai <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>M&auml;&auml;ritt&auml;&auml;, lasketaanko tilastotiedot uudelleen l&auml;ht&ouml;aineiston rasterille, jos  <b>Poikkeaman laskentamenetelm&auml;</b> -arvoksi on m&auml;&auml;ritetty <b>RXD</b> tai <b>UTD</b>, mik&auml; edellytt&auml;&auml; tarkkoja tilastotietoja suoritusta varten. Jos asetus valitaan, tilastotiedot lasketaan uudelleen l&auml;ht&ouml;aineiston rasterille. Jos asetusta ei valita, tilastotietoja ei lasketa uudelleen.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>K&auml;ytett&auml;vien klusterien m&auml;&auml;r&auml;, jos  <b>Poikkeaman laskentamenetelm&auml;</b> -arvoksi on m&auml;&auml;ritetty <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Karttaan luotavan ja lis&auml;tt&auml;v&auml;n karttatason nimi.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Luotavan tulosaineiston tyyppi. Tulosaineisto voi olla tiilitetty kuva-aineistokarttataso tai dynaaminen kuvakarttataso.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Sen  <b>Omassa sis&auml;ll&ouml;ss&auml;</b> olevan kansion nimi, johon tulos tallennetaan.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

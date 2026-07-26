@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Impostazioni per i parametri del modello quando si pubblica uno strumento Web.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Questo testo apparir&agrave; come il nome del parametro nell'interfaccia dello strumento Web. Il contenuto dell'etichetta dovrebbe essere breve, dovrebbe descrivere gli scopi del parametro e dovrebbe essere scritta con linguaggio semplice.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Questo testo apparir&agrave; come la guida popup del parametro e fornir&agrave; informazioni all'utente dello strumento Web riguardo alle modalit&agrave; per popolare il parametro dello strumento. Includere una descrizione delle funzioni del parametro, delle modalit&agrave; con cui i diversi valori influiscono sui risultati dello strumento, degli input supportati e dei valori predefiniti secondo necessit&agrave;.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Il tipo di dati supportato per il parametro. Questo valore &egrave; determinato dal tipo di dati della variabile e non pu&ograve; essere modificato.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Specifica se il parametro &egrave; un input o un output. Questo valore &egrave; determinato dal parametro dello strumento e non pu&ograve; essere modificato.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Specifica se il parametro ha un valore predefinito. Se attivato, il parametro utilizzer&agrave; un valore predefinito basato sul valore della variabile. Se disattivato, il parametro risulter&agrave; vuoto per impostazione predefinita. &Egrave; possibile utilizzare un valore predefinito per guidare gli input dell'utente o rendere pi&ugrave; semplice l'esecuzione dello strumento Web perch&eacute; l'utente non deve aggiornare il parametro manualmente.
+            </p>
+            <p>I valori predefiniti non dovrebbero essere utilizzati per parametri che si desidera lasciare vuoti (per esempio, dataset di input opzionali).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Il valore predefinito per il parametro. Per modificare il valore predefinito, aggiornare il valore della variabile nel diagramma del modello. Il valore predefinito dovrebbe essere un valore che fornir&agrave; nella maggior parte dei casi un risultato accurato o preferito.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Specifica se il parametro &egrave; obbligatorio per eseguire lo strumento Web. Se il parametro modello &egrave; collegato a uno o pi&ugrave; parametri dello strumento obbligatori, questo valore risulter&agrave; attivato e non sar&agrave; modificabile. Se tutti i parametri dello strumento collegato sono facoltativi, il parametro modello pu&ograve; essere attivato per rendere il parametro obbligatorio o pu&ograve; essere disattivato per rendere il parametro facoltativo. Trasformando un parametro in obbligatorio obbligher&agrave; l'utente a fornire un input prima di poter eseguire lo strumento Web.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Specifica se gli input del parametro dello strumento avranno delle limitazioni. Le opzioni del filtro dipendono dal tipo di parametro nel seguente modo:
+            </p>
+            <ul>
+                <li>Stringa: selezionare quali valori unici sono disponibili.
+                </li>
+                <li>Feature layer: selezionare quali feature layer sono disponibili.
+                </li>
+                <li>Intero: specificare un valore minimo e un valore massimo.
+                </li>
+                <li>Doppio: specificare un valore minimo e massimo.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

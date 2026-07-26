@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Modelio parametrų nustatymai publikuojant internetinį įrankį.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>&Scaron;is tekstas internetinio įrankio sąsajoje bus rodomas kaip parametro pavadinimas. Žymė turi būti trumpa, apibūdinanti parametro paskirtį ir užra&scaron;yta paprasta kalba.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>&Scaron;is tekstas bus rodomas kaip i&scaron;&scaron;okantysis parametro pagalbos langas ir internetinio įrankio naudotojui bus pateikta informacijos apie tai, kaip užpildyti įrankio parametrus. Įtraukite apra&scaron;ymą, kokia parametro paskirtis, kaip skirtingos reik&scaron;mės paveikia įrankio rezultatus, palaikomas įvestis ir, esant poreikiui, numatytąsias reik&scaron;mes.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Numatytasis parametro duomenų tipas. &Scaron;i reik&scaron;mė nustatoma pagal kintamojo duomenų tipą ir jos keisti negalima.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Nurodoma, ar parametras yra įvesties, ar i&scaron;vesties. &Scaron;i reik&scaron;mė nustatoma pagal įrankio parametrą ir jos keisti negalima.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Nurodoma, ar parametras turi numatytąją reik&scaron;mę. Kai parinktis įjungta, parametrui bus naudojama numatytoji reik&scaron;mė, pagrįsta kintamojo reik&scaron;me. Kai parinktis i&scaron;jungta, parametras pagal numatytuosius nustatymus bus tu&scaron;čias. Numatytoji reik&scaron;mė gali būti naudojama kaip orientacinė naudotojo įvesčių reik&scaron;mė arba tam, kad būtų lengviau paleisti internetinį įrankį, nes naudotojui nereikia atnaujinti parametro rankiniu būdu.
+            </p>
+            <p>Numatytosios reik&scaron;mės neturėtų būti naudojamos parametrams, kuriuos norite palikti tu&scaron;čius (pavyzdžiui, neprivalomam įvesties duomenų rinkiniui).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Numatytoji parametro reik&scaron;mė. Norėdami pakeisti numatytąją reik&scaron;mę, atnaujinkite kintamojo reik&scaron;mę modelio diagramoje. Numatytoji reik&scaron;mė turėtų būti reik&scaron;mė, kuriai esant daugeliu atvejų gaunamas tikslus arba pageidaujamas rezultatas.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Nurodoma, ar parametras būtinas paleidžiant internetinį įrankį. Jei modelio parametras susietas su vienu ar daugiau būtinų įrankio parametrų, &scaron;i reik&scaron;mė bus įjungta ir jos nebus galima redaguoti. Jei visi susieti įrankio parametrai yra neprivalomi, modelio parametrą galima įjungti, kad parametras būtų privalomas, arba i&scaron;jungti, kad parametras būtų neprivalomas. Nustačius, kad parametras būtų privalomas, naudotojas privalės pateikti įvestį, kad galėtų paleisti internetinį įrankį.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Nurodoma, ar bus nustatyta įrankio parametrų įvesčių apribojimų. Filtro parinktys priklauso nuo parametrų tipų, nurodytų toliau:
+            </p>
+            <ul>
+                <li>eilutė &ndash; pasirinkite, kurios unikalios reik&scaron;mės pasiekiamos;
+                </li>
+                <li>elementų sluoksnis &ndash; pasirinkite, kurie elementų tipai pasiekiami;
+                </li>
+                <li>sveikasis skaičius &ndash; nurodykite mažiausią ir didžiausią reik&scaron;mę;
+                </li>
+                <li>dvigubas &ndash; nurodykite mažiausią ir didžiausią reik&scaron;mę.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

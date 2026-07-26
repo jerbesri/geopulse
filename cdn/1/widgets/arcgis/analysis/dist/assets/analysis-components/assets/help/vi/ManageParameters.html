@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Thiết lập cho th&ocirc;ng số m&ocirc; h&igrave;nh khi xuất bản c&ocirc;ng cụ web.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Văn bản n&agrave;y sẽ hiển thị l&agrave;m t&ecirc;n th&ocirc;ng số trong giao diện c&ocirc;ng cụ web. Nh&atilde;n n&ecirc;n ngắn gọn, m&ocirc; tả r&otilde; mục đ&iacute;ch của th&ocirc;ng số v&agrave; được viết bằng ng&ocirc;n ngữ dễ hiểu.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Văn bản n&agrave;y sẽ hiển thị dưới dạng trợ gi&uacute;p cửa sổ pop-up của th&ocirc;ng số v&agrave; sẽ cung cấp th&ocirc;ng tin cho người d&ugrave;ng c&ocirc;ng cụ web về c&aacute;ch điền th&ocirc;ng số c&ocirc;ng cụ. Nội dung n&ecirc;n bao gồm m&ocirc; tả chức năng của th&ocirc;ng số, c&aacute;ch c&aacute;c gi&aacute; trị kh&aacute;c nhau ảnh hưởng đến kết quả của c&ocirc;ng cụ, đầu v&agrave;o được hỗ trợ v&agrave; gi&aacute; trị mặc định nếu cần.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Loại dữ liệu được hỗ trợ cho th&ocirc;ng số. Gi&aacute; trị n&agrave;y được x&aacute;c định bởi loại dữ liệu biến số v&agrave; kh&ocirc;ng thể thay đổi.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>X&aacute;c định th&ocirc;ng số l&agrave; đầu v&agrave;o hay đầu ra. Gi&aacute; trị n&agrave;y được x&aacute;c định bởi th&ocirc;ng số c&ocirc;ng cụ v&agrave; kh&ocirc;ng thể thay đổi.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>X&aacute;c định liệu th&ocirc;ng số c&oacute; gi&aacute; trị mặc định hay kh&ocirc;ng. Khi bật, th&ocirc;ng số sẽ sử dụng gi&aacute; trị mặc định dựa tr&ecirc;n gi&aacute; trị biến số. Khi tắt, th&ocirc;ng số sẽ được để trống theo mặc định. Gi&aacute; trị mặc định c&oacute; thể được sử dụng để định hướng đầu v&agrave;o của người d&ugrave;ng hoặc gi&uacute;p c&ocirc;ng cụ web dễ chạy hơn v&igrave; người d&ugrave;ng kh&ocirc;ng cần phải cập nhật th&ocirc;ng số theo c&aacute;ch thủ c&ocirc;ng.
+            </p>
+            <p>Kh&ocirc;ng n&ecirc;n sử dụng gi&aacute; trị mặc định cho c&aacute;c th&ocirc;ng số m&agrave; bạn c&oacute; thể muốn để trống (v&iacute; dụ: bộ dữ liệu đầu v&agrave;o t&ugrave;y chọn).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Gi&aacute; trị mặc định của th&ocirc;ng số. Để thay đổi gi&aacute; trị mặc định, h&atilde;y cập nhật gi&aacute; trị của biến số trong sơ đồ m&ocirc; h&igrave;nh. Gi&aacute; trị mặc định phải l&agrave; gi&aacute; trị mang lại kết quả ch&iacute;nh x&aacute;c hoặc được ưu ti&ecirc;n trong hầu hết c&aacute;c trường hợp.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>X&aacute;c định c&oacute; y&ecirc;u cầu th&ocirc;ng số để chạy c&ocirc;ng cụ web hay kh&ocirc;ng. Nếu th&ocirc;ng số m&ocirc; h&igrave;nh được kết nối với một hoặc nhiều th&ocirc;ng số c&ocirc;ng cụ bắt buộc, gi&aacute; trị n&agrave;y sẽ bật v&agrave; kh&ocirc;ng thể chỉnh sửa. Nếu tất cả c&aacute;c th&ocirc;ng số c&ocirc;ng cụ được kết nối đều l&agrave; t&ugrave;y chọn, c&oacute; thể bật để th&ocirc;ng số m&ocirc; h&igrave;nh trở th&agrave;nh bắt buộc hoặc tắt th&ocirc;ng số m&ocirc; h&igrave;nh để trở th&agrave;nh t&ugrave;y chọn. Việc bắt buộc phải đặt th&ocirc;ng số sẽ buộc người d&ugrave;ng phải cung cấp đầu v&agrave;o trước khi c&ocirc;ng cụ web c&oacute; thể được chạy.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>X&aacute;c định đầu v&agrave;o th&ocirc;ng số c&ocirc;ng cụ c&oacute; &aacute;p dụng giới hạn hay kh&ocirc;ng. C&aacute;c t&ugrave;y chọn bộ lọc phụ thuộc v&agrave;o loại th&ocirc;ng số, cụ thể như sau:
+            </p>
+            <ul>
+                <li>Chuỗi&mdash;Chọn c&aacute;c gi&aacute; trị duy nhất khả dụng.
+                </li>
+                <li>Lớp đối tượng&mdash;Chọn c&aacute;c loại đối tượng khả dụng.
+                </li>
+                <li>Số nguy&ecirc;n&mdash;Chỉ định gi&aacute; trị tối thiểu v&agrave; tối đa.
+                </li>
+                <li>Số thập ph&acirc;n&mdash;Chỉ định gi&aacute; trị tối thiểu v&agrave; tối đa.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

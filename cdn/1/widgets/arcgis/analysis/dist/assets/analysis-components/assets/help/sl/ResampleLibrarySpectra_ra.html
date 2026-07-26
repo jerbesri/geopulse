@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Orodje Prevzorči knjižnico spektrov prevzorči vhodne spektre knjižnice, da se ujemajo s &scaron;tevilom pasov in valovnim območjem ciljnih spektrov iz ciljnega senzorja, datoteke spektralne knjižnice po meri ali slike po meri.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>Datoteka, ki vsebuje spektrov, ki bodo ponovno vzorčeni. Vhodna knjižnica spektrov mora biti  Esri datoteka knjižnice spektrov (<code>.esl</code>).
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>Ciljni senzor, datoteka knjižnice spektrov po meri ali slika po meri, ki vsebuje ciljne spektre.
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>Datoteka knjižnice spektrov (<code>.esl</code>) ali slika, ki vsebuje ciljne spektre. Če za ciljne spektre uporabljate sliko, mora ta vsebovati podatke o valovni dolžini.
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>Metoda ponovnega vzorčenja, uporabljena za ponovno vzorčenje vhodne datoteke knjižnice spektrov.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Ime ustvarjene datoteke knjižnice spektrov  Esri (<code>.esl</code>).
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Vrsta rezultata, ki bo ustvarjen. Rezultat je lahko plo&scaron;čični slikovni sloj ali dinamični slikovni sloj.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Ime mape v  <b>Moja vsebina</b>, kjer bo shranjen rezultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

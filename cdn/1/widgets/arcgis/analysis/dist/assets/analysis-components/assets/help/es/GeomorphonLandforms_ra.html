@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>La herramienta Formas de suelo geom&oacute;rfonas calcula el patr&oacute;n geomorf&oacute;nico de cada celda de un r&aacute;ster de superficie de entrada y las clasifica en tipos de forma de suelo comunes.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>El r&aacute;ster de elevaci&oacute;n que se utilizar&aacute; para los c&aacute;lculos. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>La unidad de distancia que se utilizar&aacute; para los par&aacute;metros  <b>Distancia de b&uacute;squeda</b> y <b>Distancia de omisi&oacute;n</b>. El valor predeterminado es Celdas.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>La distancia desde la c&eacute;lula objetivo que define el radio del &aacute;rea utilizada para identificar el patr&oacute;n geom&oacute;rfico. El valor predeterminado es 10 celdas.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Distancia desde la celda objetivo donde comienza el &aacute;rea de an&aacute;lisis. Debe ser menor que el valor del par&aacute;metro  <b>Distancia de b&uacute;squeda</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Umbral (en grados) por debajo del cual la celda objetivo se clasificar&aacute; como plana. El valor predeterminado es 1 grado.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>La unidad lineal de los valores z verticales.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>El nombre de la capa r&aacute;ster de formas de suelo que se crear&aacute; y se agregar&aacute; al mapa.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>El nombre de la capa r&aacute;ster de geom&oacute;rfonas que se crear&aacute; y agregar&aacute; al mapa.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>El tipo de salida que se crear&aacute;. La salida puede ser una capa de im&aacute;genes en teselas o una capa de im&aacute;genes din&aacute;micas.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>El nombre de la carpeta de  <b>Mi contenido</b> en la que se guardar&aacute; el resultado.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

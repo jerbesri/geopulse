@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>ライブラリー スペクトルのリサンプリング ツールは、入力ライブラリー スペクトルをリサンプリングして、ターゲット センサー、カスタム スペクトル ライブラリー ファイル、またはカスタム イメージから取得したターゲット スペクトルのバンド数および波長範囲に一致させます。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>リサンプリング対象のスペクトルを含むファイルです。 入力ライブラリー スペクトルは  Esri スペクトル ライブラリー ファイル (<code>.esl</code>)である必要があります。
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>ターゲット センサー、カスタム スペクトル ライブラリー ファイル、またはターゲット スペクトルを含むカスタム画像です。
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>ターゲット スペクトルを含むスペクトル ライブラリー ファイル (<code>.esl</code>) または画像です。 ターゲット スペクトルに画像を使用する場合は、その画像に波長情報が含まれている必要があります。
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>入力スペクトル ライブラリー ファイルのリサンプリングに使用される方法です。
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>作成される  Esri スペクトル ライブラリー ファイル (<code>.esl</code>) の名前です。
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>作成する出力のタイプ。 出力は、タイル イメージ レイヤーまたはダイナミック イメージ レイヤーです。
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>結果を保存する  <b>[マイ コンテンツ]</b> 内のフォルダーの名前。
+            </p>
+        </div>
+    </div>
+</div>
+</html>

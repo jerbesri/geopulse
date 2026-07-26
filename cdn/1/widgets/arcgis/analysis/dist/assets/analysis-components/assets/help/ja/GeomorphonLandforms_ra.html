@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Geomorphon 地形ツールは、入力サーフェス ラスターの各セルの Geomorphon パターンを計算し、一般的な地形タイプに分類します。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>計算で使用する標高ラスター。 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p> <b>[検索距離]</b> および <b>[スキップ距離]</b> パラメーターで使用される距離単位。 デフォルトは [セル] です。
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Geomorphon パターンの識別に使用されるエリアの半径を定義する、ターゲット セルからの距離。 デフォルトは 10 個のセルです。
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>解析エリアが始まるターゲット セルからの距離。  <b>[検索距離]</b> パラメーター値より小さくなければなりません。
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>ターゲット セルが平地として分類される閾値 (度)。 デフォルトは 1 度です。
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>鉛直方向の Z 値の距離単位。
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>作成され、マップに追加される地形ラスター レイヤーの名前。
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>作成され、マップに追加される Geomorphon ラスター レイヤーの名前。
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>作成する出力のタイプ。 出力は、タイル イメージ レイヤーまたはダイナミック イメージ レイヤーです。
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>結果を保存する  <b>[マイ コンテンツ]</b> 内のフォルダーの名前。
+            </p>
+        </div>
+    </div>
+</div>
+</html>

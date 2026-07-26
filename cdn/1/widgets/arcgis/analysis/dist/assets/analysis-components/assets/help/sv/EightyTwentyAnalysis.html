@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>80-20-analysverktyget identifierar platser d&auml;r en oproportionerligt stor andel av h&auml;ndelser intr&auml;ffar med hj&auml;lp av Pareto-analys (80/20).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Punktlagret som ska anv&auml;ndas f&ouml;r att ber&auml;kna de platser d&auml;r h&auml;ndelser intr&auml;ffar oproportionerligt.
+            </p>
+            <p class="toolPaneOnly">Antalet geoobjekt beror p&aring; ytterligare faktorer som filtreringskriterier och analysutbredningen.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Anger om indatapunkterna aggregeras med klustringsmetoden Definierat avst&aring;nd (DBSCAN) (<b>Punktkluster</b>) eller en indataj&auml;mf&ouml;relselinje eller ett polygongeoobjekt (<b>N&auml;rmaste geoobjekt</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Det maximala avst&aring;ndet vid vilket punkter anses ing&aring; i samma kluster. Om ingen klustertolerans har angivits skapar verktyget ett kluster d&auml;r punktgeoobjekt &ouml;verlappar varandra.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Linje- eller polygonlagret som anv&auml;nds f&ouml;r att aggregera punkter efter det n&auml;rmaste geoobjektet.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>F&auml;ltet fr&aring;n indatapunkterna och j&auml;mf&ouml;relsegeoobjekten som ska anv&auml;ndas f&ouml;r att matcha n&auml;rmaste geoobjekt. Endast poster fr&aring;n indatageoobjekten som matchar f&auml;ltv&auml;rden med j&auml;mf&ouml;relsegeoobjekten inkluderas i utdata.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>De f&auml;lt fr&aring;n indatageoobjekten som &ouml;verf&ouml;rs till utdata.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Namnet p&aring; lagret som skapas och l&auml;ggs till i kartan.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Namnet p&aring; mappen i  <b>Mitt inneh&aring;ll</b> d&auml;r resultatet ska sparas.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

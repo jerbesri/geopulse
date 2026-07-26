@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Pengaturan parameter model saat memublikasikan alat web.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Teks ini akan muncul sebagai nama parameter di antarmuka alat web. Label harus singkat, menjelaskan tujuan parameter, dan ditulis dalam bahasa yang mudah dipahami.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Teks ini akan muncul sebagai bantuan pop-up parameter dan akan memberikan informasi kepada pengguna alat web tentang cara mengisi parameter alat tersebut. Sertakan deskripsi tentang fungsi parameter, cara nilai yang berbeda memengaruhi hasil alat, input yang didukung, dan nilai default jika diperlukan.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Jenis data yang didukung untuk parameter. Nilai ini ditentukan oleh jenis data variabel dan tidak dapat diubah.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Menentukan apakah parameter merupakan input atau output. Nilai ini ditentukan oleh parameter alat dan tidak dapat diubah.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Menentukan apakah parameter memiliki nilai default. Saat diaktifkan, parameter akan menggunakan nilai default berdasarkan nilai variabel. Saat dinonaktifkan, parameter tersebut akan kosong secara default. Nilai default dapat digunakan sebagai panduan bagi input pengguna atau untuk mempermudah eksekusi alat web karena pengguna tidak perlu memperbarui parameter secara manual.
+            </p>
+            <p>Nilai default sebaiknya tidak digunakan untuk parameter yang ingin Anda kosongkan (misalnya, kumpulan data input opsional).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Nilai default untuk parameter. Untuk mengubah nilai default, perbarui nilai variabel dalam diagram model. Nilai default harus berupa nilai yang akan memberikan hasil yang akurat atau yang lebih disukai dalam sebagian besar kasus.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Menentukan apakah parameter ini wajib diisi untuk menjalankan alat web. Jika parameter model terhubung ke satu atau beberapa parameter alat yang bersifat wajib, nilai ini akan diaktifkan secara otomatis dan tidak dapat diedit. Jika semua parameter alat yang terhubung bersifat opsional, parameter model dapat diaktifkan untuk menjadikan parameter tersebut wajib atau dinonaktifkan untuk menjadikannya opsional. Menjadikan parameter sebagai wajib akan mengharuskan pengguna untuk memberikan input sebelum alat web dapat dijalankan.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Menentukan apakah input parameter alat akan memiliki batasan. Opsi filter bergantung pada jenis parameter sebagai berikut:
+            </p>
+            <ul>
+                <li>String&mdash;Pilih nilai unik mana yang tersedia.
+                </li>
+                <li>Feature layer&mdash;Pilih jenis fitur mana yang tersedia.
+                </li>
+                <li>Bilangan bulat&mdash;Tentukan nilai minimal dan maksimal.
+                </li>
+                <li>Ganda&mdash;Tentukan nilai minimal dan maksimal.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

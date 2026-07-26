@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Modeļa parametru iestatījumi, publicējot tīmekļa rīku.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>&Scaron;is teksts tiks parādīts kā parametra nosaukums tīmekļa rīka saskarnē. Kartes tekstam jābūt īsam, apraksto&scaron;am attiecībā uz parametra mērķi un uzrakstītam vienkār&scaron;ā valodā.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>&Scaron;is teksts tiks parādīts kā parametra uznirsto&scaron;ais palīdzības logs un sniegs tīmekļa rīka lietotājam informāciju par to, kā aizpildīt rīka parametru. Iekļaujiet parametra darbības aprakstu, to, kā dažādas vērtības ietekmē rīka rezultātus, atbalstītās ievades vērtības un noklusējuma vērtības pēc nepiecie&scaron;amības.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Parametra atbalstītais datu tips. &Scaron;o vērtību nosaka mainīgais datu tips, un to nevar mainīt.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Norāda, vai parametrs ir ievade vai izvade. &Scaron;o vērtību nosaka rīka parametrs, un to nevar mainīt.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Nosaka, vai parametram ir noklusējuma vērtība. Ja ieslēgts, parametrs izmantos noklusēto vērtību, kas balstīta uz mainīgā vērtību. Ja izslēgts, parametrs pēc noklusējuma būs tuk&scaron;s. Noklusējuma vērtību var izmantot, lai vadītu lietotāja ievadi vai atvieglotu tīmekļa rīka darbību, jo lietotājam nav jāatjaunina parametrs manuāli.
+            </p>
+            <p>Noklusējuma vērtības nevajadzētu izmantot parametriem, kurus varētu vēlēties atstāt tuk&scaron;us (piemēram, izvēles ievades datu kopai).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Parametra noklusējuma vērtība. Lai mainītu noklusējuma vērtību, atjauniniet mainīgā vērtību modeļa diagrammā. Noklusējuma vērtībai jābūt tādai, kas lielākajā daļā gadījumu nodro&scaron;ina precīzu vai vēlamo rezultātu.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Nosaka, vai parametrs ir obligāts, lai palaistu tīmekļa rīku. Ja modeļa parametrs ir savienots ar vienu vai vairākiem obligātiem rīka parametriem, &scaron;ī vērtība tiks ieslēgta un to nevarēs mainīt. Ja visi pievienotā rīka parametri ir izvēles, modeļa parametru var ieslēgt, lai parametrs būtu obligāts, vai izslēgt, lai parametrs būtu izvēles. Ja parametrs būs obligāts, lietotājam būs jāveic ievade, pirms tīmekļa rīka palai&scaron;anas.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Norāda, vai rīka parametru ievadei tiks piemēroti ierobežojumi. Filtra opcijas ir atkarīgas no parametra veida &scaron;ādi:
+            </p>
+            <ul>
+                <li>Teksts&mdash;izvēlieties, kuras unikālās vērtības ir pieejamas.
+                </li>
+                <li>Elementu slānis&ndash;izvēlieties, kuri elementu veidi ir pieejami.
+                </li>
+                <li>Vesels skaitlis&ndash;norādiet minimālo un maksimālo vērtību.
+                </li>
+                <li>Dubults&ndash;norādiet minimālo un maksimālo vērtību.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

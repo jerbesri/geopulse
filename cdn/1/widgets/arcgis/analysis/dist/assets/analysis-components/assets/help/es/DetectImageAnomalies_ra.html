@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>La herramienta Detectar anomal&iacute;as de imagen crea un r&aacute;ster de puntuaci&oacute;n de anomal&iacute;as a partir de una imagen hiperespectral o multibanda de entrada. El r&aacute;ster de puntuaci&oacute;n de anomal&iacute;as es un r&aacute;ster de banda &uacute;nica, con valores entre cero y uno.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Imagen hiperespectral o multibanda que contiene las anomal&iacute;as que se van a detectar.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>M&eacute;todo utilizado para detectar anomal&iacute;as.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>Capa de entidades de pol&iacute;gonos que define la regi&oacute;n utilizada para calcular estad&iacute;sticas de fondo. Este par&aacute;metro solo aparece si  <b>M&eacute;todo de c&aacute;lculo de anomal&iacute;as</b> est&aacute; establecido en <b>RXD</b> o <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>Especifica si las estad&iacute;sticas se vuelven a calcular para el r&aacute;ster de entrada cuando  <b>M&eacute;todo de c&aacute;lculo de anomal&iacute;as</b> est&aacute; establecido en <b>RXD</b> o <b>UTD</b>, que requieren estad&iacute;sticas precisas para llevarse a cabo. De estar activado, se volver&aacute;n a calcular las estad&iacute;sticas del r&aacute;ster de entrada. Si se desactiva, las estad&iacute;sticas no se recalculan.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>N&uacute;mero de cl&uacute;steres a utilizar si  <b>M&eacute;todo de c&aacute;lculo de anomal&iacute;as</b> est&aacute; establecido en <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>El nombre de la capa que se crear&aacute; y se agregar&aacute; al mapa.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>El tipo de salida que se crear&aacute;. La salida puede ser una capa de im&aacute;genes en teselas o una capa de im&aacute;genes din&aacute;micas.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>El nombre de la carpeta de  <b>Mi contenido</b> en la que se guardar&aacute; el resultado.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

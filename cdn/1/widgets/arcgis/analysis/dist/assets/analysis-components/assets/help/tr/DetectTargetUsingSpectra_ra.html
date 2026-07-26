@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Spektrumları Kullanarak Hedef Algıla aracı, girdi rasterdaki her piksel i&ccedil;in piksel spektrumunun bir girdi spektral imza dosyasında tanımlanan hedef spektrumlarla ne kadar iyi eşleştiğine bağlı olarak bir eşleşme puanı hesaplar.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Tespit edilecek hedef pikselleri i&ccedil;eren &ccedil;ok bantlı raster.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Girdi spektral imza dosyasının dosya t&uuml;r&uuml;.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>Hedef spektrumu i&ccedil;eren spektral imza dosyası.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Girdi raster ile spektral imza dosyası arasındaki eşleşme puanlarını hesaplamak i&ccedil;in kullanılan y&ouml;ntem.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Spektrumların normalleştirilip normalleştirilmeyeceğini belirtir; bu işlem bir g&ouml;r&uuml;nt&uuml; veya referans veriler kullanılarak ger&ccedil;ekleştirilebilir. İşaretlenmezse, spektrumlar normalleştirilmez. İşaretlenirse, spektrumlar normalleştirilir.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Oluşturulan ve g&ouml;r&uuml;nt&uuml;lenen eşleşme puanı rasterını i&ccedil;eren katmanın adı.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Oluşturulacak &ccedil;ıktının t&uuml;r&uuml;. &Ccedil;ıktı, d&ouml;şemeli g&ouml;r&uuml;nt&uuml; katmanı veya dinamik g&ouml;r&uuml;nt&uuml; katmanı olabilir.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p> <b>İ&ccedil;eriğim</b> i&ccedil;inde sonucun kaydedileceği klas&ouml;r&uuml;n adı.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

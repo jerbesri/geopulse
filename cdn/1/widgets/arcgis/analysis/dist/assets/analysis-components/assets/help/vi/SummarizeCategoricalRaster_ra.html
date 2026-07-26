@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>C&ocirc;ng cụ T&oacute;m tắt Raster Ph&acirc;n loại l&agrave; c&ocirc;ng cụ ph&acirc;n t&iacute;ch raster tạo ra một bảng chứa số lượng pixel của từng danh mục trong mỗi l&aacute;t cắt của raster ph&acirc;n loại đa chiều đầu v&agrave;o.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>X&aacute;c định raster ph&acirc;n loại cần được t&oacute;m tắt. Raster ph&acirc;n loại đầu v&agrave;o phải l&agrave; loại số nguy&ecirc;n.
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>X&aacute;c định g&oacute;c độ được sử dụng để t&oacute;m tắt raster đầu v&agrave;o. Nếu c&oacute; nhiều hơn một g&oacute;c độ v&agrave; kh&ocirc;ng c&oacute; gi&aacute; trị n&agrave;o được chỉ định, tất cả c&aacute;c l&aacute;t cắt sẽ được t&oacute;m tắt bằng mọi tổ hợp gi&aacute; trị của g&oacute;c độ.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>X&aacute;c định lớp đối tượng v&ugrave;ng chứa khu vực hoặc c&aacute;c khu vực quan t&acirc;m cần sử dụng khi t&iacute;nh số lượng pixel mỗi danh mục. Nếu kh&ocirc;ng chỉ định khu vực quan t&acirc;m, to&agrave;n bộ bộ dữ liệu raster sẽ được sử dụng trong ph&acirc;n t&iacute;ch.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>X&aacute;c định trường trong lớp đối tượng v&ugrave;ng d&ugrave;ng để x&aacute;c định từng khu vực quan t&acirc;m.
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>T&ecirc;n của lớp sẽ được tạo v&agrave; th&ecirc;m v&agrave;o bản đồ.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>T&ecirc;n của thư mục trong  <b>Nội dung của t&ocirc;i</b> sẽ lưu trữ kết quả.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

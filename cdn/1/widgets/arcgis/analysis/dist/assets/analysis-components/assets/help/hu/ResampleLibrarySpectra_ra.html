@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Az Oszt&aacute;lyk&ouml;nyvt&aacute;r spektrumainak &uacute;jramintav&eacute;telez&eacute;se eszk&ouml;z &uacute;jramintav&eacute;telezi a bemeneti oszt&aacute;lyk&ouml;nyvt&aacute;r-spektrumokat, hogy azok megfeleljenek a c&eacute;lszenzorb&oacute;l, az egy&eacute;ni spektr&aacute;lis oszt&aacute;lyk&ouml;nyvt&aacute;r-f&aacute;jlb&oacute;l vagy az egy&eacute;ni k&eacute;pből sz&aacute;rmaz&oacute; c&eacute;lspektrumok hull&aacute;mhossztartom&aacute;nyai sz&aacute;m&aacute;nak &eacute;s hull&aacute;mhossztartom&aacute;ny&aacute;nak.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>Az &uacute;jramintav&eacute;telezendő spektrumokat tartalmaz&oacute; f&aacute;jl. A bemeneti oszt&aacute;lyk&ouml;nyvt&aacute;r-spektrumoknak  Esri spektr&aacute;lis oszt&aacute;lyk&ouml;nyvt&aacute;rf&aacute;jlnak (<code>.esl</code>) kell lenni&uuml;k.
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>A c&eacute;lspektrumokat tartalmaz&oacute; c&eacute;lszenzor, egy&eacute;ni spektr&aacute;lis oszt&aacute;lyk&ouml;nyvt&aacute;rf&aacute;jl vagy egy&eacute;ni k&eacute;p.
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>A c&eacute;lspektrumokat tartalmaz&oacute; spektr&aacute;lis oszt&aacute;lyk&ouml;nyvt&aacute;rf&aacute;jl (<code>.esl</code>) vagy k&eacute;p. Ha k&eacute;pet haszn&aacute;l a c&eacute;lspektrumokhoz, annak hull&aacute;mhossz-inform&aacute;ci&oacute;t kell tartalmaznia.
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>A bemeneti spektr&aacute;lis oszt&aacute;lyk&ouml;nyvt&aacute;rf&aacute;jl &uacute;jramintav&eacute;telez&eacute;s&eacute;hez haszn&aacute;lt &uacute;jramintav&eacute;telez&eacute;si met&oacute;dus.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>A l&eacute;trehozott  Esri spektr&aacute;lis oszt&aacute;lyk&ouml;nyvt&aacute;r-f&aacute;jl (<code>.esl</code>) neve.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>A l&eacute;trej&ouml;vő kimenet t&iacute;pusa. A kimenet csemp&eacute;zett t&aacute;v&eacute;rz&eacute;kel&eacute;si r&eacute;teg vagy pedig dinamikus t&aacute;v&eacute;rz&eacute;kel&eacute;si r&eacute;teg lehet.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>A  <b>Saj&aacute;t tartalom</b> azon mapp&aacute;j&aacute;nak neve, ahov&aacute; az eredm&eacute;ny ment&eacute;se t&ouml;rt&eacute;nik.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

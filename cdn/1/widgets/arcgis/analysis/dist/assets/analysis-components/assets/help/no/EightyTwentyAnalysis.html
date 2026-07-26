@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Verkt&oslash;yet 80-20-analyse identifiserer lokasjoner hvor en uvanlig stor andel av hendelser skjer ved hjelp av Pareto (80/20)-analyse.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Punktlaget som brukes til &aring; beregne lokasjonen der hendelsene skjer.
+            </p>
+            <p class="toolPaneOnly">Antallet geoobjekter avhenger av flere faktorer, blant annet filtreringskriterier og analysens utstrekning.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Spesifiserer om inndatapunktene skal aggregeres med Definert avstand (DBSCAN)-grupperingsmetodne (<b>Punktgruppe</b>) eller inng&aring;ende sammenligningslinje eller et polygongeoobjekt (<b>N&aelig;rmeste geoobjekt</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Den maksimale avstanden som punktene skal regnes som en del av samme gruppe ved. Hvis det ikke er oppgitt noen grupperingstoleranse, oppretter verkt&oslash;yet en gruppe der punktgeoobjektene overlapper.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Linje- eller polygonlaget som brukes til &aring; aggregere punkter ved det n&aelig;rmeste geoobjektet.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Feltet fra inndatapunktene og sammenligningsgeoobjektene som skal brukes til &aring; matche med de n&aelig;rmeste geoobjektene. Bare poster fra inndatageoobjektene som matcher feltverdier med sammenligningsgeoobjektet, blir med i utdataene.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Feltene fra inndatageoobjektene som blir overf&oslash;rt til utdataene.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Navnet p&aring; laget som opprettes og legges til kartet.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Navnet p&aring; mappen i  <b>Mitt innhold</b> der resultatet blir lagret.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

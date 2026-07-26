@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Инструмент Анализ 80-20 определяет местоположения, в которых происходит непропорционально большая доля инцидентов, используя анализ по Парето (80/20).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Точечный слой, который будет использоваться для вычисления местоположений, где происходит непропорционально большая доля инцидентов.
+            </p>
+            <p class="toolPaneOnly">Количество объектов зависит от дополнительных факторов, таких как критерии фильтрации и экстент анализа.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Указывает, будут ли входные точки агрегироваться с использованием метода кластеризации с заданным расстоянием (DBSCAN) (<b>Точечный кластер</b>) или с использованием входных линейных или полигональных объектов сравнения (<b>Ближайший объект</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Максимальное расстояние, на котором точки будут считаться частью одного кластера. Если кластерный допуск не указан, инструмент создаст кластер, в котором точечные объекты будут перекрываться.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Линейный или полигональный слой, используемый для агрегирования точек по ближайшему объекту.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Поле из входных точек и объектов сравнения, которые будут использоваться для сопоставления ближайших объектов. В выходные данные будут включены только те записи из входных объектов, значения полей которых соответствуют значениям объектов сравнения.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Поля из входных объектов, которые будут перенесены в выходные данные.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Имя слоя, который будет создан и добавлен на карту.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Имя папки в разделе  <b>Мои ресурсы</b>, в которую будет сохранен результат.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

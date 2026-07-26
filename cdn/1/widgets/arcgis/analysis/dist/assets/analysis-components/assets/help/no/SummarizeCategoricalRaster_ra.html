@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Verkt&oslash;yet Summarize Categorical Raster er et rasteranalyseverkt&oslash;y som genererer en tabell som inneholder antall piksler for hver kategori i hvert snitt av et flerdimensjonalt kategorisk raster.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>Spesifiserer det kategoriske rasteret som skal summeres. Inndata-rasterkategorien m&aring; v&aelig;re av typen heltall.
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>Spesifiserer dimensjonen som brukes til &aring; summere inndatarasteret. Hvis det er flere enn &eacute;n dimensjon og ingen verdi er angitt, blir hvert snitt summert med alle kombinasjoner av dimensjonsverdier.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>Spesifiserer polygongeoobjektlaget som inneholder omr&aring;det eller interesseomr&aring;det som skal brukes ved beregning av pikselantallet per kategori. Hvis det ikke er angitt noe interesseomr&aring;de, brukes hele rasterdatasettet i analysen.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>Spesifiserer feltet i polygongeoobjektet som definerer hvert interesseomr&aring;de.
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>Navnet p&aring; laget som opprettes og legges til kartet.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Navnet p&aring; mappen i  <b>Mitt innhold</b> der resultatet blir lagret.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

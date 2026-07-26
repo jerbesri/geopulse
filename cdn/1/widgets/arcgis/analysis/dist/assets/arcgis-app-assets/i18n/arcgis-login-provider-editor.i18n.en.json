@@ -1,0 +1,162 @@
+{
+  "dialogHeading": "Change login type",
+  "chooseLoginType": "Choose login type",
+  "selectMembers": "Select members",
+  "userDetails": "User details",
+  "reauth": "Re-authenticate",
+  "confirmComplete": "Confirm and complete",
+  "next": "Next",
+  "back": "Back",
+  "cancel": "Cancel",
+  "close": "Close",
+  "changeLogins": "Change logins",
+  "acknowledgeImpact": "I acknowledge and understand the impact of this change.",
+  "propertiesHeading": "Specify new login details for the following members",
+  "chooseFile": "Choose a different file",
+  "mustAcknowledge": "You must acknowledge the impact of this change before proceeding.",
+  "confirmLeave": {
+    "title": "Cancel changes",
+    "message1": "You have unsaved changes.",
+    "message2": "Are you sure you want to cancel the changes?",
+    "remain": "Continue editing",
+    "leave": "Exit without saving"
+  },
+  "methodSelection": {
+    "arcgisLogin": "ArcGIS login",
+    "chooseLoginModify": "Choose how to modify logins",
+    "changeType": "Change login type",
+    "selectType": "Select the current login type to work with",
+    "changeTypeDescription": "Change organization-specific IDs between OpenID Connect, SAML, or ArcGIS logins.",
+    "keepType": "Keep login type",
+    "keepTypeDescription": "Update an OpenID Connect or SAML ID and email address without changing the login type.",
+    "currentType": "Current login type",
+    "newType": "New login type",
+    "select": "Select",
+    "samlLogin": "{name} (SAML login)",
+    "oidcLogin": "{name} (OpenID Connect login)",
+    "oldSaml": "Previous SAML login",
+    "oldOidc": "Previous OIDC login",
+    "enterpriseOverwrite": "Depending on your enterprise login provider settings, the email address may be overwritten with the value from your identity provider.",
+    "generateMissingPasswords": "When changing to ArcGIS login, temporary passwords will be automatically generated if they have not been specified. They will be displayed in the user details step.",
+    "errors": {
+      "loginTypes": "Both current and new login types must be selected.",
+      "currentLoginType": "Current login type is required and must be selected.",
+      "sameLoginType": "The new login type must be different from the current login type."
+    }
+  },
+  "memberSelection": {
+    "selectionMethod": "Member selection method",
+    "howToSelect": "How do you want to select members?",
+    "bulkUpload": "Bulk upload (CSV)",
+    "chooseAFile": "Choose a file to upload in the next step.",
+    "manualSelection": "Manual selection",
+    "selectMembers": "Select members from a list in the next step.",
+    "selectFromFile": "Select members from a CSV file",
+    "dragDrop": "Drag and drop your file or choose from your device.",
+    "headerInstructions": "Header (first row) should contain field names exactly as they appear below.",
+    "fieldOrder": "The field order may vary.",
+    "yourDevice": "Your device",
+    "downloadTemplate": "Download CSV template",
+    "requiredFields": "Required fields",
+    "optionalFields": "Optional fields",
+    "passwordTooltip": "A temporary password will be automatically generated if one is not provided.",
+    "excessTitleCsv": "CSV exceeds the 5,000 member limit",
+    "excessBatchLimit": "You can update login types for up to 5,000 members per batch.",
+    "excessBodyCsv": "To process more than 5,000 members, split your CSV into multiple smaller files and upload them separately.",
+    "learnMore": "Learn more",
+    "errors": {
+      "fileType": "Invalid file type. Please upload a CSV file.",
+      "fileSize": "File size exceeds 500 KB and may not be processed efficiently.",
+      "noMembers": "No members selected. Please select members or upload a CSV file to continue.",
+      "tooManyMembers": "Selection exceeds the 5,000 member limit."
+    }
+  },
+  "fieldNames": {
+    "email": "Email",
+    "username": "ArcGIS username",
+    "password": "Temporary password",
+    "samlId": "SAML ID",
+    "oidcId": "OIDC ID",
+    "oldSamlId": "Previous SAML ID",
+    "oldOidcId": "Previous OIDC ID",
+    "success": "Success",
+    "error": "Error",
+    "fromLoginType": "Initial login type",
+    "toLoginType": "New login type"
+  },
+  "authentication": {
+    "header": "Re-authentication required",
+    "reauthSteps": "Re-authentication steps",
+    "step1_label": "Step 1: Sign in (new window)",
+    "step1_desc": "A new window will appear for you to sign in.",
+    "step2_label": "Step 2: Copy the authentication key",
+    "step2_desc": "You'll be given an authentication key to copy.",
+    "step3_label": "Step 3: Paste the authentication key",
+    "step3_desc": "Enter the authentication key to continue.",
+    "openWindow": "Open a new window to re-authenticate",
+    "authKey": "Authentication key",
+    "paste": "Paste",
+    "getNewKey": "Generate new key",
+    "hide": "Hide",
+    "show": "Show",
+    "errors": {
+      "clipboard": "Failed to read from clipboard",
+      "authKey": "A valid authentication key is required"
+    }
+  },
+  "usersTable": {
+    "asc": "Alphabetical",
+    "desc": "Reverse alphabetical",
+    "sortBy": "Sort by",
+    "sortDirection": "Sort direction",
+    "searchMembers": "Search for members in this list",
+    "memberDetails": "Member details for change login provider operation",
+    "optional": "(optional)",
+    "fieldErrors": "Field errors",
+    "noErrors": "No errors",
+    "noData": "No data available",
+    "noMembersMatch": "No members match your search criteria",
+    "togglePassword": "Toggle password visibility",
+    "memberCount": "{start} - {end} of {total}",
+    "errors": {
+      "email": "Email is required",
+      "username": "ArcGIS username is required",
+      "password": "Temporary password is required",
+      "samlId": "SAML ID is required",
+      "oidcId": "OIDC ID is required"
+    }
+  },
+  "review": {
+    "heading": "Review the changes",
+    "loginsWillChange": "The following accounts will change from {fromLogin} to {toLogin}",
+    "downloadCsv": "Download CSV of changes",
+    "providerTypes": {
+      "saml": "SAML logins",
+      "oidc": "OpenID Connect logins",
+      "arcgis": "ArcGIS account logins"
+    },
+    "missingRequired": "Required information is missing. Fill in the missing information before proceeding."
+  },
+  "progress": {
+    "processing": "Processing... {current} of {total} users.",
+    "percentComplete": "Percent complete",
+    "doNotClose": "Please do not close the browser.",
+    "extendedTime": "This could take up to 10 minutes, please be patient.",
+    "extendedTime10": "This could take more than 10 minutes, please be patient.",
+    "extendedTime15": "This could take more than 15 minutes, please be patient.",
+    "label": "Progress indicator for changing login types",
+    "errors": {
+      "authkey": {
+        "title": "Invalid authentication key",
+        "body1": "The authentication key you have entered is invalid.",
+        "body2": "Please re-enter a valid authentication key.",
+        "action": "Re-enter authentication key",
+        "cancel": "Cancel"
+      },
+      "unknown": "An error occurred during the provider change process. Please try again or contact support if the issue persists.",
+      "userNotFound": "Username not found",
+      "idpUsernameNotMatching": "Username does not match",
+      "providerNotMatching": "Unable to change login" 
+    }
+  }
+}

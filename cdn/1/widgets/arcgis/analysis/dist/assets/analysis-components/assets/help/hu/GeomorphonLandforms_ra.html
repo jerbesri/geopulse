@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>A Geomorphon felsz&iacute;ni form&aacute;k eszk&ouml;z kisz&aacute;m&iacute;tja egy bemeneti felsz&iacute;ni raszter minden egyes cell&aacute;j&aacute;nak geomorphon-mint&aacute;zat&aacute;t, &eacute;s azokat gyakori felsz&iacute;niforma-t&iacute;pusokba sorolja.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>A sz&aacute;m&iacute;t&aacute;sokhoz haszn&aacute;lt magass&aacute;gi raszter. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>A  <b>Keres&eacute;si t&aacute;vols&aacute;g</b> &eacute;s a <b>Kihagy&aacute;si t&aacute;vols&aacute;g</b> param&eacute;terekhez haszn&aacute;land&oacute; t&aacute;vols&aacute;g-m&eacute;rt&eacute;kegys&eacute;g. Az alap&eacute;rtelmez&eacute;s a Cell&aacute;k.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>A c&eacute;lcell&aacute;t&oacute;l m&eacute;rt t&aacute;vols&aacute;g, amely meghat&aacute;rozza annak a ter&uuml;letnek a sugar&aacute;t, amelyet a rendszer a geomorphon-mint&aacute;zat azonos&iacute;t&aacute;s&aacute;hoz haszn&aacute;l. Az alap&eacute;rtelmez&eacute;s a 10 cella.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Az a t&aacute;vols&aacute;g a c&eacute;lcell&aacute;t&oacute;l, ahol az elemz&eacute;si ter&uuml;let kezdődik. A  <b>Keres&eacute;si t&aacute;vols&aacute;g</b> param&eacute;ter &eacute;rt&eacute;k&eacute;n&eacute;l kisebbnek kell lennie.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Az a k&uuml;sz&ouml;b&eacute;rt&eacute;k (fokban), amely alatt a c&eacute;lcella s&iacute;k ter&uuml;letk&eacute;nt lesz oszt&aacute;lyozva. Az alap&eacute;rtelmez&eacute;s az 1 fok.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>A f&uuml;ggőleges z &eacute;rt&eacute;kek line&aacute;ris egys&eacute;ge.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>A l&eacute;trehozni &eacute;s a t&eacute;rk&eacute;phez hozz&aacute;adni k&iacute;v&aacute;nt felsz&iacute;ni form&aacute;k raszteres r&eacute;teg&eacute;nek a neve.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>A l&eacute;trehozni &eacute;s a t&eacute;rk&eacute;phez hozz&aacute;adni k&iacute;v&aacute;nt geomorphonok raszteres r&eacute;teg&eacute;nek a neve.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>A l&eacute;trej&ouml;vő kimenet t&iacute;pusa. A kimenet csemp&eacute;zett t&aacute;v&eacute;rz&eacute;kel&eacute;si r&eacute;teg vagy pedig dinamikus t&aacute;v&eacute;rz&eacute;kel&eacute;si r&eacute;teg lehet.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>A  <b>Saj&aacute;t tartalom</b> azon mapp&aacute;j&aacute;nak neve, ahov&aacute; az eredm&eacute;ny ment&eacute;se t&ouml;rt&eacute;nik.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

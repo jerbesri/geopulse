@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>L&rsquo;outil Geomorphon Landforms (Reliefs de type G&eacute;omorphon) calcule le mod&egrave;le de g&eacute;omorphon de chaque cellule d&rsquo;un raster de surface en entr&eacute;e et les classe en types de reliefs communs.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>Raster d&rsquo;altitude &agrave; utiliser pour les calculs. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>Unit&eacute; de distance utilis&eacute;e pour les param&egrave;tres  <b>Search distance (Distance de recherche)</b> et <b>Skip distance (Distance omise)</b>. La valeur par d&eacute;faut est Cells (Cellules).
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Distance &agrave; partir de la cellule cible qui d&eacute;finit le rayon de la zone utilis&eacute;e pour identifier le mod&egrave;le de g&eacute;omorphon. La valeur par d&eacute;faut est 10&nbsp;cellules.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Distance s&eacute;parant la cellule cible du d&eacute;but de la zone d&rsquo;analyse. Elle doit &ecirc;tre inf&eacute;rieure &agrave; la valeur du param&egrave;tre  <b>Search distance (Distance de recherche)</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Seuil (en degr&eacute;s) sous lequel la cellule cible est class&eacute;e comme plate. La valeur par d&eacute;faut est 1&nbsp;degr&eacute;.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Unit&eacute; lin&eacute;aire des valeurs&nbsp;z verticales.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>Nom de la couche raster de reliefs &agrave; cr&eacute;er et ajouter &agrave; la carte.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>Nom de la couche raster de g&eacute;omorphons en sortie &agrave; cr&eacute;er et ajouter &agrave; la carte.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Type de sortie &agrave; cr&eacute;er. La sortie peut &ecirc;tre une couche d&rsquo;imagerie tuil&eacute;e ou une couche d&rsquo;imagerie dynamique.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>Nom du dossier de  <b>My content (Mon contenu)</b> dans lequel est enregistr&eacute; le r&eacute;sultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

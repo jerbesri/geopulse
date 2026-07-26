@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>發佈 Web 工具時的模型參數設定。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>此文字將在 Web 工具介面中顯示為參數名稱。 標籤應簡短、清楚說明參數的用途，並以淺顯易懂的語言撰寫。
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>此文字將顯示為參數的快顯說明，為 Web 工具使用者提供關於如何設定工具參數的資訊。 包括敘述參數的功能、不同的值對工具結果有何影響、支援的輸入，以及預設值(如有需要)。
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>參數支援的資料類型。 此值由變數的資料類型決定，無法變更。
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>指定參數為輸入還是輸出類型。 此值由工具參數決定，無法變更。
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>指定參數是否有預設值。 開啟時，參數將使用以變數值為基礎的預設值。 關閉時，參數預設為空值。 預設值可用來引導使用者輸入，或讓 Web 工具更容易執行，因為使用者不需要手動設定參數。
+            </p>
+            <p>對於可能希望留空的參數(例如，選用的輸入資料集)，不應使用預設值。
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>參數的預設值。 若要變更預設值，請更新模型圖中變數的值。 預設值應是在大多數情況下皆能產生準確或理想結果的值。
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>指定執行 Web 工具時是否必須輸入該參數。 如果模型參數連接到一或多個必要的工具參數，則此值將自動啟用且無法編輯。 如果所有連接的工具參數都是選用，則可啟用模型參數使其成為必要參數，或將其停用使其成為選用參數。 若將參數設為必要參數，則會強制使用者輸入內容，Web 工具才能執行。
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>指定工具參數輸入是否設有限制。 篩選器選項取決於參數類型，如下所述：
+            </p>
+            <ul>
+                <li>字串 &mdash; 選擇可用的唯一值。
+                </li>
+                <li>圖徵圖層 &mdash; 選擇可用的圖徵類型。
+                </li>
+                <li>整數 &mdash; 指定最小值和最大值。
+                </li>
+                <li>雙精度 &mdash; 指定最小值和最大值。
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

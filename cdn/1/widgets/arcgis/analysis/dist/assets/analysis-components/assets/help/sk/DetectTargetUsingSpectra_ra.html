@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>N&aacute;stroj Detekovať cieľ pomocou Spectra vypoč&iacute;ta sk&oacute;re zhody pre každ&yacute; pixel vo vstupnom rastri na z&aacute;klade toho, ako dobre spektrum pixela zodpoved&aacute; cieľov&yacute;m spektr&aacute;m definovan&yacute;m vo vstupnom s&uacute;bore spektr&aacute;lneho vzoru.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Multip&aacute;smov&yacute; raster obsahuj&uacute;ci cieľov&eacute; pixely na detekciu.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Typ vstupn&eacute;ho s&uacute;boru spektr&aacute;lneho vzoru.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>S&uacute;bor spektr&aacute;lneho vzoru obsahuj&uacute;ci cieľov&eacute; spektr&aacute;.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Met&oacute;da použit&aacute; na v&yacute;počet sk&oacute;re zhody medzi vstupn&yacute;m rastrom a s&uacute;borom spektr&aacute;lneho vzoru.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Určuje, či sa spektr&aacute; normalizuj&uacute;. Normaliz&aacute;ciu je možn&eacute; vykonať pomocou sn&iacute;mky alebo referenčn&yacute;ch d&aacute;t. Ak je možnosť neza&scaron;krtnut&aacute;, spektr&aacute; sa nenormalizuj&uacute;. Ak je možnosť za&scaron;krtnut&aacute;, spektr&aacute; sa normalizuj&uacute;.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>N&aacute;zov vytvorenej a zobrazenej vrstvy obsahuj&uacute;cej raster sk&oacute;re zhody.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Typ v&yacute;stupu, ktor&yacute; bude vytvoren&yacute;. V&yacute;stupom m&ocirc;že byť dlaždicov&aacute; sn&iacute;mkov&aacute; vrstva alebo dynamick&aacute; sn&iacute;mkov&aacute; vrstva.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>N&aacute;zov priečinka v r&aacute;mci  <b>M&ocirc;j obsah</b>, do ktor&eacute;ho sa ulož&iacute; v&yacute;sledok.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

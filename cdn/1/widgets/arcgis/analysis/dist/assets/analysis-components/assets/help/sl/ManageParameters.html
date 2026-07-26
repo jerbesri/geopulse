@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Nastavitve za parametre modela, ko objavljate spletno orodje.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>To besedilo se bo pojavilo kot ime parametra v vmesniku spletnega orodja. Oznaka mora biti kratka, opisna za namen parametra in napisana v preprostem jeziku.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>To besedilo se bo pojavilo kot pomoč v pojavnem oknu za parameter in bo uporabniku spletnega orodja zagotovilo informacije o tem, kako izpolniti parameter orodja. Po potrebi vključite opis delovanja parametra, kako različne vrednosti vplivajo na rezultate orodja, podprte vhodne podatke in privzete vrednosti.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Podprt tip podatkov za parameter. To vrednost določa tip podatkov spremenljivke in je ni mogoče spremeniti.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Določa, ali je parameter vhod ali izhod. To vrednost določa parameter orodja in je ni mogoče spremeniti.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Določa, ali ima parameter privzeto vrednost. Ko je vklopljen, bo parameter uporabil privzeto vrednost, ki temelji na vrednosti spremenljivke. Ko je izklopljen, bo parameter privzeto prazen. Privzeta vrednost se lahko uporabi za vodenje uporabnikovih vnosov ali za lažji zagon spletnega orodja, saj uporabniku ni treba ročno posodabljati parametra.
+            </p>
+            <p>Privzetih vrednosti se ne sme uporabljati za parametre, ki jih morda želite pustiti prazne (na primer, neobvezni vhodni sklop podatkov).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Privzeta vrednost za parameter. Če želite spremeniti privzeto vrednost, posodobite vrednost spremenljivke v diagramu modela. Privzeta vrednost mora biti vrednost, ki bo v večini primerov dala natančen ali želeni rezultat.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Določa, ali je parameter zahtevan za zagon spletnega orodja. Če je parameter modela povezan z enim ali več zahtevanimi parametri orodja, bo ta vrednost vklopljena in je ne bo mogoče urejati. Če so vsi parametri povezanega orodja neobvezni, lahko parameter modela vklopite, da postane obvezen, ali pa ga izklopite, da postane neobvezen. Če parameter nastavite kot obvezen, bo uporabnik moral zagotoviti vnos, preden se bo spletno orodje lahko zagnalo.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Določa, ali bodo vhodni parametri orodja imeli omejitve. Možnosti filtra so odvisne od tipa parametra, kot sledi:
+            </p>
+            <ul>
+                <li>Niz &ndash; Izberite, katere enolične vrednosti so na voljo.
+                </li>
+                <li>Geoobjektni sloj &ndash; Izberite, kateri tipi geoobjekta so na voljo.
+                </li>
+                <li>Celo &scaron;tevilo &ndash; Določite najmanj&scaron;o in največjo vrednost.
+                </li>
+                <li>Dvojno &ndash; Določite najmanj&scaron;o in največjo vrednost.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

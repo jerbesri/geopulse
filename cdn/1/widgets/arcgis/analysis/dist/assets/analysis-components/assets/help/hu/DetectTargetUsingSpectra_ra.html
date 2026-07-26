@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>A Kameran&eacute;zet k&ouml;z&eacute;ppont &eacute;szlel&eacute;se spektrumok haszn&aacute;lat&aacute;val eszk&ouml;z egyez&eacute;si pontsz&aacute;mot sz&aacute;m&iacute;t ki a bemeneti raszter minden egyes pixel&eacute;re annak alapj&aacute;n, hogy a pixel spektruma mennyire egyezik a bemeneti sz&iacute;nk&eacute;pvonalak-f&aacute;jlban meghat&aacute;rozott c&eacute;lspektrumokkal.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Az &eacute;szlelendő c&eacute;lpixeleket tartalmaz&oacute; t&ouml;bbs&aacute;vos raszter.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>A bemeneti sz&iacute;nk&eacute;pvonalak-f&aacute;jl f&aacute;jlt&iacute;pusa.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>A c&eacute;lspektrumokat tartalmaz&oacute; sz&iacute;nk&eacute;pvonalak-f&aacute;jl.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>A bemeneti raszter &eacute;s a sz&iacute;nk&eacute;pvonalak-f&aacute;jl k&ouml;z&ouml;tti egyez&eacute;si pontsz&aacute;mok kisz&aacute;m&iacute;t&aacute;s&aacute;ra haszn&aacute;lt met&oacute;dus.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Megadhatja, hogy a spektrumok normaliz&aacute;lva legyenek-e. Ez egy k&eacute;p, illetve a referenciaadatok haszn&aacute;lat&aacute;val v&eacute;gezhető el. Ha nincs bejel&ouml;lve, a spektrumok nem lesznek normaliz&aacute;lva. Ha be van jel&ouml;lve, a spektrumok normaliz&aacute;lva lesznek.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>A l&eacute;trehozott &eacute;s megjelen&iacute;tett egyez&eacute;si pontsz&aacute;m raszter&eacute;t tartalmaz&oacute; r&eacute;teg neve.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>A l&eacute;trej&ouml;vő kimenet t&iacute;pusa. A kimenet csemp&eacute;zett t&aacute;v&eacute;rz&eacute;kel&eacute;si r&eacute;teg vagy pedig dinamikus t&aacute;v&eacute;rz&eacute;kel&eacute;si r&eacute;teg lehet.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>A  <b>Saj&aacute;t tartalom</b> azon mapp&aacute;j&aacute;nak neve, ahov&aacute; az eredm&eacute;ny ment&eacute;se t&ouml;rt&eacute;nik.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

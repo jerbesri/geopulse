@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Lo strumento Morfologia Geomorphon calcola il modello geomorphon di ogni cella di un raster superficie di input e le classifica in tipi di morfologia comuni.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>Il raster di elevazione che verr&agrave; utilizzato per i calcoli. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>L'Unit&agrave; di distanza che verr&agrave; utilizzata per i parametri  <b>Distanza di ricerca</b> e <b>Ignora distanza</b>. L'opzione predefinita &egrave; Celle.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>La distanza dalla cella di destinazione che definisce il raggio dell'area utilizzato per identificare il modello di geomorfoni. L'opzione predefinita &egrave; 10 celle.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>La distanza dalla cella di destinazione in cui ha inizio l'area di analisi. Deve essere inferiore al valore del parametro  <b>Distanza di ricerca</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>La soglia (in gradi) sotto la quale la cella di destinazione sar&agrave; classificata come piana. Il valore predefinito &egrave; 1 grado.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>L'unit&agrave; lineare dei valori z verticali.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>Il nome del layer raster morfologia che verr&agrave; creato e aggiunto alla mappa.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>Il nome del layer raster geomorfoni che verr&agrave; creato e aggiunto alla mappa.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Il tipo di output che sar&agrave; creato. L'output pu&ograve; essere un layer immagini con tile o un layer immagini dinamico.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>Il nome della cartella in  <b>I miei contenuti</b> in cui sar&agrave; salvato il risultato.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

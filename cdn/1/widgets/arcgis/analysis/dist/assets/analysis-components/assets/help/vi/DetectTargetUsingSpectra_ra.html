@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>C&ocirc;ng cụ Ph&aacute;t hiện Mục ti&ecirc;u Bằng Quang phổ t&iacute;nh to&aacute;n điểm số khớp cho từng pixel trong raster đầu v&agrave;o dựa tr&ecirc;n mức độ khớp giữa quang phổ của pixel đ&oacute; với quang phổ mục ti&ecirc;u được x&aacute;c định bởi tệp chữ k&yacute; quang phổ đầu v&agrave;o.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Raster đa dải chứa pixel mục ti&ecirc;u cần được ph&aacute;t hiện.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Loại tệp của tệp chữ k&yacute; quang phổ đầu v&agrave;o.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>Tệp chữ k&yacute; quang phổ chứa quang phổ mục ti&ecirc;u.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Phương ph&aacute;p d&ugrave;ng để t&iacute;nh to&aacute;n điểm số khớp giữa raster đầu v&agrave;o v&agrave; tệp chữ k&yacute; quang phổ.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>X&aacute;c định xem c&oacute; chuẩn h&oacute;a quang phổ hay kh&ocirc;ng, bằng h&igrave;nh ảnh hoặc dữ liệu tham chiếu. Nếu kh&ocirc;ng chọn, quang phổ sẽ kh&ocirc;ng được chuẩn h&oacute;a. Nếu chọn, quang phổ sẽ được chuẩn h&oacute;a.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>T&ecirc;n của lớp chứa raster điểm số khớp được tạo v&agrave; hiển thị.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Loại đầu ra sẽ được tạo. Đầu ra c&oacute; thể l&agrave; lớp h&igrave;nh ảnh dạng tile hoặc lớp h&igrave;nh ảnh động.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>T&ecirc;n của thư mục trong  <b>Nội dung của t&ocirc;i</b> sẽ lưu trữ kết quả.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

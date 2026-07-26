@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>80-20 分析工具使用帕累托 (80/20) 分析识别事件点占比异常偏高​的位置。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>将用于计算事件点占比异常的位置的点图层。
+            </p>
+            <p class="toolPaneOnly">要素计数将取决于其他因素，例如过滤条件和分析范围。
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>指定是使用定义距离 (DBSCAN) 聚类方法（ <b>点聚类</b>）还是输入比较线或面要素（ <b>最近要素</b>）聚合输入点。
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>点将被视为属于同一聚类的最大距离。 如果未指定聚类容差，则该工具将创建点要素重叠的聚类。
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>用于按最近要素聚合点的线或面图层。
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>输入点和比较要素中将用于匹配最近要素的字段。 仅来自输入要素（与比较要素字段值匹配）的记录才会包含在输出中。
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>输入要素中将传递到输出的字段。
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>要创建并添加至地图的图层的名称。
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p> <b>我的内容</b>中要保存结果的文件夹名称。
+            </p>
+        </div>
+    </div>
+</div>
+</html>

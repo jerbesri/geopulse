@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Kategoorilise rasteri kokkuv&otilde;tte tegemise t&ouml;&ouml;riist on rasteranal&uuml;&uuml;si t&ouml;&ouml;riist, mis genereerib tabeli, mis sisaldab pikslite arvu iga kategooria kohta sisendiks oleva mitmem&otilde;&otilde;tmelise kategoorilise rasteri igas l&otilde;igus.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>M&auml;&auml;rab summeeritava kategoorilise rasteri. Sisendkategooria raster peab olema t&auml;isarvu t&uuml;&uuml;pi.
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>M&auml;&auml;rab m&otilde;&otilde;tme, mida kasutatakse sisendrasti summeerimiseks. Kui m&otilde;&otilde;tmeid on rohkem kui &uuml;ks ja &uuml;htegi v&auml;&auml;rtust ei ole m&auml;&auml;ratud, v&otilde;etakse k&otilde;ik l&otilde;igud kokku, kasutades k&otilde;iki m&otilde;&otilde;tmete v&auml;&auml;rtuste kombinatsioone.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>M&auml;&auml;rab pol&uuml;goonide objektikihi, mis sisaldab huvipiirkonda v&otilde;i huvipiirkondi, mida kasutatakse pikslite arvu arvutamisel kategooria kohta. Kui huvipiirkonda pole m&auml;&auml;ratud, kasutatakse anal&uuml;&uuml;sis kogu rasterandmestikku.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>M&auml;&auml;rab pol&uuml;goonide objektikihi v&auml;lja, mis m&auml;&auml;rab iga huvipiirkonna.
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>Selle kihi nimi, mis luuakse ja lisatakse kaardile.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Selle kausta nimi jaotises  <b>Minu sisu</b>, kuhu tulemus salvestatakse.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>הגדרות עבור פרמטרים של מודל בעת פרסום כלי ווב.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>טקסט זה יופיע כשם הפרמטר בממשק של כלי הווב. התווית צריכה להיות קצרה ולתאר את מטרת הפרמטר ויש לכתוב אותה בשפה פשוטה.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>טקסט זה יופיע כחלון העזרה הקובץ של הפרמטר ויספק מידע למשתמש בכלי הווב שמסביר כיצד לאכלס את פרמטר הכלי. כלול תיאור של מה הפרמטר מבצע, כיצד ערכים שונים משפיעים על תוצאות הכלי, סוגי הקלט שנתמכים וערכי ברירת המחדל לפי הצורך.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>סוג הנתונים שבהם תומך הפרמטר. ערך זה נקבע על ידי סוג הנתונים של המשתנה ולא ניתן לשנותו.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>מציין האם הפרמטר הוא קלט או פלט. ערך זה נקבע על ידי פרמטר הכלי ולא ניתן לשנותו.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>מציין האם לפרמטר יש ערך ברירת מחדל. במצב מופעל, הפרמטר ישתמש בערך ברירת מחדל על בסיס ערך המשתנה. במצב כבוי, הפרמטר יהיה ריק כברירת מחדל. ערך ברירת מחדל יכול לשמש להנחיית הקלטים של המשתמש או להפוך את כלי הווב לקל יותר לשימוש מכיוון שלא נדרש מהמשתמש לעדכן את הפרמטר באופן ידני.
+            </p>
+            <p>אין להשתמש בערכי ברירת מחדל עבור פרמטרים שייתכן שתרצה להשאיר ריקים (לדוגמה, סט נתוני קלט אופציונלי).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>ערך ברירת המחדל עבור הפרמטר. כדי לשנות את ערך ברירת המחדל, עדכן את הערך של המשתנה בתרשים המודל. ערך ברירת המחדל צריך להיות ערך שיספק תוצאה מדויקת או מועדפת במרבית המקרים.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>מציין האם הפרמטר נדרש לצורך פעולת כלי הווב. אם פרמטר המודל מחובר לפרמטר אחד או יותר נדרשים לכלי, ערך זה יופעל ולא תהיה אפשרות לערוך אותו. אם כל הפרמטרים המחוברים של הכלי הם אופציונליים, ניתן להפעיל את פרמטר המודל כדי שזה יהיה פרמטר חובה או לכבות אותו כדי שהפרמטר יהיה אופציונלי. אם פרמטר הוגדר כחובה המשתמש יצטרך לספק קלט לפני שניתן יהיה להפעיל את כלי הווב.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>מציין האם לקלטים של פרמטר הכלי יהיו מגבלות. אפשרויות הסינון תלויות בסוג הפרמטר כדלהלן:
+            </p>
+            <ul>
+                <li>מחרוזת - בחר אילו ערכים ייחודיים זמינים.
+                </li>
+                <li>שכבת ישויות - בחר אילו סוגי ישויות זמינים.
+                </li>
+                <li>מספר שלם - ציין ערך מינימום וערך מקסימום.
+                </li>
+                <li>כפול - ציין ערך מינימום וערך מקסימום.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

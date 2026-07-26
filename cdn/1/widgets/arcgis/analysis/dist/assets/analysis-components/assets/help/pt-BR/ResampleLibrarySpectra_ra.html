@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>A ferramenta Espectros da biblioteca de reamostragem reamostra os espectros da biblioteca de entrada para corresponder ao n&uacute;mero de bandas e &agrave; faixa de comprimento de onda dos espectros de destino de um sensor de destino, arquivo de biblioteca espectral personalizado ou imagem personalizada.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>O arquivo que cont&eacute;m os espectros que ser&atilde;o reamostrados. A biblioteca espectral de entrada deve ser um arquivo de biblioteca espectral da  Esri (<code>.esl</code>).
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>O sensor de destino, a biblioteca espectral personalizada ou a imagem personalizada que cont&eacute;m os espectros de destino.
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>O arquivo de biblioteca espectral (<code>.esl</code>) ou a imagem que cont&eacute;m os espectros de destino. Se voc&ecirc; usar uma imagem para os espectros de destino, ela dever&aacute; conter informa&ccedil;&otilde;es sobre o comprimento de onda.
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>O m&eacute;todo de reamostragem utilizado para reamostrar o arquivo de biblioteca espectral de entrada.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>O nome do arquivo de biblioteca espectral da  Esri (<code>.esl</code>) criado.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>O tipo de sa&iacute;da que ser&aacute; criado. A sa&iacute;da pode ser uma camada de imagem mosaicada ou uma camada de imagem din&acirc;mica.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>O nome da pasta em  <b>Meu conte&uacute;do</b> onde o resultado ser&aacute; salvo.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

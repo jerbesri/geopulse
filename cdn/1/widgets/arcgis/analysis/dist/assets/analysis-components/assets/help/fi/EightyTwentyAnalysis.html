@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>80-20-analyysity&ouml;kalu tunnistaa sijainnit, joissa suhteettoman suuri osa ongelmatapauksista tapahtuu, k&auml;ytt&auml;en Pareto (80/20) -analyysi&auml;.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Pistekarttatasoa k&auml;ytet&auml;&auml;n sellaisten sijaintien laskemiseen, joissa ongelmatapauksia ilmenee suhteettoman paljon.
+            </p>
+            <p class="toolPaneOnly">Kohteiden m&auml;&auml;r&auml; riippuu ylim&auml;&auml;r&auml;isist&auml; tekij&ouml;ist&auml;, kuten suodatusehdoista ja analyysin laajuudesta.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>M&auml;&auml;ritt&auml;&auml;, koostetaanko l&auml;ht&ouml;aineiston pisteet k&auml;ytt&auml;en m&auml;&auml;ritetyn et&auml;isyyden (DBSCAN) klusterointimenetelm&auml;&auml; (<b>pisteklusteri</b>) tai l&auml;ht&ouml;aineiston vertailun viiva- tai aluekohdetta (<b>l&auml;hin kohde</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Enimm&auml;iset&auml;isyys, jolla pisteiden katsotaan kuuluvan samaan klusteriin. Jos klusteritoleranssia ei ole m&auml;&auml;ritetty, ty&ouml;kalu luo klusterin, jossa pistekohteet ovat p&auml;&auml;llekk&auml;in.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Viiva- tai aluekarttatasoa k&auml;ytet&auml;&auml;n pisteiden koostamiseen l&auml;himm&auml;n kohteen mukaan.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Kentt&auml; l&auml;ht&ouml;aineiston pisteist&auml; ja vertailukohteet, joita k&auml;ytet&auml;&auml;n l&auml;himpien kohteiden t&auml;sm&auml;ytt&auml;miseen. Tulosaineistoon sis&auml;llytet&auml;&auml;n vain kent&auml;n arvoja vastaavat tietueet l&auml;ht&ouml;aineiston kohteista yhdess&auml; vertailukohteiden kanssa.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>L&auml;ht&ouml;aineiston kohteista saadut kent&auml;t, jotka siirret&auml;&auml;n tulosaineistoon.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Karttaan luotavan ja lis&auml;tt&auml;v&auml;n karttatason nimi.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Sen  <b>Omassa sis&auml;ll&ouml;ss&auml;</b> olevan kansion nimi, johon tulos tallennetaan.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

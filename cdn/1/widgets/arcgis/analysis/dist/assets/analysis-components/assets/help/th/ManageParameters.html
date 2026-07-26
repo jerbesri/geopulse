@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>การตั้งค่าสำหรับพารามิเตอร์แบบจำลองขณะเผยแพร่เครื่องมือเว็บ
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>ข้อความนี้จะปรากฏในรูปแบบชื่อพารามิเตอร์ในอินเทอร์เฟซเครื่องมือเว็บ ป้ายกำกับควรจะสั้น สื่อถึงวัตถุประสงค์ของพารามิเตอร์ได้อย่างชัดเจน และเขียนด้วยภาษาที่เข้าใจง่าย
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>ข้อความนี้จะปรากฏในรูปแบบป็อปอัพช่วยเหลือของพารามิเตอร์ และจะให้ข้อมูลกับผู้ใช้เครื่องมือเว็บ เกี่ยวกับวิธีการเติมข้อมูลพารามิเตอร์เครื่องมือ เพิ่มคำอธิบายว่าพารามิเตอร์ใช้ทำอะไร ค่าที่แตกต่างกันจะส่งผลกระทบต่อผลลัพธ์ของเครื่องมืออย่างไร อินพุตที่รองรับ และค่าเริ่มต้น ตามความจำเป็น
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>ประเภทข้อมูลที่รองรับสำหรับพารามิเตอร์ ค่านี้จะถูกกำหนดตามประเภทข้อมูลตัวแปร และไม่สามารถเปลี่ยนแปลงได้
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>ระบุว่าพารามิเตอร์เป็นอินพุตหรือเอาต์พุต ค่านี้จะถูกกำหนดตามพารามิเตอร์เครื่องมือ และไม่สามารถเปลี่ยนแปลงได้
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>ระบุว่าพารามิเตอร์มีค่าเริ่มต้นหรือไม่ เมื่อเปิด พารามิเตอร์จะใช้ค่าเริ่มต้นโดยอิงตามค่าตัวแปร เมื่อปิด พารามิเตอร์จะว่างเปล่าตามค่าเริ่มต้น สามารถใช้ค่าเริ่มต้นเป็นแนวทางอินพุตของผู้ใช้ หรือช่วยให้สามารถรันเครื่องมือเว็บได้สะดวกขึ้น เนื่องจากผู้ใช้ไม่จำเป็นต้องอัปเดตพารามิเตอร์ด้วยตัวเอง
+            </p>
+            <p>ไม่ควรใช้ค่าเริ่มต้นสำหรับพารามิเตอร์ที่คุณอาจต้องการเว้นว่างไว้ (เช่น ชุดข้อมูลอินพุตตัวเลือกเสริม)
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>ค่าเริ่มต้นสำหรับพารามิเตอร์ หากต้องการเปลี่ยนแปลงค่าเริ่มต้น ให้อัปเดตค่าของตัวแปรในไดอะแกรมแบบจำลอง ค่าเริ่มต้นควรเป็นค่าที่จะให้ผลลัพธ์ที่แม่นยำหรือผลลัพธ์ที่ต้องการในกรณีส่วนใหญ่
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>ระบุว่าจำเป็นต้องใช้พารามิเตอร์ในการรันเครื่องมือเว็บหรือไม่ หากพารามิเตอร์แบบจำลองเชื่อมต่อกับอย่างน้อยหนึ่งพารามิเตอร์เครื่องมือที่จำเป็น ค่านี้จะถูกเปิดและไม่สามารถแก้ไขได้ หากพารามิเตอร์เครื่องมือที่เชื่อมต่อทั้งหมดเป็นทางเลือก จะสามารถเปิดพารามิเตอร์แบบจำลอง เพื่อกำหนดให้จำเป็นต้องใช้พารามิเตอร์ หรือปิด เพื่อกำหนดให้พารามิเตอร์เป็นทางเลือก การกำหนดให้จำเป็นต้องใช้พารามิเตอร์ จะบังคับให้ผู้ใช้ต้องระบุอินพุตก่อน จึงจะสามารถรันเครื่องมือเว็บได้
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>ระบุว่าอินพุตพารามิเตอร์เครื่องมือจะมีข้อจำกัดหรือไม่ ตัวเลือกตัวกรองจะขึ้นอยู่กับประเภทพารามิเตอร์ดังต่อไปนี้:
+            </p>
+            <ul>
+                <li>สตริง&mdash;เลือกว่าค่าที่ไม่ซ้ำกันใดบ้างที่พร้อมใช้งาน
+                </li>
+                <li>ชั้นข้อมูลฟีเจอร์&mdash;เลือกว่าประเภทฟีเจอร์ใดบ้างที่พร้อมใช้งาน
+                </li>
+                <li>จำนวนเต็ม&mdash;ระบุค่าต่ำสุดและค่าสูงสุด
+                </li>
+                <li>ดับเบิล&mdash;ระบุค่าต่ำสุดและค่าสูงสุด
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

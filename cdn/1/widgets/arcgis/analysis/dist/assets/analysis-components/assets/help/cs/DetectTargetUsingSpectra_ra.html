@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>N&aacute;stroj Detekce c&iacute;le pomoc&iacute; spekter vypoč&iacute;t&aacute; sk&oacute;re shody pro každ&yacute; pixel vstupn&iacute;ho rastru na z&aacute;kladě toho, jak dobře spektrum pixelu odpov&iacute;d&aacute; c&iacute;lov&yacute;m spektrům definovan&yacute;m vstupn&iacute;m souborem spektr&aacute;ln&iacute;ho podpisu.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>V&iacute;cep&aacute;smov&yacute; rastr obsahuj&iacute;c&iacute; c&iacute;lov&eacute; pixely, kter&eacute; maj&iacute; b&yacute;t detekov&aacute;ny.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Typ vstupn&iacute;ho souboru spektr&aacute;ln&iacute;ho podpisu.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>Soubor spektr&aacute;ln&iacute;ho podpisu obsahuj&iacute;c&iacute; c&iacute;lov&aacute; spektra.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Metoda použit&aacute; k v&yacute;počtu sk&oacute;re shody mezi vstupn&iacute;m rastrem a souborem spektr&aacute;ln&iacute;ho podpisu.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Určuje, zda jsou spektra normalizov&aacute;na, což lze prov&eacute;st pomoc&iacute; sn&iacute;mku nebo referenčn&iacute;ch dat. Pokud nen&iacute; za&scaron;krtnuto, spektra nejsou normalizov&aacute;na. Pokud je za&scaron;krtnuto, spektra jsou normalizov&aacute;na.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>N&aacute;zev vrstvy obsahuj&iacute;c&iacute; rastr sk&oacute;re shody, kter&aacute; se vytvoř&iacute; a zobraz&iacute;.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Typ v&yacute;stupu, kter&yacute; bude vytvořen. V&yacute;stupem může b&yacute;t vrstva dlaždicov&yacute;ch sn&iacute;mků nebo vrstva dynamick&yacute;ch sn&iacute;mků.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>N&aacute;zev složky v č&aacute;sti  <b>Můj obsah</b>, do kter&eacute; bude v&yacute;sledek uložen.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

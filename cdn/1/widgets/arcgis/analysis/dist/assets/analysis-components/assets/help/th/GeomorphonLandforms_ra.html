@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>เครื่องมือลักษณะภูมิประเทศ Geomorphon จะคำนวณรูปแบบ Geomorphon ของแต่ละเซลล์ของราสเตอร์พื้นผิวอินพุต แล้วจำแนกประเภทตามประเภทลักษณะภูมิประเทศทั่วไป
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>แรสเตอร์ระดับความสูงที่จะใช้ในการคำนวณ 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>หน่วยระยะทางที่จะใช้สำหรับพารามิเตอร์  <b>ระยะทางการค้นหา</b> และ <b>ระยะทางการข้าม</b> ค่าเริ่มต้นคือเซลล์
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>ระยะห่างจากเซลล์เป้าหมายที่ใช้กำหนดรัศมีของพื้นที่สำหรับระบุรูปแบบ Geomorphon ค่าเริ่มต้นคือ 10 เซลล์
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>ระยะห่างจากเซลล์เป้าหมายที่เป็นจุดเริ่มต้นของพื้นที่การวิเคราะห์ จะต้องน้อยกว่าค่าพารามิเตอร์  <b>ระยะทางการค้นหา</b>
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>ค่าเกณฑ์ (เป็นองศา) ที่เมื่อต่ำกว่า เซลล์เป้าหมายจะถูกจำแนกประเภทเป็นพื้นที่ราบ ค่าเริ่มต้นคือ 1 องศา
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>หน่วยเชิงเส้นของค่า z แนวตั้ง
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>ชื่อของชั้นข้อมูลราสเตอร์ลักษณะภูมิประเทศที่จะสร้างขึ้นและเพิ่มลงในแผนที่
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>ชื่อของชั้นข้อมูลราสเตอร์ Geomorphon ที่จะสร้างขึ้นและเพิ่มลงในแผนที่
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>ประเภทของเอาท์พุทที่จะสร้างขึ้น เอาท์พุทสามารถเป็นชั้นข้อมูลภาพแบบไทล์หรือชั้นข้อมูลภาพแบบไดนามิก
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>ชื่อของโฟลเดอร์ใน  <b>เนื้อหาของฉัน</b> ที่จะทำการบันทึกผลลัพธ์
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Postavke parametara modela prilikom objavljivanja internetskih alata.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Ovaj tekst će se pojaviti kao naziv parametra u sučelju internetskog alata. Oznaka treba biti kratka, opisujući svrhu parametra i napisana jednostavnim jezikom.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Ovaj tekst će se pojaviti kao skočni prozor pomoći za parametar i navest će informacije korisniku internetskog alata o tome kako popuniti parametar alata. Uključite opis &scaron;to parametar radi, kako različite vrijednosti utječu na rezultate alata, podržane ulaze i zadane vrijednosti prema potrebi.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Podržane vrste podataka za parametar. Ova vrijednost je određena vrstom podataka varijable i ne može se mijenjati.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Određuje je li parametar ulaz ili izlaz. Ova vrijednost je određena parametrom alata i ne može se mijenjati.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Određuje ima li parametar zadanu vrijednost. Kada je uključen, parametar će koristiti zadanu vrijednost na temelju vrijednosti varijable. Kada je isključen, parametar će prema zadanim postavkama biti prazan. Zadana vrijednost može se koristiti za usmjeravanje korisničkog unosa ili za lak&scaron;e pokretanje internetskog alata jer korisnik ne mora ručno ažurirati parametar.
+            </p>
+            <p>Zadane vrijednosti ne smiju se koristiti za parametre koje možda želite ostaviti praznima (na primjer, opcionalni ulazni skup podataka).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Zadana vrijednost parametra. Za promjenu zadane vrijednosti, ažurirajte vrijednost varijable u dijagramu modela. Zadana vrijednost trebala bi biti vrijednost koja će u većini slučajeva dati točan ili poželjni rezultat.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Određuje je li parametar potreban za pokretanje internetskog alata. Ako je parametar modela povezan s jednim ili vi&scaron;e potrebnih parametara alata, ova će vrijednost biti uključena i neće se moći uređivati. Ako su svi parametri povezanog alata opcionalni, parametar modela može se uključiti kako bi parametar bio obavezan ili isključiti da bi parametar bio opcionalan. Ako parametar učinite obaveznim tada će korisnik morati navesti unos prije nego &scaron;to se internetski alat može pokrenuti.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Određuje hoće li unosi parametara alata imati ograničenja. Opcije filtriranja ovise o vrsti parametra na sljedeći način:
+            </p>
+            <ul>
+                <li>Tekst &ndash; odaberite koje su jedinstvene vrijednosti dostupne.
+                </li>
+                <li>Sloj geoobjekta&ndash; odaberite koje su vrste geoobjekta dostupne.
+                </li>
+                <li>Cijeli broj &ndash; navedite minimalnu i maksimalnu vrijednost.
+                </li>
+                <li>Dvostruko &ndash; navedite minimalnu i maksimalnu vrijednost.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

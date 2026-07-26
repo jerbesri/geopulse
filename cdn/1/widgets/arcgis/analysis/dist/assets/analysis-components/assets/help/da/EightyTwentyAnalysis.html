@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>80/20-analysev&aelig;rkt&oslash;jet identificerer steder, hvor en uforholdsm&aelig;ssigt stor andel af h&aelig;ndelserne finder sted, ved hj&aelig;lp af Pareto-analyse (80/20).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Det punktlag, der skal bruges til at beregne de steder, hvor der forekommer uforholdsm&aelig;ssigt mange h&aelig;ndelser.
+            </p>
+            <p class="toolPaneOnly">Antallet af objekter afh&aelig;nger af yderligere faktorer s&aring;som filtreringskriterier og analysens omfang.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Angiver, om input-punkterne skal aggregeres ved hj&aelig;lp af klyngemetoden Defineret afstand (DBSCAN) (<b>Punktklynge</b>) eller en input-sammenligningslinje eller et polygonobjekt (<b>N&aelig;rmeste objekt</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Den maksimale afstand, inden for hvilken punkter kan betragtes som en del af samme klynge. Hvis der ikke er angivet nogen klyngetolerance, opretter v&aelig;rkt&oslash;jet en klynge, hvor punktobjekter overlapper hinanden.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Det linje- eller polygonlag, der bruges til at aggregere punkter efter det n&aelig;rmeste objekt.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Det felt fra inputpunkterne og sammenligningsobjekterne, som vil blive brugt til at matche de n&aelig;rmeste objekter. Kun poster fra de inputobjekter, der matcher feltv&aelig;rdierne med sammenligningsobjekterne, vil blive medtaget i outputtet.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Felterne fra de inputobjekter, der skal overf&oslash;res til outputtet.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Navnet p&aring; det lag, der oprettes og f&oslash;jes til kortet.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Navnet p&aring; mappen  <b>Mit indhold</b>, hvor resultatet gemmes.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

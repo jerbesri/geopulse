@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>L'eina Formes de s&ograve;l dels geomorfons calcula el patr&oacute; de geomorf&oacute; de cada cel&middot;la d'un r&agrave;ster de superf&iacute;cie d'entrada i els classifica en tipus de forma de s&ograve;l habituals.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>R&agrave;ster d'elevaci&oacute; que s'utilitzar&agrave; per als c&agrave;lculs. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>Unitat de dist&agrave;ncia que es far&agrave; servir per als par&agrave;metres  <b>Dist&agrave;ncia de cerca</b> i <b>Dist&agrave;ncia d'omissi&oacute;</b>. El valor per defecte &eacute;s Cel&middot;les.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Dist&agrave;ncia des de la cel&middot;la de destinaci&oacute; que defineix el radi de l'&agrave;rea que es far&agrave; servir per identificar el patr&oacute; del geomorf&oacute;. El valor per defecte &eacute;s 10 cel&middot;les.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Dist&agrave;ncia des de la cel&middot;la de destinaci&oacute; on s'inicia l'&agrave;rea d'an&agrave;lisi. Ha de ser inferior al valor del par&agrave;metre  <b>Dist&agrave;ncia de cerca</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Llindar (en graus) per sota del qual la cel&middot;la de destinaci&oacute; es classificar&agrave; com a plana. El valor per defecte &eacute;s 1 grau.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Unitat lineal dels valors z verticals.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>Nom de la capa r&agrave;ster de formes de s&ograve;l que es crear&agrave; i s'afegir&agrave; al mapa.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>Nom de la capa r&agrave;ster de geomorfons que es crear&agrave; i s'afegir&agrave; al mapa.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Tipus de sortida que es crear&agrave;. La sortida pot ser una capa d'imatges en mosaic o una capa d'imatges din&agrave;miques.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>Nom de la carpeta d' <b>El meu contingut</b> on es desar&agrave; el resultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>N&aacute;stroj Anal&yacute;za 80-20 identifikuje lokality, kde doch&aacute;dza k ne&uacute;merne veľk&eacute;mu podielu incidentov, pomocou Pareto (80/20) anal&yacute;zy.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Bodov&aacute; vrstva, ktor&aacute; sa použije na v&yacute;počet lokal&iacute;t, kde sa incidenty vyskytuj&uacute; neprimerane často.
+            </p>
+            <p class="toolPaneOnly">Počet prvkov z&aacute;vis&iacute; od ďal&scaron;&iacute;ch faktorov, ako napr&iacute;klad filtrovacie krit&eacute;ri&aacute; a rozsah anal&yacute;zy.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Určuje, či sa vstupn&eacute; body bud&uacute; agregovať pomocou met&oacute;dy klastrovania s definovanou vzdialenosťou (DBSCAN) (<b>Bodov&yacute; klaster</b>) alebo pomocou vstupnej porovn&aacute;vacej l&iacute;nie alebo polyg&oacute;nu (<b>Najbliž&scaron;&iacute; prvok</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Maxim&aacute;lna vzdialenosť, pri ktorej bud&uacute; body považovan&eacute; za s&uacute;časť toho ist&eacute;ho klastra. Ak nie je zadan&aacute; tolerancia klastra, n&aacute;stroj vytvor&iacute; klaster, kde sa bodov&eacute; prvky prekr&yacute;vaj&uacute;.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>L&iacute;niov&aacute; alebo polyg&oacute;nov&aacute; vrstva použit&aacute; na agreg&aacute;ciu bodov podľa najbliž&scaron;ieho prvku.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Pole zo vstupn&yacute;ch bodov a porovn&aacute;vac&iacute;ch prvkov, ktor&eacute; sa použije na p&aacute;rovanie najbliž&scaron;&iacute;ch prvkov. Do v&yacute;stupu bud&uacute; zahrnut&eacute; iba z&aacute;znamy zo vstupn&yacute;ch prvkov, ktor&eacute; sa zhoduj&uacute; v hodnot&aacute;ch pol&iacute; s porovn&aacute;vac&iacute;mi prvkami.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Polia zo vstupn&yacute;ch prvkov, ktor&eacute; sa prenes&uacute; do v&yacute;stupu.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>N&aacute;zov vrstvy, ktor&aacute; sa vytvor&iacute; a prid&aacute; do mapy.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>N&aacute;zov priečinka v r&aacute;mci  <b>M&ocirc;j obsah</b>, do ktor&eacute;ho sa ulož&iacute; v&yacute;sledok.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

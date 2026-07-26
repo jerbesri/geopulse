@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>&ldquo;使用光谱检测目标&rdquo;工具会根据输入栅格中每个像元的光谱与输入光谱特征文件所定义的目标光谱的匹配程度来计算每个像元的匹配得分。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>指定包含要检测的目标像素的多波段栅格。
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>输入光谱特征文件的文件类型。
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>包含目标光谱的光谱特征文件。
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>用于计算输入栅格与光谱特征文件之间匹配得分的方法。
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>指定是否归一化光谱，可使用图像或参考数据执行此操作。 如果未选中，则不会归一化光谱。 如果选中，则会对光谱进行归一化处理。
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>图层的名称，该图层包含要创建并显示的匹配得分栅格。
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>要创建的输出的类型。 输出可以为切片影像图层或动态影像图层。
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p> <b>我的内容</b>中要保存结果的文件夹名称。
+            </p>
+        </div>
+    </div>
+</div>
+</html>

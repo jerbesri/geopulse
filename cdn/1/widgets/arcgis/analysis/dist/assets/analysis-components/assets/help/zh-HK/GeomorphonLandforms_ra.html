@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Geomorphon 地貌工具會計算輸入表面點陣的每個單元的 Geomorphon 模式，並將其分類為常見的地貌類型。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>將用於計算的高程點陣。 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>將用於 <b>搜尋距離</b>和 <b>略過距離</b>參數的距離單位。 預設為單元。
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>與目標單元之間的距離，定義用來識別 Geomorphon 模式的區域半徑。 預設為 10 個單元。
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>與目標單元之間的距離，即分析區域開始的起點。 它必須小於 <b>搜尋距離</b>參數值。
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>低於此閾值(以度為單位)時，目標單元將被歸類為平面。 預設為 1 度。
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>垂直 z 值的線性單位。
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>將建立並新增到地圖之地貌點陣圖層的名稱。
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>將建立並新增到地圖之 Geomorphon 點陣圖層的名稱。
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>將建立之輸出的類型。 輸出可以是圖磚影像圖層或動態影像圖層。
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p> <b>我的內容</b>中將儲存結果的資料夾名稱。
+            </p>
+        </div>
+    </div>
+</div>
+</html>

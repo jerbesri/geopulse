@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Instellingen voor modelparameters bij het publiceren van een webtool.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Deze tekst wordt in de interface van de webtool als de parameternaam weergegeven. Het label moet kort zijn, moet het doel van de parameter beschrijven en moet in eenvoudige taal geschreven zijn.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Deze tekst wordt weergegeven als de pop-uphelp en biedt de gebruiker van de webtool informatie over het invullen van de tool-parameter. Neem waar nodig een beschrijving op van wat de parameter doet, hoe verschillende waarden van invloed zijn op de resultaten van de tool, alsmede de ondersteunde invoer en de standaardwaarden.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Het ondersteunde gegevenstype voor de parameter. Deze waarde wordt bepaald door het variabele gegevenstype en kan niet worden gewijzigd.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Specificeert of de parameter een invoer of een uitvoer is. Deze waarde wordt bepaald door de toolparameter en kan niet worden gewijzigd.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Specificeert of de parameter een standaardwaarde heeft. Wanneer dit ingeschakeld is, gebruikt de parameter een standaardwaarde die gebaseerd is op de variabele waarde. Wanneer dit uitgeschakeld is, is de parameter standaard leeg. Een standaardwaarde kan worden gebruikt om de invoer van de gebruiker te leiden of om de uitvoering van de webtool te vergemakkelijken doordat de gebruiker de parameter niet handmatig hoeft bij te werken.
+            </p>
+            <p>Gebruik geen standaardwaarden voor parameters die u mogelijk leeg wilt laten (bijvoorbeeld optionele invoer-gegevenssets).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>De standaardwaarde voor de parameter. U kunt de standaardwaarde wijzigen door de waarde van de variabele bij te werken in het modeldiagram. De standaardwaarde moet een waarde zijn die in de meeste gevallen een nauwkeurig of geprefereerd resultaat geeft.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Specificeert of de parameter vereist is voor het uitvoeren van de web tool. Als de modelparameter wordt gekoppeld aan een of meer vereiste toolparameters, wordt deze waarde ingeschakeld en kan deze niet worden bewerkt. Als alle gekoppelde toolparameters optioneel zijn, kan de modelparameter worden ingeschakeld om de parameter vereist te maken of kan deze worden uitgeschakeld om de parameter optioneel te maken. Als u een parameter vereist maakt, wordt de gebruiker gedwongen een invoer op te geven voordat de webtool kan worden uitgevoerd.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Specificeert of er beperkingen gelden voor de invoer voor de toolparameters. Filteropties zijn als volgt afhankelijk van het parametertype:
+            </p>
+            <ul>
+                <li>Tekenreeks: selecteer welke unieke waarden beschikbaar zijn.
+                </li>
+                <li>Feature layer: selecteer welke objecttypes beschikbaar zijn.
+                </li>
+                <li>Integer: specificeer een minimum- en maximumwaarde.
+                </li>
+                <li>Double: specificeer een minimum- en maximumwaarde.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

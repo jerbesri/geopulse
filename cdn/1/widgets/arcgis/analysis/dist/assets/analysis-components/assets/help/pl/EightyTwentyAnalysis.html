@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Narzędzie analizy 80-20 identyfikuje lokalizacje, w kt&oacute;rych dochodzi do nieproporcjonalnie dużej liczby zdarzeń, przy użyciu analizy Pareto (80/20).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Warstwa punktowa, kt&oacute;ra zostanie użyta do obliczenia lokalizacji, w kt&oacute;rych zdarzenia występują nieproporcjonalnie często.
+            </p>
+            <p class="toolPaneOnly">Liczba obiekt&oacute;w zależy od dodatkowych czynnik&oacute;w, takich jak kryteria filtrowania i zasięg analizy.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Określa, czy punkty wejściowe będą agregowane za pomocą metody klastrowania o zdefiniowanej odległości (DBSCAN) (<b>Klaster punkt&oacute;w</b>), czy też wejściowego, por&oacute;wnawczego obiektu liniowego lub poligonowego (<b>Najbliższy obiekt</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Maksymalna odległość, przy kt&oacute;rej punkty będą uznawane za część tego samego klastra. Jeśli tolerancja skupiania nie zostanie określona, narzędzie utworzy skupienie w miejscach, gdzie obiekty punktowe nakładają się na siebie.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Warstwa liniowa lub poligonowa używana do agregowania punkt&oacute;w według najbliższego obiektu.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Pole z punkt&oacute;w wejściowych i obiekt&oacute;w por&oacute;wnawczych, kt&oacute;re zostanie użyte do dopasowania najbliższych obiekt&oacute;w. W danych wyjściowych zostaną uwzględnione tylko te rekordy z obiekt&oacute;w wejściowych, kt&oacute;rych wartości p&oacute;l są zgodne z obiektami por&oacute;wnawczymi.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Pola z obiekt&oacute;w wejściowych, kt&oacute;re zostaną przeniesione do danych wyjściowych.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Nazwa warstwy, kt&oacute;ra zostanie utworzona i dodana do mapy.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Nazwa folderu na stronie  <b>Moje zasoby</b>, w kt&oacute;rym zostanie zapisany wynik.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

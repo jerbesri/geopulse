@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>La herramienta An&aacute;lisis 80-20 identifica las ubicaciones donde se produce una proporci&oacute;n desproporcionadamente grande de incidentes utilizando el an&aacute;lisis de Pareto (80/20).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Capa de puntos que se utilizar&aacute; para calcular las ubicaciones donde ocurren incidentes desproporcionadamente.
+            </p>
+            <p class="toolPaneOnly">El recuento de entidades depende de factores adicionales como los criterios de filtrado y el alcance del an&aacute;lisis.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Especifica si los puntos de entrada se agregar&aacute;n mediante el m&eacute;todo de agrupaci&oacute;n de cl&uacute;steres Distancia definida (DBSCAN) (<b>Cl&uacute;ster de puntos</b>) o mediante una entidad de l&iacute;nea o pol&iacute;gono de comparaci&oacute;n de entrada (<b>Entidad m&aacute;s cercana</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>La distancia m&aacute;xima a la que los puntos se considerar&aacute;n parte del mismo cl&uacute;ster. Si no se especifica ninguna tolerancia de cl&uacute;ster, la herramienta crear&aacute; un cl&uacute;ster donde las entidades de puntos se superpongan.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Capa de l&iacute;neas o pol&iacute;gonos utilizada para agregar puntos por la entidad m&aacute;s cercana.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Campo de los puntos de entrada y las entidades de comparaci&oacute;n que se utilizar&aacute; para hacer coincidir las entidades m&aacute;s cercanas. Solo se incluir&aacute;n en la salida los registros de las entidades de entrada cuyos valores de campo coincidan con los de las entidades de comparaci&oacute;n.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Campos de las entidades de entrada que se transferir&aacute;n a la salida.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>El nombre de la capa que se crear&aacute; y se agregar&aacute; al mapa.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>El nombre de la carpeta de  <b>Mi contenido</b> en la que se guardar&aacute; el resultado.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

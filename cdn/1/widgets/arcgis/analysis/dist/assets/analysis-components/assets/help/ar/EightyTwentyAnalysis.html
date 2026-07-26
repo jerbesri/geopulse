@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>تحدد أداة تحليل 80-20 المواقع التي تحدث فيها نسبة كبيرة بشكل غير متناسب من الحوادث باستخدام تحليل باريتو (80/20).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>طبقة النقاط التي سيتم استخدامها لحساب المواقع التي تحدث فيها الحوادث بشكل غير متناسب.
+            </p>
+            <p class="toolPaneOnly">يعتمد عدد المعالم على عوامل إضافية مثل معايير التصفية ومدى التحليل.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>يحدد ما إذا كان سيتم تجميع نقاط الإدخال باستخدام طريقة التجميع للمسافة المحددة (DBSCAN) (<b>مجموعة النقاط</b>) أو خط مقارنة الإدخال أو معلم المضلع (<b>أقرب معلم</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>أقصى مسافة تُعتبر عندها النقاط جزءًا من نفس المجموعة. إذا لم يتم تحديد أي سماحية تجميع، فستقوم الأداة بإنشاء مجموعة تتداخل فيها معالم النقاط.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>طبقة الخط أو المضلع المستخدمة لتجميع النقاط حسب أقرب معلم.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>الحقل من النقاط المدخلة ومعالم المقارنة التي سيتم استخدامها لمطابقة أقرب المعالم. لن يتم تضمين سوى السجلات من المعالم المدخلة التي تتطابق قيم حقولها مع معالم المقارنة في المخرجات.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>الحقول من المعالم المدخلة التي سيتم نقلها إلى المخرجات.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>اسم الطبقة التي سيتم إنشاؤها وإضافتها إلى الخريطة.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>اسم المجلد الموجود في  <b>المحتوى الخاص بي</b> الذي سيتم حفظ النتيجة فيه.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

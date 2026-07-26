@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Verkt&oslash;yet Geomorphon Landforms beregner geomorfonm&oslash;nsteret for hver celle i et inngangsraster og klassifiserer dem i vanlige landformtyper.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>H&oslash;yderasteret som blir brukt til beregninger. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>Avstandsenheten som skal brukes for parameterne  <b>S&oslash;keavstand</b> og <b>Hopp over avstand</b>. Standardverdi er Celler.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Avstanden fra m&aring;lcellen som definerer radiusen til omr&aring;det som brukes til &aring; identifisere geomorfm&oslash;nsteret. Standardverdi er 10 celler.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Avstanden fra m&aring;lcellen der analyseomr&aring;det starter. Den m&aring; v&aelig;re kortere enn parameterverdien i  <b>S&oslash;keavstand</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Grensen (i grader) som m&aring;lcellen klassifiseres som flat om den er under. Standardverdien er 1 grad.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Den line&aelig;re enheten for vertikale z-verdier.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>Navnet p&aring; landformrasterlaget som opprettes og legges til kartet.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>Navnet p&aring; geomorfonrasterlaget som opprettes og legges til kartet.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Typen utdata som blir opprettet. Utdata kan v&aelig;re et flisinndelt bildelag eller et dynamisk bildelag.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>Navnet p&aring; mappen i  <b>Mitt innhold</b> der resultatet blir lagret.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

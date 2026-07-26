@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>L'eina Remostreja els espectres de la biblioteca torna a mostrejar els espectres de la biblioteca d'entrada per fer-los coincidir amb el nombre de bandes i l'interval de longituds d'ona dels espectres de destinaci&oacute; procedents d'un sensor de destinaci&oacute;, d'un fitxer de biblioteca espectral personalitzat o d'una imatge personalitzada.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>Fiter que cont&eacute; els espectres que es tornaran a mostrejar. Els espectres de la biblioteca d'entrada han de ser un fitxer de biblioteca espectral d' Esri (<code>.esl</code>).
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>Sensor de la destinaci&oacute;, fitxer de biblioteca espectral personalitzat o imatge personalitzada que cont&eacute; els espectres de destinaci&oacute;.
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>Fitxer de la biblioteca espectral (<code>.esl</code>) o imatge que cont&eacute; els espectres de destinaci&oacute;. Si utilitzeu una imatge per als espectres de destinaci&oacute;, ha de contenir informaci&oacute; sobre longituds d'ona.
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>M&egrave;tode de remostreig que es fa servir per tornar a mostrejar el fitxer de la biblioteca espectral d'entrada.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Nom de la biblioteca espectral d' Esri (<code>.esl</code>) que es crea.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Tipus de sortida que es crear&agrave;. La sortida pot ser una capa d'imatges en mosaic o una capa d'imatges din&agrave;miques.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Nom de la carpeta d' <b>El meu contingut</b> on es desar&agrave; el resultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

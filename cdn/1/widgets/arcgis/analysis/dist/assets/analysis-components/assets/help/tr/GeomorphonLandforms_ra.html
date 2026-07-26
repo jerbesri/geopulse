@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Geomorphon Yery&uuml;z&uuml; Şekilleri aracı, girdi olarak verilen bir y&uuml;zey rasterındaki her bir h&uuml;crenin geomorphon desenini hesaplar ve bunları yaygın yery&uuml;z&uuml; şekli t&uuml;rleri olarak sınıflandırır.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>Hesaplamalar i&ccedil;in kullanılacak y&uuml;kselti rasterı. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p> <b>Arama mesafesi</b> ve <b>Atlama mesafesi</b> parametreleri i&ccedil;in kullanılacak mesafe birimi. Varsayılan H&uuml;crelerdir.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Geomorphon deseninin belirlenmesinde kullanılan alanın yarı&ccedil;apını tanımlayan, hedef h&uuml;creyle aradaki mesafe. Varsayılan 10 h&uuml;credir.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Analiz alanının başladığı hedef h&uuml;creden mesafe.  <b>Arama mesafesi</b> parametre değerinden k&uuml;&ccedil;&uuml;k olmalıdır.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Hedef h&uuml;crenin d&uuml;z olarak sınıflandırılacağı eşik değeri (derece cinsinden). Varsayılan 1 derecedir.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Dikey z değerlerinin doğrusal birimi.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>Oluşturulacak ve haritaya eklenecek yery&uuml;z&uuml; şekilleri raster katmanının adı.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>Oluşturulacak ve haritaya eklenecek geomorphon raster katmanının adı.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Oluşturulacak &ccedil;ıktının t&uuml;r&uuml;. &Ccedil;ıktı, d&ouml;şemeli g&ouml;r&uuml;nt&uuml; katmanı veya dinamik g&ouml;r&uuml;nt&uuml; katmanı olabilir.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p> <b>İ&ccedil;eriğim</b> i&ccedil;inde sonucun kaydedileceği klas&ouml;r&uuml;n adı.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>تحسب أداةGeomorphon Landforms نمط الجيومورفون لكل خلية في البيانات النقطية للسطح المدخل وتصنفها إلى أنواع أشكال الأرض الشائعة.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>البيانات النقطية للارتفاع التي ستُستخدم في العمليات الحسابية. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>وحدة المسافة التي ستُستخدم لمعلمتي  <b>مسافة البحث</b> و <b>مسافة التخطي</b>. الخيار الافتراضي هو الخلايا.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>المسافة بعيدًا عن الخلية الهدف التي تحدد نصف قطر المساحة المُستخدمة لتحديد نمط الجيومورفون. الخيار الافتراضي هو 10 خلايا.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>المسافة بعيدًا عن الخلية الهدف حيث تبدأ مساحة التحليل. يجب أن تكون أقل من قيمة معلمة  <b>مسافة البحث</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>الحد (بالدرجات) الذي سيتم تصنيف الخلية الهدف&nbsp;دونه&nbsp;على أنها مستوية. الوضع الافتراضي هو 1 درجة.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>الوحدة الخطية لقيم z الرأسية.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>اسم طبقة البيانات النقطية الخاصة بأشكال الأرض التي سيتم إنشاؤها وإضافتها إلى الخريطة.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>اسم طبقة البيانات النقطية الخاصة بالجيومورفون التي سيتم إنشاؤها وإضافتها إلى الخريطة.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>نوع المخرجات التي سيتم إنشاؤها. يمكن أن تكون المخرجات عبارة عن طبقة صور متجانبة أو طبقة صور ديناميكية.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>اسم المجلد الموجود في  <b>المحتوى الخاص بي</b> الذي سيتم حفظ النتيجة فيه.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

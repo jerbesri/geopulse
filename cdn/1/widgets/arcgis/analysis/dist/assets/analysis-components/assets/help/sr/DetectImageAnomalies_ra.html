@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Alatka Detektuj anomalije snimka kreira raster rezultata anomalije iz ulaznog snimka sa vi&scaron;e opsega ili hiperspektralnog snimka. Raster rezultata anomalije je raster sa jednim opsegom sa vrednostima između nula i jedan.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Snimak sa vi&scaron;e opsega ili hiperspektralni snimak koji sadrži anomalije koje treba detektovati.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Metod koji se koristi za detektovanje anomalija.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>Sloj poligonalnih geoobjekata koji defini&scaron;e region koji se koristi za izračunavanje pozadinske statistike. Ovaj parametar se pojavljuje samo ako je opcija  <b>Metod izračunavanja anomalije</b> postavljena na <b>RXD</b> ili <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>Određuje da li se statistika ponovo izračunava za ulazni raster kada je opcija  <b>Metod izračunavanja anomalije</b> postavljena na <b>RXD</b> ili <b>UTD</b>, za čije izvr&scaron;avanje je potrebna precizna statistika. Ako je označeno, statistika se ponovo izračunava za ulazni raster. Ako nije označeno, statistika se ne izračunava ponovo.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>Broj klastera koji se koriste ako je opcija  <b>Metod izračunavanja anomalije</b> postavljena na <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Naziv sloja koji će biti kreiran i dodat mapi.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Tip izlaza koji će biti kreiran. Izlaz može biti sloj sa popločanim slikama ili sloj dinamičkih slika.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Naziv fascikle u  <b>Mom sadržaju</b> u kojoj će rezultat biti sačuvan.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

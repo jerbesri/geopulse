@@ -1,0 +1,24 @@
+{
+  "expandAll": "Expand all",
+  "collapseAll": "Collapse all",
+  "categoryItem": {
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "editCategory": "Edit category",
+    "deleteCategory": "Delete category",
+    "addSubcategory": "Add subcategory",
+    "addCategory": "Add category",
+    "save": "Save",
+    "cancel": "Cancel",
+    "missingTitleMessage": "The category title is required.",
+    "errors": {
+      "generic": "Something went wrong. Please try again later.",
+      "maxDepthExceeded": "You cannot nest categories more than 2 levels deep.",
+      "destinationHasSameName": "A category with the same name already exists in the destination category.",
+      "emptyTitle": "Category title cannot be empty.",
+      "noSchema": "Item schema not found for user.",
+      "maxCharacter": "Category name exceeds the allowed character limit."
+    },
+    "dragHandleLabel": "Drag to reorder."
+  }
+}

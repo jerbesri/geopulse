@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Инструментът &bdquo;Анализ 80-20&ldquo; идентифицира местоположения, където възникват непропорционално голям дял от инцидентите, използвайки Парето (80/20) анализ.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Точковият слой, който ще се използва за изчисляване на местоположенията, където възникват непропорционално много инциденти.
+            </p>
+            <p class="toolPaneOnly">Броят на обектите зависи от допълнителни фактори, като например критериите за филтриране и обхвата за анализ.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Указва дали входните точки ще бъдат обобщени чрез метода за групирне по общ признак &bdquo;Определено разстояние (DBSCAN)&ldquo; (<b>Клъстер на точките</b>) или чрез въведена сравнителна линия или полигонов обект (<b>Най-близкия обект</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Максималното разстояние, при което точките ще се считат за част от един и същ клъстер. Ако не е указан толеранс на клъстера, инструментът ще създаде клъстер, при който точкови обекти се припокриват.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Линейният или полигоновият слой, използван за обобщаване на точки по най-близкия обект.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Полето от входните точки и сравнителните обекти, което ще бъде използвано за сравняване на най-близките обекти. В изходния резултат ще бъдат включени само записи от входните обекти, при които има съответствие между стойностите на полета и сравнителните обекти.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Полетата от входните обекти, които ще бъдат прехвърлени към изходните.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Името на слоя, който ще бъде създаден и добавен към картата.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Името на папка в  <b>Моето съдържание</b>, където резултатите ще бъдат запазени.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

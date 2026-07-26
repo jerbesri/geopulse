@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Das Werkzeug &quot;Bildabweichungen erkennen&quot; erstellt f&uuml;r ein Eingabe-Multiband-Bild oder ein Eingabe-Hyperspektralbild ein Punktzahl-Raster f&uuml;r Abweichungen. Das Punktzahl-Raster f&uuml;r Abweichungen ist ein Einzelband-Raster mit Werten zwischen 0 und 1.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Das Multiband- oder Hyperspektralbild, das die zu erkennenden Abweichungen enth&auml;lt.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Die zum Erkennen von Abweichungen verwendete Methode.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>Der Polygon-Feature-Layer, der die Region definiert, die zum Berechnen der Hintergrundstatistik verwendet wird. Dieser Parameter wird nur angezeigt, wenn  <b>Berechnungsmethode f&uuml;r Abweichung</b> auf <b>RXD</b> oder <b>UTD</b> festgelegt ist.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>Gibt an, ob die Statistik f&uuml;r das Eingabe-Raster neu berechnet wird, wenn  <b>Berechnungsmethode f&uuml;r Abweichung</b> auf <b>RXD</b> oder <b>UTD</b> festgelegt ist, da f&uuml;r diese Methoden genaue Statistiken erforderlich sind. Wenn diese Einstellung aktiviert ist, wird die Statistik f&uuml;r das Eingabe-Raster neu berechnet. Wenn diese Einstellung deaktiviert ist, wird die Statistik nicht neu berechnet.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>Die Anzahl der zu verwendenden Cluster, wenn  <b>Berechnungsmethode f&uuml;r Abweichung</b> auf <b>KMEANS</b> festgelegt ist.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Der Name des Layers, der erstellt und der Karte hinzugef&uuml;gt wird.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Die Art der Ausgabe, die erstellt wird. Die Ausgabe kann ein gekachelter Bilddaten-Layer oder ein dynamischer Bilddaten-Layer sein.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Der Name des Ordners in  <b>Eigene Inhalte</b>, in dem das Ergebnis gespeichert werden soll.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

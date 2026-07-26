@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>N&aacute;stroj Sumarizovať kategorick&yacute; raster je n&aacute;stroj na anal&yacute;zu rastra, ktor&yacute; generuje tabuľku obsahuj&uacute;cu počet pixelov pre každ&uacute; kateg&oacute;riu v každom reze vstupn&eacute;ho multidimenzion&aacute;lneho kategorick&eacute;ho rastra.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>Určuje kategorick&yacute; raster na sumariz&aacute;ciu. Vstupn&yacute; kategorick&yacute; raster mus&iacute; byť typu cel&eacute; č&iacute;slo.
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>Určuje dimenziu použit&uacute; na sumariz&aacute;ciu vstupn&eacute;ho rastra. Ak existuje viac ako jedna dimenzia a nie je zadan&aacute; žiadna hodnota, v&scaron;etky rezy sa zosumarizuj&uacute; pomocou v&scaron;etk&yacute;ch kombin&aacute;ci&iacute; hodn&ocirc;t dimenzi&iacute;.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>Určuje prvkov&uacute; vrstvu polyg&oacute;nov obsahuj&uacute;cu oblasť alebo oblasti z&aacute;ujmu, ktor&eacute; sa maj&uacute; použiť pri v&yacute;počte počtu pixelov na kateg&oacute;riu. Ak nie je &scaron;pecifikovan&aacute; žiadna oblasť z&aacute;ujmu, pri anal&yacute;ze sa použije cel&yacute; rastrov&yacute; dataset.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>Určuje pole v polyg&oacute;novej prvkovej vrstve, ktor&eacute; definuje každ&uacute; z&aacute;ujmov&uacute; oblasť.
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>N&aacute;zov vrstvy, ktor&aacute; sa vytvor&iacute; a prid&aacute; do mapy.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>N&aacute;zov priečinka v r&aacute;mci  <b>M&ocirc;j obsah</b>, do ktor&eacute;ho sa ulož&iacute; v&yacute;sledok.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

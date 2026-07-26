@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Synth&eacute;tiser le raster cat&eacute;gorique est un outil d&rsquo;analyse raster qui g&eacute;n&egrave;re une table contenant le nombre de pixels pour chaque cat&eacute;gorie dans chaque tranche d&rsquo;un raster cat&eacute;goriel multidimensionnel en entr&eacute;e.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>Indique le raster cat&eacute;goriel &agrave; classer. Le raster cat&eacute;goriel en entr&eacute;e doit &ecirc;tre de type entier.
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>Indique la dimension utilis&eacute;e pour synth&eacute;tiser le raster en entr&eacute;e. S&rsquo;il existe plusieurs dimensions et qu&rsquo;aucune valeur n&rsquo;est sp&eacute;cifi&eacute;e, toutes les tranches sont synth&eacute;tis&eacute;es &agrave; l&rsquo;aide de toutes les combinaisons de valeurs de dimension.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>Indique la couche d&rsquo;entit&eacute;s surfaciques contenant la ou les zones d&rsquo;int&eacute;r&ecirc;t &agrave; utiliser lors du calcul du nombre de pixels par cat&eacute;gorie. Si aucune zone d&rsquo;int&eacute;r&ecirc;t n&rsquo;est sp&eacute;cifi&eacute;e, l&rsquo;ensemble du jeu de donn&eacute;es raster est utilis&eacute; dans l&rsquo;analyse.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>Indique le champ dans la couche d&rsquo;entit&eacute;s surfaciques qui d&eacute;finit chaque zone d&rsquo;int&eacute;r&ecirc;t.
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>Nom de la couche &agrave; cr&eacute;er et ajouter &agrave; la carte.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Nom du dossier de  <b>My content (Mon contenu)</b> dans lequel est enregistr&eacute; le r&eacute;sultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

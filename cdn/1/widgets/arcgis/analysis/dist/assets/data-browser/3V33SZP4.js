@@ -1,0 +1,1 @@
+import{G as t}from"./JGBFLJ2V.js";var e=t({defaultAssetPath:"https://jsdev.arcgis.com/5.1.0-next/data-browser/",hydratedAttribute:"hydrated"}),{customElement:o,getAssetPath:m,setAssetPath:u}=e;e.t=void 0,e.o=void 0,e.c=void 0,e.r=void 0;export{e as a,o as b,m as c};

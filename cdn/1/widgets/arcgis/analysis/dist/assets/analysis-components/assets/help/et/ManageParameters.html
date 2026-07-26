@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Mudeli parameetrite seaded veebit&ouml;&ouml;riista avaldamisel.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>See tekst kuvatakse veebit&ouml;&ouml;riista kasutajaliideses parameetri nimena. M&auml;rgis peaks olema l&uuml;hike, parameetri eesm&auml;rki kirjeldav ja lihtsas keeles kirjutatud.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>See tekst ilmub parameetri h&uuml;pikaknana ja annab veebit&ouml;&ouml;riista kasutajale teavet selle kohta, kuidas t&ouml;&ouml;riista parameetrit t&auml;ita. Lisage vajaduse korral kirjeldus selle kohta, mida parameeter teeb, kuidas erinevad v&auml;&auml;rtused m&otilde;jutavad t&ouml;&ouml;riista tulemusi, toetatud sisendeid ja vaikev&auml;&auml;rtusi.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Parameetri toetatud andmet&uuml;&uuml;p. See v&auml;&auml;rtus on m&auml;&auml;ratud muutuja andmet&uuml;&uuml;biga ja seda ei saa muuta.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>M&auml;&auml;rab, kas parameeter on sisend v&otilde;i v&auml;ljund. See v&auml;&auml;rtus on m&auml;&auml;ratud t&ouml;&ouml;riista parameetriga ja seda ei saa muuta.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>M&auml;&auml;rab, kas parameetril on vaikev&auml;&auml;rtus. Kui see on sisse l&uuml;litatud, kasutab parameeter muutuja v&auml;&auml;rtusel p&otilde;hinevat vaikev&auml;&auml;rtust. Kui see on v&auml;lja l&uuml;litatud, on parameeter vaikimisi t&uuml;hi. Vaikev&auml;&auml;rtust v&otilde;ib kasutada selleks, et suunata kasutaja sisestusi v&otilde;i muuta veebit&ouml;&ouml;riista k&auml;ivitamist lihtsamaks, sest kasutaja ei pea parameetrit k&auml;sitsi uuendama.
+            </p>
+            <p>Vaikev&auml;&auml;rtusi ei tohiks kasutada parameetrite puhul, mille soovite v&otilde;ib-olla t&uuml;hjaks j&auml;tta (n&auml;iteks valikuline sisendandmestik).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Parameetri vaikev&auml;&auml;rtus. Vaikev&auml;&auml;rtuse muutmiseks ajakohastage muutuja v&auml;&auml;rtust mudeli diagrammil. Vaikev&auml;&auml;rtus peaks olema v&auml;&auml;rtus, mis annab enamikul juhtudel t&auml;pse v&otilde;i eelistatud tulemuse.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>T&auml;psustab, kas parameeter on veebit&ouml;&ouml;riista k&auml;ivitamiseks n&otilde;utav. Kui mudeliparameeter on seotud &uuml;he v&otilde;i mitme n&otilde;utava t&ouml;&ouml;riistaparameetriga, l&uuml;litatakse see v&auml;&auml;rtus sisse ja seda ei saa redigeerida. Kui k&otilde;ik &uuml;hendatud t&ouml;&ouml;riista parameetrid on valikulised, saab mudeli parameetri sisse l&uuml;litada, et muuta parameeter n&otilde;utavaks, v&otilde;i v&auml;lja l&uuml;litada, et muuta parameeter valikuliseks. Parameetri n&otilde;utavaks muutmine sunnib kasutajat enne veebit&ouml;&ouml;riista k&auml;ivitamist sisendit esitama.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>T&auml;psustab, kas t&ouml;&ouml;riista parameetri sisenditel on piirangud. Filtri valikud s&otilde;ltuvad parameetri t&uuml;&uuml;bist j&auml;rgmiselt:
+            </p>
+            <ul>
+                <li>String &mdash; valige, millised kordumatud v&auml;&auml;rtused on saadaval.
+                </li>
+                <li>Objektikiht &mdash; valige, millised objektit&uuml;&uuml;bid on saadaval.
+                </li>
+                <li>T&auml;isarv &mdash; m&auml;&auml;rake minimaalne ja maksimaalne v&auml;&auml;rtus.
+                </li>
+                <li>Kahekordne &mdash; m&auml;&auml;rake minimaalne ja maksimaalne v&auml;&auml;rtus.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

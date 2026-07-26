@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>80/20 分析工具使用柏拉圖(80/20)分析法，辨識出事件發生率過高的位置。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>用於計算事件發生率過高的位置的點圖層。
+            </p>
+            <p class="toolPaneOnly">圖徵的計數取決於其他因素，例如篩選準則和分析範圍。
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>指定輸入點將使用定義的距離(DBSCAN)叢集方法(<b>點叢集</b>)，還是使用輸入比較線或多邊形圖徵(<b>最近圖徵</b>)進行匯聚。
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>被判定為同一叢集距離最遠的點的位置。 如果沒有指定叢集容差，則工具將建立一個點圖徵重疊的叢集。
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>用於依最近圖徵匯聚點的線或多邊形圖層。
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>來自輸入點和比較圖徵的欄位，將用於匹配最接近的圖徵。 只有輸入圖徵中與比較圖徵欄位值相符的記錄才會包含在輸出中。
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>將要傳輸到輸出的輸入圖徵的欄位。
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>將建立並新增到地圖之圖層的名稱。
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p> <b>我的內容</b>中將儲存結果的資料夾名稱。
+            </p>
+        </div>
+    </div>
+</div>
+</html>

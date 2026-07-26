@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>N&aacute;stroj Sumarizace kategorick&eacute;ho rastru je n&aacute;stroj pro rastrovou anal&yacute;zu, kter&yacute; generuje tabulku obsahuj&iacute;c&iacute; počet pixelů pro každou kategorii v každ&eacute;m řezu vstupn&iacute;ho v&iacute;cerozměrn&eacute;ho kategorick&eacute;ho rastru.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>Určuje kategorick&yacute; rastr, kter&yacute; m&aacute; b&yacute;t sumarizov&aacute;n. Vstupn&iacute; kategorick&yacute; rastr mus&iacute; b&yacute;t celoč&iacute;seln&eacute;ho typu.
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>Určuje rozměr použit&yacute; k sumarizaci vstupn&iacute;ho rastru. Pokud existuje v&iacute;ce než jeden rozměr a nen&iacute; zad&aacute;na ž&aacute;dn&aacute; hodnota, budou v&scaron;echny řezy sumarizov&aacute;ny pomoc&iacute; v&scaron;ech kombinac&iacute; hodnot rozměrů.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>Určuje vrstvu polygonov&yacute;ch prvků obsahuj&iacute;c&iacute; oblast nebo oblasti z&aacute;jmu, kter&eacute; se použij&iacute; při v&yacute;počtu počtu pixelů na kategorii. Pokud nen&iacute; zad&aacute;na ž&aacute;dn&aacute; z&aacute;jmov&aacute; oblast, použije se v anal&yacute;ze cel&aacute; rastrov&aacute; datov&aacute; sada.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>Určuje pole ve vrstvě polygonov&yacute;ch prvků, kter&eacute; definuje každou z&aacute;jmovou oblast.
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>N&aacute;zev vrstvy, kter&aacute; bude vytvořena a přid&aacute;na do mapy.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>N&aacute;zev složky v č&aacute;sti  <b>Můj obsah</b>, do kter&eacute; bude v&yacute;sledek uložen.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

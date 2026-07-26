@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>N&aacute;stroj Prevzorkovať Spectra knižnicu prevzorkov&aacute;va vstupn&eacute; spektr&aacute; knižnice tak, aby zodpovedali počtu p&aacute;siem a rozsahu vlnov&yacute;ch dĺžok cieľov&yacute;ch spektier. Tie m&ocirc;žu poch&aacute;dzať z cieľov&eacute;ho senzora, vlastn&eacute;ho s&uacute;boru spektr&aacute;lnej knižnice alebo vlastnej sn&iacute;mky.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>S&uacute;bor obsahuj&uacute;ci spektr&aacute;, ktor&eacute; bud&uacute; prevzorkovan&eacute;. Vstupn&eacute; spektr&aacute; knižnice musia byť v s&uacute;bore spektr&aacute;lnej knižnice typu Esri (<code>.esl</code>).
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>Cieľov&yacute; senzor, vlastn&yacute; s&uacute;bor spektr&aacute;lnej knižnice alebo vlastn&aacute; sn&iacute;mka obsahuj&uacute;ca cieľov&eacute; spektr&aacute;.
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>S&uacute;bor spektr&aacute;lnej knižnice (<code>.esl</code>) alebo sn&iacute;mka obsahuj&uacute;ca cieľov&eacute; spektr&aacute;. Ak ako cieľov&eacute; spektr&aacute; použijete sn&iacute;mku, mus&iacute; obsahovať inform&aacute;cie o vlnov&yacute;ch dĺžkach.
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>Met&oacute;da prevzorkovania použit&aacute; na prevzorkovanie vstupn&eacute;ho s&uacute;boru spektr&aacute;lnej knižnice.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>N&aacute;zov vytvoren&eacute;ho s&uacute;boru spektr&aacute;lnej knižnice typu  Esri (<code>.esl</code>).
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Typ v&yacute;stupu, ktor&yacute; bude vytvoren&yacute;. V&yacute;stupom m&ocirc;že byť dlaždicov&aacute; sn&iacute;mkov&aacute; vrstva alebo dynamick&aacute; sn&iacute;mkov&aacute; vrstva.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>N&aacute;zov priečinka v r&aacute;mci  <b>M&ocirc;j obsah</b>, do ktor&eacute;ho sa ulož&iacute; v&yacute;sledok.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

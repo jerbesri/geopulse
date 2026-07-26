@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Nastavenia parametrov modelu pri publikovan&iacute; webov&eacute;ho n&aacute;stroja.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Tento text sa zobraz&iacute; ako n&aacute;zov parametra v rozhran&iacute; webov&eacute;ho n&aacute;stroja. Popis by mal byť kr&aacute;tky, mal by popisovať &uacute;čel parametra a byť nap&iacute;san&yacute; v jednoduchom jazyku.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Tento text sa zobraz&iacute; ako kontextov&aacute; pomoc k parametru a poskytne použ&iacute;vateľovi webov&eacute;ho n&aacute;stroja inform&aacute;cie o tom, ako vyplniť parameter n&aacute;stroja. Zahrňte popis toho, čo parameter rob&iacute;, ako r&ocirc;zne hodnoty ovplyvňuj&uacute; v&yacute;sledky n&aacute;stroja, podporovan&eacute; vstupy a podľa potreby predvolen&eacute; hodnoty.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Podporovan&yacute; d&aacute;tov&yacute; typ pre parameter. T&aacute;to hodnota je určen&aacute; d&aacute;tov&yacute;m typom premennej a nie je možn&eacute; ju zmeniť.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Určuje, či je parameter vstupom alebo v&yacute;stupom. T&aacute;to hodnota je určen&aacute; parametrom n&aacute;stroja a nie je možn&eacute; ju zmeniť.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Určuje, či m&aacute; parameter predvolen&uacute; hodnotu. Keď je parameter zapnut&yacute;, použije predvolen&uacute; hodnotu na z&aacute;klade hodnoty premennej. Keď je parameter vypnut&yacute;, bude predvolene pr&aacute;zdny. Predvolen&aacute; hodnota sa m&ocirc;že použiť na usmernenie vstupov použ&iacute;vateľa alebo na uľahčenie spustenia webov&eacute;ho n&aacute;stroja, pretože použ&iacute;vateľ nemus&iacute; aktualizovať parameter manu&aacute;lne.
+            </p>
+            <p>Predvolen&eacute; hodnoty by sa nemali použ&iacute;vať pre parametre, ktor&eacute; chcete nechať pr&aacute;zdne (napr&iacute;klad voliteľn&yacute; vstupn&yacute; dataset).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Predvolen&aacute; hodnota pre parameter. Ak chcete zmeniť predvolen&uacute; hodnotu, aktualizujte hodnotu premennej v modelovom diagrame. Predvolen&aacute; hodnota by mala byť hodnota, ktor&aacute; vo v&auml;č&scaron;ine pr&iacute;padov poskytne presn&yacute; alebo preferovan&yacute; v&yacute;sledok.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Určuje, či je parameter potrebn&yacute; na spustenie webov&eacute;ho n&aacute;stroja. Ak je parameter modelu pripojen&yacute; k jedn&eacute;mu alebo viacer&yacute;m požadovan&yacute;m parametrom n&aacute;stroja, t&aacute;to hodnota bude zapnut&aacute; a nebude možn&eacute; ju editovať. Ak s&uacute; v&scaron;etky parametre pripojen&eacute;ho n&aacute;stroja voliteľn&eacute;, parameter modelu je možn&eacute; zapn&uacute;ť, aby bol parameter povinn&yacute;, alebo vypn&uacute;ť, aby bol parameter voliteľn&yacute;. Ak nastav&iacute;te parameter ako povinn&yacute;, prin&uacute;tite použ&iacute;vateľa poskytn&uacute;ť vstup pred spusten&iacute;m webov&eacute;ho n&aacute;stroja.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Určuje, či bud&uacute; vstupy parametrov n&aacute;stroja obmedzen&eacute;. Možnosti filtrovania z&aacute;visia od typu parametra takto:
+            </p>
+            <ul>
+                <li>Reťazec &ndash; vyberte, ktor&eacute; jedinečn&eacute; hodnoty s&uacute; k dispoz&iacute;cii.
+                </li>
+                <li>Prvkov&aacute; vrstva &ndash; vyberte, ktor&eacute; typy prvkov s&uacute; k dispoz&iacute;cii.
+                </li>
+                <li>Cel&eacute; č&iacute;slo &ndash; zadajte minim&aacute;lnu a maxim&aacute;lnu hodnotu.
+                </li>
+                <li>Desatinn&eacute; č&iacute;slo &ndash; zadajte minim&aacute;lnu a maxim&aacute;lnu hodnotu.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

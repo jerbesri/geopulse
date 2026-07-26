@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Lo strumento Analisi 80-20 identifica le posizioni in cui si verifica una percentuale sproporzionatamente ampia di incidenti utilizzando l'analisi di Pareto (80/20).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Il layer punto verr&agrave; utilizzato per calcolare le posizione in cui si verificano incidenti in modo sproporzionato.
+            </p>
+            <p class="toolPaneOnly">Il conteggio di feature dipende da altri fattori, come i criteri di filtraggio e l'estensione analisi.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Specifica se i punti di input saranno raggruppati utilizzando il metodo di clustering distanza definita (DBSCAN) (<b>cluster di punti</b>), una linea di confronto oppure una feature poligono (<b>feature pi&ugrave; vicina</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>La distanza massima in cui i punti saranno considerati parte dello stesso cluster. Se non viene specificata alcuna tolleranza cluster, lo strumento creer&agrave; un cluster in cui le feature punto si sovrappongono.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Il layer linea o poligono utilizzato per raggruppare i punti tramite la feature pi&ugrave; vicina.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Il campo dai punti di input e le feature di confronto che saranno utilizzati per la corrispondenza alle feature pi&ugrave; vicine. Solo i record delle feature di input che corrispondono ai valori dei campi con le feature di confronto saranno inclusi nell'output.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>I campi delle feature di input che saranno trasferiti all'output.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Il nome del layer che sar&agrave; creato e aggiunto alla mappa.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Il nome della cartella in  <b>I miei contenuti</b> in cui sar&agrave; salvato il risultato.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

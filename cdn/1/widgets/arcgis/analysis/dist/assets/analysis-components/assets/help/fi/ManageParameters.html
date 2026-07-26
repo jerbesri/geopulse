@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Malliparametrien asetukset, kun verkkoty&ouml;kalu julkaistaan.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>T&auml;m&auml; teksti n&auml;kyy parametrin nimen&auml; verkkoty&ouml;kalun k&auml;ytt&ouml;liittym&auml;ss&auml;. Tunnustekstin tulee olla lyhyt ja kuvata parametrin k&auml;ytt&ouml;tarkoitusta. Tunnusteksti tulee kirjoittaa selkokielell&auml;.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>T&auml;m&auml; teksti n&auml;kyy parametrin ponnahdusikkunaohjeena ja antaa verkkoty&ouml;kalun k&auml;ytt&auml;j&auml;lle tietoja siit&auml;, miten ty&ouml;kalun parametri t&auml;ytet&auml;&auml;n. Sis&auml;llyt&auml; tarpeen mukaan kuvaus tuetuista l&auml;ht&ouml;aineistoista, oletusarvoista ja siit&auml;, miten parametri toimii ja miten eri arvot vaikuttavat ty&ouml;kalun tuloksiin.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Parametrin tuettu tietotyyppi. Muuttujan tietotyyppi m&auml;&auml;ritt&auml;&auml; t&auml;m&auml;n arvon, eik&auml; sit&auml; voi muuttaa.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>M&auml;&auml;ritt&auml;&auml;, onko parametri l&auml;ht&ouml;- vai tulosaineisto. Ty&ouml;kalun parametri m&auml;&auml;ritt&auml;&auml; t&auml;m&auml;n arvon, eik&auml; sit&auml; voi muuttaa.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>M&auml;&auml;ritt&auml;&auml;, onko parametrill&auml; oletusarvoa. Kun t&auml;m&auml; on k&auml;yt&ouml;ss&auml;, parametri k&auml;ytt&auml;&auml; oletusarvoa muuttujan arvon perusteella. Kun t&auml;m&auml; ei ole k&auml;yt&ouml;ss&auml;, parametri on tyhj&auml; oletuksena. Oletusarvoa voidaan k&auml;ytt&auml;&auml; k&auml;ytt&auml;j&auml;n l&auml;ht&ouml;aineistojen ohjaamiseen tai verkkoty&ouml;kalun suorittamisen helpottamiseen, koska k&auml;ytt&auml;j&auml;n ei tarvitse p&auml;ivitt&auml;&auml; parametria manuaalisesti.
+            </p>
+            <p>Oletusarvoja ei saa k&auml;ytt&auml;&auml; parametreille, jotka haluat ehk&auml; j&auml;tt&auml;&auml; tyhjiksi (esimerkiksi valinnainen l&auml;ht&ouml;aineistoryhm&auml;).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Parametrin oletusarvo. Jos haluat muuttaa oletusarvoa, p&auml;ivit&auml; muuttuja mallikaaviossa. Oletusarvon tulee olla arvo, joka tuottaa useimmissa tapauksissa tarkan tai halutun tuloksen.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>M&auml;&auml;ritt&auml;&auml;, tarvitaanko parametria verkkoty&ouml;kalun suorittamiseen. Jos malliparametri on liitetty yhteen tai useaan pakolliseen ty&ouml;kalun parametriin, t&auml;m&auml; arvo otetaan k&auml;ytt&ouml;&ouml;n eik&auml; sit&auml; voi muokata. Jos kaikki yhdistetyt ty&ouml;kalun parametrit ovat valinnaisia, parametrista voidaan tehd&auml; pakollinen ottamalla malliparametri k&auml;ytt&ouml;&ouml;n tai parametrista voidaan tehd&auml; valinnainen poistamalla malliparametri k&auml;yt&ouml;st&auml;. Jos parametrist&auml; tehd&auml;&auml;n pakollinen, k&auml;ytt&auml;j&auml;n on annettava l&auml;ht&ouml;aineisto ennen kuin verkkoty&ouml;kalu voidaan suorittaa.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>M&auml;&auml;ritt&auml;&auml;, liittyyk&ouml; ty&ouml;kalun parametrien sy&ouml;tteisiin rajoitteita. Suodatusasetukset riippuvat parametrin tyypist&auml; seuraavasti:
+            </p>
+            <ul>
+                <li>Merkkijono: valitse, mitk&auml; yksil&ouml;lliset arvot ovat k&auml;ytett&auml;viss&auml;.
+                </li>
+                <li>Kohdekarttataso: valitse, mitk&auml; kohdetyypit ovat k&auml;ytett&auml;viss&auml;.
+                </li>
+                <li>Kokonaisluku: valitse v&auml;himm&auml;is- ja enimm&auml;isarvo.
+                </li>
+                <li>Kaksois: m&auml;&auml;rit&auml; v&auml;himm&auml;is- ja enimm&auml;isarvo.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

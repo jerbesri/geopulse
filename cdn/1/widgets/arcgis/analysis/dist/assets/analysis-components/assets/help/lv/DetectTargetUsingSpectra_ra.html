@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Rīks Detect Target Using Spectra aprēķina atbilstības vērtējumu katram pikselim ievades rastrā, pamatojoties uz to, cik labi pikseļa spektrs atbilst mērķa spektriem, kas definēti ievades spektrālā signatūras failā.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Daudzjoslu rastrs, kas satur detektējamos mērķa pikseļus.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Ievades spektrālā paraksta faila veids.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>Spektrālā paraksta fails, kas ietver mērķa spektrus.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Metode, kas tiek izmantota atbilstības vērtējumu aprēķinā&scaron;anai starp ievades rastru un spektrālā paraksta failu.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Norāda, vai spektri ir normalizēti, ko var veikt, izmantojot attēlu vai atsauces datus. Ja &scaron;ī opcija nav atzīmēta, spektri netiek normalizēti. Ja &scaron;ī opcija ir atzīmēta, spektri tiek normalizēti.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Slāņa nosaukums, kas satur izveidoto un attēloto atbilstības novērtējuma rastru.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Izveidotās izvades veids. Izvade var būt mozaīkas attēlu slānis vai dinamisks attēlu slānis.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Mapes nosaukums sadaļā  <b>Mans saturs</b>, kurā tiks saglabāts rezultāts.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

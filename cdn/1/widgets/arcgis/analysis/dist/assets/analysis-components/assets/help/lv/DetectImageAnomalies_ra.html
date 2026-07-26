@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Rīks Noteikt attēla anomālijas (Detect Image Anomalies) izveido anomāliju novērtējuma rastru no ievades daudzjoslu vai hiperspektrāla attēla. Anomāliju novērtējuma rastrs ir vienjoslas rastrs ar vērtībām no nulles līdz viens.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Daudzjoslu vai hiperspektrāls attēls, kurā ir konstatējamas anomālijas.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Metode, kas izmantota anomāliju noteik&scaron;anai.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>Daudzstūru objektu slānis, kas nosaka reģionu, kas tiek izmantots fona statistikas aprēķinā&scaron;anai. &Scaron;is parametrs parādās tikai tad, ja  <b>anomāliju aprēķina metode</b> ir iestatīta uz <b>RXD</b> vai <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>Norāda, vai ievades rastram tiek pārrēķināta statistika, ja  <b>anomāliju aprēķina metode</b> ir iestatīta uz <b>RXD</b> vai <b>UTD</b>, kuru darbībai ir nepiecie&scaron;ama precīza statistika. Ja &scaron;ī opcija ir atzīmēta, ievades rastram tiek pārrēķinātas statistikas vērtības. Ja &scaron;ī opcija nav atzīmēta, statistikas vērtības netiek pārrēķinātas.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>Klasteru skaits, kas jāizmanto, ja  <b>anomāliju aprēķina metode</b> ir iestatīta uz <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Tā slāņa nosaukums, kas tiks izveidots un pievienots kartei.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Izveidotās izvades veids. Izvade var būt mozaīkas attēlu slānis vai dinamisks attēlu slānis.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Mapes nosaukums sadaļā  <b>Mans saturs</b>, kurā tiks saglabāts rezultāts.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

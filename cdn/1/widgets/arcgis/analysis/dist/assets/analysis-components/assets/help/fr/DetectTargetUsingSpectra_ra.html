@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>L&rsquo;outil D&eacute;tecter la cible &agrave; l&rsquo;aide de spectres calcule un score de correspondance pour chaque pixel en &eacute;valuant &agrave; quel point le spectre du pixel correspond aux spectres cible d&eacute;finis par un fichier de signature spectrale en entr&eacute;e.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Le raster multibande qui contient les pixels cible &agrave; d&eacute;tecter.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>Le type du fichier de signature spectrale en entr&eacute;e.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>Le fichier de signature spectrale contenant les spectres cible.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>La m&eacute;thode &agrave; utiliser pour calculer les scores de correspondance entre le raster en entr&eacute;e et le fichier de signature spectrale.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Indique si les spectres sont normalis&eacute;s, ce qui peut s&rsquo;effectuer &agrave; l&rsquo;aide d&rsquo;une image ou de donn&eacute;es de r&eacute;f&eacute;rence. Si ce param&egrave;tre n&rsquo;est pas s&eacute;lectionn&eacute;, les spectres ne sont pas normalis&eacute;s. S&rsquo;il est coch&eacute;, les spectres sont normalis&eacute;s.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Le nom de la couche qui contient le raster de score de correspondance cr&eacute;&eacute; et affich&eacute;.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Type de sortie &agrave; cr&eacute;er. La sortie peut &ecirc;tre une couche d&rsquo;imagerie tuil&eacute;e ou une couche d&rsquo;imagerie dynamique.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Nom du dossier de  <b>My content (Mon contenu)</b> dans lequel est enregistr&eacute; le r&eacute;sultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

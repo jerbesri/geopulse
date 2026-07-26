@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>A ferramenta Detectar anomalias na imagem cria um raster de pontua&ccedil;&atilde;o de anomalias a partir de uma imagem multibanda ou hiperespectral de entrada. O raster de pontua&ccedil;&atilde;o de anomalia &eacute; um raster de banda &uacute;nica com valores entre zero e um.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>A imagem multibanda ou hiperespectral que cont&eacute;m as anomalias a serem detectadas.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>O m&eacute;todo utilizado para detectar anomalias.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>A camada de fei&ccedil;&atilde;o de pol&iacute;gono que define a regi&atilde;o usada para calcular estat&iacute;sticas do plano de fundo. Este par&acirc;metro somente aparece se o  <b>M&eacute;todo de c&aacute;lculo de anomalias</b> for definido para <b>RXD</b> ou <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>Especifica se as estat&iacute;sticas s&atilde;o recalculadas para o raster de entrada quando o  <b>M&eacute;todo de c&aacute;lculo de anomalias</b> est&aacute; definido como <b>RXD</b> ou <b>UTD</b>, que exigem estat&iacute;sticas precisas para serem executadas. Se selecionada, as estat&iacute;sticas s&atilde;o recalculadas para o raster de entrada. Se desmarcado, as estat&iacute;sticas n&atilde;o ser&atilde;o recalculadas.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>O n&uacute;mero de agrupamentos a ser utilizado se o  <b>M&eacute;todo de c&aacute;lculo de anomalias</b> estiver definido como <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>O nome da camada que ser&aacute; criada e adicionada ao mapa.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>O tipo de sa&iacute;da que ser&aacute; criado. A sa&iacute;da pode ser uma camada de imagem mosaicada ou uma camada de imagem din&acirc;mica.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>O nome da pasta em  <b>Meu conte&uacute;do</b> onde o resultado ser&aacute; salvo.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

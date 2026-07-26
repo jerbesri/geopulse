@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>V&aelig;rkt&oslash;jet Registr&eacute;r billedanomalier opretter en raster med score for anomalitet ud fra et input-multib&aring;nd eller et hyperspektralbillede. Rasteren med score for anomalitet er en raster med enkelt b&aring;nd med v&aelig;rdier mellem nul og en.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>Multib&aring;ndet eller hyperspektralbilledet, der indeholder de anomalier, der skal registreres.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>Den metode, der bruges til at registrere anomalier.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>Det polygon-objektlag, der definerer den region, der bruges til at beregne baggrundsstatistik. Denne parameter vises kun, hvis  <b>Beregningsmetode for anomalier</b> er indstillet til <b>RXD</b> eller <b>UTD</b>.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p>Angiver, om statistik genberegnes for inputrasteren, n&aring;r  <b>Beregningsmetode for anomalier</b> er indstillet til <b>RXD</b> eller <b>UTD</b>, hvilket kr&aelig;ver, at statistikken er n&oslash;jagtig, hvis det skal v&aelig;re muligt. Hvis indstillingen er markeret, genberegnes statistikken for inputrasteren. Hvis indstillingen ikke er markeret, genberegnes statistikken for inputrasteren ikke.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p>Antallet af klynger, der skal bruges, hvis  <b>Beregningsmetode for anomalier</b> er indstillet til <b>KMEANS</b>.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Navnet p&aring; det lag, der oprettes og f&oslash;jes til kortet.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Den type output, der oprettes. Outputtet kan v&aelig;re et tile-billedlag eller et dynamisk billedlag.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Navnet p&aring; mappen  <b>Mit indhold</b>, hvor resultatet gemmes.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

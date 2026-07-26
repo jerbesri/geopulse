@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>80-20 分析ツールは、パレート (80/20) 解析を用いて、インシデントが過度に発生している位置を特定します。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>インシデントが過度に発生している位置を計算するために使用されるポイント レイヤー。
+            </p>
+            <p class="toolPaneOnly">フィーチャのカウントはフィルター処理条件や解析の範囲などのその他の要因によって異なります。
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>入力ポイントを、指定距離 (DBSCAN) クラスター分析手法 (<b>[ポイント クラスター]</b>) を使用して集約するか、入力比較ライン フィーチャまたはポリゴン フィーチャ (<b>[最近隣フィーチャ]</b>) を使用して集約するかを指定します。
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>ポイントが同じクラスターの一部として見なされる最大距離。 クラスター許容値が指定されない場合、ツールは、ポイント フィーチャが重なっているクラスターを作成します。
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>最近隣フィーチャごとにポイントの集約に使用される、ラインまたはポリゴン レイヤー。
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>最近隣フィーチャの照合に使用される、入力ポイントおよび比較用のフィーチャのフィールド。 入力比較フィーチャとフィールド値が一致する入力フィーチャのレコードのみが出力に含められます。
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>出力に渡す入力フィーチャのフィールド。
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>作成されマップに追加されるレイヤーの名前。
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>結果を保存する  <b>[マイ コンテンツ]</b> 内のフォルダーの名前。
+            </p>
+        </div>
+    </div>
+</div>
+</html>

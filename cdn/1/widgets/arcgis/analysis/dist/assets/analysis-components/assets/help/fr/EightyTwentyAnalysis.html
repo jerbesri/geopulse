@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>L&rsquo;outil Analyse 80/20 identifie les localisations qui concentrent un nombre important d&rsquo;incidents selon le principe de Pareto (ou r&egrave;gle des 80/20).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Couche ponctuelle utilis&eacute;e pour calculer les localisations concentrant un nombre important d&rsquo;incidents.
+            </p>
+            <p class="toolPaneOnly">Le nombre d&rsquo;entit&eacute;s d&eacute;pend de facteurs suppl&eacute;mentaires, tels que les crit&egrave;res de filtrage et l&rsquo;&eacute;tendue d&rsquo;analyse.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Indique si les points en entr&eacute;e sont agr&eacute;g&eacute;s &agrave; l&rsquo;aide de la m&eacute;thode d&rsquo;agr&eacute;gation Defined distance (DBSCAN) (Distance d&eacute;finie [DBSCAN]) (<b>Point cluster [Agr&eacute;gat de points]</b>) ou d&rsquo;une entit&eacute; lin&eacute;aire ou surfacique de comparaison en entr&eacute;e (<b>Closest feature [Entit&eacute; la plus proche]</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Distance maximale &agrave; laquelle les points sont consid&eacute;r&eacute;s comme faisant partie du m&ecirc;me agr&eacute;gat. Si aucune tol&eacute;rance d&rsquo;agr&eacute;gat n&rsquo;est sp&eacute;cifi&eacute;e, l&rsquo;outil cr&eacute;e un agr&eacute;gat dans lequel les entit&eacute;s ponctuelles se superposent.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Couche de lignes ou de polygones utilis&eacute;e pour agr&eacute;ger les points selon l&rsquo;entit&eacute; la plus proche.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Champ provenant des points en entr&eacute;e et des entit&eacute;s de comparaison utilis&eacute; pour apparier les entit&eacute;s les plus proches. Seuls les enregistrements des entit&eacute;s en entr&eacute;e qui apparient des valeurs de champ avec les entit&eacute;s de comparaison sont incluses dans la sortie.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Champs provenant des entit&eacute;s en entr&eacute;e qui seront transf&eacute;r&eacute;s vers la sortie.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Nom de la couche &agrave; cr&eacute;er et ajouter &agrave; la carte.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Nom du dossier de  <b>My content (Mon contenu)</b> dans lequel est enregistr&eacute; le r&eacute;sultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

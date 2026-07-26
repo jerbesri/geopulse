@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>The 80-20 Analysis tool identifies locations where a disproportionately large share of incidents occur using Pareto (80/20) analysis.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>The point layer that will be used to calculate the locations where incidents are disproportionately occurring.
+            </p>
+            <p class="toolPaneOnly">The count of features depends on additional factors such as filtering criteria and the analysis extent.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Specifies whether the input points will be aggregated using the Defined distance (DBSCAN) clustering method (<b>Point cluster</b>) or an input comparison line or polygon feature (<b>Closest feature</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>The maximum distance at which points will be considered part of the same cluster. If no cluster tolerance is specified, the tool will create a cluster where point features overlap.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>The line or polygon layer used to aggregate points by the closest feature.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>The field from the input points and comparison features that will be used to match closest features. Only records from the input features that match field values with the comparison features will be included in the output.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>The fields from the input features that will be transferred to the output.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>The name of the layer that will be created and added to the map.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>The name of the folder in  <b>My content</b> where the result will be saved.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

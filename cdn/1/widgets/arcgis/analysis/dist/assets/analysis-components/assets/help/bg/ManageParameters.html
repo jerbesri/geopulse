@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Настройки за параметри на модела при публикуване на уеб инструмент.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Този текст ще се показва като име на параметър в интерфейса на уеб инструмента. Етикетът трябва да е кратък, описателен за целта на параметъра и написан на разбираем език.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Този текст ще се показва като изскачаща помощ за параметъра и ще предоставя информация на потребителя на уеб инструмента за това как да попълни параметъра на инструмента. Включете описание на това какво прави параметърът, как различните стойности влияят върху резултатите от инструмента, поддържаните входни данни и стойностите по подразбиране, ако е необходимо.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Поддържаният тип данни за параметъра. Тази стойност се определя от типа данни на променливата и не може да бъде променяна.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Указва дали параметърът е вход или изход. Тази стойност се определя от параметъра на инструмента и не може да бъде променяна.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Указва дали параметърът има стойност по подразбиране. Когато е включен, параметърът ще използва стойност по подразбиране, базирана на стойността на променливата. Когато е изключен, параметърът ще бъде празен по подразбиране. Стойността по подразбиране може да се използва за насочване на входните данни на потребителя или за улесняване на работата на уеб инструмента, тъй като потребителят не е необходимо да актуализира параметъра ръчно.
+            </p>
+            <p>Стойностите по подразбиране не трябва да се използват за параметри, които може да искате да оставите празни (например входен набор от данни по избор).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Стойността по подразбиране за параметъра. За да промените стойността по подразбиране, актуализирайте стойността на променливата в диаграмата на модела. Стойността по подразбиране трябва да е стойност, която ще даде точен или предпочитан резултат в повечето случаи.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Указва дали параметърът е необходим за стартиране на уеб инструмента. Ако параметърът на модела е свързан с един или повече задължителни параметри на инструмента, тази стойност ще бъде включена и няма да може да се редактира. Ако всички свързани параметри на инструмента са по избор, параметърът на модела може да бъде включен, за да направи параметъра задължителен, или изключен, за да направи параметъра да е по избор. Задаването на параметър като задължителен ще принуди потребителя да предостави входни данни, преди уеб инструментът да може да бъде стартиран.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Указва дали входните данни за параметрите на инструмента ще имат ограничения. Опциите за филтриране зависят от типа на параметъра, както следва:
+            </p>
+            <ul>
+                <li>Низ &ndash; изберете кои уникални стойности са налични.
+                </li>
+                <li>Обектен слой &ndash; изберете кои типове обекти са налични.
+                </li>
+                <li>Цяло число &ndash; посочете минимална и максимална стойност.
+                </li>
+                <li>Двойно &ndash; посочете минимална и максимална стойност.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

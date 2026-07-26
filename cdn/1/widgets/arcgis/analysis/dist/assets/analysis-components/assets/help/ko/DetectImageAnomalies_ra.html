@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>이미지 이상치 감지 도구는 입력 다중밴드 또는 하이퍼스펙트럼 이미지에서 이상치 점수 래스터를 생성합니다. 이상치 점수 래스터는 값이 0과 1 사이인 단일 밴드 래스터입니다.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>감지할 이상치가 포함된 다중밴드 또는 하이퍼스펙트럼 이미지입니다.
+            </p> 
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>이상치를 감지하는 데 사용되는 방법입니다.
+            </p>
+        </div>
+    </div>
+    <div id="backgroundRegion">
+        <div>
+            <p>배경 통계를 계산하는 데 사용되는 영역을 정의하는 폴리곤 피처 레이어입니다. 이 매개변수는  <b>이상치 계산 방법</b>이 <b>RXD</b> 또는 <b>UTD</b>로 설정된 경우에만 나타납니다.
+            </p>
+        </div>
+    </div>
+    <div id="recomputeStats">
+        <div>
+            <p> <b>이상치 계산 방법</b>이 <b>RXD</b> 또는 <b>UTD</b>로 설정된 경우 입력 래스터의 통계를 재계산할지 지정합니다. RXD 및 UTD 방법을 수행하려면 정확한 통계가 필요합니다. 선택하는 경우 입력 래스터의 통계가 재계산됩니다. 선택하지 않은 경우 통계가 재계산되지 않습니다.
+            </p>
+        </div>
+    </div>
+    <div id="numClusters">
+        <div>
+            <p> <b>이상치 계산 방법</b>이 <b>KMEANS</b>로 설정된 경우에 사용할 클러스터 수입니다.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>생성되어 맵에 추가되는 레이어 이름입니다.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>생성될 결과 유형입니다. 결과는 타일 영상 레이어 또는 동적 영상 레이어일 수 있습니다.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>결과를 저장할  <b>내 콘텐츠</b>의 폴더 이름입니다.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

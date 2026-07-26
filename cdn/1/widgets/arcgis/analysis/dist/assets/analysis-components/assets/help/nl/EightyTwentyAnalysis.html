@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>De tool 80-20-analyse identificeert locaties waar zich een disproportioneel aantal incidenten voordoet met behulp van Pareto-analyse (80-20-analyse).
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>De puntenlaag die zal worden gebruikt voor het berekenen van de locaties waar zich een disproportioneel aantal incidenten voordoet.
+            </p>
+            <p class="toolPaneOnly">Het aantal objecten is afhankelijk van aanvullende factoren als de filtercriteria en de analyse-extent.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Specificeert of de ingevoerde punten zullen worden geaggregeerd met de clusteringmethode Gedefinieerde afstand (DBSCAN) (<b>Puntencluster</b>) of via een ingevoerd vergelijkend lijn- of polygoonobject (<b>Dichtstbijzijnd object</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>De maximumafstand waarbij punten als deel van dezelfde cluster zullen worden beschouwd. Als er geen clustertolerantie is opgegeven, maakt de tool een cluster waarbij puntobjecten elkaar overlappen.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>De lijn- of polygoonlaag die wordt gebruikt om punten op het dichtstbijzijnde object te aggregeren.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Het veld van de ingevoerde punten en vergelijkingsobjecten die zullen worden gebruikt voor overeenkomst met de dichtstbijzijnde objecten. In de uitvoer worden alleen records uit de ingevoerde objecten opgenomen waarbij de veldwaarden overeenkomen met de vergelijkingsobjecten.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>De velden uit de ingevoerde objecten die naar de uitvoer zullen worden overgebracht.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>De naam van de laag die wordt aangemaakt en toegevoegd aan de kaart.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>De naam van de map in  <b>Mijn content</b> waarin het resultaat wordt opgeslagen.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

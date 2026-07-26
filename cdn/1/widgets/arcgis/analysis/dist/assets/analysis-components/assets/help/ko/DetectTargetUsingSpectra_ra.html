@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>스펙트럼을 사용하는 대상 감지 도구는 입력 분광 신호 파일에 정의된 대상 스펙트럼과 각 픽셀의 스펙트럼이 얼마나 잘 일치하는지를 기반으로 입력 래스터의 각 픽셀에 대한 매칭 점수를 계산합니다.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>감지할 대상 픽셀이 포함된 다중밴드 래스터입니다.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>입력 분광 신호 파일의 파일 유형입니다.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>대상 스펙트럼이 포함된 분광 신호 파일입니다.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>입력 래스터 및 분광 신호 파일 간의 매칭 점수를 계산하는 데 사용되는 방법입니다.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>이미지 또는 참조 데이터를 사용하여 스펙트럼을 정규화할지 지정합니다. 선택하지 않은 경우 스펙트럼이 정규화되지 않습니다. 선택한 경우 스펙트럼이 정규화됩니다.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>생성되어 표시되는 매칭 점수 래스터가 포함된 레이어의 이름입니다.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>생성될 결과 유형입니다. 결과는 타일 영상 레이어 또는 동적 영상 레이어일 수 있습니다.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>결과를 저장할  <b>내 콘텐츠</b>의 폴더 이름입니다.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

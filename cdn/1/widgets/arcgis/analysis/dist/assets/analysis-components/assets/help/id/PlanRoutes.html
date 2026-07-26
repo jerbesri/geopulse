@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Alat Rencanakan Rute membuat rute perjalanan dengan beberapa perhentian untuk suatu armada kendaraan.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="startLayer">
+        <div>
+            <p>Fitur titik yang menentukan di mana kendaraan memulai rutenya.
+            </p>
+            <p class="toolPaneOnly">Jumlah fitur bergantung pada faktor tambahan seperti kriteria pemfilteran dan jangkauan analisis.
+            </p>
+        </div>
+    </div>
+    <div id="stopsLayer">
+        <div>
+            <p>Fitur titik yang harus dikunjungi kendaraan sepanjang rutenya. Titik-titik ini menjadi perhentian yang dialokasikan atau tidak dialokasikan pada output.
+            </p>
+            <p class="toolPaneOnly">Jumlah fitur bergantung pada faktor tambahan seperti kriteria pemfilteran dan jangkauan analisis.
+            </p>
+        </div>
+    </div>
+    <div id="returnToStart">
+        <div>
+            
+            <p>Menentukan apakah kendaraan harus kembali ke lokasi awal (diaktifkan) atau berakhir di lokasi tertentu.
+            </p>
+        </div>
+    </div>
+    <div id="endLayer">
+        <div>
+            <p>Fitur titik yang menentukan tempat kendaraan mengakhiri rutenya. Jika layer hanya memiliki satu titik, semua kendaraan akan diarahkan ke satu titik akhir yang sama. Jika layer berisi beberapa titik, setiap kendaraan akan diarahkan ke lokasi akhir yang unik.
+            </p>
+            <p class="toolPaneOnly">Jumlah fitur bergantung pada faktor tambahan seperti kriteria pemfilteran dan jangkauan analisis.
+            </p>
+        </div>
+    </div>
+    <div id="startLayerRouteIDField">
+        <div>
+            <p>Kolom di layer awal yang secara unik mengidentifikasi masing-masing rute, kendaraan, atau pengemudi. Jika kendaraan mulai di beberapa lokasi dan berakhir di beberapa lokasi, ID rute yang ditentukan untuk layer mulai dan layer akhir harus sesuai.
+            </p>
+        </div>
+    </div>
+    <div id="endLayerRouteIDField">
+        <div>
+            <p>Kolom di layer akhir yang secara unik mengidentifikasi masing-masing rute, kendaraan, atau pengemudi. Jika kendaraan mulai di beberapa lokasi dan berakhir di beberapa lokasi, ID rute yang ditentukan untuk layer mulai dan layer akhir harus sesuai.
+            </p>
+        </div>
+    </div>
+    <div id="pointBarrierLayer">
+        <div>
+            <p>Satu atau lebih fitur titik yang berfungsi sebagai pembatasan sementara (hambatan) saat melakukan perjalanan pada jaringan jalan yang mendasarinya. Perjalanan diizinkan di jalan tersebut tetapi tidak boleh melalui penghalang.
+            </p>
+        </div>
+    </div>
+    <div id="lineBarrierLayer">
+        <div>
+            <p>Satu atau lebih fitur garis yang berfungsi sebagai pembatasan sementara (penghalang) saat melakukan perjalanan di jaringan jalan yang mendasarinya. Penghalang garis tersebut melarang perjalanan di titik mana pun saat penghalang berpotongan dengan jalan.
+            </p>
+        </div>
+    </div>
+    <div id="polygonBarrierLayer">
+        <div>
+            <p>Satu atau lebih fitur poligon yang berfungsi sebagai pembatasan sementara (penghalang) saat melakukan perjalanan di jaringan jalan yang mendasarinya. Penghalang poligon melarang perjalanan di mana pun poligon berpotongan dengan jalan.
+            </p>
+        </div>
+    </div>
+    <div id="travelMode">
+        <div>
+            <p>Mode perjalanan yang akan digunakan untuk membuat rute. Hanya mode perjalanan berbasis waktu yang didukung.
+            </p>
+        </div>
+    </div>
+    <div id="routeStartTime">
+        <div>
+            <p>Tanggal dan waktu keberangkatan untuk kendaraan.
+            </p>
+        </div>
+    </div>
+    <div id="routeCount">
+        <div>
+            
+            <p class="OnlineOnly">Jumlah maksimal kendaraan yang tersedia untuk mengunjungi titik pemberhentian. Jika nilai  <b>Layer mulai</b> dan <b>Layer akhir</b> masing-masing berisi satu fitur, Anda dapat menentukan hingga 100 kendaraan. Jika salah satu layer berisi lebih dari satu fitur, nilai default tidak dapat diedit. </p> 
+            <p class="PortalOnly">Jumlah maksimal kendaraan yang tersedia untuk mengunjungi titik pemberhentian. Jika nilai  <b>Layer mulai</b> dan <b>Layer akhir</b> masing-masing berisi satu fitur, Anda dapat menentukan jumlah maksimal kendaraan. Jika salah satu layer berisi lebih dari satu fitur, nilai default tidak dapat diedit.
+            </p>
+        </div>
+    </div>
+    <div id="maxStopsPerRoute">
+        <div>
+            
+            <p class="OnlineOnly">Jumlah maksimal perhentian yang dapat dilakukan oleh setiap kendaraan pada satu rute. Anda dapat menentukan nilai antara 1 dan  200. </p> 
+            <p class="PortalOnly">Jumlah maksimal perhentian yang dapat dilakukan oleh setiap kendaraan pada satu rute.
+            </p>
+        </div>
+    </div>
+    <div id="stopServiceTime">
+        <div>
+            <p>Rata-rata waktu layanan yang diharapkan di setiap perhentian.
+            </p>
+        </div>
+    </div>
+    <div id="limitMaxRouteTimeCheckbox">
+        <div>
+            <p>Menentukan apakah waktu perutean maksimal diterapkan pada kendaraan. Waktu perutean mencakup perkiraan waktu perjalanan dan waktu layanan yang dihabiskan di perhentian di sepanjang rute.
+            </p>
+        </div>
+    </div>
+    <div id="maxRouteTime">
+        <div>
+            <p>Durasi maksimum yang dapat ditempuh oleh suatu rute dari awal hingga akhir. Waktu perutean mencakup perkiraan waktu perjalanan dan waktu layanan yang dihabiskan di perhentian di sepanjang rute.
+            </p>
+            <p>Nilai defaultnya adalah 480 menit (8 jam) dan nilai maksimalnya adalah 525.600 menit (1 tahun).
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Nama layer yang akan dibuat dan ditambahkan ke peta.
+            </p>
+        </div>
+    </div>
+    <div id="includeRouteLayers">
+        <div>
+            <p>Menentukan apakah setiap rute hasil akan disimpan sebagai item layer rute, yang menyimpan rute tersebut beserta titik pemberhentian yang ditetapkan ke rute dan petunjuk arah perjalanan.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Nama folder di  <b>Konten saya</b> tempat penyimpanan hasil.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>La herramienta Resumir r&aacute;ster de categor&iacute;as es una herramienta de an&aacute;lisis r&aacute;ster que genera una tabla que contiene el recuento de p&iacute;xeles y el &aacute;rea de cada categor&iacute;a de cada porci&oacute;n de un r&aacute;ster de categor&iacute;as multidimensional.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>Especifica el r&aacute;ster categ&oacute;rico que se va a resumir. El r&aacute;ster categ&oacute;rico de entrada debe ser de tipo entero.
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>Especifica la dimensi&oacute;n utilizada para resumir el r&aacute;ster de entrada. Si hay m&aacute;s de una dimensi&oacute;n y no se especifica ning&uacute;n valor, todas las secciones se resumir&aacute;n utilizando todas las combinaciones de valores de dimensi&oacute;n.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>Especifica la capa de entidades de pol&iacute;gono que contiene el &aacute;rea o &aacute;reas de inter&eacute;s que se utilizar&aacute;n al calcular el recuento de p&iacute;xeles por categor&iacute;a. Si no se especifica ninguna &aacute;rea de inter&eacute;s, en el an&aacute;lisis se utiliza todo el dataset r&aacute;ster.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>Especifica el campo de la capa de entidades de pol&iacute;gono que define cada &aacute;rea de inter&eacute;s.
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>El nombre de la capa que se crear&aacute; y se agregar&aacute; al mapa.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>El nombre de la carpeta de  <b>Mi contenido</b> en la que se guardar&aacute; el resultado.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

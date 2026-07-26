@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>A ferramenta Detetar o alvo por meio de espectros calcula uma pontua&ccedil;&atilde;o de correspond&ecirc;ncia para cada p&iacute;xel num raster de entrada, com base no grau de correspond&ecirc;ncia entre o espectro do p&iacute;xel e os espectros-alvo definidos por um ficheiro de assinatura espectral de entrada.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputRaster">
+        <div>
+            <p>O raster multibanda que cont&eacute;m os p&iacute;xeis-alvo a detetar.
+            </p> 
+        </div>
+    </div>
+    <div id="inputSpectraType">
+        <div>
+            <p>O tipo de ficheiro da assinatura espectral de entrada.
+            </p>
+        </div>
+    </div>
+    <div id="inputSpectra">
+        <div>
+            <p>O ficheiro de assinatura espectral que cont&eacute;m os espectros-alvo.
+            </p>
+        </div>
+    </div>
+    <div id="method">
+        <div>
+            <p>O m&eacute;todo utilizado para calcular as pontua&ccedil;&otilde;es de correspond&ecirc;ncia entre o raster de entrada e o ficheiro de assinatura espectral.
+            </p>
+        </div>
+    </div>
+    <div id="removeContinuum">
+        <div>
+            <p>Especifica se os espectros s&atilde;o normalizados, o que pode ser feito utilizando uma imagem ou dados de refer&ecirc;ncia. Se a op&ccedil;&atilde;o n&atilde;o estiver selecionada, os espectros n&atilde;o ser&atilde;o normalizados. Se a op&ccedil;&atilde;o estiver selecionada, os espectros ser&atilde;o normalizados.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>O nome da camada que cont&eacute;m o raster de pontua&ccedil;&atilde;o de correspond&ecirc;ncia que &eacute; criado e apresentado.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>O tipo de sa&iacute;da que ser&aacute; criado. A sa&iacute;da pode ser uma camada de imagens em mosaico ou uma camada de imagens din&acirc;micas.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>O nome da pasta em  <b>O meu conte&uacute;do</b> onde o resultado ser&aacute; guardado.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

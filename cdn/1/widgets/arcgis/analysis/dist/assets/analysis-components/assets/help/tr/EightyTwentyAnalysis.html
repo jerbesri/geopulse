@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>80-20 Analizi aracı, Pareto (80/20) analizini kullanarak olayların orantısız bir şekilde yoğunlaştığı yerleri tespit eder.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Olayların orantısız bir şekilde yoğunlaştığı yerleri hesaplamak i&ccedil;in kullanılacak nokta katmanı.
+            </p>
+            <p class="toolPaneOnly">Detay sayısı, filtreleme kriterleri ve analiz yayılımı gibi ek fakt&ouml;rlere bağlıdır.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Girdi noktaların, Tanımlanmış mesafe (DBSCAN) k&uuml;meleme y&ouml;ntemi (<b>Nokta k&uuml;mesi</b>) kullanılarak mı, yoksa bir girdi karşılaştırma &ccedil;izgisi veya &ccedil;okgen detayı (<b>En yakın &ouml;zellik</b>) kullanılarak mı toplanacağını belirtir.
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Noktaların aynı k&uuml;menin par&ccedil;ası olarak kabul edileceği maksimum mesafe. K&uuml;me toleransı belirtilmezse, ara&ccedil; nokta &ouml;gelerinin &uuml;st &uuml;ste bindiği bir k&uuml;me oluşturur.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Noktaları en yakın &ouml;geye g&ouml;re k&uuml;melemek i&ccedil;in kullanılan &ccedil;izgi veya &ccedil;okgen katmanı.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>En yakın detayları eşleştirmek i&ccedil;in kullanılacak girdi noktaları ve karşılaştırma detaylarından oluşan alan. &Ccedil;ıktıya yalnızca, karşılaştırma detaylarıyla alan değerleri eşleşen girdi detaylara ait kayıtlar dahil edilir.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Girdi detaylardan &ccedil;ıktıya aktarılacak alanlar.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Oluşturulacak ve haritaya eklenecek katmanın adı.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p> <b>İ&ccedil;eriğim</b> i&ccedil;inde sonucun kaydedileceği klas&ouml;r&uuml;n adı.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

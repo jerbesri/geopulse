@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>N&aacute;stroj Geomorphon Landforms vypoč&iacute;tava geomorf&oacute;nov&yacute; vzor každej bunky vstupn&eacute;ho rastra povrchu a klasifikuje ich do bežn&yacute;ch typov krajinn&yacute;ch prvkov.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputSurfaceRaster">
+        <div>
+            <p>V&yacute;&scaron;kov&yacute; raster, ktor&yacute; sa použije na v&yacute;počty. 
+            </p>
+        </div>
+    </div>
+    <div id="distanceUnits">
+        <div>
+            <p>Jednotka vzdialenosti, ktor&aacute; sa použije pre parametre  <b>Vyhľad&aacute;vacia vzdialenosť</b> a <b>Vzdialenosť preskočenia</b>. Predvolen&aacute; hodnota je bunky.
+            </p>
+        </div>
+    </div>
+    <div id="searchDistance">
+        <div>
+            <p>Vzdialenosť od cieľovej bunky definuj&uacute;ca polomer oblasti použitej na identifik&aacute;ciu vzoru geomorf&oacute;nu. Predvolen&aacute; hodnota je 10 buniek.
+            </p>
+        </div>
+    </div>
+    <div id="skipDistance">
+        <div>
+            <p>Vzdialenosť od stredu cieľovej bunky, kde sa zač&iacute;na oblasť anal&yacute;zy. Mus&iacute; byť men&scaron;ia ako hodnota parametra  <b>Vyhľad&aacute;vacia vzdialenosť</b>.
+            </p>
+        </div>
+    </div>
+    <div id="angleThreshold">
+        <div>
+            <p>Prahov&aacute; hodnota (v stupňoch), pod ktorou bude cieľov&aacute; bunka klasifikovan&aacute; ako ploch&aacute;. Predvolen&aacute; hodnota je 1 stupeň.
+            </p>
+        </div>
+    </div>
+    <div id="zUnit">
+        <div>
+            <p>Line&aacute;rna jednotka vertik&aacute;lnych z-hodn&ocirc;t.
+            </p>
+        </div>
+    </div>
+    <div id="outputLandformsRasterName">
+        <div>
+            <p>N&aacute;zov rastrovej vrstvy krajinn&yacute;ch prvkov, ktor&aacute; bude vytvoren&aacute; a pridan&aacute; do mapy.
+            </p>
+        </div>
+    </div>
+    <div id="outputGeomorphonsRasterName">
+        <div>
+            <p>N&aacute;zov geomorf&oacute;novej rastrovej vrstvy, ktor&aacute; sa vytvor&iacute; a prid&aacute; do mapy.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            <p>Typ v&yacute;stupu, ktor&yacute; bude vytvoren&yacute;. V&yacute;stupom m&ocirc;že byť dlaždicov&aacute; sn&iacute;mkov&aacute; vrstva alebo dynamick&aacute; sn&iacute;mkov&aacute; vrstva.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            <p>N&aacute;zov priečinka v r&aacute;mci  <b>M&ocirc;j obsah</b>, do ktor&eacute;ho sa ulož&iacute; v&yacute;sledok.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

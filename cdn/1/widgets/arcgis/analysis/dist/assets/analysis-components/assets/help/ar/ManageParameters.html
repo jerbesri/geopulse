@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>الإعدادات الخاصة بمعلمات النموذج عند نشر أداة ويب.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>سيظهر هذا النص كاسم معلمة في واجهة أداة الويب. يجب أن تكون التسمية قصيرة، وواصفة لغرض المعلمة، ومكتوبة بلغة عادية.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>سيظهر هذا النص في صورة نافذة منبثقة للمعلمة وسيوفر معلومات لمستخدم أداة الويب تتعلق بكيفية تعبئة معلمة الأداة. يتضمن وصفًا لما تفعله المعلمة وكيف تؤثر القيم المختلفة في نتائج الأداة والإدخالات المدعومة والقيم الافتراضية حسب الضرورة.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>نوع البيانات المدعومة للمعلمة. تُحدد هذه القيمة حسب نوع بيانات المتغير ولا يمكن تغييرها.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>تحدد ما إذا كانت المعلمة إدخالاً أم إخراجًا. تُحدد هذه القيمة حسب معلمة الأداة ولا يمكن تغييرها.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>تحدد ما إذا كانت المعلمة تتضمن قيمة افتراضية. عند تشغيلها، ستستخدم المعلمة قيمة افتراضية بناءً على قيمة المتغير. عند إيقاف تشغيلها، ستكون المعلمة فارغة افتراضيًا. يمكن استخدام قيمة افتراضية لتوجيه إدخالات المستخدم أو لتسهيل تشغيل أداة الويب، إذ لن يحتاج المستخدم إلى تحديث المعلمة يدويًا.
+            </p>
+            <p>لا ينبغي استخدام القيم الافتراضية للمعلمات التي قد ترغب في تركها فارغة (على سبيل المثال، مجموعة بيانات إدخال اختيارية).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>القيمة الافتراضية للمعلمة. لتغيير القيمة الافتراضية، حدّث قيمة المتغير في مخطط النموذج. يجب أن تكون القيمة الافتراضية قيمة تمنح نتيجة دقيقة أو مفضلة في معظم الحالات.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>تحدد ما إذا كانت المعلمة مطلوبة لتشغيل أداة الويب. إذا كانت معلمة النموذج متصلة بمعلمة أداة مطلوبة واحدة أو أكثر، فسيتم تشغيل هذا الخيار ولن يكون قابلاً للتحرير. إذا كانت جميع معلمات الأداة المتصلة اختيارية، يمكن تشغيل معلمة النموذج لجعل المعلمة مطلوبة، أو إيقاف تشغيلها لجعلها اختيارية. سيؤدي جعل المعلمة مطلوبة إلى إجبار المستخدم على توفير إدخال قبل إمكانية تشغيل أداة الويب.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>تحدد ما إذا كانت ستفرض قيود على إدخالات معلمة الأداة. تعتمد خيارات التصفية على نوع المعلمة كما يلي:
+            </p>
+            <ul>
+                <li>سلسلة&mdash;تحديد القيم الفريدة المتاحة.
+                </li>
+                <li>طبقة المعالم&mdash;تحديد أنواع المعالم المتاحة.
+                </li>
+                <li>عدد صحيح&mdash;تعيين قيمتين دنيا وقصوى.
+                </li>
+                <li>مضاعف&mdash;تعيين قيمتين دنيا وقصوى.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

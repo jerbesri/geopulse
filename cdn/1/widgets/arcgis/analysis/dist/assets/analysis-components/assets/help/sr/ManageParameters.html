@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Postavke za parametre modela prilikom objavljivanja veb alatke.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Ovaj tekst će biti prikazan kao naziv parametra u interfejsu veb alatke. Oznaka treba da bude kratka, da sadrži opis svrhe parametra i da bude jednostavno formulisana.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Ovaj tekst će biti prikazan kao iskačući prozor za pomoć vezanu za parametar i pružiće informacije korisniku veb alatke o tome kako da popuni parametar alatke. Uključite opis onoga &scaron;to parametar radi, kako različite vrednosti utiču na rezultate alatke, podržane ulaze i podrazumevane vrednosti, po potrebi.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Podržani tip podataka za parametar. Ova vrednost je određena tipom podataka promenljive i ne može da se promeni.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Određuje da li je parametar ulaz ili izlaz. Ova vrednost je određena parametrom alatke i ne može da se promeni.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Određuje da li parametar ima podrazumevanu vrednost. Kada je uključeno, parametar će koristiti podrazumevanu vrednost zasnovanu na vrednosti promenljive. Kada je isključeno, parametar će podrazumevano biti prazan. Podrazumevana vrednost može da se koristi da usmerava unose korisnika ili da olak&scaron;a pokretanje veb alatke, jer korisnik ne treba ručno da ažurira parametar.
+            </p>
+            <p>Podrazumevane vrednosti ne treba koristiti za parametre koje želite da ostavite prazne (na primer, opcionalni ulazni skup podataka).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Podrazumevana vrednost za parametar. Da biste promenili podrazumevanu vrednost, ažurirajte vrednost promenljive u dijagramu modela. Podrazumevana vrednost treba da bude vrednost koja će dati tačan ili željeni rezultat u većini slučajeva.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Određuje da li je parametar obavezan za pokretanje veb alatke. Ako je parametar modela povezan sa jednim ili vi&scaron;e parametara alatke, ova vrednost će biti uključena i neće se moći uređivati. Ako su svi povezani parametri alatke opcionalni, parametar modela može da bude uključen da bi parametar bio zahtevan ili isključen da bi parametar bio opcionalan. Ako se odredi da parametar bude zahtevan, korisnik će morati da napravi unos pre nego &scaron;to veb alatka bude mogla biti pokrenuta.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Određuje da li će ulazi parametra alatke imati ograničenja. Opcije filtera zavise od tipa parametra, na sledeći način:
+            </p>
+            <ul>
+                <li>Niska &mdash; Izaberite koje jedinstvene vrednosti su dostupne.
+                </li>
+                <li>Sloj geoobjekata &mdash; Izaberite koji tipovi geoobjekata su dostupni.
+                </li>
+                <li>Celi broj &mdash; Odredite minimalnu i maksimalnu vrednost.
+                </li>
+                <li>Dvostruko &mdash; Odredite minimalnu i maksimalnu vrednost.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>C&ocirc;ng cụ Lấy mẫu lại Quang phổ Thư viện gi&uacute;p lấy mẫu lại quang phổ thư viện đầu v&agrave;o để khớp với số lượng dải v&agrave; khoảng chiều d&agrave;i bước s&oacute;ng của quang phổ mục ti&ecirc;u từ cảm biến mục ti&ecirc;u, tệp thư viện quang phổ t&ugrave;y chỉnh hoặc h&igrave;nh ảnh t&ugrave;y chỉnh.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>Tệp chứa quang phổ sẽ được lấy mẫu lại. Quang phổ thư viện đầu v&agrave;o phải l&agrave; tệp thư viện quang phổ  Esri (<code>.esl</code>).
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>Cảm biến mục ti&ecirc;u, tệp thư viện quang phổ t&ugrave;y chỉnh hoặc h&igrave;nh ảnh t&ugrave;y chỉnh chứa quang phổ mục ti&ecirc;u.
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>Tệp thư viện quang phổ (<code>.esl</code>) hoặc h&igrave;nh ảnh chứa quang phổ mục ti&ecirc;u. Nếu bạn sử dụng h&igrave;nh ảnh cho quang phổ mục ti&ecirc;u, h&igrave;nh ảnh phải chứa th&ocirc;ng tin chiều d&agrave;i bước s&oacute;ng.
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>Phương ph&aacute;p lấy mẫu lại được d&ugrave;ng để lấy mẫu lại tệp thư viện quang phổ đầu v&agrave;o.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>T&ecirc;n của tệp thư viện quang phổ  Esri (<code>.esl</code>) đ&atilde; được tạo.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Loại đầu ra sẽ được tạo. Đầu ra c&oacute; thể l&agrave; lớp h&igrave;nh ảnh dạng tile hoặc lớp h&igrave;nh ảnh động.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>T&ecirc;n của thư mục trong  <b>Nội dung của t&ocirc;i</b> sẽ lưu trữ kết quả.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

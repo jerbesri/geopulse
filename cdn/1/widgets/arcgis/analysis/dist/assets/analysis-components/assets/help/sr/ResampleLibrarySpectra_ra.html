@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Alatka Ponovo uzorkuj biblioteku spektra ponovo uzorkuje ulaznu biblioteku spektra tako da se podudara sa brojem opsega i opsegom talasnih dužina ciljnog spektra iz ciljnog senzora, prilagođene datoteke spektralne biblioteke ili prilagođenog snimka.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>Datoteka koja sadrži spektar koje će da bude ponovo uzorkovan. Ulazna biblioteka spektra mora da bude  Esri datoteka spektralne biblioteke (<code>.esl</code>).
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>Ciljni senzor, prilagođena datoteka spektralne biblioteke ili prilagođeni snimak koji sadrže ciljni spektar.
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>Datoteka spektralne biblioteke (<code>.esl</code>) ili snimak koji sadrže ciljni spektar. Ako koristite snimak za ciljni spektar, on mora da sadrži informacije o talasnoj dužini.
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>Metod ponovnog uzorkovanja koji se koristi za ponovno uzorkovanje ulazne datoteke spektralne biblioteke.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Naziv  Esri datoteke spektralne biblioteke (<code>.esl</code>) koja je kreirana.
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Tip izlaza koji će biti kreiran. Izlaz može biti sloj sa popločanim slikama ili sloj dinamičkih slika.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Naziv fascikle u  <b>Mom sadržaju</b> u kojoj će rezultat biti sačuvan.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

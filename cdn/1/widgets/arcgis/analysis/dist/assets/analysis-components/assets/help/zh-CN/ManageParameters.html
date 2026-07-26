@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>当发布 web 工具时，模型参数的设置。
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>此文本将作为参数名称显示在 web 工具界面中。 标注应该为参数用途的简短描述，并使用通俗易懂的语言编写。
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>此文本将显示为参数的弹出帮助，并为 web 工具用户提供有关如何填充工具参数的信息。 根据需要，包含对参数功能的描述、不同值对工具结果的影响、受支持的输入以及默认值。
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>参数的受支持数据类型。 此值由变量数据类型决定，无法对其进行更改。
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>指定参数是输入还是输出。 此值由工具参数决定，无法对其进行更改。
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>指定参数是否具有默认值。 如果打开，则参数将基于变量值使用默认值。 如果关闭，则参数将默认为空。 默认值可用于引导用户输入或者使 web 工具更易于运行，因为用户无需手动更新参数。
+            </p>
+            <p>不应在可能想要留空的参数（例如，可选的输入数据集）中设置默认值。
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>参数的默认值。 要更改默认值，请更新模型逻辑示意图中变量的值。 默认值应该是在大多数情况下都能提供准确或理想结果的值。
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>指定参数是否为运行 Web 工具时的必需参数。 如果将模型参数连接至一个或多个必需工具参数，则将启用此值并且无法对其进行编辑。 如果所有已连接工具参数均为可选项，则可以打开模型参数以将参数设置为必需参数，或者关闭模型参数以将参数设置为可选参数。 将参数设置为必需项将强制用户在运行 web 工具之前提供输入。
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>指定工具参数输入是否具有限制。 过滤选项取决于参数类型，如下所示：
+            </p>
+            <ul>
+                <li>字符串 - 选择可用的唯一值。
+                </li>
+                <li>要素图层 - 选择可用的要素类型。
+                </li>
+                <li>整型 - 指定最小值和最大值。
+                </li>
+                <li>双精度 - 指定最小值和最大值。
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

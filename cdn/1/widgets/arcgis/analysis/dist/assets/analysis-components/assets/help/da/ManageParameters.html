@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Indstillinger for modelparametre, n&aring;r der udgives et webv&aelig;rkt&oslash;j.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="alias">
+        <div>
+            <p>Denne tekst vises som parameternavnet i webv&aelig;rkt&oslash;jets gr&aelig;nseflade. Etiketten skal v&aelig;re kort og beskrive form&aring;let med parameterren og v&aelig;re skrevet i almindeligt sprog.
+            </p>
+        </div>
+    </div>
+    <div id="description">
+        <div>
+            <p>Denne tekst vises som parameterens pop op-hj&aelig;lp og leverer oplysninger til brugeren af webv&aelig;rkt&oslash;jet om, hvordan v&aelig;rkt&oslash;jsparameteren skal udfyldes. Inkluder efter behov en beskrivelse af, hvad parameteren g&oslash;r, hvordan forskellige v&aelig;rdier p&aring;virker v&aelig;rkt&oslash;jsresultaterne, de underst&oslash;ttede input og standardv&aelig;rdierne.
+            </p>
+        </div>
+    </div>
+    <div id="dataType">
+        <div>
+            <p>Den underst&oslash;ttede datatype for parameteren. Denne v&aelig;rdi bestemmes af den variable datatype og kan ikke &aelig;ndres.
+            </p>
+        </div>
+    </div>
+    <div id="direction">
+        <div>
+            <p>Angiver, om parameteren er input eller output. Denne v&aelig;rdi bestemmes af v&aelig;rkt&oslash;jsparameteren og kan ikke &aelig;ndres.
+            </p>
+        </div>
+    </div>
+    <div id="includeDefaultValue">
+        <div>
+            <p>Angiver, om parameteren har en standardv&aelig;rdi. N&aring;r den er sl&aring;et til, bruger parameteren en standardv&aelig;rdi baseret p&aring; den variable v&aelig;rdi. N&aring;r den er sl&aring;et fra, vil parameteren som standard v&aelig;re tom. En standardv&aelig;rdi kan bruges til at styre brugerens input eller g&oslash;re det nemmere at k&oslash;re webv&aelig;rkt&oslash;jet, fordi brugeren ikke har brug for at opdatere parameteren manuelt.
+            </p>
+            <p>Standardv&aelig;rdier b&oslash;r ikke bruges til parametre, som du m&aring;ske &oslash;nsker at lade st&aring; tomme (f.eks. et valgfrit inputdatas&aelig;t).
+            </p>
+        </div>
+    </div>
+    <div id="defaultValue">
+        <div>
+            <p>Standardv&aelig;rdien for parameteren. Hvis du vil &aelig;ndre standardv&aelig;rdien, skal du opdatere variablens v&aelig;rdi i modeldiagrammet. Standardv&aelig;rdien skal v&aelig;re en v&aelig;rdi, der giver et n&oslash;jagtigt eller foretrukket resultat i de fleste tilf&aelig;lde.
+            </p>
+        </div>
+    </div>
+    <div id="required">
+        <div>
+            <p>Angiver, om parameteren er n&oslash;dvendig for at k&oslash;re webv&aelig;rkt&oslash;jet. Hvis modelparameteren er forbundet med en eller flere kr&aelig;vede v&aelig;rkt&oslash;jsparametre, sl&aring;s denne v&aelig;rdi til og kan ikke redigeres. Hvis alle forbundne v&aelig;rkt&oslash;jsparametre er valgfrie, kan modelparameteren blive sl&aring;et til for at g&oslash;re parameteren p&aring;kr&aelig;vet eller sl&aring;et fra for at g&oslash;re den valgfri. Hvis en parameter g&oslash;res p&aring;kr&aelig;vet, tvinger det brugeren til at angive et input, f&oslash;r webv&aelig;rkt&oslash;jet kan k&oslash;res.
+            </p>
+        </div>
+    </div>
+    <div id="filter">
+        <div>
+            <p>Angiver, om der vil v&aelig;re begr&aelig;nsninger vedr&oslash;rende input af v&aelig;rkt&oslash;jsparametre. Filterindstillinger afh&aelig;nger af parametertypen p&aring; f&oslash;lgende m&aring;de:
+            </p>
+            <ul>
+                <li>Streng &ndash; v&aelig;lg, hvilke unikke v&aelig;rdier der er tilg&aelig;ngelige.
+                </li>
+                <li>Objektlag &ndash; v&aelig;lg, hvilke objekttyper, der er tilg&aelig;ngelige.
+                </li>
+                <li>Heltal &ndash; angiv en minimum- og en maksimumv&aelig;rdi.
+                </li>
+                <li>Dobbelt &ndash;angiv en minimum- og en maksimumv&aelig;rdi.
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>A ferramenta Resumir Raster Categ&oacute;rico &eacute; uma ferramenta de an&aacute;lise raster que gera uma tabela com a contagem de p&iacute;xeis para cada categoria em cada sec&ccedil;&atilde;o de um raster categ&oacute;rico multidimensional de entrada.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputCategoricalRaster">
+        <div>
+            <p>Especifica o raster categ&oacute;rico a ser resumido. O raster categ&oacute;rico de entrada precisa ser do tipo inteiro.
+            </p> 
+        </div>
+    </div>
+    <div id="dimension">
+        <div>
+            <p>Especifica a dimens&atilde;o utilizada para resumir o raster de entrada. Se existir mais do que uma dimens&atilde;o e nenhum valor for especificado, todas as sec&ccedil;&otilde;es ser&atilde;o resumidas utilizando todas as combina&ccedil;&otilde;es de valores de dimens&atilde;o.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterest">
+        <div>
+            <p>Especifica a camada de elementos de pol&iacute;gono que cont&eacute;m a &aacute;rea ou &aacute;reas de interesse a serem utilizadas no c&aacute;lculo da contagem de p&iacute;xeis por categoria. Se n&atilde;o for especificada nenhuma &aacute;rea de interesse, todo o conjunto de dados raster ser&aacute; utilizado na an&aacute;lise.
+            </p>
+        </div>
+    </div>
+    <div id="areaOfInterestIdField">
+        <div>
+            <p>Especifica o campo na camada de elementos de pol&iacute;gono que define cada &aacute;rea de interesse.
+            </p>
+        </div>
+    </div>
+    <div id="outputSummaryTableName">
+        <div>
+            <p>O nome da camada que ser&aacute; criada e adicionada ao mapa.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>O nome da pasta em  <b>O meu conte&uacute;do</b> onde o resultado ser&aacute; guardado.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

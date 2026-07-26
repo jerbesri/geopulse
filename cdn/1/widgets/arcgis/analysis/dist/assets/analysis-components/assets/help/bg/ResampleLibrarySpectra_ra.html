@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Инструментът &bdquo;Преоразмеряване на библиотека със спектри&ldquo; преоразмерява входните библиотеки със спектри така, че да съответстват на броя на честотните ленти и диапазона на дължините на вълните на целевите спектри от целеви сензор, потребителски спектрален файл с библиотека или персонализирано изображение.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLibrarySpectra">
+        <div>
+            <p>Файлът, съдържащ спектрите, които ще бъдат преоразмерени. Входните библиотеки със спектри трябва да бъдат  Esri спектрален файл с библиотека (<code>.esl</code>).
+            </p> 
+        </div>
+    </div>
+    <div id="targetSensor">
+        <div>
+            <p>Целевият сензор, персонализираният спектрален файл с библиотека или персонализираното изображение, което съдържа целевите спектри.
+            </p>
+        </div>
+    </div>
+    <div id="customTargetImageOrSpectra">
+        <div>
+            <p>Спектралният файл с библиотека (<code>.esl</code>) или потребителско изображение, което съдържа целевите спектри. Ако използвате изображение за целевите спектри, то трябва да съдържа информация за дължините на вълните.
+            </p>
+        </div>
+    </div>
+    <div id="resamplingMethod">
+        <div>
+            <p>Методът за преоразмеряване, използван за преоразмеряване на входния спектрален файл с библиотека.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Името на създадения спектрален файл с библиотека  Esri (<code>.esl</code>).
+            </p>
+        </div>
+    </div>
+    <div id="resultType">
+        <div>
+            
+            <p>Типът резултат, който ще бъде създаден. Резултатът може да бъде слой с плочкови изображения или слой с динамични изображения.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Името на папка в  <b>Моето съдържание</b>, където резултатите ще бъдат запазени.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

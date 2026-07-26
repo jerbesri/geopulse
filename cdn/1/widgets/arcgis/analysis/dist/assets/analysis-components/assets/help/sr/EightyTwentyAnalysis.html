@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Alatka za 80-20 analizu identifikuje lokacije na kojima nastupa nesrazmerno velik broj incidenata upotrebom Pareto (80-20) analize.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Sloj tačaka koji će biti kori&scaron;ćen za izračunavanje lokacija na kojima incidenti nesrazmerno nastupaju.
+            </p>
+            <p class="toolPaneOnly">Broj geoobjekata zavisi od dodatnih faktora kao &scaron;to su kriterijumi filtriranja i obuhvat analize.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Određuje da li će ulazne tačke biti grupisane upotrebom metoda grupisanja pomoću definisanog rastojanja (DBSCAN) (<b>Klaster tačaka</b>) ili upotrebom ulaznog linijskog ili poligonalnog geoobjekta za poređenje (<b>Najbliži geoobjekat</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Maksimalno rastojanje na kojem će tačke biti smatrane delom istog klastera. Ako nije navedena tolerancija klastera, alatka će kreirati klaster tamo gde se tačkasti geoobjekti preklapaju.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Sloj linija ili poligona koji se koristi za grupisanje tačaka po najbližem geoobjektu.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Polje iz ulaznih tačaka i geoobjekata za poređenje koje će biti kori&scaron;ćeno za podudaranje sa najbližim geoobjektima. Samo zapisi iz ulaznih geoobjekata koji se podudaraju sa vrednostima polja koja imaju geoobjekte za poređenje će biti uključeni u izlaz.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Polja iz ulaznih geoobjekata koja će biti preneta u izlaz.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Naziv sloja koji će biti kreiran i dodat mapi.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Naziv fascikle u  <b>Mom sadržaju</b> u kojoj će rezultat biti sačuvan.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

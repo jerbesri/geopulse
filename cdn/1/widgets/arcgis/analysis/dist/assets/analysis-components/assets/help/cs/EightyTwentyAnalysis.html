@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>N&aacute;stroj Anal&yacute;za 80&ndash;20 pomoc&iacute; Paretovy anal&yacute;zy (80/20) identifikuje m&iacute;sta, kde doch&aacute;z&iacute; k ne&uacute;měrně vysok&eacute;mu počtu incidentů.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Vrstva bodů, kter&aacute; bude použita k v&yacute;počtu m&iacute;st, kde se incidenty vyskytuj&iacute; ne&uacute;měrně často.
+            </p>
+            <p class="toolPaneOnly">Počet prvků z&aacute;vis&iacute; na dal&scaron;&iacute;ch faktorech, jako jsou krit&eacute;ria filtrov&aacute;n&iacute; a rozsah anal&yacute;zy.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Určuje, zda budou vstupn&iacute; body seskupov&aacute;ny pomoc&iacute; metody shlukov&aacute;n&iacute; Definovan&aacute; vzd&aacute;lenost (DBSCAN) (<b>Shluk bodů</b>), nebo na z&aacute;kladě srovn&aacute;n&iacute; se vstupn&iacute; lini&iacute; či polygonov&yacute;m prvkem (<b>Nejbliž&scaron;&iacute; prvek</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Maxim&aacute;ln&iacute; vzd&aacute;lenost, při kter&eacute; budou body považov&aacute;ny za souč&aacute;st stejn&eacute;ho shluku. Pokud nen&iacute; zad&aacute;na tolerance seskupen&iacute;, n&aacute;stroj vytvoř&iacute; seskupen&iacute; v m&iacute;stech, kde se bodov&eacute; prvky překr&yacute;vaj&iacute;.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Liniov&aacute; nebo polygonov&aacute; vrstva použit&aacute; k seskupen&iacute; bodů podle nejbliž&scaron;&iacute;ho prvku.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Pole vstupn&iacute;ch bodů a srovn&aacute;vac&iacute;ch prvků, kter&eacute; budou použity k nalezen&iacute; nejbliž&scaron;&iacute;ch prvků. Do v&yacute;stupu budou zahrnuty pouze z&aacute;znamy ze vstupn&iacute;ch prvků, u nichž se hodnoty pol&iacute; shoduj&iacute; s hodnotami v porovn&aacute;vac&iacute;ch prvc&iacute;ch.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Pole ze vstupn&iacute;ch prvků, kter&aacute; budou přenesena do v&yacute;stupu.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>N&aacute;zev vrstvy, kter&aacute; bude vytvořena a přid&aacute;na do mapy.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>N&aacute;zev složky v č&aacute;sti  <b>Můj obsah</b>, do kter&eacute; bude v&yacute;sledek uložen.
+            </p>
+        </div>
+    </div>
+</div>
+</html>

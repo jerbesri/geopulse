@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="Stylesheet" href="../css/analysis.css" />
+    <script type="text/javascript">
+        function init() {
+            if (window.location.hash) {
+                var parentDiv, nodes, i, helpInfo, helpId, helpEnvFilters, envContent, hideNodes, hideEnvClass, hideEnvNodes, hideModeClass, hideModeNodes;
+                helpInfo = window.location.hash.substring(1);
+                if (helpInfo.indexOf("-")) {
+                    [helpId, ...helpEnvFilters] = helpInfo.split("-");
+                    helpEnvFilters = helpEnvFilters.join("-");
+                }
+                else {
+                    helpId = helpInfo;
+                }
+                parentDiv = document.getElementById("topics");
+                nodes = parentDiv.children;
+                hideEnvClass = (helpEnvFilters.includes("OnlineOnly") ? "PortalOnly": "OnlineOnly");
+                hideModeClass = (helpEnvFilters.includes("toolPaneOnly") ? "modelBuilderOnly": "toolPaneOnly");
+                if(document.getElementsByClassName) {
+                    hideEnvNodes = document.getElementsByClassName(hideEnvClass);
+                    hideModeNodes = document.getElementsByClassName(hideModeClass);
+                }
+                else {
+                    hideNodes = document.querySelectorAll(hideEnvClass);
+                }
+                for(i=0; i < nodes.length; i++) {
+                    if(nodes[i].id !== helpId) {
+                        nodes[i].style.display ="none";
+                    }
+                }
+                for(i=0; i < hideEnvNodes.length; i++) {
+                    hideEnvNodes[i].style.display = "none";
+                }
+                for(i=0; i < hideModeNodes.length; i++) {
+                    hideModeNodes[i].style.display = "none";
+                }
+                }
+            }
+    </script>
+</head>
+<body onload="init()">
+<div id="topics">
+    <div id="toolDescription" class="smallsize">
+    <p>Orodje za analizo 80-20 z uporabo analize Pareto (80/20) prepozna lokacije, kjer se zgodi nesorazmerno velik delež incidentov.
+    </p>
+    </div>
+    <!--Parameter divs for each param-->
+    <div id="inputLayer">
+        <div>
+            <p>Točkovni sloj, ki se bo uporabljal za izračun lokacij, kjer se nesorazmerno pojavljajo incidenti.
+            </p>
+            <p class="toolPaneOnly">&Scaron;tevilo funkcij je odvisno od dodatnih dejavnikov, kot so kriteriji filtriranja in obseg analize.
+            </p>
+        </div>
+    </div>
+    <div id="aggregationMethod">
+        <div>
+            <p>Določa, ali bodo vhodne točke združene z metodo gručenja Določena razdalja (DBSCAN) (<b>gruča točk</b>) ali z vhodnim primerjalnim linijskim ali poligonskim geoobjektom (<b>najbližji geoobjekt</b>).
+            </p>
+        </div>
+    </div>
+    <div id="clusterTolerance">
+        <div>
+            <p>Maksimalna razdalja, pri kateri se bodo točke obravnavale kot del iste gruče. Če toleranca gruče ni določena, bo orodje ustvarilo gručo, kjer se točkovni geoobjekti prekrivajo.
+            </p>
+        </div>
+    </div>
+    <div id="inComparisonFeatures">
+        <div>
+            <p>Linijski ali poligonski sloj, ki se uporablja za združevanje točk po najbližjem geoobjektu.
+            </p>
+        </div>
+    </div>
+    <div id="matchFields">
+        <div>
+            <p>Polje iz vhodnih točk in primerjalnih geoobjektov, ki bodo uporabljene za ujemanje najbližjih geoobjektov. V izhod bodo vključeni samo zapisi iz vhodnih geoobjektov, ki se ujemajo z vrednostmi polj s primerjalnimi geoobjekti.
+            </p>
+        </div>
+    </div>
+    <div id="outFields">
+        <div>
+            <p>Polja iz vhodnih geoobjektov, ki bodo prenesena na izhod.
+            </p>
+        </div>
+    </div>
+    <div id="outputName">
+        <div>
+            <p>Ime sloja, ki bo ustvarjen in dodan na karto.
+            </p>
+        </div>
+    </div>
+    <div id="saveResultIn">
+        <div>
+            
+            <p>Ime mape v  <b>Moja vsebina</b>, kjer bo shranjen rezultat.
+            </p>
+        </div>
+    </div>
+</div>
+</html>
