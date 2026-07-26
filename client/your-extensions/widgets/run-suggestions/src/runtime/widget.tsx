@@ -450,7 +450,10 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
         throw new Error("Set Feature Layer URL in widget settings first.");
       }
 
-      const targetTimeISO = new Date().toISOString();
+      const targetTime = resolveForecastTargetTime(
+        props.config?.forecastWindow,
+      );
+      const targetTimeISO = targetTime.toISOString();
       const [stagingResult, candidates] = await Promise.all([
         runStagingPipeline(targetTimeISO),
         getTopStagingCandidates(targetTimeISO, 3),
