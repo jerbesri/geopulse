@@ -802,21 +802,16 @@ export const generateAIDispatchBriefing = async (
   return clampToTwoSentences(text);
 };
 
-export const runStagingPipeline = async (
+const buildStagingPipelineResult = async (
+  feature: QueryFeatureData,
   targetTimeISO: string,
+  rankCitywide: number,
 ): Promise<StagingPipelineResult> => {
-  let topFeature;
-  try {
-    topFeature = await queryTopForecastFeature(targetTimeISO);
-  } catch (error) {
-    throw new Error(`[Pipeline] Query step failed: ${toErrorMessage(error)}`);
-  }
-
   let weatherSummary;
   try {
     weatherSummary = await getWeatherForInterval(
-      topFeature.lat,
-      topFeature.lng,
+      feature.lat,
+      feature.lng,
       targetTimeISO,
     );
   } catch (error) {
@@ -826,8 +821,8 @@ export const runStagingPipeline = async (
   let historicalIncidentSummary: HistoricalIncidentSummary;
   try {
     historicalIncidentSummary = await queryHistoricalIncidentSummary(
-      topFeature.lat,
-      topFeature.lng,
+      feature.lat,
+      feature.lng,
       targetTimeISO,
     );
   } catch (error) {
@@ -840,24 +835,22 @@ export const runStagingPipeline = async (
   }
 
   const azurePayload: AzureDispatchPayload = {
-    location_id: topFeature.locationId,
-    latitude: topFeature.lat,
-    longitude: topFeature.lng,
+    location_id: feature.locationId,
+    latitude: feature.lat,
+    longitude: feature.lng,
     forecast_window: pipelineConfig.forecastWindow || "next_24_hours",
-    forecast_total: topFeature.predictedScore,
-    forecast_peak_interval: topFeature.forecastPeakInterval,
-    recent_incident_count_30d: topFeature.recentIncidentCount30d,
-    recent_incident_types: topFeature.recentIncidentTypes,
-    historical_pattern: topFeature.historicalPattern,
+    forecast_total: feature.predictedScore,
+    forecast_peak_interval: feature.forecastPeakInterval,
+    recent_incident_count_30d: feature.recentIncidentCount30d,
+    recent_incident_types: feature.recentIncidentTypes,
+    historical_pattern: feature.historicalPattern,
     historical_incident_summary: historicalIncidentSummary.summary,
     historical_incident_totals: historicalIncidentSummary.totals,
     historical_match_count: historicalIncidentSummary.matchCount,
     historical_lookup_mode: historicalIncidentSummary.lookupMode,
-    rank_citywide: 1,
+    rank_citywide: rankCitywide,
     weather_summary: weatherSummary,
   };
-
-  console.log("Azure Payload:", azurePayload);
 
   let aiBriefing;
   try {
@@ -869,16 +862,50 @@ export const runStagingPipeline = async (
   }
 
   return {
-    locationId: topFeature.locationId,
-    lat: topFeature.lat,
-    lng: topFeature.lng,
-    predictedScore: topFeature.predictedScore,
+    locationId: feature.locationId,
+    lat: feature.lat,
+    lng: feature.lng,
+    predictedScore: feature.predictedScore,
     weatherSummary,
     historicalIncidentSummary: historicalIncidentSummary.summary,
     historicalIncidentTotals: historicalIncidentSummary.totals,
     historicalMatchCount: historicalIncidentSummary.matchCount,
     historicalLookupMode: historicalIncidentSummary.lookupMode,
     aiBriefing,
-    geometry: topFeature.geometry,
+    geometry: feature.geometry,
   };
+};
+
+export const runStagingPipelineForCandidate = async (
+  targetTimeISO: string,
+  candidateIndex: number,
+): Promise<StagingPipelineResult> => {
+  let features;
+  try {
+    features = await queryTopForecastFeatures(
+      targetTimeISO,
+      Math.max(1, candidateIndex + 1),
+    );
+  } catch (error) {
+    throw new Error(`[Pipeline] Query step failed: ${toErrorMessage(error)}`);
+  }
+
+  const selectedFeature = features[candidateIndex];
+  if (!selectedFeature) {
+    throw new Error(
+      `No forecast feature found for candidate index ${candidateIndex}.`,
+    );
+  }
+
+  return buildStagingPipelineResult(
+    selectedFeature,
+    targetTimeISO,
+    candidateIndex + 1,
+  );
+};
+
+export const runStagingPipeline = async (
+  targetTimeISO: string,
+): Promise<StagingPipelineResult> => {
+  return runStagingPipelineForCandidate(targetTimeISO, 0);
 };

@@ -11,6 +11,7 @@ import type { IMConfig } from "../config";
 import {
   getTopStagingCandidates,
   runStagingPipeline,
+  runStagingPipelineForCandidate,
   setPipelineConfig,
   type StagingCandidate,
   type StagingPipelineResult,
@@ -58,6 +59,10 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
   const moveAmbulanceGraphicRef = React.useRef<Graphic | null>(null);
   const routeGraphicRef = React.useRef<Graphic | null>(null);
   const ambulanceLayerRef = React.useRef<FeatureLayer | null>(null);
+  const resultCacheRef = React.useRef<{ [key: number]: StagingPipelineResult }>(
+    {},
+  );
+  const targetTimeISORef = React.useRef<string>("");
 
   const toErrorMessage = (err: unknown): string => {
     if (err instanceof Error) {
@@ -411,6 +416,18 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
     setSelectedCandidateIndex(index);
 
     try {
+      const cachedResult = resultCacheRef.current[index];
+      if (cachedResult) {
+        setResult(cachedResult);
+      } else if (targetTimeISORef.current) {
+        const selectedResult = await runStagingPipelineForCandidate(
+          targetTimeISORef.current,
+          index,
+        );
+        resultCacheRef.current[index] = selectedResult;
+        setResult(selectedResult);
+      }
+
       await applyCandidateSelection(candidate);
     } catch (selectionError) {
       setMoveSuggestion(null);
@@ -430,6 +447,7 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
       setMoveSuggestion(null);
       setTopCandidates([]);
       setSelectedCandidateIndex(0);
+      resultCacheRef.current = {};
 
       clearMoveAndRouteGraphics();
 
@@ -451,12 +469,14 @@ const Widget = (props: AllWidgetProps<IMConfig>) => {
       }
 
       const targetTimeISO = new Date().toISOString();
+      targetTimeISORef.current = targetTimeISO;
       const [stagingResult, candidates] = await Promise.all([
         runStagingPipeline(targetTimeISO),
         getTopStagingCandidates(targetTimeISO, 3),
       ]);
 
       setResult(stagingResult);
+      resultCacheRef.current[0] = stagingResult;
       setTopCandidates(candidates);
 
       const firstCandidate: StagingCandidate = candidates[0] ?? {
